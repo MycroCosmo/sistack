@@ -157,6 +157,8 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ───
 
 ## v0.2 백로그 (지금 구현하지 않음)
 
+- modern-board 테스트베드(Spring Boot + JPA) — si-migrate의 to-be 및 JPA 인덱서 수집기 검증용
+
 - `si-impact` (← `blast-radius`): 안전 근거 1개 증명 + SI에서 grep이 멈추는 곳 점검
 - `si-migrate`: 기준선 고정 → 이관 → 비교 (si-trace + si-unit-test + si-impact 조합)
 - si-docs: docx 양식, 인터페이스 정의서, HWPX 검토

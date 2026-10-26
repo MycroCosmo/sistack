@@ -15,7 +15,9 @@ mvn jetty:run
 
 [로컬 로그인](http://127.0.0.1:8080/legacy-board/auth/login.do)에서 조회자 또는 관리자 역할을 선택합니다. 실제 인증 시스템이 아닌 합성 역할 선택입니다. 관리자만 등록·수정·삭제·공통코드 화면을 이용합니다. 다른 터미널에서 `node smoke.mjs`로 실제 HTTP 흐름을 확인하고, 종료할 때 서버 터미널에서 Ctrl+C를 누릅니다. 서버 재시작 시 메모리 데이터는 초기화됩니다.
 
-H2 2.2.224는 **test 스코프**이고 Oracle 모드로 실행합니다. `src/test/resources/spring/local-datasource.xml`과 초기 SQL 역시 테스트 클래스패스에만 있습니다. Jetty 플러그인의 useTestScope·local 프로필을 통해 로컬 실행합니다. 기본 WAR에는 H2가 포함되지 않고, 독립 운영 배포용 datasource는 제공하지 않습니다. Oracle 실제 DB 호환성은 검증하지 않았습니다.
+H2 2.2.224는 **test 스코프**이고 Oracle 모드로 실행합니다. `src/test/resources/spring/local-datasource.xml`과 초기 SQL 역시 테스트 클래스패스에만 있습니다. Jetty 플러그인의 useTestScope·local 프로필을 통해 로컬 실행합니다. 기본 WAR에는 H2가 포함되지 않습니다. prod 프로필에는 `globals.properties` 자리표시자를 참조하는 datasource 빈 정의만 있으며 Oracle 드라이버나 접속 정보를 제공하지 않습니다. prod 실행·Oracle 실제 DB 호환성은 검증하지 않았습니다.
+
+`src/main/resources/db/oracle/ddl.sql`은 테이블·시퀀스와 한글 COMMENT ON TABLE/COLUMN을 포함합니다. M3/M5 분석용이며 자동 실행하지 않습니다. 기존 H2 schema.sql은 유지합니다.
 
 Maven Central이 차단되거나 JDK/Maven이 없으면 검증은 BLOCKED입니다. 접근 가능한 개발 환경에서 위 명령을 그대로 실행하며, 실패한 다운로드·검증을 성공으로 간주하지 않습니다.
 
@@ -32,8 +34,9 @@ Maven Central이 차단되거나 JDK/Maven이 없으면 검증은 BLOCKED입니�
 | 등록/수정 화면 | GET `/board/form.do[?id=...]` | BoardController.form | board/form.jsp |
 | 등록 | POST `/board/create.do` | BoardController.create | 상세 redirect |
 | 수정 | POST `/board/update.do` | BoardController.update | 상세 redirect |
-| 삭제 | POST `/board/delete.do` | BoardController.delete | 목록 redirect |
+| AJAX 삭제 | POST `/board/delete.do` (id, csrf) | BoardController.delete → @ResponseBody | JSON `{success:true}`; JS가 목록으로 이동 |
 | 분류 공통코드 | GET `/code/list.do` | CommonCodeController.list | code/list.jsp |
+| AJAX 공통코드 | GET `/code/listJson.do?page=1` | CommonCodeController.listJson → @ResponseBody | JSON codes/page/total; AJAX 새로고침 버튼 |
 | 공통 오류 | HTTP 400/403/404/500 | CommonExceptionHandler·web.xml | error.jsp |
 
 공통 조각: `common/header.jspf`, `common/menu.jspf`, `common/paging.jspf`. 목록 두 화면은 `resources/board.js`와 Pagination을 함께 사용합니다.
@@ -46,17 +49,21 @@ Java 기준 경로: `legacy-board/src/main/java/kr/sistack/board/`.
 |---|---|---|
 | web | AuthController, BoardController, CommonCodeController | 로그인·게시판·공통코드 요청 |
 | web | LoginInterceptor, UserSession, CommonExceptionHandler | 세션→request, 권한·CSRF, 오류 응답 |
-| service | BoardService, CommonCodeService, NotFoundException | 목록·CRUD·입력 검증·미존재 처리 |
-| dao | CommonCodeDao | SqlSessionTemplate의 문자열 sqlId 호출 |
+| service | BoardService, CommonCodeService | 서비스 인터페이스 |
+| service/impl | BoardServiceImpl, CommonCodeServiceImpl | 이름 있는 @Service 구현; 목록·CRUD·입력 검증 |
+| service | NotFoundException | 미존재 처리 |
+| dao | CommonCodeDao | HashMap 입력 → SqlSessionTemplate의 문자열 sqlId 호출 |
 | mapper | BoardMapper | XML Mapper 인터페이스 |
 | mapper | MenuMapper | `@Select` 어노테이션 Mapper |
 | domain | Board, BoardSearch, CommonCode, Menu | 게시글·검색 조건·코드·메뉴 |
 | common | Pagination | 공통 페이지 번호·전체 건수·행 범위 |
 | XML | mapper/BoardMapper.xml | selectList, count, selectOne, insert, update, delete; filters 조각 |
-| XML | mapper/CommonCode.xml | commonCode.selectList, commonCode.count |
+| XML | mapper/CommonCode.xml | commonCode.selectList(parameterType="map"), commonCode.count |
 | XML | mapper/CommonSql.xml | pageStart, pageEnd 공통 SQL 조각 |
 
-테이블: BOARD, COMMON_CODE, APP_MENU. 시퀀스: BOARD_SEQ. 기본 Service 단위 테스트 1개와 MVC→Service→실제 Mapper/H2 통합 테스트 1개만 둡니다. `smoke.mjs`는 실행된 서버에 로그인·권한·JSP·CRUD·검색·HTML 이스케이프를 확인합니다.
+테이블: BOARD, COMMON_CODE, APP_MENU. 시퀀스: BOARD_SEQ. 기본 Service 단위 테스트 1개와 MVC→Service→실제 Mapper/H2 통합 테스트 1개를 둡니다. 통합 테스트와 `smoke.mjs`는 JSON GET/POST, map의 두 번째 페이지, 권한·CSRF 거부, 삭제 후 미존재도 확인합니다.
+
+Controller→Service 주입은 이름 기반 `@Resource(name="boardService")`·`@Resource(name="commonCodeService")`와 `@Autowired` 필드를 혼용합니다. 구현체의 이름은 각각 `@Service("boardService")`, `@Service("commonCodeService")`입니다. 애플리케이션의 생성자 DI는 LoginInterceptor만 남겼습니다. UserSession의 값 생성자와 프레임워크 XML 생성자 인자는 별개입니다.
 
 함정 위치는 [evals/legacy-board-traps.md](../evals/legacy-board-traps.md)에만 기록합니다. M1/M2 eval 정답이 아니며 연결 판정 정답은 별도 사용자 승인을 받아야 합니다.
 
