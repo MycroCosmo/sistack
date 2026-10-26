@@ -1,0 +1,4 @@
+<nav aria-label="주 메뉴">
+  <c:forEach items="${menus}" var="menu"><c:url value="${menu.url}" var="menuUrl"/><a href="${fn:escapeXml(menuUrl)}"><c:out value="${menu.label}"/></a> </c:forEach>
+  <form method="post" action="<c:url value='/auth/logout.do'/>"><input type="hidden" name="csrf" value="<c:out value='${sessionScope.csrf}'/>"><button>로그아웃</button></form>
+</nav>

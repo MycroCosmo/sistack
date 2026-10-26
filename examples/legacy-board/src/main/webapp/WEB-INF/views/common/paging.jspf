@@ -1,0 +1,5 @@
+<div class="paging" aria-label="페이지 이동">
+  <c:if test="${paging.page > 1}"><button type="button" data-page="${paging.page - 1}">이전</button></c:if>
+  <span><c:out value="${paging.page}"/> / <c:out value="${paging.lastPage}"/> 페이지 · <c:out value="${paging.total}"/>건</span>
+  <c:if test="${paging.page < paging.lastPage}"><button type="button" data-page="${paging.page + 1}">다음</button></c:if>
+</div>

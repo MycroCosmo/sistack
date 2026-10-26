@@ -11,6 +11,7 @@ import { validateSkill, frontmatter } from '../scripts/validate-skills.mjs';
 import { syncShared } from '../scripts/sync-shared.mjs';
 import { install, destination } from '../scripts/install.mjs';
 import { root, exists } from '../scripts/common.mjs';
+import { fetchTestbed } from '../scripts/fetch-testbed.mjs';
 
 async function temporary(t) {
   const dir = await mkdtemp(path.join(os.tmpdir(), 'sistack-test-'));
@@ -121,4 +122,25 @@ test('공통 모듈 차이를 탐지하고 단독 설치·충돌 보존·명시�
   await writeFile(path.join(base, 'skills/si-example/scripts/lib/mask/stale.mjs'), 'stale');
   await assert.rejects(syncShared({ base }));
   assert.ok(await exists(path.join(base, 'skills/si-example/scripts/lib/mask/stale.mjs')));
+});
+
+test('외부 테스트베드는 고정 커밋을 재사용하고 변경된 파일을 보존', async (t) => {
+  const base = await temporary(t), source = path.join(base, 'source');
+  await mkdir(source);
+  const git = (args, cwd = source) => {
+    const result = spawnSync('git', args, { cwd, encoding: 'utf8', windowsHide: true });
+    assert.equal(result.status, 0, result.stderr); return result.stdout.trim();
+  };
+  git(['init', '-q']);
+  await writeFile(path.join(source, 'sample.txt'), 'fixture');
+  git(['add', 'sample.txt']);
+  git(['-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-qm', 'fixture']);
+  git(['tag', 'fixture-v1']);
+  const spec = { url: source, tag: 'fixture-v1', revision: git(['rev-parse', 'HEAD']) };
+  assert.equal(await fetchTestbed(base, spec), spec.revision);
+  assert.equal(await fetchTestbed(base, spec), spec.revision);
+  const changed = path.join(base, '.testbeds/egovframe/sample.txt');
+  await writeFile(changed, 'local change');
+  await assert.rejects(fetchTestbed(base, spec));
+  assert.equal(await readFile(changed, 'utf8'), 'local change');
 });

@@ -8,5 +8,12 @@ Design references:
   M0 does not copy pstack implementation or skill text.
 - Agent Skills specification: https://agentskills.io/specification
 
-Third-party Java dependencies, if approved, retain their own licenses.
-See docs/dependency-proposal.md for the proposed dependency inventory.
+Third-party Java dependencies retain their own licenses.
+See docs/decisions.md for the approved dependency inventory.
+
+Bundled third-party asset:
+- jQuery 3.7.1, Copyright OpenJS Foundation and other contributors.
+  MIT License, preserved at:
+  examples/legacy-board/src/main/webapp/resources/vendor/jquery-LICENSE.txt
+  Source: https://code.jquery.com/jquery-3.7.1.min.js
+  SHA-256: fc9a93dd241f6b045cbff0481cf4e1901becd0e12fb45166a8f17f95823f0b1a
