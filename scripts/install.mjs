@@ -3,6 +3,7 @@ import os from 'node:os';
 import { cli, isMain, root, files, exists, noLinks, copyFiles } from './common.mjs';
 import { validateSkills } from './validate-skills.mjs';
 import { syncShared } from './sync-shared.mjs';
+import { mask } from '../lib/mask/index.mjs';
 
 export function destination({ target, scope, dest, cwd = process.cwd(), home = os.homedir() }) {
   if (!['codex', 'claude'].includes(target) || !['repo', 'user'].includes(scope)) throw new Error('--target codex|claude --scope repo|user가 필요합니다');
@@ -30,7 +31,7 @@ export async function install(options, base = root) {
     plan.push({ source, target, names });
   }
   if (conflicts.length) {
-    console.log('기존 경로:\n' + conflicts.join('\n'));
+    console.log('기존 경로:\n' + conflicts.map(mask).join('\n'));
     if (!options.force) throw new Error('설치 중단: 덮어쓰려면 목록 검토 후 --force를 지정하세요');
   }
   for (const { source, target, names } of plan) await copyFiles(source, target, names, options.force);
