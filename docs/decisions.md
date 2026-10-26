@@ -29,6 +29,8 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 | javax.servlet-api 4.0.1 (provided), JSTL 1.2 | Servlet/JSP javax 네임스페이스 유지. Servlet은 CDDL-1.1 / GPL-2.0+Classpath Exception, JSTL은 CDDL-1.0 / GPL-2.0+Classpath Exception |
 | H2 2.2.224 (test) | Java 8 호환과 Oracle 모드. 다운로드한 org/h2/Driver.class의 major 52 확인. MPL-2.0 / EPL-1.0 |
 | JUnit 4.13.2, Mockito 4.11.0 (test) | 레거시 테스트 조합, Java 8 유지. 각각 EPL-1.0, MIT |
+| jackson-databind 2.20.2 (compile) | 사용자가 승인한 JSON 변환용 2.x. [공식 2.20 호환성 안내](https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.20)에 따라 Java 8 기반을 유지한다. 전이 core 2.20.2·annotations 2.20 포함. Apache-2.0 |
+| javax.annotation-api 1.3.2 (compile) | 추가 승인 후 테스트베드 pom에만 추가. JDK 11에서 제거된 javax.annotation의 `@Resource` 사용을 지원한다. CDDL-1.1 / GPL-2.0 with Classpath Exception. jakarta.annotation-api는 사용하지 않는다 |
 | jQuery 3.7.1 정적 파일 | Maven 의존성·CDN 없이 로컬 실행. 공식 배포 파일과 MIT LICENSE를 vendor에 보관; NOTICE에 SHA-256 기록 |
 | compiler 3.13.0 / surefire 3.2.5 / war 3.4.0 | release 8과 JDK 11/17 빌드. Apache-2.0 |
 | Jetty Maven plugin 9.4.57.v20241219 | 구형 javax JSP 로컬 실행. Apache-2.0 / EPL-1.0. 127.0.0.1에만 바인딩 |
@@ -45,3 +47,14 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - eGovFrame 공식 공통컴포넌트의 v4.2.4, 커밋 `2303751d76c119b56dc2e6b6fe1002adafbef938`을 고정한다. 최신 main은 Jakarta 기반으로 바뀌었으므로 XML·MyBatis 레거시 검증 목적에 맞는 공개 태그를 선택했다.
 - `context-mapper.xml`의 SqlSessionFactoryBean·SqlSessionTemplate과 Mapper XML을 확인했다. iBatis 2 지원 검증으로 확대 해석하지 않는다.
 - 가져오기 재실행은 출처·HEAD·작업트리 상태를 확인하며 기존 수정본을 리셋하거나 삭제하지 않는다.
+
+## 2026-10-27 — legacy-board GATE 수정
+
+- 인프라·검증 도구 승인은 유지하고 테스트베드만 재검토한다. M1은 시작하지 않는다.
+- BoardService와 CommonCodeService를 인터페이스로 만들고 `service/impl/`의 이름 있는 @Service 구현으로 분리했다. Controller→Service는 `@Resource(name=...)`와 `@Autowired` 필드 주입을 혼용한다. 애플리케이션 DI 생성자는 LoginInterceptor 한 곳만 남긴다. UserSession 생성자는 DTO 생성이며 DI가 아니다. 프레임워크 빈 SqlSessionTemplate의 XML constructor-arg는 유지한다.
+- 공통코드 서비스가 HashMap에 offset/endRow를 넣고 DAO의 문자열 sqlId와 parameterType="map"으로 전달한다. 기존 목록 결과·페이지 계산은 유지한다.
+- 기존 공통코드 HTML 목록은 유지하고 GET `/code/listJson.do`를 추가했다. `$.ajax`가 JSON 목록을 읽어 `.text()`로 셀을 채운다. 게시글 삭제 POST는 `{success:true}` JSON을 반환하며 jQuery가 성공 후 목록으로 이동한다. 오류는 HTTP 상태로 판별한다. 세션·역할·CSRF 보호는 유지한다.
+- Java 문장과 메서드, XML 요소, JSP·자체 JS/CSS를 줄 단위로 정리했다. jQuery 배포 파일은 변경하지 않는다. 포맷 변환 시 Java 토큰·XML 내용의 동일성을 확인했다.
+- 브라우저 확인 중 공통 JSP 조각의 한글이 ISO 기본 인코딩으로 해석되는 기존 문제를 재현했다. 각 jspf에 pageEncoding=UTF-8을 명시하고 smoke에 로그아웃·페이징 한글 확인을 추가했다.
+- Oracle DDL의 물리 컬럼명은 영문을 유지하고 COMMENT에 한글 논리명을 기록한다. H2 schema.sql은 변경하지 않는다. prod datasource는 globals.properties의 자리표시자만 참조한다. Oracle 드라이버·실제 접속·DDL 실행은 추가하지 않았다. Jetty는 local 프로필을 유지한다.
+- modern-board는 v0.2 백로그 한 줄만 추가했다. 구현하지 않았다.

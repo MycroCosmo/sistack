@@ -2,6 +2,8 @@ package kr.sistack.board;
 
 import java.time.LocalDate;
 import java.util.List;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @ActiveProfiles("local")
 @ContextConfiguration(locations = {"classpath:spring/root-context.xml", "file:src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml"})
 public class BoardFlowTest {
-    @Autowired private WebApplicationContext context;
-    @Autowired private BoardService service;
+    @Autowired
+    private WebApplicationContext context;
+
+    @Autowired
+    private BoardService service;
 
     private MockHttpSession login(MockMvc mvc, String role) throws Exception {
         MvcResult start = mvc.perform(get("/auth/login.do")).andReturn();
@@ -45,6 +50,7 @@ public class BoardFlowTest {
         assertEquals("/auth/login.do", mvc.perform(get("/board/list.do")).andReturn().getResponse().getRedirectedUrl());
         MockHttpSession reader = login(mvc, "READER");
         assertEquals(403, mvc.perform(get("/code/list.do").servletPath("/code/list.do").session(reader)).andReturn().getResponse().getStatus());
+        assertEquals(403, mvc.perform(get("/code/listJson.do").session(reader)).andReturn().getResponse().getStatus());
         assertEquals(403, mvc.perform(post("/board/create.do;legacy").session(reader)
             .param("csrf", (String) reader.getAttribute("csrf"))).andReturn().getResponse().getStatus());
         MockHttpSession admin = login(mvc, "ADMIN");
@@ -61,9 +67,12 @@ public class BoardFlowTest {
         assertEquals(200, title.getResponse().getStatus());
         assertEquals(1, ((List<Board>) title.getModelAndView().getModel().get("boards")).size());
         assertEquals("테스트관리자", title.getModelAndView().getModel().get("viewer"));
-        BoardSearch search = new BoardSearch(); search.setSearchType("author"); search.setKeyword("테스트관리자");
+        BoardSearch search = new BoardSearch();
+        search.setSearchType("author");
+        search.setKeyword("테스트관리자");
         assertEquals(2, service.list(search).size());
-        search.setStartDate(LocalDate.now().toString()); search.setEndDate(LocalDate.now().toString());
+        search.setStartDate(LocalDate.now().toString());
+        search.setEndDate(LocalDate.now().toString());
         assertEquals(2, service.list(search).size());
         search.setEndDate("2000-01-01");
         assertThrows(IllegalArgumentException.class, () -> service.list(search));
@@ -71,21 +80,45 @@ public class BoardFlowTest {
         assertEquals(400, mvc.perform(get("/board/detail.do").session(admin).param("id", "invalid")).andReturn().getResponse().getStatus());
 
         for (int i = 0; i < 11; i++) {
-            Board item = new Board(); item.setTitle("페이지 " + i); item.setContent("본문"); item.setCategory("FREE");
+            Board item = new Board();
+            item.setTitle("페이지 " + i);
+            item.setContent("본문");
+            item.setCategory("FREE");
             service.create(item, "페이징작성자");
         }
-        BoardSearch pages = new BoardSearch(); pages.setKeyword("페이지");
-        assertEquals(10, service.list(pages).size()); assertEquals(11, pages.getTotal());
-        pages.setPage(2); assertEquals(1, service.list(pages).size());
+        BoardSearch pages = new BoardSearch();
+        pages.setKeyword("페이지");
+        assertEquals(10, service.list(pages).size());
+        assertEquals(11, pages.getTotal());
+        pages.setPage(2);
+        assertEquals(1, service.list(pages).size());
         MvcResult codes = mvc.perform(get("/code/list.do").servletPath("/code/list.do").session(admin)).andReturn();
         assertEquals(200, codes.getResponse().getStatus());
         assertEquals(2, ((List<?>) codes.getModelAndView().getModel().get("codes")).size());
+        ObjectMapper json = new ObjectMapper();
+        MvcResult codeJson = mvc.perform(get("/code/listJson.do").session(admin)).andReturn();
+        assertEquals(200, codeJson.getResponse().getStatus());
+        assertTrue(codeJson.getResponse().getContentType().startsWith("application/json"));
+        JsonNode codeResult = json.readTree(codeJson.getResponse().getContentAsByteArray());
+        assertEquals(2, codeResult.get("total").asInt());
+        assertEquals("FREE", codeResult.get("codes").get(0).get("code").asText());
+        assertEquals("자유", codeResult.get("codes").get(0).get("label").asText());
+        MvcResult nextCodes = mvc.perform(get("/code/listJson.do").session(admin).param("page", "2")).andReturn();
+        assertEquals(0, json.readTree(nextCodes.getResponse().getContentAsByteArray()).get("codes").size());
+        assertEquals(400, mvc.perform(get("/code/listJson.do").session(admin).param("page", "0")).andReturn().getResponse().getStatus());
         assertEquals(200, mvc.perform(get("/board/form.do").servletPath("/board/form.do").session(admin)).andReturn().getResponse().getStatus());
         assertEquals(302, mvc.perform(post("/board/update.do").servletPath("/board/update.do").session(admin)
             .param("csrf", csrf).param("id", Long.toString(id)).param("title", "수정 제목").param("content", "수정 내용").param("category", "NOTICE")).andReturn().getResponse().getStatus());
         assertEquals("수정 제목", service.get(id).getTitle());
-        assertEquals(302, mvc.perform(post("/board/delete.do").servletPath("/board/delete.do").session(admin)
-            .param("csrf", csrf).param("id", Long.toString(id))).andReturn().getResponse().getStatus());
+        assertEquals(403, mvc.perform(post("/board/delete.do").session(reader)
+            .param("csrf", (String) reader.getAttribute("csrf")).param("id", Long.toString(id))).andReturn().getResponse().getStatus());
+        assertEquals(403, mvc.perform(post("/board/delete.do").session(admin).param("id", Long.toString(id))).andReturn().getResponse().getStatus());
+        assertEquals("수정 제목", service.get(id).getTitle());
+        MvcResult deleted = mvc.perform(post("/board/delete.do").session(admin)
+            .param("csrf", csrf).param("id", Long.toString(id))).andReturn();
+        assertEquals(200, deleted.getResponse().getStatus());
+        assertTrue(deleted.getResponse().getContentType().startsWith("application/json"));
+        assertTrue(json.readTree(deleted.getResponse().getContentAsByteArray()).get("success").asBoolean());
         assertEquals(404, mvc.perform(get("/board/detail.do").session(admin).param("id", Long.toString(id))).andReturn().getResponse().getStatus());
         assertEquals(302, mvc.perform(post("/auth/logout.do").servletPath("/auth/logout.do").session(admin).param("csrf", csrf)).andReturn().getResponse().getStatus());
     }

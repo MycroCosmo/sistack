@@ -1,3 +1,4 @@
 package kr.sistack.board.service;
 
-public class NotFoundException extends RuntimeException { }
+public class NotFoundException extends RuntimeException {
+}

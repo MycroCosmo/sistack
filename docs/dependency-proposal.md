@@ -1,5 +1,10 @@
 # M0 테스트베드 의존성 승인안
 
+## GATE 재검토 변경안
+
+- 승인됨: `com.fasterxml.jackson.core:jackson-databind:2.20.2`와 전이 core/annotations. Java 8 호환 JSON 응답 변환용, Apache-2.0. 테스트베드 pom에만 추가한다.
+- 추가 승인 완료: `javax.annotation:javax.annotation-api:1.3.2` (CDDL-1.1 / GPL-2.0 with Classpath Exception). 요청한 `@Resource(name=...)` 주입을 JDK 11/17에서 사용하기 위한 API다. JDK 11부터 JDK에 포함되지 않아 테스트베드 pom에만 compile 스코프로 추가했다. Jakarta API는 사용하지 않는다.
+
 상태: 2026-10-27 사용자 조건부 승인 반영 완료. Node 도구에는 외부 의존성이 없다.
 
 M0에서 요청한 Java 테스트베드를 구성하기 위한 직접 의존성과 빌드 도구다. Java 의존성은 `examples/legacy-board/pom.xml`에만 추가한다. Maven은 이들의 전이 의존성도 내려받는다. 구형 SI 재현용이며 운영 배포 대상이 아니다.
