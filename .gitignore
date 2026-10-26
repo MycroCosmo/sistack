@@ -1,0 +1,8 @@
+evals/private/
+.sistack/
+node_modules/
+.testbeds/
+.tmp/
+**/target/
+*.log
+.DS_Store
