@@ -1,0 +1,4 @@
+interface:
+  display_name: "SIStack 설치 확인"
+  short_description: "예제 스킬과 공통 모듈의 단독 설치 상태를 확인합니다"
+  default_prompt: "$si-example로 SIStack 설치를 확인해 줘."

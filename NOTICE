@@ -1,0 +1,12 @@
+SIStack
+Copyright (c) 2026 SIStack contributors. MIT License; see LICENSE.
+
+Design references:
+- pstack: https://github.com/backnotprop/pstack (MIT)
+  README.md and skills/how/SKILL.md consulted on 2026-10-27.
+  Principles and skill/reference directory organization informed the design.
+  M0 does not copy pstack implementation or skill text.
+- Agent Skills specification: https://agentskills.io/specification
+
+Third-party Java dependencies, if approved, retain their own licenses.
+See docs/dependency-proposal.md for the proposed dependency inventory.

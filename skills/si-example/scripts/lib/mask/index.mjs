@@ -1,0 +1,19 @@
+const REDACTED = '[REDACTED]';
+
+/** 텍스트 로그용 보수적 마스킹. 반환값만 산출물에 저장한다. */
+export function mask(input) {
+  if (typeof input !== 'string') throw new TypeError('mask에는 문자열만 전달합니다');
+  return input
+    .replace(/(jdbc:oracle:thin:)[^\s/@]+\/[^\s@]+@/gi, `$1${REDACTED}@`)
+    .replace(/(\/\/)[^\s/@:]+:[^\s/@]+@/g, `$1${REDACTED}@`)
+    .replace(/(["']?(?:[\w.-]*(?:password|passwd|pwd|secret|token|api[_-]?key|access[_-]?key|private[_-]?key)[\w.-]*)["']?\s*[:=]\s*)(\[REDACTED\]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\s,;&}\]]+)/gi, `$1${REDACTED}`)
+    .replace(/(\bAuthorization\s*:\s*(?:Bearer|Basic)\s+)\S+/gi, `$1${REDACTED}`)
+    .replace(/-----BEGIN (?:[A-Z]+ )*PRIVATE KEY-----[\s\S]*?-----END (?:[A-Z]+ )*PRIVATE KEY-----/g, REDACTED)
+    .replace(/[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9](?:[A-Z0-9.-]*[A-Z0-9])?\.[A-Z]{2,}/gi, REDACTED)
+    .replace(/(?<!\d)\d{6}[- ]?[1-8]\d{6}(?!\d)/g, REDACTED)
+    .replace(/(?<!\d)(?:(?:\+82[- .]?(?:0)?|0)(?:1[016789]|2|[3-6][1-5]|70)[- .]?\d{3,4}[- .]?\d{4})(?!\d)/g, REDACTED)
+    .replace(/((?:계좌(?:번호)?|카드(?:번호)?|account(?:[_ -]?number)?|card(?:[_ -]?number)?)\s*[:=]?\s*)\d(?:[\d -]{5,}\d)/gi, `$1${REDACTED}`)
+    .replace(/(?<![\d-])(?:\d{2,6}-){2,4}\d{2,6}(?![\d-])/g, (value) => value.replace(/-/g, '').length >= 10 ? REDACTED : value)
+    .replace(/(?<!\d)(?:\d[ -]?){12,18}\d(?!\d)/g, REDACTED)
+    .replace(/(?<!\d)\d{10,12}(?!\d)/g, REDACTED);
+}

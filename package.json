@@ -1,0 +1,12 @@
+{
+  "name": "sistack",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test && node scripts/validate-skills.mjs && node scripts/sync-shared.mjs --check",
+    "sync-shared": "node scripts/sync-shared.mjs"
+  },
+  "license": "MIT"
+}
