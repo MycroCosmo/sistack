@@ -28,6 +28,17 @@ const controller = 'kr.sistack.board.web.BoardController';
 const impl = 'kr.sistack.board.service.impl.BoardServiceImpl';
 const mapper = 'kr.sistack.board.mapper.BoardMapper';
 
+test('extends와 implements를 함께 선언한 구현체로 주입 호출을 연결한다', async () => {
+  await fixture({
+    'C.java': 'package p;\npublic class C {\n@Autowired\nprivate S svc;\npublic void run() { svc.go(); }\n}',
+    'S.java': 'package p;\npublic interface S {\nvoid go();\n}',
+    'Impl.java': 'package p;\n@Service\npublic class Impl extends Base implements S, Other {\npublic void go() {}\n}'
+  }, index => {
+    assert.ok(has(index, 'p.C#run', 'p.Impl#go', 'calls'));
+    assert.ok(!has(index, 'p.C#run', 'p.S#go', 'calls'));
+  });
+});
+
 test('주석 제거는 문자열의 //와 라인 번호를 보존한다', () => {
   const text = '"http://local"; // old\n/* obsolete */ call();';
   const clean = stripComments(text);

@@ -78,3 +78,6 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - 같은 이름의 DB별 SQL 후보는 eval에서 논리 연결 하나로 비교한다. scope의 출발 노드·관계 종류·선택 위치 밖은 과탐으로 세지 않는다. 이 범위를 넓힐지 여부도 GATE에서 검토한다.
 - eGovFrame 메뉴는 단순 CRUD인 공통분류코드 삭제, PaginationInfo와 공통코드 JOIN을 거치는 공통상세코드 목록, 직접 JDBC를 쓰는 RSS 컬럼 조회를 선정했다. 고정 버전에서 실제 iBatis 2 메뉴를 확인하지 못했으므로 합성 테스트 범위를 명시한다.
 - pstack build-the-lever/encode-lessons-in-structure의 원칙을 적용해 CLI와 테스트를 만들었으며 원문 문장이나 코드를 복제하지 않았다. 제품 스킬과 설치용 indexer 복사는 해당 소비 스킬을 구현하는 이후 마일스톤의 작업이다.
+
+### M1 승인 후 — 구현체 해석
+- extends와 implements 절을 각각 해석하고 제네릭 인자를 제거한 타입으로 상속 관계를 연결한다. 두 키워드를 한 타입으로 읽던 오류를 실제 주입 호출 회귀 테스트로 고정했다.
