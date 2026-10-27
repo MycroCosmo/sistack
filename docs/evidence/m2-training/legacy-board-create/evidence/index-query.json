@@ -1,0 +1,2066 @@
+{
+  "meta": {
+    "target": "C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/examples/legacy-board",
+    "source_revision": "7c4c7c511a28df9a273644c5f0c95056508ba490",
+    "source_dirty": false,
+    "created_at": "2026-10-27T04:12:39.500Z",
+    "indexer_version": "0.1.0",
+    "processed_files": 38,
+    "duration_ms": 170,
+    "source_files": {
+      "pom.xml": "1daf24d610aef638e73d6942da56f251d5f00f88ec803d51329de46291c60573",
+      "src/main/java/kr/sistack/board/common/Pagination.java": "484a19e438becd6e61a51bbc1740854dbe5b9f8fa4293e8d75ec7bc8d5e1f060",
+      "src/main/java/kr/sistack/board/dao/CommonCodeDao.java": "bf17d511c55527f8169dec393d32c6b5366fb6468d9a0e9c477a89e38136d7cb",
+      "src/main/java/kr/sistack/board/domain/Board.java": "f9b4b7b8f311ded09d10a36faae74b05079c30544c9643bfedb19e1b5f464b25",
+      "src/main/java/kr/sistack/board/domain/BoardSearch.java": "7dcc4fa6feff06daac074e3c2f337310f0831b4d0cf0c2a050562e663c1f5b65",
+      "src/main/java/kr/sistack/board/domain/CommonCode.java": "0dd95b9d8a38eee6440db4275e3029f1dc37a4ae21c05ae2809226c08abd43ea",
+      "src/main/java/kr/sistack/board/domain/Menu.java": "4d3e73ac4f5494d8056d715c809bc1ae83053c2d1462dd879b251316c48e9ba2",
+      "src/main/java/kr/sistack/board/mapper/BoardMapper.java": "7912db189d1060de0e3d4aa7add93f625cb14e446dcb7daa71241d616a88bcfa",
+      "src/main/java/kr/sistack/board/mapper/MenuMapper.java": "cb950f3cb91faa8ca712669245e72bdc700ba03dd740f07f27cdc2668c282c2d",
+      "src/main/java/kr/sistack/board/service/BoardService.java": "896a3dc32285cec3671382ce969adc1a2943a920852e5a696bcbd794e50ab10c",
+      "src/main/java/kr/sistack/board/service/CommonCodeService.java": "0d6fb300d45ae00d5118fcf67d92401ce9943de8e5ff42a6e54de35ebb3d78fb",
+      "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java": "338abd3aa4a58c89144bfa7f13edd15b36439767a1092a583c65dda9b397b970",
+      "src/main/java/kr/sistack/board/service/impl/CommonCodeServiceImpl.java": "898a9ee4acff5b5f53070f9ff89570355caa27ffc88a6b23905e11f82058d666",
+      "src/main/java/kr/sistack/board/service/NotFoundException.java": "e8a5793405fd835c0160fe92f007e054bb0bb3801d74e558d2e782e6de11ef4e",
+      "src/main/java/kr/sistack/board/web/AuthController.java": "99ce3a31f3e2cf37a3d5ccbf84f51480681326790daa5a890047f5834d67b908",
+      "src/main/java/kr/sistack/board/web/BoardController.java": "227d0a21ed2932322e94453c3af9c6a6921076936ae759d3d4eed6c863de6e73",
+      "src/main/java/kr/sistack/board/web/CommonCodeController.java": "ca74a2e20ad4210a950b5cee7ac3f05809552e4f497a37acada4d0e22b127a90",
+      "src/main/java/kr/sistack/board/web/CommonExceptionHandler.java": "840c8a58e7cb490dc7bc1b5f00db2b7b6219329fb60f7a453822d33aeb55eb85",
+      "src/main/java/kr/sistack/board/web/LoginInterceptor.java": "ffdc90cb080d3303862c8d9d1a53efbb50cb9437000311d2e409620f17ba3b1c",
+      "src/main/java/kr/sistack/board/web/UserSession.java": "f30cf08b464a57b453a954aa2248825c13a21a113d840f88f7f58b1b58c557b1",
+      "src/main/resources/db/oracle/ddl.sql": "2335077f19afe3f217e81e8abeb7d975e828e75441fafa01d8508febbac3f31a",
+      "src/main/resources/globals.properties": "d7711f3c96e1f24042efd71f9d6ab71cec8f6a753f54f447a583954e9474bf08",
+      "src/main/resources/mapper/BoardMapper.xml": "ad194be2f97e681dea017a28c62b6a1cbd22956ac0c4471c59d1c7963278c4c0",
+      "src/main/resources/mapper/CommonCode.xml": "7d71ac52705051551532ce4f79b82c855f1b25b3abb255aaf4687e618786b388",
+      "src/main/resources/mapper/CommonSql.xml": "69553bacb0b00e4fd092fe2131d271914b4703e8f91b5d0737fc9c6d983c21cc",
+      "src/main/resources/spring/root-context.xml": "696a11db923fb70687a863faa44321f462b6f9a1969869b252bd46c711d5627c",
+      "src/main/webapp/resources/board.js": "6b7d7a88bee42990012ee211c75b0457650d911b34ede84e7bfab0eaf9327709",
+      "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml": "1e1a10e0ea9704c9cdf5fbede8668991194a9446128c0117c9db9e0d22c5296a",
+      "src/main/webapp/WEB-INF/views/board/detail.jsp": "26103291f0f5df494de12dff45db92007cbaaac2c5152b3e6f75a61b2161e421",
+      "src/main/webapp/WEB-INF/views/board/form.jsp": "8ed0c020451cfa8b84faab83d9c8631360af1eeaa32b07dd254eae7e274f14b9",
+      "src/main/webapp/WEB-INF/views/board/list.jsp": "feee1bbf66ab87a91a8920595542f8ce218a300348f9efdfa2bc1f2660d224c0",
+      "src/main/webapp/WEB-INF/views/code/list.jsp": "1e14d74bc30469867916e1ab8dfa45698925a640b6ac94e0cbdbbc540928eff4",
+      "src/main/webapp/WEB-INF/views/common/header.jspf": "e8a7827af18324bc3939bbb85a881f8547d6456532902ff1351657f390bea1a1",
+      "src/main/webapp/WEB-INF/views/common/menu.jspf": "2293c5b0676b6fd61cb382306cd103606a2c89979c77ab9afa86ad516417f8b5",
+      "src/main/webapp/WEB-INF/views/common/paging.jspf": "9c8557458ed1b63afcb97ce3edfd10050403ec2dfc1db4bc26024d02e8982cfb",
+      "src/main/webapp/WEB-INF/views/error.jsp": "9db004c8d2a00449cf3f8f124ee3d884318082b9945e40531a6887ed61bbc8ce",
+      "src/main/webapp/WEB-INF/views/login.jsp": "0bdc3edbe5df9471c4bdb7182278070d64986ab3a0656bcb3e71f588446f8b16",
+      "src/main/webapp/WEB-INF/web.xml": "d01994c45686c2d855a2ed3c887440c7ed3fe213eb1277b5e5e07cb00aa528e0"
+    }
+  },
+  "direction": "forward",
+  "depth": 8,
+  "roots": [
+    "852c694dbca9925507226c6ab126d34ba93b5ed005f2c687fb209e9aa1816c1e"
+  ],
+  "nodes": [
+    {
+      "id": "20cd6e13d5cfbb3054303f0b3f3ec45e31c9b60f4257ec20b6887036a823b951",
+      "kind": "method",
+      "name": "kr.sistack.board.mapper.BoardMapper#selectList",
+      "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+      "line": 8,
+      "details": {
+        "owner": "kr.sistack.board.mapper.BoardMapper",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.domain.BoardSearch",
+            "name": "search"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "3c09dee087dacc43df570f8edb34cd8772af352605c4942137686c7cf0560e71",
+      "kind": "method",
+      "name": "kr.sistack.board.mapper.BoardMapper#count",
+      "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+      "line": 10,
+      "details": {
+        "owner": "kr.sistack.board.mapper.BoardMapper",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.domain.BoardSearch",
+            "name": "search"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "19514cb84a614b6df2c5a65e1c502326397ed1f5e9ae3887e30c4ddbfae39fa9",
+      "kind": "method",
+      "name": "kr.sistack.board.mapper.BoardMapper#insert",
+      "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+      "line": 14,
+      "details": {
+        "owner": "kr.sistack.board.mapper.BoardMapper",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.domain.Board",
+            "name": "board"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "fd2ac7c4334f96205eabd62162e882441e12dc153cf5d960f308893f66d50276",
+      "kind": "method",
+      "name": "kr.sistack.board.mapper.BoardMapper#update",
+      "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+      "line": 16,
+      "details": {
+        "owner": "kr.sistack.board.mapper.BoardMapper",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.domain.Board",
+            "name": "board"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "2270421d8762ee77200b91b6de80c444aa86083faf1b6c8aff540582648e1aa5",
+      "kind": "method",
+      "name": "kr.sistack.board.mapper.BoardMapper#delete",
+      "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+      "line": 18,
+      "details": {
+        "owner": "kr.sistack.board.mapper.BoardMapper",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.mapper.long",
+            "name": "id"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "7f3a96554483ddd2465be83b65d420077d3fa2842eac3c4b5f23b9ef3189713b",
+      "kind": "method",
+      "name": "kr.sistack.board.mapper.MenuMapper#selectList",
+      "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+      "line": 10,
+      "details": {
+        "owner": "kr.sistack.board.mapper.MenuMapper",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.mapper.String",
+            "name": "role"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "0b1a6c7a1902ce8c8682966336888d10c2c4fdb4cd64b832283c84c936ab55b1",
+      "kind": "method",
+      "name": "kr.sistack.board.service.impl.BoardServiceImpl#list",
+      "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+      "line": 19,
+      "details": {
+        "owner": "kr.sistack.board.service.impl.BoardServiceImpl",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.domain.BoardSearch",
+            "name": "search"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "a90f3d8bd891ad80f61f15157fde135657659fd37578f073f40949ac61094ab0",
+      "kind": "method",
+      "name": "kr.sistack.board.service.impl.BoardServiceImpl#create",
+      "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+      "line": 39,
+      "details": {
+        "owner": "kr.sistack.board.service.impl.BoardServiceImpl",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.domain.Board",
+            "name": "board"
+          },
+          {
+            "type": "kr.sistack.board.service.impl.String",
+            "name": "author"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "749580ad8ed73e556ac9bef6fa5b24947abdd78883b05e3a251c50733cc7e1ea",
+      "kind": "method",
+      "name": "kr.sistack.board.service.impl.BoardServiceImpl#update",
+      "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+      "line": 48,
+      "details": {
+        "owner": "kr.sistack.board.service.impl.BoardServiceImpl",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.service.impl.long",
+            "name": "id"
+          },
+          {
+            "type": "kr.sistack.board.domain.Board",
+            "name": "board"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "b8ac68ebcd02bddc71c3323c0e2f27dabf6b55be7306ce60c9a40595956e5c42",
+      "kind": "method",
+      "name": "kr.sistack.board.service.impl.BoardServiceImpl#delete",
+      "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+      "line": 58,
+      "details": {
+        "owner": "kr.sistack.board.service.impl.BoardServiceImpl",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.service.impl.long",
+            "name": "id"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "e81367559cfbb9a1d7b28f4d9fd93474e22895b6b2e190415dd7633c9150c59b",
+      "kind": "method",
+      "name": "kr.sistack.board.service.impl.BoardServiceImpl#validate",
+      "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+      "line": 64,
+      "details": {
+        "owner": "kr.sistack.board.service.impl.BoardServiceImpl",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.domain.Board",
+            "name": "board"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "f29071e21598476f108e5fd59950bd617a8b857ed94ae0beef8298dc9e036cbc",
+      "kind": "method",
+      "name": "kr.sistack.board.web.AuthController#logout",
+      "file": "src/main/java/kr/sistack/board/web/AuthController.java",
+      "line": 41,
+      "details": {
+        "owner": "kr.sistack.board.web.AuthController",
+        "parameters": [
+          {
+            "type": "javax.servlet.http.HttpSession",
+            "name": "session"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "54b42bdbe7ed54e51c2328c45f0518e20690306802c426310ec870a7a608cf2f",
+      "kind": "method",
+      "name": "kr.sistack.board.web.BoardController#list",
+      "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+      "line": 37,
+      "details": {
+        "owner": "kr.sistack.board.web.BoardController",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.domain.BoardSearch",
+            "name": "search"
+          },
+          {
+            "type": "kr.sistack.board.web.UserSession",
+            "name": "user"
+          },
+          {
+            "type": "org.springframework.ui.Model",
+            "name": "model"
+          }
+        ],
+        "request_attributes": [
+          "currentUser"
+        ],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "e8b9095a4fc547c10725f0a574657344f8fd7fd23e0e9d1787ceb22a424a76b4",
+      "kind": "method",
+      "name": "kr.sistack.board.web.BoardController#create",
+      "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+      "line": 58,
+      "details": {
+        "owner": "kr.sistack.board.web.BoardController",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.domain.Board",
+            "name": "board"
+          },
+          {
+            "type": "kr.sistack.board.web.UserSession",
+            "name": "user"
+          }
+        ],
+        "request_attributes": [
+          "currentUser"
+        ],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "9ae79125d87e1c365111820326e5853f6125a214e9e1360fd8e0cbe8d31fc735",
+      "kind": "method",
+      "name": "kr.sistack.board.web.BoardController#update",
+      "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+      "line": 63,
+      "details": {
+        "owner": "kr.sistack.board.web.BoardController",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.web.long",
+            "name": "id"
+          },
+          {
+            "type": "kr.sistack.board.domain.Board",
+            "name": "board"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "83277a076644de96288b5fba874915c56510ed9162dfc68e9b6805e74331ffc9",
+      "kind": "method",
+      "name": "kr.sistack.board.web.BoardController#delete",
+      "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+      "line": 70,
+      "details": {
+        "owner": "kr.sistack.board.web.BoardController",
+        "parameters": [
+          {
+            "type": "kr.sistack.board.web.long",
+            "name": "id"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [],
+        "request_writes": []
+      }
+    },
+    {
+      "id": "23939dc4cafa716279f8896d0978312479cbdb7b89ad0cd17682c54544ca536f",
+      "kind": "method",
+      "name": "kr.sistack.board.web.LoginInterceptor#preHandle",
+      "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+      "line": 18,
+      "details": {
+        "owner": "kr.sistack.board.web.LoginInterceptor",
+        "parameters": [
+          {
+            "type": "javax.servlet.http.HttpServletRequest",
+            "name": "request"
+          },
+          {
+            "type": "javax.servlet.http.HttpServletResponse",
+            "name": "response"
+          },
+          {
+            "type": "kr.sistack.board.web.Object",
+            "name": "handler"
+          }
+        ],
+        "request_attributes": [],
+        "map_keys": [],
+        "session_reads": [
+          "loginUser",
+          "csrf"
+        ],
+        "request_writes": [
+          "currentUser",
+          "menus"
+        ]
+      }
+    },
+    {
+      "id": "756a873325c3b54d2fc8f6e5c6e66a547ab7a2ca74f8f6a5671ad4ea8b217c89",
+      "kind": "table",
+      "name": "APP_MENU",
+      "file": "src/main/resources/db/oracle/ddl.sql",
+      "line": 6,
+      "details": {
+        "declaration": true
+      }
+    },
+    {
+      "id": "f6011aa91b92fc64f0c3faf0605ac133d8fd4cd7b90ed4360a7ee16f80808687",
+      "kind": "table",
+      "name": "BOARD",
+      "file": "src/main/resources/db/oracle/ddl.sql",
+      "line": 15,
+      "details": {
+        "declaration": true
+      }
+    },
+    {
+      "id": "9b0084e8bdcbc1bd0c8e76c4c2869617647aa3930282a6822f0561012e13868c",
+      "kind": "resultMap",
+      "name": "kr.sistack.board.mapper.BoardMapper.board",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 4,
+      "details": {
+        "namespace": "kr.sistack.board.mapper.BoardMapper",
+        "statement": "board",
+        "dialect": "mybatis",
+        "parameter_type": null
+      }
+    },
+    {
+      "id": "83c05c6280726bafd91c5505864b9264fb2f68806fa25e82e84bb5edb12be94d",
+      "kind": "fragment",
+      "name": "kr.sistack.board.mapper.BoardMapper.filters",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 12,
+      "details": {
+        "namespace": "kr.sistack.board.mapper.BoardMapper",
+        "statement": "filters",
+        "dialect": "mybatis",
+        "parameter_type": null,
+        "parameters": [
+          "keyword",
+          "keyword",
+          "fromDate",
+          "untilDate"
+        ],
+        "substitutions": []
+      }
+    },
+    {
+      "id": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+      "kind": "sql",
+      "name": "kr.sistack.board.mapper.BoardMapper.selectList",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 30,
+      "details": {
+        "namespace": "kr.sistack.board.mapper.BoardMapper",
+        "statement": "selectList",
+        "dialect": "mybatis",
+        "parameter_type": null,
+        "parameters": [],
+        "substitutions": [
+          "sortColumn"
+        ]
+      }
+    },
+    {
+      "id": "1e815d84adeec59a6d42acea92cfe3bf3a15df126f98f3bca804d2bb40be48a6",
+      "kind": "sql",
+      "name": "kr.sistack.board.mapper.BoardMapper.count",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 37,
+      "details": {
+        "namespace": "kr.sistack.board.mapper.BoardMapper",
+        "statement": "count",
+        "dialect": "mybatis",
+        "parameter_type": null,
+        "parameters": [],
+        "substitutions": []
+      }
+    },
+    {
+      "id": "b264247ea4ce260970fe9e70546a7e9041ccc76a6d01fa20c389fd4aa2b1243d",
+      "kind": "sql",
+      "name": "kr.sistack.board.mapper.BoardMapper.insert",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 44,
+      "details": {
+        "namespace": "kr.sistack.board.mapper.BoardMapper",
+        "statement": "insert",
+        "dialect": "mybatis",
+        "parameter_type": null,
+        "parameters": [
+          "id",
+          "title",
+          "content",
+          "author",
+          "category"
+        ],
+        "substitutions": []
+      }
+    },
+    {
+      "id": "e65e8c809557fd97d8e3ae1d7dfdfdc57460f772e4b364fc203f67af3eb53d30",
+      "kind": "table",
+      "name": "DUAL",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 46,
+      "details": {
+        "declaration": false,
+        "object_type": "table-or-view"
+      }
+    },
+    {
+      "id": "f3184062108a047b35daf45d5c0cf64a916cc91850a14666f548111544791307",
+      "kind": "sql",
+      "name": "kr.sistack.board.mapper.BoardMapper.update",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 50,
+      "details": {
+        "namespace": "kr.sistack.board.mapper.BoardMapper",
+        "statement": "update",
+        "dialect": "mybatis",
+        "parameter_type": null,
+        "parameters": [
+          "title",
+          "content",
+          "category",
+          "id"
+        ],
+        "substitutions": []
+      }
+    },
+    {
+      "id": "cb652cfbe9c6a59c1f7bc28a154175cf6d24acaeef785610553bb08457108b18",
+      "kind": "sql",
+      "name": "kr.sistack.board.mapper.BoardMapper.delete",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 53,
+      "details": {
+        "namespace": "kr.sistack.board.mapper.BoardMapper",
+        "statement": "delete",
+        "dialect": "mybatis",
+        "parameter_type": null,
+        "parameters": [
+          "id"
+        ],
+        "substitutions": []
+      }
+    },
+    {
+      "id": "84dca681aa1e6d5fb4a7f573e6e300b81ea972d5836c818507e3849b4ea03878",
+      "kind": "fragment",
+      "name": "commonSql.pageStart",
+      "file": "src/main/resources/mapper/CommonSql.xml",
+      "line": 4,
+      "details": {
+        "namespace": "commonSql",
+        "statement": "pageStart",
+        "dialect": "mybatis",
+        "parameter_type": null,
+        "parameters": [],
+        "substitutions": []
+      }
+    },
+    {
+      "id": "d4c681e15adcad90c16500f56527e9c48049bcff5994a7df56ecc927aca35cfa",
+      "kind": "fragment",
+      "name": "commonSql.pageEnd",
+      "file": "src/main/resources/mapper/CommonSql.xml",
+      "line": 7,
+      "details": {
+        "namespace": "commonSql",
+        "statement": "pageEnd",
+        "dialect": "mybatis",
+        "parameter_type": null,
+        "parameters": [
+          "endRow",
+          "offset"
+        ],
+        "substitutions": []
+      }
+    },
+    {
+      "id": "24ac6738d29ad24f8eb7dd903968e7f440108b1c00052ce0e1721989be513ea6",
+      "kind": "js",
+      "name": "src/main/webapp/resources/board.js",
+      "file": "src/main/webapp/resources/board.js",
+      "line": 1,
+      "details": {}
+    },
+    {
+      "id": "59b39cd480beb04bcce89b56b48b75628412c1c457237c3d6bb795ea4edb9748",
+      "kind": "js",
+      "name": "src/main/webapp/resources/board.js#listUrl",
+      "file": "src/main/webapp/resources/board.js",
+      "line": 3,
+      "details": {
+        "selector": null
+      }
+    },
+    {
+      "id": "7967856475a9e91b3674275b6bbc0eb1eba902ecf335dfdf8232e7da3b4bc939",
+      "kind": "js",
+      "name": "src/main/webapp/resources/board.js#handler:18",
+      "file": "src/main/webapp/resources/board.js",
+      "line": 18,
+      "details": {
+        "selector": "#loadCodes"
+      }
+    },
+    {
+      "id": "b4d440261fa33f2ed70e105b15d47ba4dff930ee96c7605b1157d657e91230f0",
+      "kind": "js",
+      "name": "src/main/webapp/resources/board.js#handler:44",
+      "file": "src/main/webapp/resources/board.js",
+      "line": 44,
+      "details": {
+        "selector": "#deleteForm"
+      }
+    },
+    {
+      "id": "852c694dbca9925507226c6ab126d34ba93b5ed005f2c687fb209e9aa1816c1e",
+      "kind": "jsp",
+      "name": "src/main/webapp/WEB-INF/views/board/form.jsp",
+      "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+      "line": 1,
+      "details": {
+        "url_declarations": [
+          {
+            "value": "${board.id == 0 ? '/board/create.do' : '/board/update.do'}",
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 12
+          },
+          {
+            "value": "/board/list.do",
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 30
+          }
+        ]
+      }
+    },
+    {
+      "id": "2cf541ca0c3194c61d4ae8d9fc06c505d8f7d9fe61871339391df59d5eb55a84",
+      "kind": "jsp",
+      "name": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "line": 1,
+      "details": {
+        "url_declarations": [
+          {
+            "value": "/resources/board.css",
+            "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+            "line": 6
+          },
+          {
+            "value": "/resources/vendor/jquery-3.7.1.min.js",
+            "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+            "line": 7
+          },
+          {
+            "value": "/resources/board.js",
+            "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+            "line": 9
+          }
+        ]
+      }
+    },
+    {
+      "id": "aa71d1410aab11db1f107ce379041ad41d7ba68c2c21e133200fbb78e1515019",
+      "kind": "js",
+      "name": "src/main/webapp/WEB-INF/views/common/header.jspf#inline:7",
+      "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "line": 7,
+      "details": {}
+    },
+    {
+      "id": "2684cd5107b82e8d6f028bfc9a3c4f7fdbc0aef873b53b2db1fbf0fff213a2e7",
+      "kind": "js",
+      "name": "src/main/webapp/WEB-INF/views/common/header.jspf#inline:9",
+      "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "line": 9,
+      "details": {}
+    },
+    {
+      "id": "8e5badb45953733655f8e24d5d783db9c1472223e83cfab4d5fd032884a2df43",
+      "kind": "jsp",
+      "name": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+      "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+      "line": 1,
+      "details": {
+        "url_declarations": [
+          {
+            "value": "${menu.url}",
+            "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+            "line": 4
+          },
+          {
+            "value": "/auth/logout.do",
+            "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+            "line": 9
+          }
+        ]
+      }
+    },
+    {
+      "id": "3f9e8e018bc730f8d40e5af22d6d252ebba1c76f601c0b46d664367e6babae05",
+      "kind": "endpoint",
+      "name": "POST /auth/logout.do",
+      "file": "src/main/java/kr/sistack/board/web/AuthController.java",
+      "line": 40,
+      "details": {
+        "path": "/auth/logout.do",
+        "http_method": "POST"
+      }
+    },
+    {
+      "id": "ded13c1bc0bb4868e396bf42eced7f9fc6f42fb8eb1ff61173d733d9bbd64338",
+      "kind": "endpoint",
+      "name": "GET /board/list.do",
+      "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+      "line": 36,
+      "details": {
+        "path": "/board/list.do",
+        "http_method": "GET"
+      }
+    },
+    {
+      "id": "0a29d892aa8543e8dab474d83bd1b998c7d8f5bb415e327a9f1480f3e77ad430",
+      "kind": "endpoint",
+      "name": "POST /board/create.do",
+      "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+      "line": 57,
+      "details": {
+        "path": "/board/create.do",
+        "http_method": "POST"
+      }
+    },
+    {
+      "id": "6fbac8ea511eb2413481266bd2243e563565446663ee436349fbedb73eac30d7",
+      "kind": "endpoint",
+      "name": "POST /board/update.do",
+      "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+      "line": 62,
+      "details": {
+        "path": "/board/update.do",
+        "http_method": "POST"
+      }
+    },
+    {
+      "id": "72b0060e0bdfe8655bd5b88626ca1f6c23b548c4d0d6f44c7e28e93808140938",
+      "kind": "endpoint",
+      "name": "POST /board/delete.do",
+      "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+      "line": 68,
+      "details": {
+        "path": "/board/delete.do",
+        "http_method": "POST"
+      }
+    },
+    {
+      "id": "91b83926cb0a6ed9e53e3b10a4ccaedf493f58692c2888c6e21dceda1597f263",
+      "kind": "sql",
+      "name": "kr.sistack.board.mapper.MenuMapper.selectList",
+      "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+      "line": 9,
+      "details": {
+        "dialect": "mybatis-annotation"
+      }
+    },
+    {
+      "id": "fe915309f1e4c48745e520e55a3fd072f4fbd90720beee09636a8d28590577a3",
+      "kind": "unknown",
+      "name": "dynamic-url:src/main/webapp/WEB-INF/views/common/menu.jspf:5",
+      "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+      "line": 5,
+      "details": {
+        "pattern": "dynamic-url",
+        "constants": []
+      }
+    },
+    {
+      "id": "ab65b4eb79f7553baed4d91d06da98970785f605499c83f606bf09917538392c",
+      "kind": "unknown",
+      "name": "string-url:src/main/webapp/resources/board.js:21",
+      "file": "src/main/webapp/resources/board.js",
+      "line": 21,
+      "details": {
+        "pattern": "string-url",
+        "constants": [
+          "data-base",
+          "/list",
+          "Json.do"
+        ]
+      }
+    },
+    {
+      "id": "81b5c323c07bca0ecd110ad7952c0cfeb82cb9a1cb6d47a45887e918c096bd57",
+      "kind": "unknown",
+      "name": "string-url:src/main/webapp/resources/board.js:59",
+      "file": "src/main/webapp/resources/board.js",
+      "line": 59,
+      "details": {
+        "pattern": "string-url",
+        "constants": [
+          "data-base",
+          "/list.do"
+        ]
+      }
+    },
+    {
+      "id": "44555689989ee4e37d6f7b27c9e785729e846d00d3da0aab04353d649b5335fc",
+      "kind": "unknown",
+      "name": "string-url:src/main/webapp/resources/board.js:15",
+      "file": "src/main/webapp/resources/board.js",
+      "line": 15,
+      "details": {
+        "pattern": "string-url",
+        "constants": []
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "852c694dbca9925507226c6ab126d34ba93b5ed005f2c687fb209e9aa1816c1e",
+      "to": "2cf541ca0c3194c61d4ae8d9fc06c505d8f7d9fe61871339391df59d5eb55a84",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 6
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "from": "852c694dbca9925507226c6ab126d34ba93b5ed005f2c687fb209e9aa1816c1e",
+      "to": "8e5badb45953733655f8e24d5d783db9c1472223e83cfab4d5fd032884a2df43",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 10
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "from": "852c694dbca9925507226c6ab126d34ba93b5ed005f2c687fb209e9aa1816c1e",
+      "to": "24ac6738d29ad24f8eb7dd903968e7f440108b1c00052ce0e1721989be513ea6",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+          "line": 9
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "from": "852c694dbca9925507226c6ab126d34ba93b5ed005f2c687fb209e9aa1816c1e",
+      "to": "0a29d892aa8543e8dab474d83bd1b998c7d8f5bb415e327a9f1480f3e77ad430",
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 57
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "from": "852c694dbca9925507226c6ab126d34ba93b5ed005f2c687fb209e9aa1816c1e",
+      "to": "6fbac8ea511eb2413481266bd2243e563565446663ee436349fbedb73eac30d7",
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 62
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "from": "852c694dbca9925507226c6ab126d34ba93b5ed005f2c687fb209e9aa1816c1e",
+      "to": "ded13c1bc0bb4868e396bf42eced7f9fc6f42fb8eb1ff61173d733d9bbd64338",
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 30
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "from": "2cf541ca0c3194c61d4ae8d9fc06c505d8f7d9fe61871339391df59d5eb55a84",
+      "to": "aa71d1410aab11db1f107ce379041ad41d7ba68c2c21e133200fbb78e1515019",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+          "line": 1
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "from": "2cf541ca0c3194c61d4ae8d9fc06c505d8f7d9fe61871339391df59d5eb55a84",
+      "to": "2684cd5107b82e8d6f028bfc9a3c4f7fdbc0aef873b53b2db1fbf0fff213a2e7",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+          "line": 1
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "from": "2cf541ca0c3194c61d4ae8d9fc06c505d8f7d9fe61871339391df59d5eb55a84",
+      "to": "24ac6738d29ad24f8eb7dd903968e7f440108b1c00052ce0e1721989be513ea6",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+          "line": 9
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "from": "8e5badb45953733655f8e24d5d783db9c1472223e83cfab4d5fd032884a2df43",
+      "to": "fe915309f1e4c48745e520e55a3fd072f4fbd90720beee09636a8d28590577a3",
+      "kind": "requests",
+      "status": "UNRESOLVED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+          "line": 5
+        }
+      ],
+      "reason": "상대/동적/외부 URL은 배포 기준 경로 확정 불가"
+    },
+    {
+      "from": "8e5badb45953733655f8e24d5d783db9c1472223e83cfab4d5fd032884a2df43",
+      "to": "3f9e8e018bc730f8d40e5af22d6d252ebba1c76f601c0b46d664367e6babae05",
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+          "line": 9
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/AuthController.java",
+          "line": 40
+        }
+      ]
+    },
+    {
+      "from": "24ac6738d29ad24f8eb7dd903968e7f440108b1c00052ce0e1721989be513ea6",
+      "to": "59b39cd480beb04bcce89b56b48b75628412c1c457237c3d6bb795ea4edb9748",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 1
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 3
+        }
+      ]
+    },
+    {
+      "from": "24ac6738d29ad24f8eb7dd903968e7f440108b1c00052ce0e1721989be513ea6",
+      "to": "7967856475a9e91b3674275b6bbc0eb1eba902ecf335dfdf8232e7da3b4bc939",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 1
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "from": "24ac6738d29ad24f8eb7dd903968e7f440108b1c00052ce0e1721989be513ea6",
+      "to": "b4d440261fa33f2ed70e105b15d47ba4dff930ee96c7605b1157d657e91230f0",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 1
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "from": "24ac6738d29ad24f8eb7dd903968e7f440108b1c00052ce0e1721989be513ea6",
+      "to": "44555689989ee4e37d6f7b27c9e785729e846d00d3da0aab04353d649b5335fc",
+      "kind": "requests",
+      "status": "UNRESOLVED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 15
+        }
+      ],
+      "reason": "URL 문자열 조합/변수/폼 action은 확정하지 않음; contextPath 선언과 단일 리터럴 조합만 예외"
+    },
+    {
+      "from": "0a29d892aa8543e8dab474d83bd1b998c7d8f5bb415e327a9f1480f3e77ad430",
+      "to": "e8b9095a4fc547c10725f0a574657344f8fd7fd23e0e9d1787ceb22a424a76b4",
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 57
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 58
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "from": "0a29d892aa8543e8dab474d83bd1b998c7d8f5bb415e327a9f1480f3e77ad430",
+      "to": "23939dc4cafa716279f8896d0978312479cbdb7b89ad0cd17682c54544ca536f",
+      "kind": "intercepted_by",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 57
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "from": "6fbac8ea511eb2413481266bd2243e563565446663ee436349fbedb73eac30d7",
+      "to": "9ae79125d87e1c365111820326e5853f6125a214e9e1360fd8e0cbe8d31fc735",
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 62
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 63
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "from": "6fbac8ea511eb2413481266bd2243e563565446663ee436349fbedb73eac30d7",
+      "to": "23939dc4cafa716279f8896d0978312479cbdb7b89ad0cd17682c54544ca536f",
+      "kind": "intercepted_by",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 62
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "from": "ded13c1bc0bb4868e396bf42eced7f9fc6f42fb8eb1ff61173d733d9bbd64338",
+      "to": "54b42bdbe7ed54e51c2328c45f0518e20690306802c426310ec870a7a608cf2f",
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 36
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 37
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "from": "ded13c1bc0bb4868e396bf42eced7f9fc6f42fb8eb1ff61173d733d9bbd64338",
+      "to": "23939dc4cafa716279f8896d0978312479cbdb7b89ad0cd17682c54544ca536f",
+      "kind": "intercepted_by",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 36
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "from": "3f9e8e018bc730f8d40e5af22d6d252ebba1c76f601c0b46d664367e6babae05",
+      "to": "f29071e21598476f108e5fd59950bd617a8b857ed94ae0beef8298dc9e036cbc",
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/AuthController.java",
+          "line": 40
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/AuthController.java",
+          "line": 41
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/AuthController.java",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "from": "3f9e8e018bc730f8d40e5af22d6d252ebba1c76f601c0b46d664367e6babae05",
+      "to": "23939dc4cafa716279f8896d0978312479cbdb7b89ad0cd17682c54544ca536f",
+      "kind": "intercepted_by",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/AuthController.java",
+          "line": 40
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "from": "7967856475a9e91b3674275b6bbc0eb1eba902ecf335dfdf8232e7da3b4bc939",
+      "to": "ab65b4eb79f7553baed4d91d06da98970785f605499c83f606bf09917538392c",
+      "kind": "requests",
+      "status": "UNRESOLVED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 21
+        }
+      ],
+      "reason": "URL 문자열 조합/변수/폼 action은 확정하지 않음; contextPath 선언과 단일 리터럴 조합만 예외"
+    },
+    {
+      "from": "b4d440261fa33f2ed70e105b15d47ba4dff930ee96c7605b1157d657e91230f0",
+      "to": "72b0060e0bdfe8655bd5b88626ca1f6c23b548c4d0d6f44c7e28e93808140938",
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 50
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 68
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/detail.jsp",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "from": "b4d440261fa33f2ed70e105b15d47ba4dff930ee96c7605b1157d657e91230f0",
+      "to": "81b5c323c07bca0ecd110ad7952c0cfeb82cb9a1cb6d47a45887e918c096bd57",
+      "kind": "requests",
+      "status": "UNRESOLVED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 59
+        }
+      ],
+      "reason": "URL 문자열 조합/변수/폼 action은 확정하지 않음; contextPath 선언과 단일 리터럴 조합만 예외"
+    },
+    {
+      "from": "e8b9095a4fc547c10725f0a574657344f8fd7fd23e0e9d1787ceb22a424a76b4",
+      "to": "a90f3d8bd891ad80f61f15157fde135657659fd37578f073f40949ac61094ab0",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 59
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 39
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "from": "23939dc4cafa716279f8896d0978312479cbdb7b89ad0cd17682c54544ca536f",
+      "to": "7f3a96554483ddd2465be83b65d420077d3fa2842eac3c4b5f23b9ef3189713b",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 38
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "from": "9ae79125d87e1c365111820326e5853f6125a214e9e1360fd8e0cbe8d31fc735",
+      "to": "749580ad8ed73e556ac9bef6fa5b24947abdd78883b05e3a251c50733cc7e1ea",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 64
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 48
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "from": "54b42bdbe7ed54e51c2328c45f0518e20690306802c426310ec870a7a608cf2f",
+      "to": "0b1a6c7a1902ce8c8682966336888d10c2c4fdb4cd64b832283c84c936ab55b1",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 38
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 19
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "from": "72b0060e0bdfe8655bd5b88626ca1f6c23b548c4d0d6f44c7e28e93808140938",
+      "to": "83277a076644de96288b5fba874915c56510ed9162dfc68e9b6805e74331ffc9",
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 68
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 70
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "from": "72b0060e0bdfe8655bd5b88626ca1f6c23b548c4d0d6f44c7e28e93808140938",
+      "to": "23939dc4cafa716279f8896d0978312479cbdb7b89ad0cd17682c54544ca536f",
+      "kind": "intercepted_by",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 68
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "from": "a90f3d8bd891ad80f61f15157fde135657659fd37578f073f40949ac61094ab0",
+      "to": "19514cb84a614b6df2c5a65e1c502326397ed1f5e9ae3887e30c4ddbfae39fa9",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 42
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 14
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "from": "a90f3d8bd891ad80f61f15157fde135657659fd37578f073f40949ac61094ab0",
+      "to": "e81367559cfbb9a1d7b28f4d9fd93474e22895b6b2e190415dd7633c9150c59b",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 40
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 64
+        }
+      ]
+    },
+    {
+      "from": "7f3a96554483ddd2465be83b65d420077d3fa2842eac3c4b5f23b9ef3189713b",
+      "to": "91b83926cb0a6ed9e53e3b10a4ccaedf493f58692c2888c6e21dceda1597f263",
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "from": "749580ad8ed73e556ac9bef6fa5b24947abdd78883b05e3a251c50733cc7e1ea",
+      "to": "fd2ac7c4334f96205eabd62162e882441e12dc153cf5d960f308893f66d50276",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 51
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 16
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "from": "749580ad8ed73e556ac9bef6fa5b24947abdd78883b05e3a251c50733cc7e1ea",
+      "to": "e81367559cfbb9a1d7b28f4d9fd93474e22895b6b2e190415dd7633c9150c59b",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 49
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 64
+        }
+      ]
+    },
+    {
+      "from": "0b1a6c7a1902ce8c8682966336888d10c2c4fdb4cd64b832283c84c936ab55b1",
+      "to": "3c09dee087dacc43df570f8edb34cd8772af352605c4942137686c7cf0560e71",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 24
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "from": "0b1a6c7a1902ce8c8682966336888d10c2c4fdb4cd64b832283c84c936ab55b1",
+      "to": "20cd6e13d5cfbb3054303f0b3f3ec45e31c9b60f4257ec20b6887036a823b951",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 25
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 8
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "from": "83277a076644de96288b5fba874915c56510ed9162dfc68e9b6805e74331ffc9",
+      "to": "b8ac68ebcd02bddc71c3323c0e2f27dabf6b55be7306ce60c9a40595956e5c42",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 71
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 58
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "from": "19514cb84a614b6df2c5a65e1c502326397ed1f5e9ae3887e30c4ddbfae39fa9",
+      "to": "b264247ea4ce260970fe9e70546a7e9041ccc76a6d01fa20c389fd4aa2b1243d",
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 14
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 44
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 8
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "from": "91b83926cb0a6ed9e53e3b10a4ccaedf493f58692c2888c6e21dceda1597f263",
+      "to": "756a873325c3b54d2fc8f6e5c6e66a547ab7a2ca74f8f6a5671ad4ea8b217c89",
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "from": "fd2ac7c4334f96205eabd62162e882441e12dc153cf5d960f308893f66d50276",
+      "to": "f3184062108a047b35daf45d5c0cf64a916cc91850a14666f548111544791307",
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 16
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 50
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 8
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "from": "3c09dee087dacc43df570f8edb34cd8772af352605c4942137686c7cf0560e71",
+      "to": "1e815d84adeec59a6d42acea92cfe3bf3a15df126f98f3bca804d2bb40be48a6",
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 10
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 37
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 8
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "from": "20cd6e13d5cfbb3054303f0b3f3ec45e31c9b60f4257ec20b6887036a823b951",
+      "to": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 8
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 30
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 8
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "from": "b8ac68ebcd02bddc71c3323c0e2f27dabf6b55be7306ce60c9a40595956e5c42",
+      "to": "2270421d8762ee77200b91b6de80c444aa86083faf1b6c8aff540582648e1aa5",
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 59
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "from": "b264247ea4ce260970fe9e70546a7e9041ccc76a6d01fa20c389fd4aa2b1243d",
+      "to": "e65e8c809557fd97d8e3ae1d7dfdfdc57460f772e4b364fc203f67af3eb53d30",
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "from": "b264247ea4ce260970fe9e70546a7e9041ccc76a6d01fa20c389fd4aa2b1243d",
+      "to": "f6011aa91b92fc64f0c3faf0605ac133d8fd4cd7b90ed4360a7ee16f80808687",
+      "kind": "writes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "from": "f3184062108a047b35daf45d5c0cf64a916cc91850a14666f548111544791307",
+      "to": "f6011aa91b92fc64f0c3faf0605ac133d8fd4cd7b90ed4360a7ee16f80808687",
+      "kind": "writes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "from": "1e815d84adeec59a6d42acea92cfe3bf3a15df126f98f3bca804d2bb40be48a6",
+      "to": "f6011aa91b92fc64f0c3faf0605ac133d8fd4cd7b90ed4360a7ee16f80808687",
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "from": "1e815d84adeec59a6d42acea92cfe3bf3a15df126f98f3bca804d2bb40be48a6",
+      "to": "83c05c6280726bafd91c5505864b9264fb2f68806fa25e82e84bb5edb12be94d",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 39
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+      "to": "f6011aa91b92fc64f0c3faf0605ac133d8fd4cd7b90ed4360a7ee16f80808687",
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+      "to": "84dca681aa1e6d5fb4a7f573e6e300b81ea972d5836c818507e3849b4ea03878",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 31
+        },
+        {
+          "file": "src/main/resources/mapper/CommonSql.xml",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+      "to": "83c05c6280726bafd91c5505864b9264fb2f68806fa25e82e84bb5edb12be94d",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 33
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+      "to": "d4c681e15adcad90c16500f56527e9c48049bcff5994a7df56ecc927aca35cfa",
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 35
+        },
+        {
+          "file": "src/main/resources/mapper/CommonSql.xml",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+      "to": "9b0084e8bdcbc1bd0c8e76c4c2869617647aa3930282a6822f0561012e13868c",
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 30
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "from": "2270421d8762ee77200b91b6de80c444aa86083faf1b6c8aff540582648e1aa5",
+      "to": "cb652cfbe9c6a59c1f7bc28a154175cf6d24acaeef785610553bb08457108b18",
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 53
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 8
+        }
+      ],
+      "candidates": []
+    },
+    {
+      "from": "cb652cfbe9c6a59c1f7bc28a154175cf6d24acaeef785610553bb08457108b18",
+      "to": "f6011aa91b92fc64f0c3faf0605ac133d8fd4cd7b90ed4360a7ee16f80808687",
+      "kind": "writes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 54
+        }
+      ]
+    }
+  ],
+  "frontier": [],
+  "unresolved": [
+    {
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 34,
+      "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+      "pattern": "sql-substitution",
+      "reason": "${}는 문자열 치환이며 허용 값/분기 안전성을 정적 인덱서가 보증하지 않음",
+      "constants": []
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+      "line": 5,
+      "from": "8e5badb45953733655f8e24d5d783db9c1472223e83cfab4d5fd032884a2df43",
+      "pattern": "dynamic-url",
+      "reason": "상대/동적/외부 URL은 배포 기준 경로 확정 불가",
+      "constants": []
+    },
+    {
+      "file": "src/main/webapp/resources/board.js",
+      "line": 21,
+      "from": "7967856475a9e91b3674275b6bbc0eb1eba902ecf335dfdf8232e7da3b4bc939",
+      "pattern": "string-url",
+      "reason": "URL 문자열 조합/변수/폼 action은 확정하지 않음; contextPath 선언과 단일 리터럴 조합만 예외",
+      "constants": [
+        "data-base",
+        "/list",
+        "Json.do"
+      ]
+    },
+    {
+      "file": "src/main/webapp/resources/board.js",
+      "line": 59,
+      "from": "b4d440261fa33f2ed70e105b15d47ba4dff930ee96c7605b1157d657e91230f0",
+      "pattern": "string-url",
+      "reason": "URL 문자열 조합/변수/폼 action은 확정하지 않음; contextPath 선언과 단일 리터럴 조합만 예외",
+      "constants": [
+        "data-base",
+        "/list.do"
+      ]
+    },
+    {
+      "file": "src/main/webapp/resources/board.js",
+      "line": 15,
+      "from": "24ac6738d29ad24f8eb7dd903968e7f440108b1c00052ce0e1721989be513ea6",
+      "pattern": "string-url",
+      "reason": "URL 문자열 조합/변수/폼 action은 확정하지 않음; contextPath 선언과 단일 리터럴 조합만 예외",
+      "constants": []
+    }
+  ],
+  "skipped": [
+    {
+      "file": ".sistack",
+      "line": 1,
+      "pattern": "excluded-directory",
+      "reason": "생성물·비공개 사례·테스트·도구 폴더는 인덱싱 제외"
+    },
+    {
+      "file": "smoke.mjs",
+      "line": 1,
+      "pattern": "unsupported-extension",
+      "reason": "지원 수집기 없음"
+    },
+    {
+      "file": "src/main/webapp/resources/board.css",
+      "line": 1,
+      "pattern": "unsupported-extension",
+      "reason": "지원 수집기 없음"
+    },
+    {
+      "file": "src/main/webapp/resources/vendor/jquery-3.7.1.min.js",
+      "line": 1,
+      "pattern": "vendor-js",
+      "reason": "벤더/minified JS는 분석 제외"
+    },
+    {
+      "file": "src/main/webapp/resources/vendor/jquery-LICENSE.txt",
+      "line": 1,
+      "pattern": "unsupported-extension",
+      "reason": "지원 수집기 없음"
+    },
+    {
+      "file": "src/test",
+      "line": 1,
+      "pattern": "excluded-directory",
+      "reason": "생성물·비공개 사례·테스트·도구 폴더는 인덱싱 제외"
+    },
+    {
+      "file": "target",
+      "line": 1,
+      "pattern": "excluded-directory",
+      "reason": "생성물·비공개 사례·테스트·도구 폴더는 인덱싱 제외"
+    },
+    {
+      "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+      "line": 68,
+      "pattern": "mapping-conditions",
+      "reason": "HTTP method/path 외 params·headers·미디어 타입 조건은 경로 선택에 미반영"
+    },
+    {
+      "file": "src/main/java/kr/sistack/board/web/CommonCodeController.java",
+      "line": 31,
+      "pattern": "mapping-conditions",
+      "reason": "HTTP method/path 외 params·headers·미디어 타입 조건은 경로 선택에 미반영"
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+      "line": 9,
+      "pattern": "interceptor-runtime-order",
+      "reason": "정적 포함·제외 경로는 연결하되 세션 값·실행 순서·preHandle의 실제 통과 여부는 수동 확인"
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "line": 7,
+      "pattern": "external-script",
+      "reason": "외부/벤더/미수집 JS는 실행하거나 다운로드하지 않음"
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "line": 7,
+      "pattern": "external-script",
+      "reason": "외부/벤더/미수집 JS는 실행하거나 다운로드하지 않음"
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "line": 7,
+      "pattern": "external-script",
+      "reason": "외부/벤더/미수집 JS는 실행하거나 다운로드하지 않음"
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "line": 7,
+      "pattern": "external-script",
+      "reason": "외부/벤더/미수집 JS는 실행하거나 다운로드하지 않음"
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "line": 7,
+      "pattern": "external-script",
+      "reason": "외부/벤더/미수집 JS는 실행하거나 다운로드하지 않음"
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "line": 7,
+      "pattern": "external-script",
+      "reason": "외부/벤더/미수집 JS는 실행하거나 다운로드하지 않음"
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+      "line": 7,
+      "pattern": "external-script",
+      "reason": "외부/벤더/미수집 JS는 실행하거나 다운로드하지 않음"
+    }
+  ]
+}

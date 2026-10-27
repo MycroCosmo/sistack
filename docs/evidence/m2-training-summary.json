@@ -1,0 +1,602 @@
+{
+  "dataset": "training",
+  "caveat": "M1 수정에 쓰인 학습 5건의 자기 적용 평가. 전체 프로젝트 정확도나 held-out 결과가 아니다.",
+  "results": [
+    {
+      "dataset": "training",
+      "case_id": "legacy-board-search",
+      "run_id": "m2-training-search-v2",
+      "run_directory": "examples/legacy-board/.sistack/runs/m2-training-search-v2",
+      "raw_record": ".sistack/m2-training-results/legacy-board-search.json",
+      "raw_record_sha256": "0b1d536ace1c97fa5c6a5f7e477ab518b2cc59daff5c5a51eeb47de4231156fb",
+      "report_sha256": "c46652b2f86d55dab3fa4cd9a0f8fbfaadfbbd14cdbde2a03f61c318069f8eaf",
+      "tool_fingerprint": "5d142300da62cf138bcdd57f8a53c54e4d2f6d8402b122b52585ff7e6da398e3",
+      "expected_sha256": "dc3459d1d5bb5a8c2f2ea5c42b4f8ddd52e2b5f859f996c7f18e577ab4baf62e",
+      "score": {
+        "case_id": "legacy-board-search",
+        "status": "PASS",
+        "scoring": true,
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/views/board/list.jsp"
+            },
+            "kinds": [
+              "requests"
+            ],
+            "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+            "line": 14
+          },
+          {
+            "from": {
+              "name": "GET /board/list.do"
+            },
+            "kinds": [
+              "maps_to",
+              "intercepted_by"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.web.BoardController#list"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.service.impl.BoardServiceImpl#list"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper#count"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper#selectList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper.count"
+            },
+            "kinds": [
+              "reads",
+              "includes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper.selectList"
+            },
+            "kinds": [
+              "reads",
+              "includes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+            },
+            "kinds": [
+              "reads"
+            ]
+          }
+        ],
+        "expected_edges": 17,
+        "matched": 17,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "source_dirty": false,
+        "revision_changed_sources_match": true,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. 동일 이름 DB 변형은 논리 연결로 묶으며 분기·값 전파·전체 프로젝트 정확도가 아님."
+      },
+      "execution": {
+        "mode": "complex",
+        "strategy": "parallel",
+        "note": "Codex 화면·서버·SQL 탐색자 3개 실제 병렬 실행 후 원문과 종합. 동일 소스 해시의 v1 탐색 기록을 v2 골격에 재대조했다.",
+        "explorers": [
+          {
+            "role": "screen",
+            "path": "evidence/explorer-screen.md"
+          },
+          {
+            "role": "server",
+            "path": "evidence/explorer-server.md"
+          },
+          {
+            "role": "sql",
+            "path": "evidence/explorer-sql.md"
+          }
+        ]
+      },
+      "complexity": {
+        "mode": "complex",
+        "reason": "메뉴 전체 또는 여러 화면 범위",
+        "paths_at_least": null
+      },
+      "reviewed_edges": 63,
+      "analysis_status": "PARTIAL",
+      "manifest_validation": "PASS"
+    },
+    {
+      "dataset": "training",
+      "case_id": "legacy-board-create",
+      "run_id": "m2-training-create-v2",
+      "run_directory": "examples/legacy-board/.sistack/runs/m2-training-create-v2",
+      "raw_record": ".sistack/m2-training-results/legacy-board-create.json",
+      "raw_record_sha256": "072376209717991b4c5b1ac5cf887dc0d937ea746b16cf67b887ec2fabccaab2",
+      "report_sha256": "80d499d76c72367a3b1d70bb2706753a370f78d2c981a4c11d4ab5693c063135",
+      "tool_fingerprint": "5d142300da62cf138bcdd57f8a53c54e4d2f6d8402b122b52585ff7e6da398e3",
+      "expected_sha256": "15b8a[REDACTED]f98632078f603c467f5ff228138b5d413c45c687fc5d65c72",
+      "score": {
+        "case_id": "legacy-board-create",
+        "status": "PASS",
+        "scoring": true,
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/views/board/form.jsp"
+            },
+            "kinds": [
+              "requests"
+            ],
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 13
+          },
+          {
+            "from": {
+              "name": "POST /board/create.do"
+            },
+            "kinds": [
+              "maps_to",
+              "intercepted_by"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.web.BoardController#create"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.service.impl.BoardServiceImpl#create"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper#insert"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper.insert"
+            },
+            "kinds": [
+              "reads",
+              "writes"
+            ]
+          },
+          {
+            "from": {
+              "name": "POST /board/update.do"
+            },
+            "kinds": [
+              "intercepted_by"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+            },
+            "kinds": [
+              "reads"
+            ]
+          }
+        ],
+        "expected_edges": 14,
+        "matched": 14,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "source_dirty": false,
+        "revision_changed_sources_match": true,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. 동일 이름 DB 변형은 논리 연결로 묶으며 분기·값 전파·전체 프로젝트 정확도가 아님."
+      },
+      "execution": {
+        "mode": "complex",
+        "strategy": "parallel",
+        "note": "Codex 화면·서버·SQL 탐색자 3개 실제 병렬 실행 후 원문과 종합. 동일 소스 해시의 v1 탐색 기록을 v2 골격에 재대조했다.",
+        "explorers": [
+          {
+            "role": "screen",
+            "path": "evidence/explorer-screen.md"
+          },
+          {
+            "role": "server",
+            "path": "evidence/explorer-server.md"
+          },
+          {
+            "role": "sql",
+            "path": "evidence/explorer-sql.md"
+          }
+        ]
+      },
+      "complexity": {
+        "mode": "complex",
+        "reason": "도달 경로가 20개 이상",
+        "paths_at_least": 20
+      },
+      "reviewed_edges": 58,
+      "analysis_status": "PARTIAL",
+      "manifest_validation": "PASS"
+    },
+    {
+      "dataset": "training",
+      "case_id": "egov-clcode-delete",
+      "run_id": "m2-training-clcode-v2",
+      "run_directory": ".testbeds/egovframe/.sistack/runs/m2-training-clcode-v2",
+      "raw_record": ".sistack/m2-training-results/egov-clcode-delete.json",
+      "raw_record_sha256": "30ba2d4c7f9368f7981b9a8e191939a2d73fed3e14ff49d750d7f4e69f1293ce",
+      "report_sha256": "9199c88dd2fee56edebd41c2a6819c7c1a471378f13eedac1afbc6d714c130cd",
+      "tool_fingerprint": "5d142300da62cf138bcdd57f8a53c54e4d2f6d8402b122b52585ff7e6da398e3",
+      "expected_sha256": "79783d4e07492cb7f0ee329058adea849c7ec5f5acca75e75f364a89e2c3cdc9",
+      "score": {
+        "case_id": "egov-clcode-delete",
+        "status": "PASS",
+        "scoring": true,
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp#fn_egov_delete_code"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "ANY /sym/ccm/ccc/RemoveCcmCmmnClCode.do"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.ccc.web.EgovCcmCmmnClCodeManageController#deleteCmmnClCode"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.ccc.service.impl.EgovCcmCmmnClCodeManageServiceImpl#deleteCmmnClCode"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.ccc.service.impl.CmmnClCodeManageDAO#deleteCmmnClCode"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "CmmnClCodeManage.deleteCmmnClCode",
+              "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml"
+            },
+            "kinds": [
+              "writes"
+            ]
+          }
+        ],
+        "expected_edges": 6,
+        "matched": 6,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "source_dirty": true,
+        "revision_changed_sources_match": false,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. 동일 이름 DB 변형은 논리 연결로 묶으며 분기·값 전파·전체 프로젝트 정확도가 아님."
+      },
+      "execution": {
+        "mode": "simple",
+        "strategy": "direct",
+        "note": "주 에이전트가 JSP·Java·설정·SQL 원문을 직접 읽고 검토했다."
+      },
+      "complexity": {
+        "mode": "simple",
+        "reason": "단일 범위, 도달 경로 20개 미만",
+        "paths_at_least": 2
+      },
+      "reviewed_edges": 6,
+      "analysis_status": "PARTIAL",
+      "manifest_validation": "PASS"
+    },
+    {
+      "dataset": "training",
+      "case_id": "egov-detailcode-list",
+      "run_id": "m2-training-detailcode-v2",
+      "run_directory": ".testbeds/egovframe/.sistack/runs/m2-training-detailcode-v2",
+      "raw_record": ".sistack/m2-training-results/egov-detailcode-list.json",
+      "raw_record_sha256": "f566957d314e393e2a2d061d3fd5bb14299fc9ae2cb28c0c548d12524f712ca9",
+      "report_sha256": "e6076dae80be9dd0f74fde03bdfe0f8248bbe8f65d592a894a8348acaf74682f",
+      "tool_fingerprint": "5d142300da62cf138bcdd57f8a53c54e4d2f6d8402b122b52585ff7e6da398e3",
+      "expected_sha256": "63483cf076caf0c2fea620b3347ab892190422e14edb8f81fad9e8c7322aab23",
+      "score": {
+        "case_id": "egov-detailcode-list",
+        "status": "PASS",
+        "scoring": true,
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp"
+            },
+            "kinds": [
+              "requests"
+            ],
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp",
+            "line": 68
+          },
+          {
+            "from": {
+              "name": "ANY /sym/ccm/cde/SelectCcmCmmnDetailCodeList.do"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeList"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeListTotCnt"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeListTotCnt"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "CmmnDetailCodeManage.selectCmmnDetailCodeList",
+              "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads"
+            ]
+          },
+          {
+            "from": {
+              "name": "CmmnDetailCodeManage.selectCmmnDetailCodeListTotCnt",
+              "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads"
+            ]
+          }
+        ],
+        "expected_edges": 13,
+        "matched": 13,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "source_dirty": true,
+        "revision_changed_sources_match": false,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. 동일 이름 DB 변형은 논리 연결로 묶으며 분기·값 전파·전체 프로젝트 정확도가 아님."
+      },
+      "execution": {
+        "mode": "complex",
+        "strategy": "parallel",
+        "note": "Codex 화면·서버·SQL 탐색자 3개 실제 병렬 실행 후 원문과 종합. 동일 소스 해시의 v1 탐색 기록을 v2 골격에 재대조했다.",
+        "explorers": [
+          {
+            "role": "screen",
+            "path": "evidence/explorer-screen.md"
+          },
+          {
+            "role": "server",
+            "path": "evidence/explorer-server.md"
+          },
+          {
+            "role": "sql",
+            "path": "evidence/explorer-sql.md"
+          }
+        ]
+      },
+      "complexity": {
+        "mode": "complex",
+        "reason": "도달 경로가 20개 이상",
+        "paths_at_least": 20
+      },
+      "reviewed_edges": 40,
+      "analysis_status": "PARTIAL",
+      "manifest_validation": "PASS"
+    },
+    {
+      "dataset": "training",
+      "case_id": "egov-rss-columns",
+      "run_id": "m2-training-rss-v2",
+      "run_directory": ".testbeds/egovframe/.sistack/runs/m2-training-rss-v2",
+      "raw_record": ".sistack/m2-training-results/egov-rss-columns.json",
+      "raw_record_sha256": "047d251307915b42b674ac9b1152b1843f574fdf02afd8d2709a65555892f923",
+      "report_sha256": "536672a9113be31afbc1e190c196de0f6823ce1205c8fa20597ea8381a02c1ed",
+      "tool_fingerprint": "5d142300da62cf138bcdd57f8a53c54e4d2f6d8402b122b52585ff7e6da398e3",
+      "expected_sha256": "7b835203787a68c84ded1ae30590ac1f7a7082e283b25207e7912f4b281ff206",
+      "score": {
+        "case_id": "egov-rss-columns",
+        "status": "PASS",
+        "scoring": true,
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/ion/rss/EgovRssTagManageRegist.jsp#fn_egov_tableColumn_RssTagManage"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "ANY /uss/ion/rss/listRssTagManageTableColumnList.do"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.ion.rss.web.EgovRssTagManageController#EgovRssTagManageTableColumnList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+            "line": 83
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.ion.rss.service.impl.EgovRssTagManageServiceImpl#selectRssTagManageTableColumnList"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.ion.rss.service.impl.RssTagManageDao#selectRssTagManageTableColumnList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          }
+        ],
+        "expected_edges": 5,
+        "matched": 5,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "source_dirty": true,
+        "revision_changed_sources_match": false,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. 동일 이름 DB 변형은 논리 연결로 묶으며 분기·값 전파·전체 프로젝트 정확도가 아님."
+      },
+      "execution": {
+        "mode": "simple",
+        "strategy": "direct",
+        "note": "주 에이전트가 JSP·Java·설정·SQL 원문을 직접 읽고 검토했다."
+      },
+      "complexity": {
+        "mode": "simple",
+        "reason": "단일 범위, 도달 경로 20개 미만",
+        "paths_at_least": 5
+      },
+      "reviewed_edges": 7,
+      "analysis_status": "PARTIAL",
+      "manifest_validation": "PASS"
+    }
+  ],
+  "totals": {
+    "cases": 5,
+    "expected_edges": 55,
+    "matched": 55,
+    "false_negatives": 0,
+    "false_positives": 0,
+    "status_mismatches": 0,
+    "complex": 3,
+    "simple": 2
+  },
+  "held_out": {
+    "status": "AWAITING_DRAFT_APPROVAL",
+    "executed_cases": 0,
+    "score": null
+  }
+}

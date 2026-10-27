@@ -1,0 +1,17 @@
+{
+  "run_id": "m2-training-clcode-v2",
+  "created_at": "2026-10-27T04:13:43.648Z",
+  "inputs": {
+    "starts": "[\"src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp#fn_egov_delete_code\"]",
+    "direction": "forward",
+    "scope": "single",
+    "depth": "8"
+  },
+  "complexity": {
+    "mode": "simple",
+    "reason": "단일 범위, 도달 경로 20개 미만",
+    "paths_at_least": 2
+  },
+  "missing_starts": [],
+  "tool_fingerprint": "5d142300da62cf138bcdd57f8a53c54e4d2f6d8402b122b52585ff7e6da398e3"
+}

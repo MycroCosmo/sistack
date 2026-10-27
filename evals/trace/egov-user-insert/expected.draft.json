@@ -1,0 +1,710 @@
+{
+  "schema_version": "1.0",
+  "case_id": "egov-user-insert",
+  "review_status": "draft",
+  "dataset": "held-out",
+  "source_root": ".testbeds/egovframe",
+  "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
+  "source_files": {
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp": "291383d18d217e00dd035c431bd9ee6216f87b362eed8797a120c037cdfe3599",
+    "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java": "6c0a1c5e4e1f73722aeed0a6aa0c823291e8b09db6846bfdb5ebb2a40c9c7361",
+    "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java": "62469e62508a0c674857e60f6c076266019da0ef29928ed62b47b25f63813394",
+    "src/main/java/egovframework/com/uss/umt/service/EgovUserManageService.java": "c05c9670f9c4bc1d960b522a930d39d21e92409a775edceffb773aae4efd5874",
+    "src/main/java/egovframework/com/uss/umt/service/impl/UserManageDAO.java": "642cca6315d457c078c042195f9a08bce78013be341dbaa3260707beb404417a",
+    "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java": "c905d9a7c35410d0d933bc62b0de48d9a699913aa82e43abfe86ba3578b3afc6",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml": "1e9e44021f4df97732bcad0ff6ec24fa2218386b7577ebaf047b61a2e09a0177",
+    "src/main/resources/egovframework/spring/com/context-mapper.xml": "805ec8f98e29de2100230ed55301bdf6b5a643bc17a9e8f6e2c19879e83a7cdd",
+    "src/main/resources/egovframework/egovProps/globals.properties": "89262500869a4828f18a6ed872c38ae5c897adf91adfdf0c6f8d04d7f10227ec",
+    "src/main/resources/egovframework/spring/com/context-datasource.xml": "98bbd700194f1a69c24d55c2526fe2e451294d5194eeb21aed99fd28f2c039e1",
+    "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml": "145307a363cd8f4cc740dbea03fe910694b63e32aeeaf5950741e7d3208aa010",
+    "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java": "8a5038dbc877e5232108b3cbe28e0d8d309f3c4ae96d96c7ac5eb2e57484469d",
+    "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java": "ec69094ea7c9df99a5f85094cecc13ec65e880f0ddd9429a6b70cc260538c82a",
+    "src/main/java/egovframework/com/utl/fcc/service/EgovStringUtil.java": "f65b8855182af2c26d5121b03770cc62324284d39cd451c2551ba24afd14fad2",
+    "src/main/java/egovframework/com/uss/umt/service/UserManageVO.java": "323d36d4c95e95e1a2d725af84673ac3896d7f2effff9eea7dee802e6b951a7e"
+  },
+  "title": "업무사용자 등록 — 입력 검증·ID 발급·비밀번호 변환·INSERT·forward",
+  "selection_reason": "사용자 지정 held-out 등록 저장 경로. 외부 ID 생성기와 로컬 static 유틸, 서버 검증, Spring form 태그를 포함한다.",
+  "authoring": {
+    "method": "source-only",
+    "index_or_trace_execution": false,
+    "evaluation_status": "NOT_RUN",
+    "approval_required": true
+  },
+  "assumptions_and_questions": [
+    "이 초안은 원문 소스에서 작성했으며 이 사례에 대해 인덱서/si-trace/채점기를 실행하지 않았다. 승인 전 정답 확정 또는 사례 맞춤 구현 수정 금지.",
+    "요청은 form의 POST지만 Controller @RequestMapping은 HTTP method를 제한하지 않아 endpoint 선택자는 ANY다.",
+    "scope의 Controller/Service calls는 업무 서비스, 로컬 static 유틸, 주입된 외부 서비스 호출을 포함한다. 단순 VO getter/setter 및 JDK/Servlet/Spring Model/BindingResult의 일반 API 호출은 제외한다.",
+    "인증 helper, 암호화/문자열 유틸의 호출까지만 연결 점수 범위이며 유틸 내부 JDK/보안 라이브러리까지 확장하지 않는다. 실제 소스로 확인한 유틸 동작과 한계는 supplemental_assertions에서 따로 검토한다.",
+    "forward/view, 검증 분기 및 ID 생성기 설정은 현 그래프 연결 종류로 표현하지 않고 supplemental_assertions에 남긴다. 이 부분은 연결 점수에 섞지 않고 별도 수동 검토한다.",
+    "등록 준비·사용자 ID 중복확인 AJAX·인증서 팝업·목록 버튼·후속 목록 내부·공통 보안 필터/트랜잭션은 이 저장 경로의 채점 scope 밖이다.",
+    "SQL은 COMTNEMPLYRINFO에 INSERT한다. ID 생성기 설정의 COMTECOPSEQ를 이 INSERT SQL이 직접 읽거나 쓰는 테이블로 합치지 않는다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp"
+      },
+      "kinds": [
+        "requests"
+      ],
+      "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+      "line": 209
+    },
+    {
+      "from": {
+        "name": "ANY /uss/umt/EgovUserInsert.do"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.web.EgovUserManageController#insertUser"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#insertUser"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.UserManageDAO#insertUser"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "userManageDAO.insertUser_S",
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml"
+      },
+      "kinds": [
+        "reads",
+        "writes",
+        "includes"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovUserInsert.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 209
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 159
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 166
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 182
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "ANY /uss/umt/EgovUserInsert.do"
+      },
+      "to": {
+        "name": "egovframework.com.uss.umt.web.EgovUserManageController#insertUser"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 182
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 183
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.web.EgovUserManageController#insertUser"
+      },
+      "to": {
+        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#isAuthenticated"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 27
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 186
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 58
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.web.EgovUserManageController#insertUser"
+      },
+      "to": {
+        "kind": "unknown",
+        "pattern": "external-injection"
+      },
+      "kind": "calls",
+      "status": "UNRESOLVED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 75
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 76
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 191
+        }
+      ],
+      "reason": "DefaultBeanValidator.validate는 주입된 외부 라이브러리 호출이다. 저장소 src/main/java에 구현 소스가 없어 검증 내부 경로를 확정하지 않는다."
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.web.EgovUserManageController#insertUser"
+      },
+      "to": {
+        "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#insertUser"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 60
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 201
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/EgovUserManageService.java",
+          "line": 45
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 36
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 37
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 96
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#insertUser"
+      },
+      "to": {
+        "kind": "unknown",
+        "pattern": "external-injection"
+      },
+      "kind": "calls",
+      "status": "UNRESOLVED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 52
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 53
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 98
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 5
+        }
+      ],
+      "reason": "getNextStringId 호출 및 egovUsrCnfrmIdGnrService의 외부 EgovTableIdGnrServiceImpl 설정은 확인되지만 구현 소스가 없다. 내부 SQL과 실제 ID 발급 결과는 미확정이다."
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#insertUser"
+      },
+      "to": {
+        "name": "egovframework.com.utl.sim.service.EgovFileScrty#encryptPassword"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 9
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 101
+        },
+        {
+          "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+          "line": 198
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/UserManageVO.java",
+          "line": 496
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/UserManageVO.java",
+          "line": 286
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#insertUser"
+      },
+      "to": {
+        "name": "egovframework.com.utl.fcc.service.EgovStringUtil#isNullToString"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 8
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 101
+        },
+        {
+          "file": "src/main/java/egovframework/com/utl/fcc/service/EgovStringUtil.java",
+          "line": 371
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#insertUser"
+      },
+      "to": {
+        "name": "egovframework.com.uss.umt.service.impl.UserManageDAO#insertUser"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 40
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 41
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 103
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/UserManageDAO.java",
+          "line": 29
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/UserManageDAO.java",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.UserManageDAO#insertUser"
+      },
+      "to": {
+        "name": "userManageDAO.insertUser_S",
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/UserManageDAO.java",
+          "line": 56
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 65
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 67
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 4
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 74
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 20
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "userManageDAO.insertUser_S",
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNEMPLYRINFO"
+      },
+      "kind": "writes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 74
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 76
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 105
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 106
+        }
+      ]
+    }
+  ],
+  "supplemental_assertions": [
+    {
+      "id": "submit-condition",
+      "status": "CONFIRMED",
+      "claim": "POST form의 fnInsert는 사용자 확인, validateUserManageVO, 두 비밀번호 일치 확인 후 form.submit을 호출한다. 사용자 입력/검증의 실제 통과 여부는 미실행이다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 159
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 160
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 161
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 162
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 166
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 209
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 474
+        }
+      ]
+    },
+    {
+      "id": "authentication-and-validation-branches",
+      "status": "CONFIRMED",
+      "claim": "insertUser는 인증 실패 시 index view, binding 오류 시 등록 view를 반환한다. 서비스 등록은 인증/검증 통과 경로에서만 도달한다. 빈 조직/그룹 ID는 null로 정규화한다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 186
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 188
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 191
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 193
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 195
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 198
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 201
+        }
+      ]
+    },
+    {
+      "id": "auth-helper-boundary",
+      "status": "UNRESOLVED",
+      "claim": "로컬 static 인증 helper는 egovUserDetailsService에 위임한다. 본 사례 범위는 helper 호출과 등록 성공/실패 분기까지이며 인증 백엔드 선택 및 런타임 인증값은 별도 확인 대상이다.",
+      "reason": "인증 helper의 하위 보안 서비스 전체는 등록 저장 경로 범위에서 제외하며 실제 인증 상태를 실행하지 않았다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 27
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 33
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 58
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "id": "id-generation-config",
+      "status": "CONFIRMED",
+      "claim": "고유 ID는 외부 테이블형 ID 생성기에서 받는다. 설정은 table COMTECOPSEQ, tableName USRCNFRM_ID, blockSize 10, prefix USRCNFRM_, cipers 11, fillChar 0이다. 이 설정을 Oracle 시퀀스 또는 확인된 SQL 실행으로 바꾸어 표현하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 98
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 99
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 5
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 8
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 13
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 14
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "id": "id-generator-sql-boundary",
+      "status": "UNRESOLVED",
+      "claim": "COMTECOPSEQ는 생성기 설정상 대상 후보이며 본 소스만으로 실제 SELECT/UPDATE SQL, 락 방식, 호출마다 DB 접근 여부를 확정하지 않는다. 생성기→SQL→COMTECOPSEQ의 executes/reads/writes 정답 연결을 만들지 않는다.",
+      "reason": "외부 EgovIdGnrService/EgovTableIdGnrServiceImpl 구현 소스가 src/main/java 파일 목록에 없다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 98
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 5
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 8
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "id": "password-transform",
+      "status": "CONFIRMED",
+      "claim": "서비스는 비밀번호와 null을 빈 문자열로 바꾸는 사용자 ID를 encryptPassword(String,String)에 전달한다. 로컬 구현은 SHA-256 MessageDigest에 ID bytes를 먼저 넣고 비밀번호를 digest한 뒤 Base64로 반환한다. 실제 비밀번호·해시 값은 출력/실행하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 101
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 102
+        },
+        {
+          "file": "src/main/java/egovframework/com/utl/fcc/service/EgovStringUtil.java",
+          "line": 371
+        },
+        {
+          "file": "src/main/java/egovframework/com/utl/fcc/service/EgovStringUtil.java",
+          "line": 374
+        },
+        {
+          "file": "src/main/java/egovframework/com/utl/fcc/service/EgovStringUtil.java",
+          "line": 375
+        },
+        {
+          "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+          "line": 198
+        },
+        {
+          "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+          "line": 205
+        },
+        {
+          "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+          "line": 208
+        },
+        {
+          "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+          "line": 210
+        },
+        {
+          "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+          "line": 212
+        }
+      ]
+    },
+    {
+      "id": "mysql-selection",
+      "status": "CONFIRMED",
+      "claim": "PropertyPlaceholderConfigurer의 globals.properties와 Globals.DbType=mysql을 mapperLocations의 *_${Globals.DbType}.xml에 적용해 mysql XML을 선택한다. 다른 DB XML은 비선택 후보이고 executes 정답에 포함하지 않는다. 외부 배포 설정 재정의는 미확인이다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 13
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 20
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "id": "success-forward",
+      "status": "CONFIRMED",
+      "claim": "서비스 호출이 예외 없이 끝나면 resultMsg를 설정하고 forward:/uss/umt/EgovUserManage.do를 반환한다. 도착 URL까지만 범위에 넣으며 목록 처리 내부는 제외한다. 현 연결 종류에 forward/view가 없어 supplemental assertion으로 유지한다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 201
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 203
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 205
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 86
+        }
+      ]
+    }
+  ],
+  "non_selected_mapper_candidates": [
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_altibase.xml",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_cubrid.xml",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_goldilocks.xml",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_maria.xml",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_oracle.xml",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_postgres.xml",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_tibero.xml"
+  ]
+}

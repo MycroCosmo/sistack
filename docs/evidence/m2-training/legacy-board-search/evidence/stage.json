@@ -1,0 +1,17 @@
+{
+  "run_id": "m2-training-search-v2",
+  "created_at": "2026-10-27T04:12:39.221Z",
+  "inputs": {
+    "starts": "[\"src/main/webapp/WEB-INF/views/board/list.jsp\"]",
+    "direction": "forward",
+    "scope": "menu",
+    "depth": "8"
+  },
+  "complexity": {
+    "mode": "complex",
+    "reason": "메뉴 전체 또는 여러 화면 범위",
+    "paths_at_least": null
+  },
+  "missing_starts": [],
+  "tool_fingerprint": "5d142300da62cf138bcdd57f8a53c54e4d2f6d8402b122b52585ff7e6da398e3"
+}

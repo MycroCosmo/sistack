@@ -1,0 +1,1731 @@
+{
+  "schema_version": "1.0",
+  "case_id": "egov-article-list",
+  "review_status": "draft",
+  "dataset_role": "held-out",
+  "source_root": ".testbeds/egovframe",
+  "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
+  "source_files": {
+    "script/ddl/mysql/com_DDL_mysql.sql": "06cb6d01ad7c35721a6b8b042d4a2bc4a4b5c7c71157e9b1887943fb1bb42d20",
+    "src/main/java/egovframework/com/cmm/EgovComponentChecker.java": "3cc6f3a85a491739c443ab1ed0698bacc9d789148c0511ce40aa5672dd97e7a8",
+    "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java": "4079f67dfc705e7dde936a090a732506018eec944acaaa49cddf401305157330",
+    "src/main/java/egovframework/com/cmm/context/EgovWebServletContextListener.java": "a8035166445f3788adbe9b7fc0c021894f61b1c291859c9df9a6964a5a7df974",
+    "src/main/java/egovframework/com/cmm/service/EgovUserDetailsService.java": "906656c97efe16e79746135d6c2bf7776f261e5b95a9eb31977e2a395a38e416",
+    "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java": "c905d9a7c35410d0d933bc62b0de48d9a699913aa82e43abfe86ba3578b3afc6",
+    "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java": "8a5038dbc877e5232108b3cbe28e0d8d309f3c4ae96d96c7ac5eb2e57484469d",
+    "src/main/java/egovframework/com/cop/bbs/service/EgovArticleService.java": "42b2603afb1a1b050b7e11b057248693497050b6b2ae87cd79d13ed66740bd34",
+    "src/main/java/egovframework/com/cop/bbs/service/EgovBBSMasterService.java": "4fea27e6d3e6e93641cff2c17a06e10a460fa748b5a57d5b6ea9cde5681c4800",
+    "src/main/java/egovframework/com/cop/bbs/service/impl/BBSAddedOptionsDAO.java": "20250012fef4d28475ea3aa3c5dc3e1846b25281d756267c447c01fcef8b01b0",
+    "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleDAO.java": "c47723c3a8138d08dbaff42c66b85a1c98345c000d3b8ac562ec07938ebba4e5",
+    "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java": "bd31353b3359b9e8bd3330cbee0ca250ba7e2183be78232fd2601324fc73785b",
+    "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterDAO.java": "cb856651e60bdbabb7a7bf4c0538fdc96650867ac24a5049777682dfded10895",
+    "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java": "7e4405801374e407b7c3bd220a186f7fd8b0ca068717231a99e39de12625f7ff",
+    "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java": "d976e377b777dc29fa9d2699f42718086d33128a160753539df10520c39dc0b2",
+    "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java": "0f9791345652971e35947aa3c2be46325cf4be3aff95dcac85a6a9901b02f84d",
+    "src/main/resources/egovframework/egovProps/globals.properties": "89262500869a4828f18a6ed872c38ae5c897adf91adfdf0c6f8d04d7f10227ec",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_altibase.xml": "f134504223237bd3f39735fe7622a4339e36d36af750f2e57011ba5f7d2c5d3e",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_cubrid.xml": "2fce2208380b541dd6901a64cf67ffe1e3f44dfafd9b7d04d52ddc21d9d03fc4",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_goldilocks.xml": "2d17ae5d8bb49724a89d47bdf50d9bf7cd5b764737fe6c126871c49cd91cceed",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_maria.xml": "e998c4103b2e6d55a657d5424b404f8b0ba230a14fa25611833a366e1bd175c8",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml": "e998c4103b2e6d55a657d5424b404f8b0ba230a14fa25611833a366e1bd175c8",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_oracle.xml": "ed410d67962bbdec6155fd45c82c6211f2863df60a2377fad130eda6680ac5d7",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_postgres.xml": "c35d3a73454efd5b36a35edfd2491389cc6f4006ffb38bb023f889289d7ad1e7",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_tibero.xml": "b5f4c8370bd8156a8613a754a8a581cf3e511fc2e1753e2a203a6c5ced4bae40",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_altibase.xml": "93e30f27725fc2e1e6e0d0a09add1a4bddd15ab5b2157e326b458b51fcf1cd21",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_cubrid.xml": "b46d606dda5ff42ba34ebcc99fde051fe1d2fb4161879a15c475df00b1efd58f",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_goldilocks.xml": "93e30f27725fc2e1e6e0d0a09add1a4bddd15ab5b2157e326b458b51fcf1cd21",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_maria.xml": "c1a04202ede2c43832aedb82c413116282a7855c1abbdd082f1bcaf617d3fb9a",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml": "c1a04202ede2c43832aedb82c413116282a7855c1abbdd082f1bcaf617d3fb9a",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_oracle.xml": "b1674d3090c7a2f5e8e9ef9897bb508fbdfd5b52b0039df505e44a13cd82d652",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_postgres.xml": "e4b3884aff5af81031cd24585fdedededd04a04957de095a8afcaa726717d30c",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_tibero.xml": "b1674d3090c7a2f5e8e9ef9897bb508fbdfd5b52b0039df505e44a13cd82d652",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_altibase.xml": "9cf0406ffd9f751e3486d9118dffffb388435432cf427e28fa7f9707825919e5",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_cubrid.xml": "fdd6d978403f0b74defd5eda817ea652aad46d76b9b8519bf6f95cb08b1089b5",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_goldilocks.xml": "9cf0406ffd9f751e3486d9118dffffb388435432cf427e28fa7f9707825919e5",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_maria.xml": "834f9913159b610cd9826a8dbdf5846b9d21efa9edbceec73867f7afc35722a6",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml": "a93f88e376c5f54d5c16005cdc0624616224a8357fb42219b27c78c2977da331",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_oracle.xml": "26cee2a2d9186994d66307f7f246e605878071f2509e22d4a46023b709144b68",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_postgres.xml": "963de4523045c7085ba4ca76e1e1ad679a8969c508643404c55571dfbe60abec",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_tibero.xml": "094c8209af514cd558137f2f16c6a24770fbc8903677fde43d4482eb7eba42f2",
+    "src/main/resources/egovframework/spring/com/context-datasource.xml": "98bbd700194f1a69c24d55c2526fe2e451294d5194eeb21aed99fd28f2c039e1",
+    "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml": "bb30ad6f870db19e1c97ccc424a5f84b06a605845b0b2fd3f8257d6dc3585304",
+    "src/main/resources/egovframework/spring/com/context-mapper.xml": "805ec8f98e29de2100230ed55301bdf6b5a643bc17a9e8f6e2c19879e83a7cdd",
+    "src/main/resources/egovframework/spring/com/context-properties.xml": "6ae6da2d96a13d53c8e0e7b164956c0ac718ddb757040fc34d0578f2eb78fcd3",
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleList.jsp": "ee9752de3a75a815ab184365bfaaea48c26a8a711877d17511934ef45f8fa0f2"
+  },
+  "title": "게시글 목록: 마스터·조건부 옵션·목록/건수·공지 조회",
+  "selection_reason": "사용자 지정 held-out. Controller 진입 후 소스상 Service/DAO/SQL 및 테이블·뷰 경로.",
+  "entrypoint": {
+    "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleList.jsp",
+    "line": 108,
+    "url": "/cop/bbs/selectArticleList.do",
+    "controller": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+  },
+  "assumptions_and_questions": [
+    "소스만 읽어 작성했다. 이 사례 인덱스·trace 출력 미열람/미실행, 미채점. 사용자 승인 전 구현 변경 금지. 승인 후 최초 실행 원본 점수 보존.",
+    "CONFIRMED는 소스상 연결이다. 조건부 경로의 매 요청 실행을 뜻하지 않는다. 인증 실패·방명록·정상 흐름을 분리한다.",
+    "graph 비교는 JSP 목록 form 108행, 명시한 메서드의 calls 호출 위치, DAO executes, mysql SQL reads/writes/includes/resultMap이다. 외부 라이브러리 내부·런타임 조건·forward/view·VIEW 내부 확장은 supplemental_assertions로 별도 보고하고 점수에 합산하지 않는다.",
+    "Controller 이전 필터/인터셉터/AOP, DTO getter/setter/컬렉션/표준 라이브러리 내부, 다른 JSP 버튼 상세·등록·수정·삭제, forward/redirect 도착 URL 이후는 제외한다. 목록에 조회수 UPDATE를 섞지 않는다.",
+    "mapperLocations + Globals.DbType=mysql, Globals.Auth=security와 listener/profile 설정으로 저장소 기본값을 확인한다. 운영 DB/서버·런타임 override·실제 실행은 미검증.",
+    "COMVNUSERMASTER는 VIEW다. 스키마의 table/view 공통 이름으로 SQL→VIEW를 비교하고 mysql DDL/기반 테이블은 별도 보충한다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleList.jsp"
+      },
+      "kinds": [
+        "requests"
+      ],
+      "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleList.jsp",
+      "line": 108
+    },
+    {
+      "from": {
+        "name": "ANY /cop/bbs/selectArticleList.do"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+      "line": 163
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+      "line": 184
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+      "line": 188
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+      "line": 151
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+      "line": 153
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#getAuthenticatedUser"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+      "line": 42
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#isAuthenticated"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+      "line": 59
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+      "line": 65
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+      "line": 69
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+      "line": 70
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectArticleList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+      "line": 39
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectArticleList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+      "line": 42
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectNoticeArticleList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+      "line": 126
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterDAO#selectBBSMasterDetail"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSMaster.selectBBSMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+      },
+      "kinds": [
+        "reads",
+        "writes",
+        "includes"
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSMaster.selectBBSMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.BBSAddedOptionsDAO#selectAddedOptionsInf"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSAddedOptions.selectAddedOptionsInf",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml"
+      },
+      "kinds": [
+        "reads",
+        "writes",
+        "includes"
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSAddedOptions.selectAddedOptionsInf",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectArticleList"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "kinds": [
+        "reads",
+        "writes",
+        "includes"
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectArticleListCnt"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectArticleListCnt",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "kinds": [
+        "reads",
+        "writes",
+        "includes"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectNoticeArticleList"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectNoticeArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "kinds": [
+        "reads",
+        "writes",
+        "includes"
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectNoticeArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleList.jsp"
+      },
+      "to": {
+        "name": "ANY /cop/bbs/selectArticleList.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleList.jsp",
+          "line": 108
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 149
+        }
+      ],
+      "note": "form은 POST, Controller는 HTTP method 미제한."
+    },
+    {
+      "from": {
+        "name": "ANY /cop/bbs/selectArticleList.do"
+      },
+      "to": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 149
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "to": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 163
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 80
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/EgovBBSMasterService.java",
+          "line": 16
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 23
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 64
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "to": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectArticleList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 184
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 77
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/EgovArticleService.java",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+          "line": 22
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "to": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectNoticeArticleList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 188
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 77
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/EgovArticleService.java",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+          "line": 22
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+          "line": 125
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "to": {
+        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#getAuthenticatedUser"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 151
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "to": {
+        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#isAuthenticated"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 153
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#getAuthenticatedUser"
+      },
+      "to": {
+        "name": "egovframework.com.sec.ram.service.impl.EgovUserDetailsSecurityServiceImpl#getAuthenticatedUser"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 42
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 33
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/EgovUserDetailsService.java",
+          "line": 11
+        },
+        {
+          "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 36
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 38
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 41
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 26
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/context/EgovWebServletContextListener.java",
+          "line": 58
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 61
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 76
+        }
+      ],
+      "note": "기본 security profile. 외부 override는 미검증."
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#isAuthenticated"
+      },
+      "to": {
+        "name": "egovframework.com.sec.ram.service.impl.EgovUserDetailsSecurityServiceImpl#isAuthenticated"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 59
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 33
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/EgovUserDetailsService.java",
+          "line": 24
+        },
+        {
+          "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+          "line": 61
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 36
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 38
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 41
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 26
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/context/EgovWebServletContextListener.java",
+          "line": 58
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 61
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 76
+        }
+      ],
+      "note": "기본 security profile. 외부 override는 미검증."
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+      },
+      "to": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterDAO#selectBBSMasterDetail"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 65
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 26
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterDAO.java",
+          "line": 14
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterDAO.java",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+      },
+      "to": {
+        "name": "egovframework.com.cmm.EgovComponentChecker#hasComponent"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 69
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/EgovComponentChecker.java",
+          "line": 48
+        }
+      ],
+      "note": "같은 메서드 두 호출을 한 연결로 표시."
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+      },
+      "to": {
+        "name": "egovframework.com.cop.bbs.service.impl.BBSAddedOptionsDAO#selectAddedOptionsInf"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 70
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 69
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 35
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/BBSAddedOptionsDAO.java",
+          "line": 25
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/BBSAddedOptionsDAO.java",
+          "line": 42
+        }
+      ],
+      "note": "댓글/만족도 컴포넌트 존재 조건부 경로. 매 요청 실행 보장이 아니다."
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectArticleList"
+      },
+      "to": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectArticleList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+          "line": 39
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+          "line": 25
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleDAO.java",
+          "line": 12
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleDAO.java",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectArticleList"
+      },
+      "to": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectArticleListCnt"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+          "line": 42
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+          "line": 25
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleDAO.java",
+          "line": 12
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleDAO.java",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectNoticeArticleList"
+      },
+      "to": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectNoticeArticleList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+          "line": 126
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+          "line": 25
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleDAO.java",
+          "line": 12
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleDAO.java",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterDAO#selectBBSMasterDetail"
+      },
+      "to": {
+        "name": "BBSMaster.selectBBSMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterDAO.java",
+          "line": 26
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml",
+          "line": 156
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSMaster.selectBBSMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNBBSUSE"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml",
+          "line": 164
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSMaster.selectBBSMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNBBSMASTER"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml",
+          "line": 169
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSMaster.selectBBSMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTCCMMNDETAILCODE"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml",
+          "line": 171
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSMaster.selectBBSMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNTMPLATINFO"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml",
+          "line": 173
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSMaster.selectBBSMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMVNUSERMASTER"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml",
+          "line": 175
+        }
+      ],
+      "note": "mysql DDL에서 VIEW인 이름이다."
+    },
+    {
+      "from": {
+        "name": "BBSMaster.selectBBSMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "BBSMaster.boardMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml",
+          "line": 156
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.BBSAddedOptionsDAO#selectAddedOptionsInf"
+      },
+      "to": {
+        "name": "BBSAddedOptions.selectAddedOptionsInf",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/BBSAddedOptionsDAO.java",
+          "line": 43
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml",
+          "line": 38
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSAddedOptions.selectAddedOptionsInf",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNBBSMASTEROPTN"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSAddedOptions.selectAddedOptionsInf",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMVNUSERMASTER"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml",
+          "line": 46
+        }
+      ],
+      "note": "mysql DDL에서 VIEW인 이름이다."
+    },
+    {
+      "from": {
+        "name": "BBSAddedOptions.selectAddedOptionsInf",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "BBSAddedOptions.boardMasterDetail",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml",
+          "line": 38
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectArticleList"
+      },
+      "to": {
+        "name": "BBSArticle.selectArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleDAO.java",
+          "line": 16
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 208
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNBBS"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 216
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMVNUSERMASTER"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 218
+        }
+      ],
+      "note": "mysql DDL에서 VIEW인 이름이다."
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNCOMMENT"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 222
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "BBSArticle.boardList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 208
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectArticleListCnt"
+      },
+      "to": {
+        "name": "BBSArticle.selectArticleListCnt",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleDAO.java",
+          "line": 20
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 246
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectArticleListCnt",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNBBS"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 251
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectArticleListCnt",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMVNUSERMASTER"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 253
+        }
+      ],
+      "note": "mysql DDL에서 VIEW인 이름이다."
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectNoticeArticleList"
+      },
+      "to": {
+        "name": "BBSArticle.selectNoticeArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleDAO.java",
+          "line": 53
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 379
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectNoticeArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNBBS"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 387
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectNoticeArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMVNUSERMASTER"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 389
+        }
+      ],
+      "note": "mysql DDL에서 VIEW인 이름이다."
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectNoticeArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNCOMMENT"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 393
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "BBSArticle.selectNoticeArticleList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "BBSArticle.boardList",
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 379
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 10
+        }
+      ]
+    }
+  ],
+  "candidate_files": [
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_altibase.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_cubrid.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_goldilocks.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_maria.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_oracle.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_postgres.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_tibero.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_altibase.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_cubrid.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_goldilocks.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_maria.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_oracle.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_postgres.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_tibero.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_altibase.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_cubrid.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_goldilocks.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_maria.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_oracle.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_postgres.xml",
+    "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_tibero.xml"
+  ],
+  "supplemental_assertions": [
+    {
+      "id": "redirect-unauthenticated",
+      "status": "CONFIRMED",
+      "claim": "인증 실패 시 redirect:/uat/uia/egovLoginUsr.do. 도착 URL 이후 로그인 흐름 제외.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 153
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 155
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 156
+        }
+      ]
+    },
+    {
+      "id": "forward-guest-board",
+      "status": "CONFIRMED",
+      "claim": "게시판 유형 BBST03이면 forward:/cop/bbs/selectGuestArticleList.do. 도착 URL 이후 제외.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 163
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 166
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 167
+        }
+      ]
+    },
+    {
+      "id": "view-and-model",
+      "status": "CONFIRMED",
+      "claim": "기본 view egovframework/com/cop/bbs/EgovArticleList. resultList/resultCnt/articleVO/boardMasterVO/paginationInfo/noticeList를 모델에 넣는다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 204
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 205
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 206
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 207
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 208
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 209
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 210
+        }
+      ]
+    },
+    {
+      "id": "property-service-boundary",
+      "status": "UNRESOLVED",
+      "claim": "propertiesService.getInt(pageUnit/pageSize) 호출과 기본 설정 10은 확인. 내부 구현은 미확정.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 89
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 171
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 172
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-properties.xml",
+          "line": 5
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-properties.xml",
+          "line": 8
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-properties.xml",
+          "line": 9
+        }
+      ],
+      "reason": "EgovPropertyServiceImpl 구현 소스가 대상 src/main/java에 없다. 외부 라이브러리 내부를 graph 점수에서 제외하고 미확정 경계로 기록."
+    },
+    {
+      "id": "pagination-boundary",
+      "status": "UNRESOLVED",
+      "claim": "PaginationInfo 생성 후 first/last/recordCountPerPage를 boardVO에 설정하며 목록 SQL은 LIMIT/OFFSET 사용.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 174
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 176
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 180
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 181
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 182
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 242
+        }
+      ],
+      "reason": "외부 PaginationInfo 구현 소스 부재. 내부 계산/실제 결과 미검증."
+    },
+    {
+      "id": "no-master-exception",
+      "status": "UNRESOLVED",
+      "claim": "마스터 조회가 null이면 상속 processException(info.nodata.msg)을 호출하여 throw.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 24
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 65
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 66
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 67
+        }
+      ],
+      "reason": "EgovAbstractServiceImpl 소스 부재. 예외 생성 내부·후속 처리 확정 불가."
+    },
+    {
+      "id": "security-library-boundary",
+      "status": "UNRESOLVED",
+      "claim": "security 구현은 org.egovframe.rte.fdl.security.userdetails.util.EgovUserDetailsHelper에 위임한다. 로컬 동명 helper로 재귀 호출하는 것이 아니다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+          "line": 8
+        },
+        {
+          "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+          "line": 39
+        },
+        {
+          "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+          "line": 40
+        },
+        {
+          "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+          "line": 62
+        }
+      ],
+      "reason": "외부 helper 소스 부재. 내부 서비스/DAO/SQL 유무·인증 결과 확정 불가."
+    },
+    {
+      "id": "component-options-condition",
+      "status": "UNRESOLVED",
+      "claim": "EgovBBSCommentService 또는 EgovBBSSatisfactionService 컴포넌트 존재 시 추가 옵션 조회. hasComponent는 context.getBean으로 조회.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 69
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+          "line": 70
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/EgovComponentChecker.java",
+          "line": 48
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/EgovComponentChecker.java",
+          "line": 51
+        }
+      ],
+      "reason": "소스상 호출은 CONFIRMED이나 실제 배포 context에서 조건의 참/거짓은 실행하지 않았다."
+    },
+    {
+      "id": "view-base-tables",
+      "status": "CONFIRMED",
+      "claim": "COMVNUSERMASTER는 mysql VIEW이며 COMTNGNRLMBER, COMTNEMPLYRINFO, COMTNENTRPRSMBER의 UNION ALL이다. SQL→VIEW와 VIEW의 기반 테이블을 구분한다.",
+      "evidence": [
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 5050
+        },
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 5053
+        },
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 5057
+        },
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 5060
+        }
+      ]
+    },
+    {
+      "id": "mysql-ddl-location",
+      "status": "CONFIRMED",
+      "claim": "mysql 테이블 선언 근거. 다른 DB의 동명 DDL을 활성 DB 선언으로 오인하지 않는다.",
+      "evidence": [
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 598
+        },
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 631
+        },
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 682
+        },
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 1263
+        },
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 1882
+        },
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 2904
+        },
+        {
+          "file": "script/ddl/mysql/com_DDL_mysql.sql",
+          "line": 3287
+        }
+      ]
+    },
+    {
+      "id": "notice-and-count-semantics",
+      "status": "CONFIRMED",
+      "claim": "목록은 사용자 view 및 댓글 집계 LEFT JOIN+페이징. 건수에는 댓글 집계가 없다. 공지는 NOTICE_AT=Y, USE_AT=Y, LIMIT 5. 다섯 statement는 SELECT이며 writes/include 없음.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 208
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 222
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 242
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 246
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 251
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 253
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 379
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 400
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 401
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+          "line": 404
+        }
+      ]
+    }
+  ],
+  "excluded_paths": [
+    {
+      "description": "인증 실패 redirect 도착 이후",
+      "target": "/uat/uia/egovLoginUsr.do",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 156
+        }
+      ]
+    },
+    {
+      "description": "방명록 forward 도착 이후",
+      "target": "/cop/bbs/selectGuestArticleList.do",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 167
+        }
+      ]
+    }
+  ],
+  "approval": {
+    "status": "PENDING_USER_GATE",
+    "first_execution": "NOT_RUN",
+    "implementation_tuning": "PROHIBITED_UNTIL_APPROVAL"
+  }
+}

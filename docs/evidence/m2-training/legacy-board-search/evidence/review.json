@@ -1,0 +1,427 @@
+{
+  "source_reviewed": true,
+  "checked_files": [
+    "src/main/java/kr/sistack/board/common/Pagination.java",
+    "src/main/java/kr/sistack/board/dao/CommonCodeDao.java",
+    "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+    "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+    "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+    "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+    "src/main/java/kr/sistack/board/service/impl/CommonCodeServiceImpl.java",
+    "src/main/java/kr/sistack/board/web/AuthController.java",
+    "src/main/java/kr/sistack/board/web/BoardController.java",
+    "src/main/java/kr/sistack/board/web/CommonCodeController.java",
+    "src/main/java/kr/sistack/board/web/CommonExceptionHandler.java",
+    "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+    "src/main/resources/db/oracle/ddl.sql",
+    "src/main/resources/mapper/BoardMapper.xml",
+    "src/main/resources/mapper/CommonCode.xml",
+    "src/main/resources/mapper/CommonSql.xml",
+    "src/main/resources/spring/root-context.xml",
+    "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+    "src/main/resources/spring/root-context.xml",
+    "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+    "src/main/webapp/WEB-INF/views/board/detail.jsp",
+    "src/main/webapp/WEB-INF/views/board/form.jsp",
+    "src/main/webapp/WEB-INF/views/board/list.jsp",
+    "src/main/webapp/WEB-INF/views/code/list.jsp",
+    "src/main/webapp/WEB-INF/views/common/header.jspf",
+    "src/main/webapp/WEB-INF/views/common/menu.jspf",
+    "src/main/webapp/WEB-INF/views/common/paging.jspf",
+    "src/main/webapp/WEB-INF/web.xml",
+    "src/main/webapp/resources/board.js"
+  ],
+  "overview": [
+    "게시판 검색 화면은 조건과 페이지를 받아 목록·건수를 조회한다.",
+    "로그인 인터셉터가 사용자와 메뉴를 먼저 준비한다. 공유 JSP/JS를 통해 보이는 다른 화면의 handler는 실제 실행과 구별한다."
+  ],
+  "flow": [
+    "검색 폼 → /board/list.do → BoardController.list → BoardServiceImpl.list → BoardMapper의 count/selectList → BOARD 조회. Java 페이징 값이 공통 SQL에 전달된다.",
+    "각 /board 요청 → LoginInterceptor.preHandle → MenuMapper.selectList → APP_MENU. 인증·권한·CSRF 검사에서 중단될 수 있다."
+  ],
+  "traps": [
+    {
+      "text": "JS 문자열 조합 URL: listUrl은 data-base와 문자열로 action을 만들므로 미확정이다. form의 리터럴 기본 action과 구분한다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 3
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "text": "contextPath 변수 + 리터럴 경로: 상세 JSP의 ctx 선언과 삭제 AJAX /board/delete.do는 확정 가능하다. 공유 JS 포함만으로 목록·등록에서 삭제가 실행된다고 보지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/detail.jsp",
+          "line": 7
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "text": "다른 클래스의 동명 list: BoardController와 CommonCodeController의 매핑·주입 서비스가 다르다.",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 36
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/CommonCodeController.java",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "text": "공통 페이징: BoardSearch가 Pagination을 상속하며 offset/endRow를 사용한다. 페이징 JS는 page를 유지하고 검색 submit은 1로 초기화한다.",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+          "line": 7
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/common/Pagination.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 7
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 12
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+          "line": 2
+        }
+      ]
+    },
+    {
+      "text": "공유 SQL include: BoardMapper와 CommonCode는 CommonSql 페이징을 함께 사용하며 BoardMapper.filters는 로컬 검색 조건이다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 31
+        },
+        {
+          "file": "src/main/resources/mapper/CommonCode.xml",
+          "line": 5
+        },
+        {
+          "file": "src/main/resources/mapper/CommonSql.xml",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "text": "정렬 컬럼 ${}: 이 조회의 BoardSearch getter는 b.TITLE/b.CREATED_AT 허용 목록을 반환한다. 일반적인 문자열 치환 노드를 안전하다고 일괄 확정하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "text": "주석 처리된 옛 호출: oldList.do는 실행 연결에 포함하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "text": "세션→request→Controller: LoginInterceptor가 loginUser를 currentUser로 넣고 Controller가 @RequestAttribute로 받는다. 로그인·권한·CSRF에서 먼저 종료할 수 있다.",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 37
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "text": "문자열 sqlId DAO: CommonCodeDao의 commonCode.selectList 문자열은 CommonCode.xml namespace.statement로 연결된다.",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/dao/CommonCodeDao.java",
+          "line": 16
+        },
+        {
+          "file": "src/main/resources/mapper/CommonCode.xml",
+          "line": 3
+        }
+      ]
+    },
+    {
+      "text": "XML·어노테이션 Mapper 혼용: BoardMapper XML과 MenuMapper @Select(APP_MENU)가 공존한다. 메뉴 조회는 요청 인터셉터 경로다.",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 9
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 7
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "text": "서비스 인터페이스→Impl·이름 주입: @Resource boardService가 @Service 이름과 implements 선언을 통해 BoardServiceImpl로 연결된다. 인터셉터의 MenuMapper는 생성자로 주입된다.",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "text": "공통코드 서비스 구현·map 파라미터: Pagination 값이 offset/endRow 키로 바뀌어 SQL에 전달된다. 등록 화면 옵션 목록은 prepareForm에서 별도 조회한다.",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/CommonCodeServiceImpl.java",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/dao/CommonCodeDao.java",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/mapper/CommonCode.xml",
+          "line": 4
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "text": "AJAX GET URL→JSON: 코드 화면의 loadCodes가 문자열 URL을 사용한다. JSON codes/page/total을 DOM에 반영하지만 목록·등록 화면에 이 버튼은 없다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 21
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 27
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/CommonCodeController.java",
+          "line": 31
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "text": "AJAX POST URL·요청 데이터: 상세의 id/csrf POST 삭제 후 JSON success에 따라 JS가 목록으로 이동한다. HTTP redirect 응답과 구별한다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 50
+        },
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 55
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 68
+        }
+      ]
+    },
+    {
+      "text": "등록 form 삼항식은 create/update 두 리터럴 POST 모두 도달 가능 경로다. 등록 시 BOARD_SEQ를 먼저 읽고 BOARD에 INSERT하며 수정은 UPDATE다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 12
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 44
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 50
+        }
+      ]
+    }
+  ],
+  "hidden_paths": [
+    {
+      "category": "interceptor",
+      "status": "CONFIRMED",
+      "note": "/board/**에 LoginInterceptor 적용. 인증·ADMIN·POST CSRF 검사 후 currentUser와 menus를 넣는다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "category": "filter",
+      "status": "CONFIRMED",
+      "note": "web.xml의 CharacterEncodingFilter가 /*에 UTF-8을 강제한다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/web.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/web.xml",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "category": "aop",
+      "status": "CONFIRMED",
+      "note": "transactionManager와 tx:annotation-driven, 쓰기 Service의 @Transactional 선언을 확인했다. 실제 프록시 실행은 미검증.",
+      "evidence": [
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 16
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 19
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "category": "paging",
+      "status": "CONFIRMED",
+      "note": "Pagination getter와 JSP 공통 include, SQL include를 따라 offset/endRow를 확인했다.",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/common/Pagination.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+          "line": 2
+        },
+        {
+          "file": "src/main/resources/mapper/CommonSql.xml",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "category": "common-code",
+      "status": "CONFIRMED",
+      "note": "prepareForm→CommonCodeServiceImpl→문자열 sqlId→COMMON_CODE 목록 조회가 있다.",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 53
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/CommonCodeServiceImpl.java",
+          "line": 20
+        },
+        {
+          "file": "src/main/resources/mapper/CommonCode.xml",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "category": "exception",
+      "status": "CONFIRMED",
+      "note": "ControllerAdvice는 NotFound 404, 입력 오류 400, RuntimeException 500을 처리한다. web.xml 오류 페이지도 존재한다.",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/CommonExceptionHandler.java",
+          "line": 12
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/CommonExceptionHandler.java",
+          "line": 26
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/web.xml",
+          "line": 49
+        }
+      ]
+    }
+  ],
+  "adjustments": [],
+  "unverified": [
+    "앱·DB 요청은 실행하지 않았다. 정적 소스의 도달 가능 경로이며 실제 조건 충족을 보증하지 않는다.",
+    "공유 include 관계는 버튼 실행을 뜻하지 않는다. 외부 라이브러리·환경 override·동적 값은 미검증이다."
+  ],
+  "next_actions": [
+    "미확정 URL/값이 필요한 경우 실제 입력·허용된 로그를 추가로 확인한다.",
+    "결과의 파일:라인과 사용 범위를 검토하고 운영 반영 판단은 담당 승인 절차를 따른다."
+  ],
+  "execution": {
+    "mode": "complex",
+    "strategy": "parallel",
+    "note": "Codex 화면·서버·SQL 탐색자 3개 실제 병렬 실행 후 원문과 종합. 동일 소스 해시의 v1 탐색 기록을 v2 골격에 재대조했다.",
+    "explorers": [
+      {
+        "role": "screen",
+        "path": "evidence/explorer-screen.md"
+      },
+      {
+        "role": "server",
+        "path": "evidence/explorer-server.md"
+      },
+      {
+        "role": "sql",
+        "path": "evidence/explorer-sql.md"
+      }
+    ]
+  }
+}

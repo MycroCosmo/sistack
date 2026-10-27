@@ -1,0 +1,196 @@
+{
+  "source_reviewed": true,
+  "checked_files": [
+    "script/ddl/altibase/com_DDL_altibase.sql",
+    "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+    "src/main/java/egovframework/com/cmm/context/EgovWebServletContextListener.java",
+    "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/CmmnClCodeManageDAO.java",
+    "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/EgovCcmCmmnClCodeManageServiceImpl.java",
+    "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+    "src/main/resources/egovframework/egovProps/globals.properties",
+    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml",
+    "src/main/resources/egovframework/spring/com/context-datasource.xml",
+    "src/main/resources/egovframework/spring/com/context-mapper.xml",
+    "src/main/resources/egovframework/spring/com/context-privacylogaop.xml",
+    "src/main/resources/egovframework/spring/com/context-syslogaop.xml",
+    "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-interceptor.xml",
+    "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp"
+  ],
+  "overview": [
+    "공통분류코드 삭제 버튼은 확인 대화상자 후 선택한 코드를 서버에 제출한다.",
+    "실제 SQL은 행 삭제가 아니라 USE_AT를 N으로 바꾸는 논리 삭제다."
+  ],
+  "flow": [
+    "fn_egov_delete_code → RemoveCcmCmmnClCode.do → deleteCmmnClCode Controller → 이름 주입 ServiceImpl → DAO 문자열 sqlId → mysql UPDATE COMTCCMMNCLCODE.",
+    "처리 후 목록 forward 도착까지만 확인했고 후속 목록 요청은 이번 범위에서 제외했다."
+  ],
+  "traps": [
+    {
+      "text": "기본 DB 선택: mapperLocations의 *_{Globals.DbType}.xml과 Globals.DbType=mysql로 mysql 문장을 선택한다. 다른 DB XML은 활성 실행 근거가 아닌 후보다. 외부 override는 미검증.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "text": "dummy 인증 인터셉터 제외: XML은 dummy 프로필 안에 있다. Listener가 DB와 Globals.Auth로 활성 프로필을 정하고 기본 Auth=security이므로 이 선언을 활성 요청 경로로 보지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-interceptor.xml",
+          "line": 19
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/context/EgovWebServletContextListener.java",
+          "line": 58
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "text": "delete라는 메서드명과 달리 UPDATE USE_AT=N이다. 사용자 확인을 취소하면 요청하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml",
+          "line": 106
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "text": "표의 altibase DDL 위치는 이름 병합 대표 선언이다. 실행 선택은 mysql XML 근거로 판단했다.",
+      "evidence": [
+        {
+          "file": "script/ddl/altibase/com_DDL_altibase.sql",
+          "line": 791
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml",
+          "line": 106
+        }
+      ]
+    }
+  ],
+  "hidden_paths": [
+    {
+      "category": "interceptor",
+      "status": "CONFIRMED",
+      "note": "기본 HandlerMapping에 LocaleChangeInterceptor/WebLogInterceptor가 선언된다. 별도 AuthenticInterceptor는 dummy 프로필이므로 기본 security 구성에서 제외했다. 실행 순서·내부 호출 미검증.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+          "line": 44
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+          "line": 51
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-interceptor.xml",
+          "line": 19
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/context/EgovWebServletContextListener.java",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "category": "filter",
+      "status": "CONFIRMED",
+      "note": "Java initializer에서 encoding *.do, security /*, multipart, HTMLTag 필터를 등록한다. Security 내부 필터 체인 동작은 실행하지 않았다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 66
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 98
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 149
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 159
+        }
+      ]
+    },
+    {
+      "category": "aop",
+      "status": "UNRESOLVED",
+      "note": "syslog·privacy AOP의 pointcut 선언은 확인했으나 각 advice 내부와 실제 적용 여부는 미검증이다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-syslogaop.xml",
+          "line": 13
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-privacylogaop.xml",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "category": "paging",
+      "status": "NOT_FOUND",
+      "note": "이번 단일 삭제/컬럼 조회 범위에는 공통 목록 페이징 호출이 없다. 프로젝트 전체 부재를 뜻하지 않는다.",
+      "evidence": []
+    },
+    {
+      "category": "common-code",
+      "status": "NOT_FOUND",
+      "note": "이번 단일 삭제/컬럼 조회 메서드에서 별도 공통코드 조회는 발견하지 못했다.",
+      "evidence": []
+    },
+    {
+      "category": "exception",
+      "status": "CONFIRMED",
+      "note": "MVC SimpleMappingExceptionResolver의 예외→뷰 선언을 확인했다. 실제 발생·응답은 미검증이다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+          "line": 63
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+          "line": 72
+        }
+      ]
+    }
+  ],
+  "adjustments": [
+    "기본 security 구성에서 비활성 dummy AuthenticInterceptor의 연결/노드를 제외. Listener:58 + globals.Auth:26 + interceptor XML:19 근거."
+  ],
+  "unverified": [
+    "앱·DB 요청은 실행하지 않았다. 정적 소스의 도달 가능 경로이며 실제 조건 충족을 보증하지 않는다.",
+    "공유 include 관계는 버튼 실행을 뜻하지 않는다. 외부 라이브러리·환경 override·동적 값은 미검증이다."
+  ],
+  "next_actions": [
+    "미확정 URL/값이 필요한 경우 실제 입력·허용된 로그를 추가로 확인한다.",
+    "결과의 파일:라인과 사용 범위를 검토하고 운영 반영 판단은 담당 승인 절차를 따른다."
+  ],
+  "execution": {
+    "mode": "simple",
+    "strategy": "direct",
+    "note": "주 에이전트가 JSP·Java·설정·SQL 원문을 직접 읽고 검토했다."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "run_id": "m2-training-detailcode-v2",
+  "created_at": "2026-10-27T04:14:47.090Z",
+  "inputs": {
+    "starts": "[\"src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp\"]",
+    "direction": "forward",
+    "scope": "single",
+    "depth": "8"
+  },
+  "complexity": {
+    "mode": "complex",
+    "reason": "도달 경로가 20개 이상",
+    "paths_at_least": 20
+  },
+  "missing_starts": [],
+  "tool_fingerprint": "5d142300da62cf138bcdd57f8a53c54e4d2f6d8402b122b52585ff7e6da398e3"
+}

@@ -1,0 +1,2 @@
+실제 Codex /root/trace_sql 병렬 탐색 답변 요약.
+src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_mysql.xml:10/35/57 목록/count/detail; :17–18/:39–40/:66–67 COMTCCMMNDETAILCODE + COMTCCMMNCODE. cca mysql:10→:16–17 COMMONCODE+CLCODE, ccc mysql:10→:16 CLCODE. 각 DAO sqlId와 namespace 확인. LIMIT/OFFSET cde:32 cca:33 ccc:29. mysql DDL:1205/1229/1263 확인; table 노드의 altibase 위치는 이름 병합에 따른 대표 선언일 뿐 활성 DB 증거가 아니다.

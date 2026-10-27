@@ -2,11 +2,11 @@
 
 한국 SI 개발자의 코드 흐름 파악·에러 분석·테스트·산출물 작성을 돕는 Agent Skills 모음입니다.
 
-**개발 상태: M0·M1 완료. 승인 정답 5건 대비 55개 연결 일치, M2 미착수.** 업무 스킬은 아직 제공하지 않습니다. [M1 종료 보고서](docs/m1-final-report.md) · [인덱서 사용법](docs/indexer.md)
+**개발 상태: M0·M1 완료, M2 held-out 정답 승인 GATE.** `si-trace` 공통 구현과 학습 5건/55개 연결 비교를 완료했습니다. 별도 held-out 3건은 미승인·미실행입니다. [M2 진행 보고서](docs/m2-report.md) · [인덱서 사용법](docs/indexer.md)
 
 | v0.1 예정 스킬 | 역할 | 구현 시점 |
 |---|---|---|
-| si-trace | 화면 이벤트부터 SQL·테이블까지 흐름 파악 | M2 |
+| si-trace | 화면 이벤트부터 SQL·테이블까지 흐름 파악 | 구현됨, M2 GATE 대기 |
 | si-debug | 로그·증상에서 원인과 수정안 도출 | M3 |
 | si-unit-test | 레거시 Java 단위 테스트 작성·실행 | M4 |
 | si-docs | 코드·테스트 근거로 xlsx 산출물 작성 | M5 |
@@ -25,11 +25,11 @@ node scripts/validate-skills.mjs
 node scripts/sync-shared.mjs --check
 ```
 
-npm test는 승인 정답의 소스 해시·근거 라인도 검사합니다. 첫 실행 전 위 fetch-testbed 명령으로 고정 eGovFrame 소스를 준비하세요. 소스가 없으면 검사를 건너뛰지 않고 BLOCKED로 종료합니다.
+npm test는 정답의 소스 해시·근거 라인도 검사합니다. 미승인 초안은 DRAFT_SOURCES_VALID로 구별하며 채점하지 않습니다. 첫 실행 전 위 fetch-testbed 명령으로 고정 eGovFrame 소스를 준비하세요. 소스가 없으면 검사를 건너뛰지 않고 BLOCKED로 종료합니다.
 
 Windows PowerShell에서 실행 정책 때문에 npm.ps1이 차단되면 `npm.cmd test`를 사용합니다. 임시 Git 저장소 쓰기를 막는 샌드박스에서는 테스트 실행 권한이 필요합니다.
 
-## 예제 설치
+## 스킬 설치·사용
 
 ```sh
 node scripts/install.mjs --target codex --scope repo
@@ -39,7 +39,7 @@ node scripts/install.mjs --target codex --scope repo --dest .tmp/install-check
 
 Codex는 저장소 `.agents/skills/` 또는 사용자 `~/.agents/skills/`, Claude Code는 `.claude/skills/` 또는 `~/.claude/skills/`에 설치합니다. `--dest`는 최종 스킬 상위 폴더를 지정합니다. 기존 경로를 먼저 나열하고 중단하며, 검토 후 `--force`를 주면 같은 파일을 덮어씁니다.
 
-현재 설치되는 `si-example`은 설치 확인용입니다. Codex의 `$si-example`, Claude Code의 `/si-example` 또는 “SIStack 설치 확인해 줘”로 호출합니다. 설치된 폴더의 `scripts/check.mjs`를 Node로 직접 실행할 수도 있습니다.
+`si-trace`와 설치 확인용 `si-example`이 설치됩니다. 새 Codex 세션에서 `$si-trace examples/legacy-board의 /board/list.do 흐름을 추적해 줘`로 사용합니다. 산출물은 대상 프로젝트 `.sistack/runs/<run-id>/`에 남습니다. 설치본 CLI는 검증했으며 Codex 명시·자동 활성화는 아직 BLOCKED입니다. [수동 확인 절차](docs/manual-checks.md)를 참고하세요.
 
 ## 테스트베드
 

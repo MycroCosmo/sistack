@@ -1,0 +1,1098 @@
+{
+  "schema_version": "1.0",
+  "case_id": "egov-id-dplct-ajax",
+  "review_status": "draft",
+  "dataset": "held-out",
+  "source_root": ".testbeds/egovframe",
+  "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
+  "source_files": {
+    "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java": "c905d9a7c35410d0d933bc62b0de48d9a699913aa82e43abfe86ba3578b3afc6",
+    "src/main/java/egovframework/com/uss/umt/service/EgovUserManageService.java": "c05c9670f9c4bc1d960b522a930d39d21e92409a775edceffb773aae4efd5874",
+    "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java": "62469e62508a0c674857e60f6c076266019da0ef29928ed62b47b25f63813394",
+    "src/main/java/egovframework/com/uss/umt/service/impl/UserManageDAO.java": "642cca6315d457c078c042195f9a08bce78013be341dbaa3260707beb404417a",
+    "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java": "6c0a1c5e4e1f73722aeed0a6aa0c823291e8b09db6846bfdb5ebb2a40c9c7361",
+    "src/main/resources/egovframework/egovProps/globals.properties": "89262500869a4828f18a6ed872c38ae5c897adf91adfdf0c6f8d04d7f10227ec",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_altibase.xml": "dd7264f8e04f676bc4fb84f06d427683f0bd7c21710c4ef277eeb9551b54c0cb",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_cubrid.xml": "7e617181c8da5bc14fcd5fe9546b554cfd5d80d5e161c020864337ebf459f4fc",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_goldilocks.xml": "dd7264f8e04f676bc4fb84f06d427683f0bd7c21710c4ef277eeb9551b54c0cb",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_maria.xml": "1e9e44021f4df97732bcad0ff6ec24fa2218386b7577ebaf047b61a2e09a0177",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml": "1e9e44021f4df97732bcad0ff6ec24fa2218386b7577ebaf047b61a2e09a0177",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_oracle.xml": "3f0ee3ea423659d8eb6a8ae35b42045b077a2eb03cccc37bc1be360dbad7e3c1",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_postgres.xml": "7909c057afeb3564df7210dc04e6165af8bdeb9634731592b6ecbf31620882f7",
+    "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_tibero.xml": "144797354dbea80e4bebdd9767ee6d0ba1045530bb1ceef77046e11f51084542",
+    "src/main/resources/egovframework/spring/com/context-datasource.xml": "98bbd700194f1a69c24d55c2526fe2e451294d5194eeb21aed99fd28f2c039e1",
+    "src/main/resources/egovframework/spring/com/context-mapper.xml": "805ec8f98e29de2100230ed55301bdf6b5a643bc17a9e8f6e2c19879e83a7cdd",
+    "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml": "5bb10541cd559ec686ca4290ecd09561831ec7a5ba9f2af3f4f944a54acebcad",
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp": "fe9c87af7005098a568b17d216f009ac28a6de74e171b00f2547665d216c508c",
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp": "bfca1d596d0d9c532f3101a1b363ccbd84d0b2ceb3affee6ebadb3019cf861c8",
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp": "64d9df9004d9c826c9649ee22823e6673b3462066c6f87f21dd16e65de9ff37f",
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp": "50fc8214f8bf2d85ed7980265a66b3bfa66b030e4dca73ac8535494ce57a2919",
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp": "291383d18d217e00dd035c431bd9ee6216f87b362eed8797a120c037cdfe3599"
+  },
+  "title": "사용자 ID 중복확인 AJAX와 호출 화면 역추적",
+  "selection_reason": "c:url을 포함한 jQuery POST, named service 주입, 공통 사용자 ID UNION COUNT, JSON 응답과 다섯 호출 JSP 역추적을 함께 검토한다.",
+  "authorship": {
+    "method": "source-only",
+    "index_or_trace_executed": false,
+    "expected_used_for_implementation": false,
+    "approval_required": true
+  },
+  "assumptions_and_questions": [
+    "이 초안은 승인 전 정답이 아니며 첫 실행/점수 측정은 사용자 승인 뒤에 한다.",
+    "17개 edge scope: 5개 JSP의 두 AJAX 함수 requests 10개, endpoint maps_to 1개, 업무 Service/DAO calls 2개, mysql executes 1개, 물리 테이블 reads 3개. 나머지 화면 이벤트·외부 프레임워크 호출·공통 보안 경로는 이 연결 점수의 범위 밖이다.",
+    "응답 뷰/응답 데이터/역방향 JSP 집합은 supplemental_assertions 및 reverse_expectation으로 별도 판정한다. 스키마에 없는 returns_view/redirect 종류를 만들지 않는다.",
+    "mysql 선택은 mapperLocations 및 등록된 properties의 Globals.DbType에 근거한다. 다른 DB 후보는 실행 정답에서 제외한다. 실제 배포 환경의 override는 미검증이다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp#fn_id_check"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp#fn_id_checkOk"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp#fn_id_check"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp#fn_id_checkOk"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp#fn_id_check"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp#fn_id_checkOk"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp#fn_id_check"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp#fn_id_checkOk"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp#fn_id_check"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp#fn_id_checkOk"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.web.EgovUserManageController#checkIdDplctAjax"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+      "line": 411
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#checkIdDplct"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+      "line": 63
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.UserManageDAO#checkIdDplct"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "userManageDAO.checkIdDplct_S",
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml"
+      },
+      "kinds": [
+        "reads"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp#fn_id_check"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 86
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 88
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 89
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp#fn_id_checkOk"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 112
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 114
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 115
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp#fn_id_check"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+          "line": 85
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+          "line": 87
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+          "line": 88
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp#fn_id_checkOk"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+          "line": 112
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+          "line": 114
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+          "line": 115
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp#fn_id_check"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+          "line": 85
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+          "line": 87
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+          "line": 88
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp#fn_id_checkOk"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+          "line": 112
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+          "line": 114
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+          "line": 115
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp#fn_id_check"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+          "line": 89
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+          "line": 91
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+          "line": 92
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp#fn_id_checkOk"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+          "line": 115
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+          "line": 117
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+          "line": 118
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp#fn_id_check"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+          "line": 90
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+          "line": 92
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+          "line": 93
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp#fn_id_checkOk"
+      },
+      "to": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+          "line": 116
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+          "line": 118
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+          "line": 119
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+      },
+      "to": {
+        "name": "egovframework.com.uss.umt.web.EgovUserManageController#checkIdDplctAjax"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 403
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.web.EgovUserManageController#checkIdDplctAjax"
+      },
+      "to": {
+        "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#checkIdDplct"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 60
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 61
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 411
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/EgovUserManageService.java",
+          "line": 31
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 36
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 37
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#checkIdDplct"
+      },
+      "to": {
+        "name": "egovframework.com.uss.umt.service.impl.UserManageDAO#checkIdDplct"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 40
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 41
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+          "line": 63
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/UserManageDAO.java",
+          "line": 29
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/UserManageDAO.java",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.umt.service.impl.UserManageDAO#checkIdDplct"
+      },
+      "to": {
+        "name": "userManageDAO.checkIdDplct_S",
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/service/impl/UserManageDAO.java",
+          "line": 38
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 160
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 162
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 38
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 20
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 4
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 261
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "userManageDAO.checkIdDplct_S",
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNEMPLYRINFO",
+        "kind": "table"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 261
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 267
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "userManageDAO.checkIdDplct_S",
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNENTRPRSMBER",
+        "kind": "table"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 261
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 271
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "userManageDAO.checkIdDplct_S",
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml"
+      },
+      "to": {
+        "name": "COMTNGNRLMBER",
+        "kind": "table"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 261
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 275
+        }
+      ]
+    }
+  ],
+  "sql_candidates": [
+    {
+      "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_altibase.xml",
+      "status": "NOT_SELECTED",
+      "reason": "Globals.DbType=mysql에 선택되지 않은 다른 DB 후보. 실행 연결 정답에 포함하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_altibase.xml",
+          "line": 4
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_altibase.xml",
+          "line": 244
+        }
+      ]
+    },
+    {
+      "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_cubrid.xml",
+      "status": "NOT_SELECTED",
+      "reason": "Globals.DbType=mysql에 선택되지 않은 다른 DB 후보. 실행 연결 정답에 포함하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_cubrid.xml",
+          "line": 4
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_cubrid.xml",
+          "line": 244
+        }
+      ]
+    },
+    {
+      "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_goldilocks.xml",
+      "status": "NOT_SELECTED",
+      "reason": "Globals.DbType=mysql에 선택되지 않은 다른 DB 후보. 실행 연결 정답에 포함하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_goldilocks.xml",
+          "line": 4
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_goldilocks.xml",
+          "line": 244
+        }
+      ]
+    },
+    {
+      "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_maria.xml",
+      "status": "NOT_SELECTED",
+      "reason": "Globals.DbType=mysql에 선택되지 않은 다른 DB 후보. 실행 연결 정답에 포함하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_maria.xml",
+          "line": 4
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_maria.xml",
+          "line": 261
+        }
+      ]
+    },
+    {
+      "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_oracle.xml",
+      "status": "NOT_SELECTED",
+      "reason": "Globals.DbType=mysql에 선택되지 않은 다른 DB 후보. 실행 연결 정답에 포함하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_oracle.xml",
+          "line": 4
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_oracle.xml",
+          "line": 244
+        }
+      ]
+    },
+    {
+      "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_postgres.xml",
+      "status": "NOT_SELECTED",
+      "reason": "Globals.DbType=mysql에 선택되지 않은 다른 DB 후보. 실행 연결 정답에 포함하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_postgres.xml",
+          "line": 4
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_postgres.xml",
+          "line": 257
+        }
+      ]
+    },
+    {
+      "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_tibero.xml",
+      "status": "NOT_SELECTED",
+      "reason": "Globals.DbType=mysql에 선택되지 않은 다른 DB 후보. 실행 연결 정답에 포함하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_tibero.xml",
+          "line": 4
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_tibero.xml",
+          "line": 244
+        }
+      ]
+    }
+  ],
+  "supplemental_assertions": [
+    {
+      "id": "response-json-view",
+      "status": "CONFIRMED",
+      "assertion": "checkIdDplctAjax는 ModelAndView의 viewName을 jsonView로 지정하고 usedCnt/checkId를 모델에 넣어 반환한다. BeanNameViewResolver 우선순위 0과 jsonView MappingJackson2JsonView 빈이 application/json;charset=UTF-8 응답을 선언한다. 주석의 JSP 경로를 응답 뷰로 사용하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 399
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 405
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 406
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 412
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 413
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 415
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+          "line": 78
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+          "line": 84
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+          "line": 85
+        }
+      ]
+    },
+    {
+      "id": "request-response-contract",
+      "status": "CONFIRMED",
+      "assertion": "화면의 AJAX는 POST/checkId를 보내고 JSON usedCnt와 checkId를 소비한다. 서버 @RequestMapping은 method 제한이 없어 endpoint 표시는 ANY다. usedCnt>0이면 중복이고, 확인 함수의 사용 가능 분기는 입력 ID를 채우고 모달을 닫는다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 88
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 91
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 93
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 97
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 128
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 129
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 402
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 408
+        }
+      ]
+    },
+    {
+      "id": "union-count-semantics",
+      "status": "CONFIRMED",
+      "assertion": "mysql checkIdDplct_S는 업무사용자/기업회원/일반회원의 ID를 UNION ALL 한 뒤 checkId와 일치하는 건수를 센다. 파생 테이블 별칭 A는 물리 테이블 정답이 아니다. 쓰기 SQL이 아니다.",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 263
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 267
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 268
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 271
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 272
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 275
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 276
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+          "line": 277
+        }
+      ]
+    },
+    {
+      "id": "placeholder-anchor",
+      "status": "CONFIRMED",
+      "assertion": "EgovUserInsert.jsp 모달 footer의 href=\"#\"는 서버 endpoint 요청이 아니다. 조회/확인 동작은 외곽 onclick의 fn_id_check/fn_id_checkOk AJAX에서 발생한다. 주석 처리된 기존 버튼도 별도 실행 경로가 아니다.",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 66
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 67
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 68
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 69
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 89
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+          "line": 115
+        }
+      ]
+    },
+    {
+      "id": "framework-internals",
+      "status": "UNRESOLVED",
+      "assertion": "ModelAndView/BeanNameViewResolver/MappingJackson2JsonView/EgovAbstractMapper의 외부 라이브러리 내부 구현·실행은 이 저장소 src/main 소스 범위에서 확인하지 않았다. 빈 선언과 호출 계약 이상을 확정하지 않는다.",
+      "reason": "src/main 파일명 검색에서 해당 클래스의 Java 소스가 없었다. 런타임 classpath·빈 override·HTTP 응답 실측·DB 연결은 확인하지 않았다.",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+          "line": 405
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+          "line": 78
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+          "line": 84
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 16
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+          "line": 162
+        }
+      ]
+    }
+  ],
+  "reverse_expectation": {
+    "direction": "to",
+    "query": "/uss/umt/EgovIdDplctCnfirmAjax.do",
+    "status": "CONFIRMED",
+    "search_scope": "src/main의 JSP/JS/Java에 대한 URL 리터럴 검색 후 5개 JSP의 함수 본문을 직접 확인. 임의 동적 URL 구성·외부 호출자의 부재를 주장하지 않는다.",
+    "caller_jsps": [
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "functions": [
+          "fn_id_check",
+          "fn_id_checkOk"
+        ],
+        "request_method": "POST",
+        "evidence": [
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+            "line": 86
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+            "line": 89
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+            "line": 112
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+            "line": 115
+          }
+        ]
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+        "functions": [
+          "fn_id_check",
+          "fn_id_checkOk"
+        ],
+        "request_method": "POST",
+        "evidence": [
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+            "line": 85
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+            "line": 88
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+            "line": 112
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+            "line": 115
+          }
+        ]
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+        "functions": [
+          "fn_id_check",
+          "fn_id_checkOk"
+        ],
+        "request_method": "POST",
+        "evidence": [
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+            "line": 85
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+            "line": 88
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+            "line": 112
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+            "line": 115
+          }
+        ]
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+        "functions": [
+          "fn_id_check",
+          "fn_id_checkOk"
+        ],
+        "request_method": "POST",
+        "evidence": [
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+            "line": 89
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+            "line": 92
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+            "line": 115
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+            "line": 118
+          }
+        ]
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+        "functions": [
+          "fn_id_check",
+          "fn_id_checkOk"
+        ],
+        "request_method": "POST",
+        "evidence": [
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+            "line": 90
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+            "line": 93
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+            "line": 116
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+            "line": 119
+          }
+        ]
+      }
+    ],
+    "required_result": "승인 후 --to URL 역추적에서 다섯 JSP 모두 호출 화면으로 보고한다. 함수 10개 요청 연결 점수와 JSP 집합 일치 여부를 별도로 기록한다. 실제 역방향 질의는 아직 실행하지 않았다."
+  }
+}

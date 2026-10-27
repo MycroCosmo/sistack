@@ -1,6 +1,6 @@
 {
   "training": ["legacy-board-search", "legacy-board-create", "egov-clcode-delete", "egov-detailcode-list", "egov-rss-columns"],
-  "held-out": [],
-  "held_out_status": "AWAITING_USER_MENU_SELECTION",
-  "note": "M1 정답 5건은 인덱서 수정에 쓰인 학습 세트다. 사용자가 지정할 별도 메뉴 3개의 정답 초안 승인 전에는 해당 사례로 튜닝·실행·채점하지 않는다."
+  "held-out": ["egov-article-list", "egov-user-insert", "egov-id-dplct-ajax"],
+  "held_out_status": "AWAITING_DRAFT_APPROVAL",
+  "note": "M1 정답 5건은 인덱서 수정에 쓰인 학습 세트다. 사용자 지정 held-out 3건은 원문으로만 초안을 작성하고 승인 전 튜닝·실행·채점하지 않는다. 승인 후 첫 원본 점수를 수정 전 held-out 점수로 보존한다."
 }

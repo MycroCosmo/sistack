@@ -96,3 +96,12 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - 기존 manifest 검증 구현을 lib/manifest로 옮기고 CLI API를 유지했다. si-trace에 mask/indexer/trace/manifest와 스키마를 sync-shared로 복사해 저장소 밖에서도 단독 실행한다.
 - M1의 5건은 training이다. 별도 held-out 3건은 사용자 메뉴 지정 → 소스 기반 expected.draft 작성 → GATE 승인 → 첫 실행 원본·도구/정답 해시·점수 보존 순서다. 승인 전 사례별 튜닝은 금지한다. 결과 기록은 exclusive 생성으로 덮어쓰지 않고 후속 수정 점수와 분리한다.
 - 설치 경로는 기존 구현과 공식 문서를 대조했다: Codex https://learn.chatgpt.com/docs/build-skills 의 .agents/skills, Claude Code https://code.claude.com/docs/en/skills 의 .claude/skills. Agent Skills 형식은 https://agentskills.io/specification (2026-10-27 확인). 로컬 설치본은 Git에서 제외한다.
+
+### M2 — 학습 결과와 held-out GATE
+
+- 부분 질의의 executes.candidates가 질의 밖 노드를 가리켜 그래프 검증을 깨뜨리는 문제를 학습 실행에서 재현했다. 전체 인덱스 후보는 보존하고 부분 그래프만 내부 ID로 제한했으며 합성 DB 선택 테스트로 확인했다.
+- 학습 5건의 최종 비교는 55개 연결 일치다. 세 복잡 분기에서 실제 Codex 탐색자 3역할을 병렬 수행하고 두 단순 분기는 직접 읽었다. 174개 전체 연결 중 정답 scope 55개를 비교한 수치이며 전체 정확도가 아니다. 미확정 때문에 분석 manifest는 5건 모두 PARTIAL이다.
+- eGovFrame 기본 profile의 dummy 인증 인터셉터와 중첩 JSP 상세 링크는 분석 산출물에서 소스로 보완했다. 인덱서 코드는 수정하지 않았다. 공유 JS 함정은 실행 여부와 포함 관계를 구분해 설명했다.
+- 사용자가 지정한 held-out은 egov-article-list, egov-user-insert, egov-id-dplct-ajax다. 원문 직접 검토로만 expected.draft JSON/MD를 만들었다. 소스 해시/라인 검증은 DRAFT_SOURCES_VALID이며 정답 승인·eval 점수가 아니다.
+- forward/redirect와 응답 view는 현재 그래프 종류로 억지 표현하지 않고 supplemental_assertions로 남긴다. AJAX의 역방향 호출 JSP 집합도 별도 정답이다. 첫 평가에서 연결 누락/과탐/상태와 이 보충 항목의 결과를 분리해 기록한다.
+- 구현 동결 파일 해시는 docs/evidence/m2-baseline.json에 남겼다. 사용자 승인 전 held-out 실행·채점·사례 맞춤 수정은 하지 않는다. 승인 후 첫 원본 점수를 저장한 다음에만 수정한다.
