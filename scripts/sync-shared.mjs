@@ -3,17 +3,25 @@ import { cli, isMain, root, files, exists, sameFile, copyFiles, noLinks } from '
 import { validateSkills } from './validate-skills.mjs';
 
 export async function syncShared({ base = root, check = false } = {}) {
-  const source = path.join(base, 'lib/mask');
-  const names = await files(source);
   const dirs = await validateSkills(path.join(base, 'skills'));
   const differences = [];
   for (const dir of dirs) {
-    const destination = path.join(dir, 'scripts/lib/mask');
-    await noLinks(destination);
-    const current = await exists(destination) ? await files(destination) : [];
-    if (current.some((name) => !names.includes(name))) throw new Error('동기화 대상에 원본에 없는 파일이 있습니다. 삭제 여부를 직접 검토하세요');
-    for (const name of names) if (!await sameFile(path.join(source, name), path.join(destination, name))) differences.push(`${path.basename(dir)}/${name}`);
-    if (!check) await copyFiles(source, destination, names, true);
+    const groups = ['mask', ...(path.basename(dir) === 'si-trace' ? ['indexer', 'trace', 'manifest'] : [])];
+    for (const group of groups) {
+      const source = path.join(base, 'lib', group), names = await files(source);
+      const destination = path.join(dir, 'scripts/lib', group);
+      await noLinks(destination);
+      const current = await exists(destination) ? await files(destination) : [];
+      if (current.some((name) => !names.includes(name))) throw new Error('동기화 대상에 원본에 없는 파일이 있습니다. 삭제 여부를 직접 검토하세요');
+      for (const name of names) if (!await sameFile(path.join(source, name), path.join(destination, name))) differences.push(`${path.basename(dir)}/${group}/${name}`);
+      if (!check) await copyFiles(source, destination, names, true);
+    }
+    if (path.basename(dir) === 'si-trace') {
+      const source = path.join(base, 'schemas'), destination = path.join(dir, 'scripts/schemas');
+      const name = 'manifest.schema.json';
+      if (!await sameFile(path.join(source, name), path.join(destination, name))) differences.push(`si-trace/${name}`);
+      if (!check) await copyFiles(source, destination, [name], true);
+    }
   }
   if (check && differences.length) throw new Error(`공통 모듈 불일치 ${differences.length}개`);
   return dirs.length;

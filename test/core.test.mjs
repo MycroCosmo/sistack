@@ -99,6 +99,7 @@ test('공통 모듈 차이를 탐지하고 단독 설치·충돌 보존·명시�
   const base = await temporary(t);
   await cp(path.join(root, 'skills'), path.join(base, 'skills'), { recursive: true });
   await cp(path.join(root, 'lib'), path.join(base, 'lib'), { recursive: true });
+  await cp(path.join(root, 'schemas'), path.join(base, 'schemas'), { recursive: true });
   await syncShared({ base, check: true });
   const copied = path.join(base, 'skills/si-example/scripts/lib/mask/index.mjs');
   await writeFile(copied, 'stale');
@@ -107,7 +108,7 @@ test('공통 모듈 차이를 탐지하고 단독 설치·충돌 보존·명시�
   await syncShared({ base, check: true });
   const dest = path.join(base, 'installed');
   const options = { target: 'codex', scope: 'repo', dest };
-  assert.equal(await install(options, base), 1);
+  assert.equal(await install(options, base), 2);
   const module = await import(pathToFileURL(path.join(dest, 'si-example/scripts/lib/mask/index.mjs')).href);
   assert.equal(module.mask('secret=fixture'), 'secret=[REDACTED]');
   const result = spawnSync(process.execPath, [path.join(dest, 'si-example/scripts/check.mjs')], { cwd: dest, encoding: 'utf8' });

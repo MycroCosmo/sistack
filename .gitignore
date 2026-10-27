@@ -3,6 +3,7 @@ evals/private/
 node_modules/
 .testbeds/
 .tmp/
+.agents/skills/
 **/target/
 *.log
 .DS_Store

@@ -11,6 +11,13 @@ Design references:
 Third-party Java dependencies retain their own licenses.
 See docs/decisions.md for the approved dependency inventory.
 
+M2 adapted design structure:
+- pstack skills/how/SKILL.md and references/explorer-prompt.md,
+  references/explainer-prompt.md, consulted on 2026-10-27 (MIT).
+  si-trace adapts the simple/complex split, read-only layer explorers,
+  synthesis, and overview/flow/locations/gotchas organization for Korean SI.
+  No model-specific role configuration or verbatim prompt text is copied.
+
 Bundled third-party asset:
 - jQuery 3.7.1, Copyright OpenJS Foundation and other contributors.
   MIT License, preserved at:

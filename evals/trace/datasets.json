@@ -1,0 +1,6 @@
+{
+  "training": ["legacy-board-search", "legacy-board-create", "egov-clcode-delete", "egov-detailcode-list", "egov-rss-columns"],
+  "held-out": [],
+  "held_out_status": "AWAITING_USER_MENU_SELECTION",
+  "note": "M1 정답 5건은 인덱서 수정에 쓰인 학습 세트다. 사용자가 지정할 별도 메뉴 3개의 정답 초안 승인 전에는 해당 사례로 튜닝·실행·채점하지 않는다."
+}

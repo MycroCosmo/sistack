@@ -88,3 +88,11 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - JSP의 단순 리터럴 삼항식은 두 분기 모두 도달 가능한 경로로 본다. c:url 변수와 fn:escapeXml을 거친 create/update 요청을 모두 CONFIRMED로 연결하며 선언 위치도 근거로 남긴다. 조건 평가나 어느 분기가 실제 실행됐는지를 뜻하지 않는다. 동적 분기가 섞이면 UNRESOLVED다.
 - 소스 읽기로 작성한 5개 정답에 사용자 검토 조건을 적용해 승인본으로 확정한다. RSS 직접 JDBC 선정과 기존 scope 제외는 유지한다. 활성 DB SQL에는 file 선택자를 추가해 다른 DB 선언을 정답으로 대체할 수 없게 한다.
 - `check-expected.mjs`는 승인 JSON의 source_root 아래 source_files SHA-256과 모든 중첩 evidence 라인의 존재를 검사한다. npm test에 포함하며, 소스가 없으면 BLOCKED, 변경되면 FAIL이다. 해시를 자동 갱신하지 않는다. eGovFrame 체크아웃은 fetch-testbed로 먼저 준비한다. MD는 승인 JSON의 사람이 읽는 표이며 의미 검수와 PL/PM 승인을 이 검사로 대체하지 않는다.
+
+### M2 — 단독 설치와 소스 확인 단계
+- how의 단순/복잡 분기·계층별 읽기 전용 탐색·출력 구조를 SI 문맥으로 재구성했다. 모델 역할 설정은 가져오지 않았으며 구조 출처를 NOTICE에 기록했다.
+- 스킬은 prepare로 골격을 만들고 에이전트 원문 확인 후 finish로 보고서를 확정한다. 인덱서의 CONFIRMED를 원문 확인 없이 최종 답으로 복사하지 않는다. 소스 해시·근거 라인·실제 탐색 기록·manifest를 검사한다.
+- 캐시 유효성의 불완전한 추정보다 단순한 전체 재생성을 선택했다. prepare는 항상 인덱스를 갱신하므로 Git revision이 같은 미커밋 변경·추가 파일도 반영한다. 큰 프로젝트의 실행 시간은 늘어나며 M2에서 인덱서 자체는 바꾸지 않는다.
+- 기존 manifest 검증 구현을 lib/manifest로 옮기고 CLI API를 유지했다. si-trace에 mask/indexer/trace/manifest와 스키마를 sync-shared로 복사해 저장소 밖에서도 단독 실행한다.
+- M1의 5건은 training이다. 별도 held-out 3건은 사용자 메뉴 지정 → 소스 기반 expected.draft 작성 → GATE 승인 → 첫 실행 원본·도구/정답 해시·점수 보존 순서다. 승인 전 사례별 튜닝은 금지한다. 결과 기록은 exclusive 생성으로 덮어쓰지 않고 후속 수정 점수와 분리한다.
+- 설치 경로는 기존 구현과 공식 문서를 대조했다: Codex https://learn.chatgpt.com/docs/build-skills 의 .agents/skills, Claude Code https://code.claude.com/docs/en/skills 의 .claude/skills. Agent Skills 형식은 https://agentskills.io/specification (2026-10-27 확인). 로컬 설치본은 Git에서 제외한다.
