@@ -51,6 +51,10 @@ export async function prepareTrace(target, { from = [], to = [], scope = 'single
     roots: [...new Set(results.flatMap(r => r.roots))], nodes: unique(results.flatMap(r => r.nodes), n => n.id),
     edges: unique(results.flatMap(r => r.edges), e => JSON.stringify([e.from, e.to, e.kind, e.status])),
     frontier: [...new Set(results.flatMap(r => r.frontier))], unresolved: unique(results.flatMap(r => r.unresolved), u => JSON.stringify(u)), skipped: index.skipped };
+  // 질의 밖 DB 후보는 전체 인덱스에 보존한다. 부분 그래프에는 내부 id만 둔다.
+  const visible = new Set(graph.nodes.map(n => n.id));
+  graph.edges = graph.edges.map(e => e.candidates ? { ...e, candidates: e.candidates.filter(id => visible.has(id)) } : e);
+  validateIndex(graph);
   const mode = complexity(graph, scope);
   const stage = sanitize({ run_id: runId, created_at: new Date().toISOString(), inputs: { starts: JSON.stringify(from.length ? from : to), direction: graph.direction, scope, depth: String(depth) }, complexity: mode, missing_starts: misses, tool_fingerprint: await toolFingerprint() });
   await save(path.join(dir, 'evidence/index-query.json'), graph);

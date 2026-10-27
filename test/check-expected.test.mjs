@@ -15,6 +15,9 @@ test('정답 freshness: 정상 근거, 소스 변경, 없는 라인/파일, 누�
     const expected = { schema_version: '1.0', review_status: 'approved', case_id: 'fixture', source_root: 'source', source_files: { 'A.java': createHash('sha256').update(content).digest('hex') }, edges: [{ evidence: [{ file: 'A.java', line: 2 }] }] };
     const check = e => checkExpected(e, { repositoryRoot });
     assert.equal((await check(expected)).evidence_locations, 1);
+    const draft = { ...expected, review_status: 'draft' };
+    await assert.rejects(check(draft), /승인/);
+    assert.equal((await checkExpected(draft, { repositoryRoot, allowDraft: true })).status, 'DRAFT_SOURCES_VALID');
     for (const point of [{ file: 'A.java', line: 3 }, { file: 'B.java', line: 1 }, { file: 'A.java', line: 0 }]) {
       await assert.rejects(check({ ...expected, extra: { evidence: [point] } }), /라인/);
     }

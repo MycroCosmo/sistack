@@ -7,6 +7,7 @@ import { spawnSync } from 'node:child_process';
 import { prepareTrace, finishTrace, hiddenCategories, complexity } from '../lib/trace/index.mjs';
 import { validateManifest } from '../lib/manifest/index.mjs';
 import { json, save } from '../lib/trace/io.mjs';
+import { validateIndex } from '../lib/indexer/graph.mjs';
 
 async function fixture(t) {
   const root = await mkdtemp(path.join(tmpdir(), 'sistack-trace-'));
@@ -74,6 +75,20 @@ test('복잡도는 긴 단일 체인과 20개 분기 경로를 구분한다', ()
   assert.equal(complexity(chain, 'single').mode, 'simple');
   const fan = { ...chain, edges: Array.from({ length: 20 }, (_, i) => ({ from: '0', to: String(i + 1) })) };
   assert.equal(complexity(fan, 'single').mode, 'complex');
+});
+
+test('DB 선택 후 부분 그래프가 질의 밖 후보 id 때문에 깨지지 않는다', async t => {
+  const root = await fixture(t);
+  await writeFile(path.join(root, 'D.java'), 'class D {\nprivate SqlSessionTemplate sql;\npublic void run() { sql.selectList("M.list"); }\n}');
+  await writeFile(path.join(root, 'spring.xml'), '<beans><bean class="org.mybatis.spring.SqlSessionFactoryBean"><property name="mapperLocations" value="classpath:/M_mysql.xml"/></bean></beans>');
+  for (const db of ['mysql', 'oracle']) await writeFile(path.join(root, `M_${db}.xml`), '<mapper namespace="M"><select id="list">SELECT * FROM BOARD</select></mapper>');
+  const run = await prepareTrace(root, { from: ['D#run'], runId: 'selection' });
+  const graph = await json(path.join(run.directory, 'evidence/index-query.json'));
+  validateIndex(graph);
+  assert.equal(graph.edges.find(e => e.kind === 'executes').status, 'CONFIRMED');
+  assert.ok(!graph.nodes.some(n => n.file === 'M_oracle.xml'));
+  const full = await json(path.join(root, '.sistack/index/index.json'));
+  assert.equal(full.edges.find(e => e.kind === 'executes').candidates.length, 1);
 });
 
 test('si-trace 폴더만 복사해 CLI를 실행해도 상위 저장소 없이 동작한다', async t => {

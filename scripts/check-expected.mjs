@@ -10,8 +10,8 @@ function within(base, relative) {
   return target;
 }
 
-export async function checkExpected(expected, { repositoryRoot = root } = {}) {
-  if (expected.schema_version !== '1.0' || expected.review_status !== 'approved' || !expected.source_files || !Object.keys(expected.source_files).length || !expected.edges?.length) throw new Error('승인 정답 계약 또는 source_files 누락');
+export async function checkExpected(expected, { repositoryRoot = root, allowDraft = false } = {}) {
+  if (expected.schema_version !== '1.0' || !(expected.review_status === 'approved' || allowDraft && expected.review_status === 'draft') || !expected.source_files || !Object.keys(expected.source_files).length || !expected.edges?.length) throw new Error('승인 정답 계약 또는 source_files 누락');
   const sourceRoot = within(repositoryRoot, expected.source_root);
   await noLinks(sourceRoot);
   const lines = new Map();
@@ -43,7 +43,7 @@ export async function checkExpected(expected, { repositoryRoot = root } = {}) {
   };
   if (expected.edges.some(e => !Array.isArray(e.evidence) || !e.evidence.length)) throw new Error('정답 연결 evidence 누락');
   visit(expected);
-  return { case_id: expected.case_id, status: 'PASS', source_files: lines.size, evidence_locations: evidenceCount };
+  return { case_id: expected.case_id, status: expected.review_status === 'draft' ? 'DRAFT_SOURCES_VALID' : 'PASS', source_files: lines.size, evidence_locations: evidenceCount };
 }
 
 export async function checkAllExpected(repositoryRoot = root) {
@@ -53,10 +53,13 @@ export async function checkAllExpected(repositoryRoot = root) {
   if (!cases.length) throw new Error('승인 정답이 없습니다');
   const results = [];
   for (const entry of cases) {
-    const file = path.join(base, entry.name, 'expected.json');
+    const names = await readdir(path.join(base, entry.name));
+    const draft = !names.includes('expected.json') && names.includes('expected.draft.json');
+    const file = path.join(base, entry.name, draft ? 'expected.draft.json' : 'expected.json');
     await noLinks(file);
     const expected = JSON.parse(await readFile(file, 'utf8'));
-    results.push(await checkExpected(expected, { repositoryRoot }));
+    if (draft && expected.review_status !== 'draft') throw new Error('draft 파일을 승인 정답으로 사용할 수 없습니다');
+    results.push(await checkExpected(expected, { repositoryRoot, allowDraft: draft }));
   }
   return results;
 }
