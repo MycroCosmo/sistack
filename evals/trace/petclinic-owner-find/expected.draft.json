@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "review_status": "draft",
+  "preparation": {
+    "method": "source-only",
+    "collector_run": false,
+    "evaluation_run": false,
+    "implementation_revision": "fd1b93c69a64db5e54d72bb8eee0cefb19405f5b",
+    "frozen_at": "2026-10-27T08:25:46.999Z",
+    "tool_fingerprint": "8e5bdc83d9c4da2a4efee1b5d709ff1bb6126ddb9475ae9c7b3d7973a367eec0"
+  },
+  "case_id": "petclinic-owner-find",
+  "title": "PetClinic 소유주 검색 화면 → Controller",
+  "source_root": ".testbeds/spring-petclinic",
+  "source_revision": "500158f732419217507c7656904b8e6aa1bcc0d6",
+  "source_repository": "https://github.com/spring-projects/spring-petclinic.git",
+  "source_license": "Apache-2.0",
+  "source_technology": {
+    "java": "17 (pom.xml:19)",
+    "spring_boot": "4.1.0 (pom.xml:8)",
+    "thymeleaf": "spring-boot-starter-thymeleaf (pom.xml:56)",
+    "jpa": "범위 밖 (starter 선언만 확인)"
+  },
+  "selection_reason": "공식 공개 프로젝트의 검색 form → GET endpoint → Controller라는 독립 외부 화면 흐름 1건. 고정 SHA의 소스만 읽어 작성.",
+  "assumptions_and_questions": [
+    "승인 전 초안이며 실제 실행·채점은 하지 않았다. CONFIRMED는 소스로 확인한 정적 연결이다.",
+    "findOwners.html:9의 GET form만 requests 범위다. 같은 화면의 /owners/new 링크(29행)는 범위 밖이다.",
+    "lastName과 page는 요청 데이터/쿼리이며 URL 경로는 /owners다. OwnerController는 클래스 경로 prefix 없이 @GetMapping(\"/owners\")로 processFindForm을 선택한다.",
+    "Controller 도달에서 평가를 끝낸다. 이후 helper·Repository·JPA 메서드명·@Query·Entity·Table·DB와 반환 뷰·프래그먼트는 구현·채점 범위 밖이다.",
+    "pom의 Java 17·Boot 4.1.0을 기록하며 Java 8 테스트베드 조건을 적용하지 않는다. 의존성 해석·빌드·서버 실행은 하지 않았다.",
+    "승인 JSP 서버 기준선이 없는 외부 화면 흐름이므로 학습 parity/screen과 별개의 독립 held-out scope다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/resources/templates/owners/findOwners.html"
+      },
+      "kinds": [
+        "requests"
+      ],
+      "file": "src/main/resources/templates/owners/findOwners.html",
+      "line": 9
+    },
+    {
+      "from": {
+        "name": "GET /owners"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/resources/templates/owners/findOwners.html"
+      },
+      "to": {
+        "name": "GET /owners"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/templates/owners/findOwners.html",
+          "line": 9
+        },
+        {
+          "file": "src/main/resources/templates/owners/findOwners.html",
+          "line": 14
+        },
+        {
+          "file": "src/main/resources/templates/owners/findOwners.html",
+          "line": 25
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "GET /owners"
+      },
+      "to": {
+        "name": "org.springframework.samples.petclinic.owner.OwnerController#processFindForm"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 16
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 48
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 94
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 95
+        }
+      ]
+    }
+  ],
+  "source_files": {
+    "src/main/resources/templates/owners/findOwners.html": "7a468ec3c1965741387b284280bb55830e76e9ccb971642d30107c9cb932169f",
+    "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java": "611115841f671065ca2796fbb096102d56ce6aafd20bfe9a264f0a6968cca3ff",
+    "pom.xml": "7979e9f7fa4123290fe657c75357fa8b54323d1f2b00a8e7c6f888e234e9d52d",
+    "LICENSE.txt": "10e30e9bd8834d52c72cef7f67fc0adc1c14e3e83b816ed39e0c9b9b284b27e9"
+  }
+}

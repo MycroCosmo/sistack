@@ -1,0 +1,391 @@
+{
+  "schema_version": "1.0",
+  "review_status": "draft",
+  "preparation": {
+    "method": "source-only",
+    "collector_run": false,
+    "evaluation_run": false,
+    "implementation_revision": "fd1b93c69a64db5e54d72bb8eee0cefb19405f5b",
+    "frozen_at": "2026-10-27T08:25:46.999Z",
+    "tool_fingerprint": "8e5bdc83d9c4da2a4efee1b5d709ff1bb6126ddb9475ae9c7b3d7973a367eec0"
+  },
+  "case_id": "thymeleaf-board-delete-ajax",
+  "title": "Thymeleaf 상세 화면 삭제 AJAX",
+  "source_revision": "fd1b93c69a64db5e54d72bb8eee0cefb19405f5b",
+  "source_root": "examples/legacy-board-thymeleaf",
+  "selection_reason": "학습 검색·등록과 별개인 인라인 JavaScript 삭제 POST와 서버·인증 경로. 구현 동결 후 원문으로 작성.",
+  "assumptions_and_questions": [
+    "이 초안은 승인 전이며 CONFIRMED는 파일:라인에서 정적으로 확인한 관계다. 실제 실행 또는 정답 승인을 뜻하지 않는다.",
+    "삭제 submit handler의 AJAX URL 위치 12행만 requests 비교 범위다. 성공 후 목록 이동(18행), 기본 form action(39행), 화면 진입·레이아웃·수정 링크는 이 사례 밖이다.",
+    "form.serialize는 id와 csrf를 전송한다. ADMIN 세션·유효 csrf를 만족하는 성공 경로를 대상으로 하며 인증/권한/CSRF 실패 시 SQL 실행을 주장하지 않는다.",
+    "Service/Mapper/SQL 본문을 대조했다. delete는 삭제 건수 1이 아니면 NotFoundException을 던지며 선행 get/selectOne 호출은 없다.",
+    "인터셉터 메뉴 조회를 독립 부수 읽기로 포함한다. 업무 삭제 BOARD 쓰기와 APP_MENU 읽기를 구분한다.",
+    "새 승인 JSP 삭제 기준선은 없으므로 parity를 임의 생성하지 않는다. 학습 parity/screen 점수와 합산하지 않는 독립 held-out scope다.",
+    "로컬 테스트베드는 앞선 전체 인덱싱의 입력에 포함돼 있었다. 삭제 흐름의 개별 정답·채점·튜닝은 하지 않았으므로 미채점 held-out이며 독립 외부 블라인드 표본으로 주장하지 않는다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/templates/board/detail.html#handler:7"
+      },
+      "kinds": [
+        "requests"
+      ],
+      "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+      "line": 12
+    },
+    {
+      "from": {
+        "name": "POST /board/delete.do"
+      },
+      "kinds": [
+        "maps_to",
+        "intercepted_by"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.BoardController#delete"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#delete"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper#delete"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.delete"
+      },
+      "kinds": [
+        "reads",
+        "writes"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+      },
+      "kinds": [
+        "reads",
+        "writes"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/templates/board/detail.html#handler:7"
+      },
+      "to": {
+        "name": "POST /board/delete.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+          "line": 7
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+          "line": 8
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+          "line": 12
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+          "line": 13
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+          "line": 39
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 68
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "POST /board/delete.do"
+      },
+      "to": {
+        "name": "kr.sistack.board.web.BoardController#delete"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 68
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.BoardController#delete"
+      },
+      "to": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#delete"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 71
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 58
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#delete"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.BoardMapper#delete"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 15
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 59
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper#delete"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.BoardMapper.delete"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 3
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 53
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 6
+        },
+        {
+          "file": "src/main/resources/spring/root-context.xml",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.delete"
+      },
+      "to": {
+        "name": "BOARD"
+      },
+      "kind": "writes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 53
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "POST /board/delete.do"
+      },
+      "to": {
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+      },
+      "kind": "intercepted_by",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 27
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 14
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 38
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 9
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+      },
+      "to": {
+        "name": "APP_MENU"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 9
+        }
+      ]
+    }
+  ],
+  "source_files": {
+    "src/main/webapp/WEB-INF/templates/board/detail.html": "758a017baff5cac16df0c83f4aae49abbf27a2680038d98de657f42ea005ff3d",
+    "src/main/java/kr/sistack/board/web/BoardController.java": "227d0a21ed2932322e94453c3af9c6a6921076936ae759d3d4eed6c863de6e73",
+    "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java": "338abd3aa4a58c89144bfa7f13edd15b36439767a1092a583c65dda9b397b970",
+    "src/main/java/kr/sistack/board/mapper/BoardMapper.java": "7912db189d1060de0e3d4aa7add93f625cb14e446dcb7daa71241d616a88bcfa",
+    "src/main/resources/mapper/BoardMapper.xml": "ad194be2f97e681dea017a28c62b6a1cbd22956ac0c4471c59d1c7963278c4c0",
+    "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml": "6547bb4015ffa7df58692615d49770a7e4b4996a3c190ba129a2cb0ee23a9cd3",
+    "src/main/java/kr/sistack/board/web/LoginInterceptor.java": "ffdc90cb080d3303862c8d9d1a53efbb50cb9437000311d2e409620f17ba3b1c",
+    "src/main/java/kr/sistack/board/mapper/MenuMapper.java": "cb950f3cb91faa8ca712669245e72bdc700ba03dd740f07f27cdc2668c282c2d",
+    "src/main/resources/spring/root-context.xml": "696a11db923fb70687a863faa44321f462b6f9a1969869b252bd46c711d5627c",
+    "src/main/java/kr/sistack/board/service/BoardService.java": "896a3dc32285cec3671382ce969adc1a2943a920852e5a696bcbd794e50ab10c"
+  }
+}

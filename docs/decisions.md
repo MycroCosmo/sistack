@@ -1,5 +1,15 @@
 # 설계 결정
 
+## 2026-10-27 — Thymeleaf 학습 완료·구현 동결·held-out 초안 GATE
+
+- 사용자 승인에 따라 검색·등록·공존 3건을 expected 승인본으로 확정했다(`29a549d`). 최종 구현은 `fd1b93c`이며 npm test 97/97, 설치본 prepare/finish·evalTrace로 검색 parity 16/16·screen 7/7, 등록 12/12·5/5, 공존 parity 적용 없음·screen 1/1을 확인했다. 그룹별 누락·과탐·상태 불일치 모두 0이며 합산 점수는 만들지 않았다. 기존 승인 JSP/eGovFrame 8건도 새 인덱싱 회귀에서 각각 통과했다. [결과·원본](evidence/m2.5-training/README.md).
+- 학습 검토는 단일 에이전트가 화면/서버/SQL 역할을 순차 수행했다. source/kind/위치 scope 안 모든 실제 연결을 유지하고 기대 도착 노드로 걸러내지 않았다. 원본 index-query와 scope trace를 함께 보존한다. 실제 앱/DB와 외부 AOP·서버 override를 이번에 재실행·확정하지 않았으므로 manifest 3건은 PARTIAL, 정적 eval PASS와 구별한다.
+- 두 신규 흐름 전용 탐색·초안 작성 전에 **2026-10-27T08:25:46.999Z**에 구현·테스트베드 main·학습 승인본 등 138개 파일을 동결했다. 구현 revision `fd1b93c69a64db5e54d72bb8eee0cefb19405f5b`, 도구 지문 `8e5bdc83d9c4da2a4efee1b5d709ff1bb6126ddb9475ae9c7b3d7973a367eec0`와 파일별 해시는 [baseline](evidence/m2.5-heldout/baseline.json), 학습 원본·동결 보존 커밋은 `679396f`다. 동결 이후 코드·테스트·테스트베드를 수정하지 않는다.
+- 동결 후 공식 PetClinic을 승인 SHA `500158f732419217507c7656904b8e6aa1bcc0d6`에 detach clone했다. origin·HEAD·깨끗한 작업 트리와 미추적 상태를 확인했다. Apache-2.0, Java 17/Boot 4.1.0/Thymeleaf starter를 pom/LICENSE에서 판정했으며 빌드·의존성 설치·JPA 소스 추적은 하지 않았다. 원문 소스는 저장소에 복사·커밋하지 않는다.
+- 삭제 AJAX는 detail.html submit handler의 URL 12행에서 시작하는 POST와 업무 삭제·인증 메뉴 조회 총 10개 연결, 외부 검색은 findOwners.html:9의 GET form→OwnerController 총 2개 연결을 소스만 읽어 별도 expected.draft로 작성했다. 숫자는 초안 범위이지 점수가 아니다. 삭제의 목록 이동·기본 폼 요청, 공개 사례의 Controller 이후 helper/Repository/Entity/SQL은 채점 밖이다.
+- 새 두 사례에는 승인 JSP 기준선이 없으므로 학습 parity를 임의 생성하지 않고 독립 scope로 등록 대기한다. datasets의 기존 held-out 배열과 첫 점수는 유지했다. 로컬 삭제 템플릿은 앞선 전체 인덱싱에 포함됐으므로 외부 블라인드 평가로 주장하지 않는다. 개별 흐름 채점·사례 대응 튜닝은 없었다.
+- 초안 2건은 해시·근거 라인·계약 검사만 수행했다. 사용자 승인 전 구현 수정·신규 held-out 인덱싱/채점을 하지 않는다. 두 정답 승인 후 같은 동결 구현으로 각각 첫 점수와 실패 원본까지 보존한 뒤 다시 GATE 보고한다. [현재 보고](m2.5-heldout-gate-report.md).
+
 ## 2026-10-27 — Thymeleaf 수집기 구현·합성 검증
 
 - 승인된 학습 3건을 expected 승인본과 training 등록으로 확정했다. `.html` 수집, Thymeleaf URL·fragment·Layout Dialect·inline JS·data URL 소비와 XML 뷰 판정을 공통 인덱서의 별도 모듈로 추가했다. 프로젝트/메서드명을 규칙에 하드코딩하지 않는다.

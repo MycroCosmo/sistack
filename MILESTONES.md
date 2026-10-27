@@ -27,8 +27,8 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 | 이름 | 위치 | 용도 |
 |---|---|---|
 | legacy-board | `examples/legacy-board/` (M0에서 생성) | 빌드·실행 가능한 소형 레거시 프로젝트. Spring MVC + MyBatis + JSP + jQuery, 테스트용 H2. 모든 스킬의 기본 테스트 대상 |
-| legacy-board-thymeleaf | `examples/legacy-board-thymeleaf/` (M2.5 구축 완료) | 같은 서버 코드, Layout Dialect·data URL 외부 JS를 사용하는 Thymeleaf 화면과 공통코드 JSP 공존. 학습 정답 승인 대기, 삭제 AJAX held-out 평가 예정 |
-| Spring PetClinic | `.testbeds/spring-petclinic/` (M2.5 예정, 소스 커밋 금지) | 공식 공개 프로젝트 고정 커밋의 화면 → Controller held-out 1건. 이후 JPA 구간 제외 |
+| legacy-board-thymeleaf | `examples/legacy-board-thymeleaf/` (M2.5 구축 완료) | 같은 서버 코드, Layout Dialect·data URL 외부 JS와 JSP 공존. 학습 3건 승인·검증 완료, 구현 동결 후 삭제 AJAX 초안 GATE |
+| Spring PetClinic | `.testbeds/spring-petclinic/` (고정 SHA 클론 완료, 소스 커밋 금지) | `500158f`의 검색 화면 → Controller held-out 초안 GATE. 이후 JPA 구간 제외 |
 | 버그 케이스 | `evals/debug/cases/<id>/` | legacy-board에 적용하는 버그 패치 + 증상 로그. 원본 코드는 깨끗하게 유지 |
 | eGovFrame 공통컴포넌트 | 외부 클론 (`scripts/fetch-testbed.mjs`) | 실제 규모의 공개 레거시. 인덱서·si-trace 현실성 검증. 저장소에 커밋하지 않음 |
 | 실제 업무 사례 | `evals/private/` (gitignore) | Ian이 직접 넣는 마스킹된 실제 에러·코드 사례. 자기채점 방지용 |
@@ -109,7 +109,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 
 ## M2.5 — Thymeleaf 수집기
 
-**상태: 그룹별 학습 정답 3건 GATE — 구조 재검토 대기.** 기존 검색 17개·등록 14개 주 연결은 사용자 승인. parity/screen 분리와 화면 연결 승격, 독립 공존 사례를 반영했다. [그룹별 GATE 보고](docs/m2.5-grouped-gate-report.md)를 검토한다. 기존 승인 8건의 비교기 결과 동일, npm test 81건 통과. 수집기·새 학습 채점·held-out은 미착수이며 Java 8 런타임은 BLOCKED다.
+**상태: 학습 검증 완료·구현 동결, held-out 정답 2건 GATE.** 학습 3건을 승인본으로 확정했다. 검색 parity 16/16·screen 7/7, 등록 12/12·5/5, 공존 parity 적용 없음·screen 1/1이다. 기존 JSP 승인 8건 새 인덱싱 회귀와 npm test 97건 통과. `fd1b93c` 구현 동결 후 두 held-out을 소스만 읽어 작성했고 아직 채점하지 않았다. [현재 GATE 보고](docs/m2.5-heldout-gate-report.md)를 검토한다. Java 8 런타임은 BLOCKED다.
 
 **목표:** Ian의 JSP → Thymeleaf 이관 업무에서 to-be 화면의 이벤트부터 기존 서버 흐름까지 추적한다.
 
@@ -118,7 +118,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 - 수집 대상: `th:action`, `th:href`/`th:src`의 `@{...}`(경로 변수·쿼리 파라미터 포함), `th:replace`/`th:insert`/`th:include` 프래그먼트, `th:inline="javascript"`의 AJAX URL
 - 추가 수집: `layout:decorate`/`layout:fragment`의 레이아웃·본문 연결, `th:data-*`/`th:attr`의 data URL을 외부 JS가 읽어 AJAX 하는 흐름. 테스트베드 공통 레이아웃과 화면 1개 이상에 적용
 - 수집기 단계의 추가 검증: viewNames 무제한 + `checkExistence=true`의 템플릿 존재/fallback 합성 사례, Thymeleaf 3.0 유틸 객체 구문 읽기. 테스트베드는 viewNames 방식과 3.1.5 렌더링을 유지
-- 그룹별 학습 초안 3건: 검색(parity 16/screen 7), 등록(parity 12/screen 5), 독립 공존(parity 해당 없음/screen 1). 기존 화면 요청도 screen에 포함하고 보충 항목을 채점에서 제외하지 않음
+- 승인된 그룹별 학습 3건: 검색(parity 16/screen 7), 등록(parity 12/screen 5), 독립 공존(parity 해당 없음/screen 1). 기존 화면 요청도 screen에 포함하고 보충 항목을 채점에서 제외하지 않음
 - held-out 2건(자체 삭제 AJAX·외부 PetClinic 화면 → Controller)은 개별 등록·채점. 외부 JPA 구간은 범위 밖
 
 **완료 기준**
