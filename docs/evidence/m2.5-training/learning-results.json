@@ -1,0 +1,87 @@
+{
+  "phase": "학습 자기 적용 평가",
+  "generalization_performance": false,
+  "results": [
+    {
+      "dataset": "training",
+      "case_id": "legacy-board-thymeleaf-search",
+      "status": "PASS",
+      "groups": {
+        "parity": {
+          "status": "PASS",
+          "expected": 16,
+          "matched": 16,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": true
+        },
+        "screen": {
+          "status": "PASS",
+          "expected": 7,
+          "matched": 7,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": true
+        }
+      },
+      "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-learning-search-20261027-01\\skill-eval.json",
+      "analysis_status": "PARTIAL"
+    },
+    {
+      "dataset": "training",
+      "case_id": "legacy-board-thymeleaf-create",
+      "status": "PASS",
+      "groups": {
+        "parity": {
+          "status": "PASS",
+          "expected": 12,
+          "matched": 12,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": true
+        },
+        "screen": {
+          "status": "PASS",
+          "expected": 5,
+          "matched": 5,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": true
+        }
+      },
+      "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-learning-create-20261027-01\\skill-eval.json",
+      "analysis_status": "PARTIAL"
+    },
+    {
+      "dataset": "training",
+      "case_id": "legacy-board-thymeleaf-coexist",
+      "status": "PASS",
+      "groups": {
+        "parity": {
+          "status": "PASS",
+          "expected": 0,
+          "matched": 0,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": false
+        },
+        "screen": {
+          "status": "PASS",
+          "expected": 1,
+          "matched": 1,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": true
+        }
+      },
+      "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-learning-coexist-20261027-01\\skill-eval.json",
+      "analysis_status": "PARTIAL"
+    }
+  ]
+}

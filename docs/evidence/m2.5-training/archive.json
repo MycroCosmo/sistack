@@ -1,0 +1,9 @@
+{
+  "files": 54,
+  "archive_bytes": 1455073,
+  "path": "docs/evidence/m2.5-training/originals.json.gz",
+  "sha256": "8cdd215ba870725e62f498bc1848b26316b82f1d0348f18bd418b7810266543e",
+  "payload_sha256": "2bfda9d493f12fe659ad5462e9b4d8482e4d6eb4b6afaa20bdda8ca640cd9d69",
+  "verification": "해제·파일별 해시·로컬 원본 바이트 일치",
+  "tool_fingerprint": "8e5bdc83d9c4da2a4efee1b5d709ff1bb6126ddb9475ae9c7b3d7973a367eec0"
+}
