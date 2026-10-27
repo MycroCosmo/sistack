@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <nav th:fragment="menu" th:if="${session.loginUser != null}" aria-label="주 메뉴">
+        <a th:each="menu : ${menus}" th:href="@{${menu.url}}" th:text="${menu.label}"></a>
+        <form method="post" th:action="@{/auth/logout.do}">
+            <input type="hidden" name="csrf" th:value="${session.csrf}">
+            <button>로그아웃</button>
+        </form>
+    </nav>
+    <div th:fragment="paging" class="paging" aria-label="페이지 이동">
+        <button th:if="${paging.page > 1}" type="button" th:data-page="${paging.page - 1}">이전</button>
+        <span th:text="|${paging.page} / ${paging.lastPage} 페이지 · ${paging.total}건|"></span>
+        <button th:if="${paging.page < paging.lastPage}" type="button" th:data-page="${paging.page + 1}">다음</button>
+    </div>
+</body>
+</html>

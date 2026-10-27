@@ -1,0 +1,49 @@
+{
+  "recorded_at": "2026-10-27T07:06:45.922Z",
+  "java": {
+    "jdk": "Corretto 17.0.14",
+    "maven": "3.9.10",
+    "command": "mvn -B -q test",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "status": "PASS",
+    "java8_runtime": "BLOCKED: 구성된 .jdks 경로에 Java 8 없음. release 8 컴파일을 런타임 검증으로 대체하지 않음"
+  },
+  "http": {
+    "command": "node examples/legacy-board-thymeleaf/smoke.mjs",
+    "status": "PASS",
+    "scope": [
+      "로그인·권한·로그아웃",
+      "단일 공통 레이아웃·페이징",
+      "data URL 2종 생성과 실제 JSON 응답",
+      "JSP 공통코드",
+      "등록·검색·미일치 검색",
+      "CSRF 거부·출력 이스케이프",
+      "등록/수정 action 선택"
+    ]
+  },
+  "browser": {
+    "status": "PASS",
+    "tool": "cua_repl",
+    "scope": [
+      "관리자 로그인",
+      "Layout Dialect 메뉴·본문 결합",
+      "th:data-url 클릭 후 자유/공지 2건",
+      "재로딩 후 th:attr data-url 클릭 후 자유/공지 2건",
+      "JSP 공통코드 및 기존 AJAX 새로고침",
+      "등록한 합성 글의 제목·본문 표시",
+      "검색한 합성 글 1건만 표시"
+    ],
+    "screenshot": "docs/evidence/m2.5-testbed/search.jpg"
+  },
+  "warnings": [
+    "SLF4J provider 미추가: NOP logger 경고(승인안 범위)"
+  ],
+  "unverified": [
+    "Java 8 런타임",
+    "수집기·checkExistence 합성 테스트·Thymeleaf 3.0 분석",
+    "학습 eval 및 held-out eval"
+  ]
+}

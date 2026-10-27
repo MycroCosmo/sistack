@@ -1,0 +1,6 @@
+INSERT INTO COMMON_CODE VALUES ('NOTICE', '공지');
+INSERT INTO COMMON_CODE VALUES ('FREE', '자유');
+INSERT INTO APP_MENU VALUES ('READER', 1, '게시판', '/board/list.do');
+INSERT INTO APP_MENU VALUES ('ADMIN', 1, '게시판', '/board/list.do');
+INSERT INTO APP_MENU VALUES ('ADMIN', 2, '공통코드', '/code/list.do');
+INSERT INTO BOARD (ID, TITLE, CONTENT, AUTHOR, CATEGORY) VALUES (BOARD_SEQ.NEXTVAL, '게시판 안내', '로컬 테스트용 합성 데이터입니다.', '테스트관리자', 'NOTICE');

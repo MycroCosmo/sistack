@@ -1,5 +1,13 @@
 # 설계 결정
 
+## 2026-10-27 — M2.5 공존 테스트베드 구축
+
+- 승인된 viewNames 설정으로 `board/*,login,error`는 Thymeleaf(order 1), `code/*`는 JSP(order 2)로 분리했다. Java·main resources·기존 테스트 **30개 파일**은 원본과 바이트가 같다. [대조 기록](evidence/m2.5-testbed/server-parity.json).
+- Layout Dialect 공통 레이아웃과 메뉴·페이징 조각을 만들었다. 목록의 두 분류 버튼은 th:data-url/th:attr에서 같은 기존 JSON endpoint를 가리키며 외부 JS가 해당 요소의 data URL을 읽는다. 기존 검색·등록 서버 연결은 바꾸지 않았다. 추가 분류 요청은 새 화면 검토 범위로 별도 기록한다.
+- 공통코드 목록과 JSP 조각·기존 JS는 보존했다. `web.xml`이 직접 사용하는 컨테이너 오류 JSP도 유지했다. 이 인프라 오류 응답은 업무 화면 공존 대상과 구별하며 MVC `error` 반환 뷰는 Thymeleaf로 선택된다.
+- JDK 17/Maven의 기존 JUnit 2건, HTTP 학습 smoke, 브라우저의 두 data URL AJAX·JSP 공존·등록·검색을 실제 확인했다. SLF4J provider 부재 경고는 승인안대로 기록했고 provider를 추가하지 않았다. Java 8 런타임은 설치된 실행 환경이 없어 BLOCKED로 남긴다. 검증은 Thymeleaf 3.1.5 기준이다.
+- checkExistence·3.0 구문 합성 테스트와 수집기 변경은 학습 정답 승인 후 단계다. 삭제 AJAX 템플릿은 테스트베드 구성에 포함하되 새 held-out 정답·수집기 eval·첫 점수는 아직 만들지 않았다.
+
 ## 2026-10-27 — M2.5 의존성 승인·실제 tree 확인
 
 - 사용자가 1번 GATE를 승인했다. 새 테스트베드 pom에 thymeleaf-spring5 3.1.5.RELEASE, thymeleaf-layout-dialect 3.4.0과 thymeleaf exclusion, slf4j-api 2.0.17 dependencyManagement를 적용했다. JSP·Thymeleaf 공존 설정도 승인 범위다.

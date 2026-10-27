@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.sistack.board.mapper.BoardMapper">
+    <resultMap id="board" type="kr.sistack.board.domain.Board">
+        <id property="id" column="ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="author" column="AUTHOR"/>
+        <result property="category" column="CATEGORY"/>
+        <result property="createdAt" column="CREATED_AT"/>
+    </resultMap>
+    <sql id="filters">
+        <where>
+            <if test="keyword != null and keyword != ''">
+                <choose>
+                    <when test="searchType == 'author'">
+                        AND b.AUTHOR LIKE '%' || #{keyword} || '%'
+                    </when>
+                    <otherwise>AND b.TITLE LIKE '%' || #{keyword} || '%'</otherwise>
+                </choose>
+            </if>
+            <if test="fromDate != null">
+                AND b.CREATED_AT &gt;= #{fromDate}
+            </if>
+            <if test="untilDate != null">
+                AND b.CREATED_AT &lt; #{untilDate}
+            </if>
+        </where>
+    </sql>
+    <select id="selectList" resultMap="board">
+        <include refid="commonSql.pageStart"/>
+        SELECT b.* FROM BOARD b
+        <include refid="filters"/>
+        ORDER BY ${sortColumn} DESC, b.ID DESC
+        <include refid="commonSql.pageEnd"/>
+    </select>
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM BOARD b
+        <include refid="filters"/>
+    </select>
+    <select id="selectOne" resultMap="board">
+        SELECT * FROM BOARD WHERE ID = #{id}
+    </select>
+    <insert id="insert">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO BOARD (ID, TITLE, CONTENT, AUTHOR, CATEGORY) VALUES (#{id}, #{title}, #{content}, #{author}, #{category})
+    </insert>
+    <update id="update">
+        UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content}, CATEGORY=#{category} WHERE ID=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM BOARD WHERE ID=#{id}
+    </delete>
+</mapper>

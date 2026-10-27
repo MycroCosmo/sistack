@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/default}">
+<head><title>게시글 작성</title></head>
+<body>
+    <section layout:fragment="content">
+        <h1 th:text="${board.id == 0 ? '게시글 등록' : '게시글 수정'}"></h1>
+        <form method="post" th:action="${board.id == 0} ? @{/board/create.do} : @{/board/update.do}">
+            <input type="hidden" name="id" th:value="${board.id}">
+            <input type="hidden" name="csrf" th:value="${session.csrf}">
+            <label>제목 <input name="title" maxlength="200" required th:value="${board.title}"></label>
+            <label>분류
+                <select name="category">
+                    <option th:each="category : ${categories}" th:value="${category.code}" th:selected="${board.category == category.code}" th:text="${category.label}"></option>
+                </select>
+            </label>
+            <label>내용 <textarea name="content" maxlength="4000" required rows="8" th:text="${board.content}"></textarea></label>
+            <button>저장</button>
+            <a th:href="@{/board/list.do}">취소</a>
+        </form>
+    </section>
+</body>
+</html>
