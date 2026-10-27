@@ -1,0 +1,22 @@
+{
+  "source_revision": "bfa5098ab8ec79b4c9062fc24348c9465456aa27",
+  "results": [
+    {
+      "case_id": "legacy-board-thymeleaf-search",
+      "core_edges": 17,
+      "server_edges": 16,
+      "screen_edges": 1,
+      "supplemental_assertions": 7,
+      "status": "DRAFT_NOT_SCORED"
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-create",
+      "core_edges": 14,
+      "server_edges": 12,
+      "screen_edges": 2,
+      "supplemental_assertions": 3,
+      "status": "DRAFT_NOT_SCORED"
+    }
+  ],
+  "method": "승인 JSON과 소스 직접 대조. 인덱서/trace 출력 미사용, eval 미실행."
+}

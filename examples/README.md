@@ -1,5 +1,7 @@
 # M0 테스트베드
 
+M2.5의 [JSP·Thymeleaf 공존 테스트베드](legacy-board-thymeleaf/README.md)는 별도 폴더에 있다. 서버 코드는 legacy-board와 같으며 공통코드 JSP를 유지한다. 아래는 기존 JSP 테스트베드의 실행 방법이다.
+
 legacy-board는 **의도적으로 구버전을 쓰는 테스트베드이며 운영 용도가 아님**을 명시합니다. Spring 5.3 OSS 지원은 2024-08-31 종료됐습니다. EOL·CVE 경고를 문서화하고 승인된 버전을 유지합니다. 전체 보안 감사나 운영 적합성을 보증하지 않습니다.
 
 ## 실행

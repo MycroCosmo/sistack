@@ -1,5 +1,12 @@
 # 설계 결정
 
+## 2026-10-27 — M2.5 학습 정답 초안 GATE
+
+- 테스트베드 소스 revision `bfa5098`을 기준으로 Thymeleaf 검색·등록 `expected.draft.json`/`expected.draft.md`를 작성했다. 기존 승인 JSON을 서버 기준선으로 사용하고 새 화면·설정·JS 원문을 직접 대조했다. 인덱서 출력은 사용하지 않았다.
+- 주 연결은 검색 17개(화면 1·서버 16), 등록 14개(화면 2·서버 12)로 유지했다. 서버의 from/to/kind/status는 승인본과 정확히 같고 새 화면 파일·라인으로 출발 근거만 교체했다. 숫자는 정답 초안의 비교 범위이며 eval 점수가 아니다.
+- 뷰 선택·레이아웃·메뉴/페이징·data AJAX는 검색 7건·등록 3건의 `supplemental_assertions`로 구분했다. 기존 evalTrace가 이 필드를 채점하지 않으므로 수집기 단계에서 별도 검증 결과가 필요하다. 주 연결 PASS를 보충 항목 PASS로 대체하지 않는다. 해당 범위도 이번 정답 GATE에서 함께 검토받는다.
+- 초안 2건은 source_files SHA-256과 근거 라인 검사에서 DRAFT_SOURCES_VALID이며 정답 승인·학습 채점은 하지 않았다. 기존 승인 정답·datasets 등록·수집기·held-out 기록은 변경하지 않았다. 사용자 지시에 따라 학습 정답 GATE에서 중지한다.
+
 ## 2026-10-27 — M2.5 공존 테스트베드 구축
 
 - 승인된 viewNames 설정으로 `board/*,login,error`는 Thymeleaf(order 1), `code/*`는 JSP(order 2)로 분리했다. Java·main resources·기존 테스트 **30개 파일**은 원본과 바이트가 같다. [대조 기록](evidence/m2.5-testbed/server-parity.json).
