@@ -1,0 +1,83 @@
+{
+  "recorded_at": "2026-10-27T05:46:08.259Z",
+  "reason": "2026-10-27 사용자 승인: 공통 인증 Helper 기준에 따른 egov-clcode-delete 정답 누락 보정",
+  "method": "기존 m2-v2-final 학습 실행 산출물에 승인된 정답을 적용해 evalTrace를 재실행. 인덱싱·소스 검토·앱 실행을 새로 수행한 결과가 아니다.",
+  "previous_results": "docs/evidence/m2-v2/results.json",
+  "generalization_performance": false,
+  "results": [
+    {
+      "dataset": "training",
+      "case_id": "legacy-board-search",
+      "status": "PASS",
+      "expected": 17,
+      "matched": 17,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "output": ".sistack/m2-training-correction/legacy-board-search.json",
+      "source_run": "examples/legacy-board/.sistack/runs/m2-v2-final-training-search"
+    },
+    {
+      "dataset": "training",
+      "case_id": "legacy-board-create",
+      "status": "PASS",
+      "expected": 14,
+      "matched": 14,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "output": ".sistack/m2-training-correction/legacy-board-create.json",
+      "source_run": "examples/legacy-board/.sistack/runs/m2-v2-final-training-create"
+    },
+    {
+      "dataset": "training",
+      "case_id": "egov-clcode-delete",
+      "status": "PASS",
+      "expected": 7,
+      "matched": 7,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "output": ".sistack/m2-training-correction/egov-clcode-delete.json",
+      "source_run": ".testbeds/egovframe/.sistack/runs/m2-v2-final-training-clcode"
+    },
+    {
+      "dataset": "training",
+      "case_id": "egov-detailcode-list",
+      "status": "PASS",
+      "expected": 13,
+      "matched": 13,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "output": ".sistack/m2-training-correction/egov-detailcode-list.json",
+      "source_run": ".testbeds/egovframe/.sistack/runs/m2-v2-final-training-detailcode"
+    },
+    {
+      "dataset": "training",
+      "case_id": "egov-rss-columns",
+      "status": "PASS",
+      "expected": 5,
+      "matched": 5,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "output": ".sistack/m2-training-correction/egov-rss-columns.json",
+      "source_run": ".testbeds/egovframe/.sistack/runs/m2-v2-final-training-rss"
+    }
+  ],
+  "totals": {
+    "cases": 5,
+    "expected": 56,
+    "matched": 56,
+    "false_negatives": 0,
+    "false_positives": 0,
+    "status_mismatches": 0
+  },
+  "archive": {
+    "path": "docs/evidence/m2-training-correction/originals.json.gz",
+    "files": 5,
+    "sha256": "865d6881cc031fe11adde42823ed4de5210b1045c9e9e985483d0ef092724c4d",
+    "payload_sha256": "8d9398fde6c2311a577ad1e3826a337a0e0a10e7d92f106c15134e9c06cb3cd2"
+  }
+}

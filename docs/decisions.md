@@ -1,5 +1,12 @@
 # 설계 결정
 
+## 2026-10-27 — M2 학습 정답 누락 보정 승인
+
+- 사용자가 `egov-clcode-delete`의 Controller#deleteCmmnClCode → EgovUserDetailsHelper#getAuthenticatedUser를 `calls / CONFIRMED`로 추가 승인했다. Controller:184의 실제 호출과 Helper:41의 static 선언을 재확인하고 Helper 소스 SHA-256을 정답 source_files에 추가했다.
+- 기존 「held-out 승인 — 정답 작성 공통 기준」의 인증 Helper 진입 깊이에 따른 **정답 누락 보정**이다. Helper 내부 위임은 연결 점수에서 제외하며 수집기·대상 소스·평가 범위는 변경하지 않는다.
+- 기존 m2-v2-final 학습 실행 산출물에 보정한 정답으로 `evalTrace`를 재실행했다. 학습 5건 **56/56**, 누락·과탐·상태 불일치 0건이다. 재인덱싱·새 에이전트 소스 검토·앱 실행 결과로 주장하지 않는다.
+- 과거 55/55·과탐 1건의 FAIL, held-out 첫 60/66과 v2 66/66, 압축 원본은 그대로 보존한다. 새 결과는 `docs/evidence/m2-training-correction/`에 독립 기록하며 일반화 성능으로 해석하지 않는다.
+
 ## 2026-10-27 — M0 공식 문서 확인
 
 - [Agent Skills 명세](https://agentskills.io/specification): name은 1~64자 소문자·숫자·하이픈, 앞뒤 및 연속 하이픈 금지, 디렉터리명과 일치. description은 1~1024자. 선택 필드는 license, compatibility(500자), metadata, allowed-tools. SIStack은 본문 300줄 제한을 추가한다.

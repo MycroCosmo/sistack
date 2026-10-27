@@ -4,6 +4,7 @@
   "review_status": "approved",
   "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
   "source_files": {
+    "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java": "8a5038dbc877e5232108b3cbe28e0d8d309f3c4ae96d96c7ac5eb2e57484469d",
     "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp": "7dfeb221e03db4677d0829a38873f603f50c29a2c4b9227178be53e123c8ad7c",
     "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java": "4f22f3101f6d406dc4d1913909eb99c4cb37f8110e1042f60318c1f4af06a4a6",
     "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/EgovCcmCmmnClCodeManageServiceImpl.java": "94744826710efb9ce5b1cde9bba33fd2138ed484ee054e2d892e7a849f6d6aa3",
@@ -23,6 +24,7 @@
   "title": "공통분류코드 삭제",
   "selection_reason": "단순 CRUD 메뉴. delete라는 이름과 실제 UPDATE USE_AT=N SQL의 차이를 확인",
   "assumptions_and_questions": [
+    "공통 인증 Helper 기준에 따라 getAuthenticatedUser 진입 호출까지 채점한다. Helper 내부 위임은 연결 점수에서 제외한다.",
     "fn_egov_delete_code의 동일 폼 action 할당→submit을 한 흐름으로 본다. 실행 여부는 confirm 입력에 달려 있다.",
     "삭제 후 forward로 목록을 다시 읽는 후속 흐름은 범위 밖이다.",
     "context-mapper.xml의 mapperLocations와 등록된 globals.properties의 Globals.DbType=mysql을 근거로 mysql 매핑을 확정한다. 다른 DB XML은 후보로만 기록한다. 외부 런타임 override와 실제 DB 실행은 검증 범위 밖이다."
@@ -79,6 +81,27 @@
     }
   ],
   "edges": [
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.ccc.web.EgovCcmCmmnClCodeManageController#deleteCmmnClCode"
+      },
+      "to": {
+        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#getAuthenticatedUser"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+          "line": 184
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 41
+        }
+      ],
+      "reason": "사용자가 승인한 정답 누락 보정. 실제 static 호출과 선언을 확인했으며 decisions.md의 공통 인증 Helper 진입 깊이를 적용한다."
+    },
     {
       "from": {
         "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp#fn_egov_delete_code"
@@ -251,7 +274,7 @@
     }
   ],
   "source_root": ".testbeds/egovframe",
-  "approval": "2026-10-27 사용자 검토 조건 1~5 반영. 범위 제외와 RSS 직접 JDBC 선정 승인.",
+  "approval": "2026-10-27 사용자 검토 조건 1~5 반영. 범위 제외와 RSS 직접 JDBC 선정 승인. 같은 날 추가 승인: Controller:184 → EgovUserDetailsHelper#getAuthenticatedUser:41 calls CONFIRMED를 공통 인증 Helper 기준에 따른 정답 누락 보정으로 추가.",
   "mapping_selection": {
     "selected_file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml",
     "candidate_files": [
