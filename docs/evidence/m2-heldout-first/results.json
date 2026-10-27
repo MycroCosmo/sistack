@@ -1,0 +1,326 @@
+{
+  "recorded_at": "2026-10-27T04:44:29.956Z",
+  "dataset": "held-out",
+  "phase": "수정 전 held-out 첫 실행",
+  "implementation_modified": false,
+  "frozen_implementation_revision": "04b0368e66a26cf8f704de4df27e36c74ab245c1",
+  "approval_commit": "c01c908",
+  "tool_fingerprint": "5d142300da62cf138bcdd57f8a53c54e4d2f6d8402b122b52585ff7e6da398e3",
+  "totals": {
+    "expected_edges": 66,
+    "matched": 60,
+    "false_negatives": 6,
+    "false_positives": 0,
+    "status_mismatches": 0
+  },
+  "results": [
+    {
+      "case_id": "egov-article-list",
+      "dataset": "held-out",
+      "phase": "수정 전 held-out 첫 실행",
+      "status": "FAIL",
+      "expected_edges": 38,
+      "matched": 35,
+      "false_negatives": [
+        {
+          "from": {
+            "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+          },
+          "to": {
+            "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#getAuthenticatedUser"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+              "line": 151
+            },
+            {
+              "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+              "line": 41
+            }
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+          },
+          "to": {
+            "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#isAuthenticated"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+              "line": 153
+            },
+            {
+              "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+              "line": 58
+            }
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+          },
+          "to": {
+            "name": "egovframework.com.cmm.EgovComponentChecker#hasComponent"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+              "line": 69
+            },
+            {
+              "file": "src/main/java/egovframework/com/cmm/EgovComponentChecker.java",
+              "line": 48
+            }
+          ],
+          "note": "같은 메서드 두 호출을 한 연결로 표시."
+        }
+      ],
+      "false_positives": [],
+      "status_mismatches": [],
+      "run_id": "m2-heldout-first-article",
+      "run_directory": ".testbeds/egovframe/.sistack/runs/m2-heldout-first-article",
+      "analysis_status": "PARTIAL",
+      "execution": {
+        "mode": "complex",
+        "strategy": "parallel",
+        "note": "Codex screen/server/sql 탐색자를 같은 모델로 실제 병렬 실행했다. 정답·점수를 보지 않은 원문 요약을 종합했다.",
+        "explorers": [
+          {
+            "role": "screen",
+            "path": "evidence/explorer-screen.md"
+          },
+          {
+            "role": "server",
+            "path": "evidence/explorer-server.md"
+          },
+          {
+            "role": "sql",
+            "path": "evidence/explorer-sql.md"
+          }
+        ]
+      },
+      "expected_sha256": "0a62a7c6498391b1fad7b02f41870e33edf7f2ffa8ce0f986ecbe830f302d441",
+      "raw_index_sha256": "df98b4049a95dc0111fb47e95cae5fb6a1fb331804dee9acee6a2d02f9a6d1df",
+      "skill_record_sha256": "22b9e1919161467f0e5dd696bbec09607cd1f304fb14ae3abbd1874a3b973ee2",
+      "manifest_validation": "PASS",
+      "prepare_exit_code": 0,
+      "finish_exit_code": 0,
+      "reverse": null
+    },
+    {
+      "case_id": "egov-user-insert",
+      "dataset": "held-out",
+      "phase": "수정 전 held-out 첫 실행",
+      "status": "FAIL",
+      "expected_edges": 11,
+      "matched": 8,
+      "false_negatives": [
+        {
+          "from": {
+            "name": "egovframework.com.uss.umt.web.EgovUserManageController#insertUser"
+          },
+          "to": {
+            "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#isAuthenticated"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+              "line": 27
+            },
+            {
+              "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+              "line": 186
+            },
+            {
+              "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+              "line": 58
+            },
+            {
+              "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+              "line": 59
+            }
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#insertUser"
+          },
+          "to": {
+            "name": "egovframework.com.utl.sim.service.EgovFileScrty#encryptPassword"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+              "line": 9
+            },
+            {
+              "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+              "line": 101
+            },
+            {
+              "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+              "line": 198
+            },
+            {
+              "file": "src/main/java/egovframework/com/uss/umt/service/UserManageVO.java",
+              "line": 496
+            },
+            {
+              "file": "src/main/java/egovframework/com/uss/umt/service/UserManageVO.java",
+              "line": 286
+            }
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#insertUser"
+          },
+          "to": {
+            "name": "egovframework.com.utl.fcc.service.EgovStringUtil#isNullToString"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+              "line": 8
+            },
+            {
+              "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+              "line": 101
+            },
+            {
+              "file": "src/main/java/egovframework/com/utl/fcc/service/EgovStringUtil.java",
+              "line": 371
+            }
+          ]
+        }
+      ],
+      "false_positives": [],
+      "status_mismatches": [],
+      "run_id": "m2-heldout-first-user-insert",
+      "run_directory": ".testbeds/egovframe/.sistack/runs/m2-heldout-first-user-insert",
+      "analysis_status": "PARTIAL",
+      "execution": {
+        "mode": "complex",
+        "strategy": "parallel",
+        "note": "Codex screen/server/sql 탐색자를 같은 모델로 실제 병렬 실행했다. 정답·점수를 보지 않은 원문 요약을 종합했다.",
+        "explorers": [
+          {
+            "role": "screen",
+            "path": "evidence/explorer-screen.md"
+          },
+          {
+            "role": "server",
+            "path": "evidence/explorer-server.md"
+          },
+          {
+            "role": "sql",
+            "path": "evidence/explorer-sql.md"
+          }
+        ]
+      },
+      "expected_sha256": "914ad439fd692fe9e6a37daba3953e9ebd3b5de10bcdcaaf0b71a04f87fed0e4",
+      "raw_index_sha256": "8a217ece139ae10cc0ac14cc0a35cbe68313943dc288be93d1996925595524d2",
+      "skill_record_sha256": "e6f55d6479862a12b9399633dd044c7a4621f9ed93640913d294fe6417b29da7",
+      "manifest_validation": "PASS",
+      "prepare_exit_code": 0,
+      "finish_exit_code": 0,
+      "reverse": null
+    },
+    {
+      "case_id": "egov-id-dplct-ajax",
+      "dataset": "held-out",
+      "phase": "수정 전 held-out 첫 실행",
+      "status": "PASS",
+      "expected_edges": 17,
+      "matched": 17,
+      "false_negatives": [],
+      "false_positives": [],
+      "status_mismatches": [],
+      "run_id": "m2-heldout-first-id-ajax",
+      "run_directory": ".testbeds/egovframe/.sistack/runs/m2-heldout-first-id-ajax",
+      "analysis_status": "PARTIAL",
+      "execution": {
+        "mode": "simple",
+        "strategy": "direct",
+        "note": "주 에이전트가 두 AJAX 함수·Controller·Service·DAO·SQL·JSON 빈을 직접 읽고 첫 역방향 질의를 대조했다. 다른 호출 JSP는 화면 탐색자의 독립 원문 검토와 함께 확인했다."
+      },
+      "expected_sha256": "f5ba71140b5275fb235f7686563039ec03b6cfe453bae4327f936487ff1256c1",
+      "raw_index_sha256": "72725051ebf9d9e54b44fee0b41e64009e020f27494c1ea8f49f18ea835f85c9",
+      "skill_record_sha256": "241ec5d6be6ca13f54d3f9291c6b8c65380ae64390d63626fe0677d39b52bd24",
+      "manifest_validation": "PASS",
+      "prepare_exit_code": 0,
+      "finish_exit_code": 0,
+      "reverse": {
+        "url": "/uss/umt/EgovIdDplctCnfirmAjax.do",
+        "caller_jsps": [
+          "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+          "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+          "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+          "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+          "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp"
+        ],
+        "expected_jsps": [
+          "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp",
+          "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp",
+          "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp",
+          "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp",
+          "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp"
+        ],
+        "missing": [],
+        "extra": []
+      },
+      "skill_expected_sha256_recorded": "f5ba71140b5275fb235f[REDACTED]ec03b6cfe453bae4327f936487ff1256c1",
+      "expected_hash_source": "first-index.json original digest before eval serializer masking",
+      "eval_record_integrity_note": "첫 스킬 평가 레코드의 expected_sha256 일부가 마스킹됐다. 레코드를 덮어쓰지 않고 원본 골격 기록의 해시를 이 요약에 별도로 보존한다."
+    }
+  ],
+  "training": {
+    "cases": 5,
+    "expected_edges": 55,
+    "matched": 55,
+    "note": "M1 인덱서 수정에 사용한 학습 세트. held-out과 합산하지 않는다."
+  },
+  "supplemental": {
+    "total": 26,
+    "recorded": 25,
+    "partial": 1,
+    "missing": 0,
+    "runtime_unresolved": 8,
+    "note": "접속 연결 점수와 별도인 보고서 수록 여부의 수동 자기 평가. 실제 라이브러리 내부/HTTP/DB 실행의 PASS가 아니다."
+  },
+  "archive": {
+    "path": "docs/evidence/m2-heldout-first/originals.json.gz",
+    "sha256": "27961c682b1745602049b1e652f7e793ed599b5dafb728e2689bf4ccb8118dee",
+    "payload_sha256": "76049e2159f5e9b86e86202f34e508d3ed452229c2e1aeafd804b560fa878e30",
+    "files": 59,
+    "bytes": 2951530,
+    "round_trip_validation": "PASS"
+  },
+  "caveat": "승인한 source/kind/위치 범위의 비교이며 범위 밖 오류는 과탐 숫자에 포함하지 않는다. 첫 자동 골격·전방 단독 점수·전방+역방향 점수·스킬 첫 산출물을 모두 보존했다. 누락 연결을 추가하지 않았고 구현 동결을 유지했다.",
+  "known_recording_defects": [
+    {
+      "case_id": "egov-id-dplct-ajax",
+      "field": "first-skill-eval.json expected_sha256",
+      "problem": "일반 마스킹이 해시 내부 숫자열을 개인정보로 오인해 REDACTED로 바꿈",
+      "preserved_original": true,
+      "valid_hash_source": "first-index.json 및 originals.json.gz 안 expected.json 파일 해시",
+      "score_changed": false,
+      "implementation_fixed": false
+    }
+  ]
+}

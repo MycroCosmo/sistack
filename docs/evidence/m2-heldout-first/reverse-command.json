@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-10-27T04:36:34.834Z",
+  "argv": [
+    "scripts/query-index.mjs",
+    ".testbeds/egovframe/.sistack/index/index.json",
+    "--to",
+    "/uss/umt/EgovIdDplctCnfirmAjax.do"
+  ],
+  "exit_code": 0,
+  "stderr": "",
+  "stdout_sha256": "b46195ac1d4284c6d0ce030c18fbef672a23ef9f3b2f3e14e60791edc1684209"
+}

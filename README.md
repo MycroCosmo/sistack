@@ -2,7 +2,7 @@
 
 한국 SI 개발자의 코드 흐름 파악·에러 분석·테스트·산출물 작성을 돕는 Agent Skills 모음입니다.
 
-**개발 상태: M0·M1 완료, M2 held-out 정답 승인 GATE.** `si-trace` 공통 구현과 학습 5건/55개 연결 비교를 완료했습니다. 별도 held-out 3건은 미승인·미실행입니다. [M2 진행 보고서](docs/m2-report.md) · [인덱서 사용법](docs/indexer.md)
+**개발 상태: M0·M1 완료, M2 수정 전 held-out 첫 평가 기록.** 학습 5건/55개 연결과 별도로, 승인된 held-out 3건은 60/66 일치·누락 6건입니다. 사례 대응 구현 수정은 하지 않았습니다. [첫 평가 보고서](docs/m2-heldout-first-report.md) · [인덱서 사용법](docs/indexer.md)
 
 | v0.1 예정 스킬 | 역할 | 구현 시점 |
 |---|---|---|

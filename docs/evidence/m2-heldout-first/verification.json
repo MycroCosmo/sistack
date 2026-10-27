@@ -1,0 +1,16 @@
+{
+  "totals": {
+    "expected_edges": 66,
+    "matched": 60,
+    "false_negatives": 6,
+    "false_positives": 0,
+    "status_mismatches": 0
+  },
+  "archive_files": 59,
+  "archive_roundtrip": "PASS",
+  "manifests": "3/3 PASS",
+  "expected_hashes": "3/3 unchanged",
+  "frozen_files": "46/46 unchanged",
+  "installed_copy": "unchanged",
+  "known_eval_hash_masking_defect": "original preserved; valid hash independently verified"
+}

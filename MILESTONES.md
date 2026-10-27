@@ -85,7 +85,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ───
 
 ## M2 — si-trace (← pstack `how`)
 
-**상태: PARTIAL — 공통 구현·학습 평가 완료, 사용자 지정 held-out 정답 승인 GATE.** 학습 5건/55개 연결 일치, 단순 2건·복잡 3건 실제 수행, npm test 65건 통과. held-out 3건은 초안만 작성했으며 실행·채점하지 않았다. Codex 활성화는 BLOCKED + 수동 절차. [진행 보고서](docs/m2-report.md).
+**상태: PARTIAL — held-out 승인 및 수정 전 첫 평가 기록.** 학습 5건/55개와 별도로 held-out 3건/66개 중 60개 일치·누락 6건, 범위 내 과탐·상태 불일치 0건. 동결 구현과 원본·점수를 보존했으며 사례 대응 구현 수정은 하지 않았다. npm test 65건 통과. 별도 Codex 활성화 확인은 미완료. [첫 평가 보고서](docs/m2-heldout-first-report.md), [이전 GATE 기록](docs/m2-report.md).
 
 **목표:** "이 버튼 누르면 뭐가 실행돼?"에 근거 달린 흐름으로 답한다.
 
@@ -95,6 +95,8 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ───
 - Codex에서 `$si-trace`로 호출되고, 한국어 질문으로 자동 활성화됨
 
 **추가 [GATE]:** egov-article-list / egov-user-insert / egov-id-dplct-ajax의 소스 기반 초안을 승인받는다. 승인 후 첫 실행을 수정 전 held-out 점수로 보존한 뒤에만 사례 대응을 수정한다. M1의 5건은 학습 세트로 별도 보고한다.
+
+**GATE 통과:** 외부 주입 호출 기록과 공통 인증 Helper 진입 깊이를 통일해 승인본으로 확정했다. 첫 실행·역방향·누락·보충 항목과 압축 원본을 보존했다.
 
 **Ian 할 일:** 실무 코드 화면 1~2개에 로컬로 써보고 피드백
 

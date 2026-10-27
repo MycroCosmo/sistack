@@ -11,6 +11,9 @@
     "egov-user-insert",
     "egov-id-dplct-ajax"
   ],
-  "held_out_status": "APPROVED_READY_FOR_FROZEN_FIRST_RUN",
-  "note": "학습 5건과 held-out 3건을 분리한다. 검토 조건 반영으로 held-out 정답 승인 확정. 동결 구현의 첫 실행 원본·점수를 보존한 뒤 보고하며 그 보고 전 사례 대응 코드를 수정하지 않는다."
+  "held_out_status": "FROZEN_FIRST_RUN_RECORDED",
+  "note": "학습 5건과 held-out 3건을 분리한다. 승인본·동결 구현의 첫 실행 점수와 원본을 보존했다. 해당 첫 보고 전에는 사례 대응 구현 수정을 하지 않았으며 후속 결과와 덮어쓰거나 합산하지 않는다.",
+  "first_run_report": "docs/m2-heldout-first-report.md",
+  "first_run_results": "docs/evidence/m2-heldout-first/results.json",
+  "case_tuning_performed": false
 }

@@ -1,0 +1,690 @@
+[
+  {
+    "case_id": "egov-article-list",
+    "id": "redirect-unauthenticated",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 153
+      },
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 156
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "forward-guest-board",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 166
+      },
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 167
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "view-and-model",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 204
+      },
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 210
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "property-service-boundary",
+    "expected_status": "UNRESOLVED",
+    "reported_status": "UNRESOLVED",
+    "coverage": "RECORDED",
+    "note": "미확정 이유와 경계를 기록했다. 라이브러리 내부나 실행 결과를 검증했다는 의미가 아니다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 89
+      },
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 171
+      },
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 172
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/context-properties.xml",
+        "line": 8
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/context-properties.xml",
+        "line": 9
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "pagination-boundary",
+    "expected_status": "UNRESOLVED",
+    "reported_status": "UNRESOLVED",
+    "coverage": "RECORDED",
+    "note": "미확정 이유와 경계를 기록했다. 라이브러리 내부나 실행 결과를 검증했다는 의미가 아니다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 174
+      },
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+        "line": 180
+      },
+      {
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+        "line": 242
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "no-master-exception",
+    "expected_status": "UNRESOLVED",
+    "reported_status": "UNRESOLVED",
+    "coverage": "RECORDED",
+    "note": "미확정 이유와 경계를 기록했다. 라이브러리 내부나 실행 결과를 검증했다는 의미가 아니다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+        "line": 66
+      },
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+        "line": 67
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "security-library-boundary",
+    "expected_status": "UNRESOLVED",
+    "reported_status": "UNRESOLVED",
+    "coverage": "RECORDED",
+    "note": "미확정 이유와 경계를 기록했다. 라이브러리 내부나 실행 결과를 검증했다는 의미가 아니다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+        "line": 8
+      },
+      {
+        "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+        "line": 40
+      },
+      {
+        "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+        "line": 62
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "component-options-condition",
+    "expected_status": "UNRESOLVED",
+    "reported_status": "UNRESOLVED",
+    "coverage": "RECORDED",
+    "note": "미확정 이유와 경계를 기록했다. 라이브러리 내부나 실행 결과를 검증했다는 의미가 아니다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+        "line": 69
+      },
+      {
+        "file": "src/main/java/egovframework/com/cmm/EgovComponentChecker.java",
+        "line": 48
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "view-base-tables",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 5050
+      },
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 5053
+      },
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 5057
+      },
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 5060
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "mysql-ddl-location",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 598
+      },
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 631
+      },
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 682
+      },
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 1263
+      },
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 1882
+      },
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 2904
+      },
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 3287
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "notice-and-count-semantics",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+        "line": 208
+      },
+      {
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+        "line": 246
+      },
+      {
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+        "line": 379
+      },
+      {
+        "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml",
+        "line": 404
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "auth-helper-internal-getAuthenticatedUser",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+        "line": 27
+      },
+      {
+        "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+        "line": 34
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+        "line": 36
+      },
+      {
+        "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+        "line": 42
+      },
+      {
+        "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+        "line": 34
+      }
+    ]
+  },
+  {
+    "case_id": "egov-article-list",
+    "id": "auth-helper-internal-isAuthenticated",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+        "line": 27
+      },
+      {
+        "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+        "line": 34
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+        "line": 36
+      },
+      {
+        "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+        "line": 59
+      },
+      {
+        "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+        "line": 61
+      }
+    ]
+  },
+  {
+    "case_id": "egov-user-insert",
+    "id": "submit-condition",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 154
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 159
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 166
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 209
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 474
+      }
+    ]
+  },
+  {
+    "case_id": "egov-user-insert",
+    "id": "authentication-and-validation-branches",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 186
+      },
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 191
+      },
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 195
+      },
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 201
+      }
+    ]
+  },
+  {
+    "case_id": "egov-user-insert",
+    "id": "auth-helper-boundary",
+    "expected_status": "UNRESOLVED",
+    "reported_status": "UNRESOLVED",
+    "coverage": "RECORDED",
+    "note": "미확정 이유와 경계를 기록했다. 라이브러리 내부나 실행 결과를 검증했다는 의미가 아니다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 186
+      },
+      {
+        "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+        "line": 27
+      },
+      {
+        "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+        "line": 34
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+        "line": 36
+      },
+      {
+        "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+        "line": 58
+      }
+    ]
+  },
+  {
+    "case_id": "egov-user-insert",
+    "id": "id-generation-config",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "PARTIAL",
+    "note": "ID 생성기의 경계·대상·blockSize·prefix는 보고했다. cipers/fillChar 상세값은 첫 보고서에 풀어 쓰지 않았다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+        "line": 98
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+        "line": 5
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+        "line": 8
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+        "line": 13
+      }
+    ]
+  },
+  {
+    "case_id": "egov-user-insert",
+    "id": "id-generator-sql-boundary",
+    "expected_status": "UNRESOLVED",
+    "reported_status": "UNRESOLVED",
+    "coverage": "RECORDED",
+    "note": "미확정 이유와 경계를 기록했다. 라이브러리 내부나 실행 결과를 검증했다는 의미가 아니다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+        "line": 98
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/idgn/context-idgn-UsrCnfrm.xml",
+        "line": 5
+      },
+      {
+        "file": "script/ddl/mysql/com_DDL_mysql.sql",
+        "line": 5215
+      }
+    ]
+  },
+  {
+    "case_id": "egov-user-insert",
+    "id": "password-transform",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+        "line": 101
+      },
+      {
+        "file": "src/main/java/egovframework/com/utl/fcc/service/EgovStringUtil.java",
+        "line": 371
+      },
+      {
+        "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+        "line": 198
+      },
+      {
+        "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+        "line": 205
+      },
+      {
+        "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+        "line": 208
+      },
+      {
+        "file": "src/main/java/egovframework/com/utl/sim/service/EgovFileScrty.java",
+        "line": 212
+      }
+    ]
+  },
+  {
+    "case_id": "egov-user-insert",
+    "id": "mysql-selection",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/service/impl/UserManageDAO.java",
+        "line": 56
+      },
+      {
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+        "line": 74
+      },
+      {
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+        "line": 76
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+        "line": 15
+      },
+      {
+        "file": "src/main/resources/egovframework/egovProps/globals.properties",
+        "line": 20
+      }
+    ]
+  },
+  {
+    "case_id": "egov-user-insert",
+    "id": "success-forward",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 201
+      },
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 203
+      },
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 205
+      }
+    ]
+  },
+  {
+    "case_id": "egov-id-dplct-ajax",
+    "id": "response-json-view",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 405
+      },
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 406
+      },
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 412
+      },
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 415
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+        "line": 78
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+        "line": 84
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+        "line": 85
+      }
+    ]
+  },
+  {
+    "case_id": "egov-id-dplct-ajax",
+    "id": "request-response-contract",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 88
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 91
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 97
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 128
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 129
+      },
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 402
+      },
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 408
+      }
+    ]
+  },
+  {
+    "case_id": "egov-id-dplct-ajax",
+    "id": "union-count-semantics",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+        "line": 263
+      },
+      {
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+        "line": 267
+      },
+      {
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+        "line": 271
+      },
+      {
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+        "line": 275
+      },
+      {
+        "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml",
+        "line": 277
+      }
+    ]
+  },
+  {
+    "case_id": "egov-id-dplct-ajax",
+    "id": "placeholder-anchor",
+    "expected_status": "CONFIRMED",
+    "reported_status": "CONFIRMED",
+    "coverage": "RECORDED",
+    "note": "첫 보고서의 원문 확인 사항에 기록했다. 수동 자기 평가이며 연결 점수와 별도다.",
+    "evidence": [
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 68
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 69
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 89
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+        "line": 115
+      }
+    ]
+  },
+  {
+    "case_id": "egov-id-dplct-ajax",
+    "id": "framework-internals",
+    "expected_status": "UNRESOLVED",
+    "reported_status": "UNRESOLVED",
+    "coverage": "RECORDED",
+    "note": "미확정 이유와 경계를 기록했다. 라이브러리 내부나 실행 결과를 검증했다는 의미가 아니다.",
+    "evidence": [
+      {
+        "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+        "line": 405
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-servlet.xml",
+        "line": 84
+      },
+      {
+        "file": "src/main/java/egovframework/com/cmm/service/impl/EgovComAbstractDAO.java",
+        "line": 34
+      }
+    ]
+  }
+]
