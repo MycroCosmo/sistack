@@ -8,6 +8,7 @@ import { prepareCase } from './eval-debug.mjs';
 import { root, isMain, cli } from './common.mjs';
 import { json, save } from '../lib/trace/io.mjs';
 import { mask } from '../lib/mask/index.mjs';
+import { sanitize } from '../lib/indexer/graph.mjs';
 import { installCapture } from './debug-capture.mjs';
 import { StringDecoder } from 'node:string_decoder';
 
@@ -101,8 +102,8 @@ export async function reproduceCase(id, { maven, javaHome, output, baseline = fa
     if (!ready) throw new Error('BLOCKED: Jetty 시작 실패/시간 초과. 마스킹한 서버 로그 확인');
     const result = await probeCase(id, base);
     const expected = baseline ? result.healthy : result.bug;
-    await save(output, { case_id: id, mode: baseline ? 'baseline' : 'patched', status: expected ? 'PASS' : 'FAIL', observed: result.observed,
-      reproduction_level: 5, java_home: javaHome, project: prepared.project, instrumentation, note: '증상 재현 확인이며 원인 위치 적중 평가가 아니다.' });
+    await save(output, sanitize({ case_id: id, mode: baseline ? 'baseline' : 'patched', status: expected ? 'PASS' : 'FAIL', observed: result.observed,
+      reproduction_level: 5, java_home: javaHome, project: prepared.project, instrumentation, note: '증상 재현 확인이며 원인 위치 적중 평가가 아니다.' }));
     if (!expected) throw new Error('예상한 정상/결함 동작과 다릅니다');
     return { case_id: id, mode: baseline ? 'baseline' : 'patched', status: 'PASS', observed: result.observed };
   } finally {

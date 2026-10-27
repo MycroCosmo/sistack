@@ -1,11 +1,12 @@
 {
   "kind": "captured-runtime",
-  "source": "docs/evidence/m3-input-v2/runtime/05-paging.json.server.txt",
-  "source_sha256": "3de22e40965d7e4cd3d5c7d70890f04df6b5011a0ed39f0ea4ea88f84cf351b3",
+  "source": "docs/evidence/m3-mask-v3/runtime/05-paging.json.server.txt",
+  "masked_output": "docs/evidence/m3-mask-v3/runtime/05-paging.masked.txt",
+  "source_sha256": "d92f51fd0094fa1d39f26116b71c608ff2357967e252ffa6c344c0121946948f",
   "source_newlines": "LF",
   "selection": "access-only",
   "fixture_line": 14,
-  "selected_sha256": "60ab1413b671118ed03ef1f2e72d8044c0f3e40affbed0749d279e52f72fc46b",
-  "symptom_sha256": "fed230293277ae562b40f610724d4bf81cbebf83ac670cbf62e201e351be252d",
+  "selected_sha256": "1ba364d1eb25a8954acf69f585d28668fddd8524c4b3597934c09b4f1aa98f41",
+  "symptom_sha256": "ca2521c66849bf266aed517d2403d7ff9e57fc0fde6a943b2150fd0fa346efb1",
   "note": "임시 복사본의 로깅 계측만 추가. 예외/SQL/프레임/접근 결과를 수작업으로 작성하지 않음."
 }

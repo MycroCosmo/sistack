@@ -1,6 +1,7 @@
 {
   "kind": "synthetic-oracle-format",
   "source": "evals/debug/repro/oracle-format.log",
+  "masked_output": "docs/evidence/m3-mask-v3/runtime/07-oracle-log-only.masked.txt",
   "source_sha256": "3bc45febe6383cdf9ed8fe43d306860ae4551ac35cf15f171675a152a1a23cb0",
   "source_newlines": "LF",
   "selection": "complete",

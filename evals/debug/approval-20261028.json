@@ -1,0 +1,57 @@
+{
+  "approved_by": "Ian",
+  "approved_on": "2026-10-28",
+  "scope": "학습 정답 10건. 마스킹 수정과 재동결 후 첫 채점 승인. held-out은 별도 지시 대기.",
+  "records": [
+    {
+      "case_id": "01-binding",
+      "draft_sha256": "5597ec8cad51687cfd661c9b7cc9c9875f69ec48174fba3d33d7bff0e75f7f3a",
+      "approved_sha256": "35b3e1d9a54b8781c25fb8fb6ce766b3b363bf1da07c31904ad189fc6f50522c"
+    },
+    {
+      "case_id": "02-js-url",
+      "draft_sha256": "707282e5dbb2ad521bfe1de453bc014df17acc62d8753b4f7a05355b41cc475c",
+      "approved_sha256": "6fa7299785b3285bc392e338142957d320f9fdbd68633fcaa59b3ffd339e19ce"
+    },
+    {
+      "case_id": "03-request-encoding",
+      "draft_sha256": "edd045c799ddce92d2254c7e992f873db4e0604210e4806b044bf8e9a0179b23",
+      "approved_sha256": "a174feeade96ed967f7d378a5f424f0e8171568af3988f1a20fb8833a7b63e2a"
+    },
+    {
+      "case_id": "04-session-bypass",
+      "draft_sha256": "ec53d0ce6c29d7077ef4be54d2abbc34c44592c933bbda2db3005461eab5c0ed",
+      "approved_sha256": "dbd3748951842ba433da98ec4c9f48924aff5a007b0448e06213225f227cadac"
+    },
+    {
+      "case_id": "05-paging",
+      "draft_sha256": "dd44c44a34c5531fe4f360f2154fe7206f96609ff9e6bdcba876de07009a984d",
+      "approved_sha256": "352e2981840d73b9e255812bc083b0e9048046a32d3e44f96d8b362ba23424fb"
+    },
+    {
+      "case_id": "06-sort-sql",
+      "draft_sha256": "87d16b51cd537740cf04ad4156ed7632023e888bd03b186f1473a7be50743c56",
+      "approved_sha256": "9af4fbe0de7291121faca63cf3f0f04a0afb5e00bda38fd2fd478f1e770d8a7e"
+    },
+    {
+      "case_id": "07-oracle-log-only",
+      "draft_sha256": "cb5e188bb0d4a109b2242798c8ab96d84a5f0d97758b265646c71c14448183c4",
+      "approved_sha256": "2425cbc32bcf97bc85158ceddb487bdeb7af4ebc88b04f5f31e5d7c4d10469ba"
+    },
+    {
+      "case_id": "08-thymeleaf-utilities",
+      "draft_sha256": "f8e885245404b1b46911d7563d4efcd9c7d20e55e815f60d91ac02997c95b7e6",
+      "approved_sha256": "4842cf544ed2bd6a7fa8cc3360ac4d0365e833efbf90347534ad29862dede886"
+    },
+    {
+      "case_id": "09-view-resolver",
+      "draft_sha256": "2898eeb482652b62c9b6f25c967d40930157d3fac221778ba399ba197945d6ae",
+      "approved_sha256": "134475529196a6584df969c7e020aea1003c0741d5ee0923606d4ff2662eb893"
+    },
+    {
+      "case_id": "10-fragment-encoding",
+      "draft_sha256": "d6d82d36442736e15fddc5b44ff169e9bbf6d7977a414b2190855223f6276828",
+      "approved_sha256": "0f565658ae9e2482971fe371c5fd470f4d1f3788f6efea322b33236329a67b6c"
+    }
+  ]
+}

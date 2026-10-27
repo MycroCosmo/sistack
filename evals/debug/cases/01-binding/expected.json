@@ -1,0 +1,16 @@
+{
+  "case_id": "01-binding",
+  "dataset": "training",
+  "review_status": "approved",
+  "approved_by": "Ian — 2026-10-28 사용자 메시지: M3 입력 재검토: 정답 10건 승인",
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+      "line": 10
+    }
+  ],
+  "source_files": {
+    "src/main/java/kr/sistack/board/mapper/MenuMapper.java": "ef2e36ea08660a1571b0de956f5b06ee07801ff07afe27fe3428449e6f280097"
+  }
+}

@@ -52,8 +52,9 @@ test('all ten inputs preserve captured lines and mask only the inserted syntheti
     assert.equal(digest(masked), digest(log.replace(privacyFixture, expectedFixture)), id);
     assert.equal(digest(mask(masked)), digest(masked), id);
     assert.equal(digest(parseTrace(log).text), digest(masked), id);
-    const maskedFile = path.join(root, 'docs/evidence/m3-input-v2/runtime', `${id}.masked.txt`);
+    const maskedFile = path.join(root, provenance.masked_output);
     assert.equal(digest(await readFile(maskedFile, 'utf8')), digest(masked), id);
+    assert.doesNotMatch(log, /(?:[a-z]:[\\/]Users[\\/]|\/(?:home|Users)\/)[^\\/\r\n]+[\\/]/i, id);
     if (id !== '07-oracle-log-only') {
       assert.equal(provenance.kind, 'captured-runtime');
       const run = await json(path.join(root, provenance.source.replace(/\.server\.txt$/, '')));
@@ -61,6 +62,8 @@ test('all ten inputs preserve captured lines and mask only the inserted syntheti
       assert.equal(run.reproduction_level, 5);
       assert.match(source, /Initializing Spring (?:root WebApplicationContext|DispatcherServlet)/);
       assert.match(source, /INFO:.*jetty-9\.4/);
+      assert.match(source, /qtp\d+-\d+/, id);
+      assert.doesNotMatch(source, /qtp\[REDACTED\]/, id);
     }
   }
 });

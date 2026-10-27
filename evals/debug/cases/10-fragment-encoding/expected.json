@@ -1,0 +1,16 @@
+{
+  "case_id": "10-fragment-encoding",
+  "dataset": "training",
+  "review_status": "approved",
+  "approved_by": "Ian — 2026-10-28 사용자 메시지: M3 입력 재검토: 정답 10건 승인",
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+      "line": 1
+    }
+  ],
+  "source_files": {
+    "src/main/webapp/WEB-INF/views/common/paging.jspf": "e10151053ebffa330f003d13c1cdbf522d161cc1fc47fe77fdf1430263161cbe"
+  }
+}

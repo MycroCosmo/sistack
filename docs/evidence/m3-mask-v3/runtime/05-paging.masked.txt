@@ -1,0 +1,27 @@
+2026-10-27T15:05:18.743295900Z ACCESS GET /legacy-board/auth/login.do 200
+2026-10-27T15:05:18.755296600Z ACCESS GET /legacy-board/auth/login.do 200
+2026-10-27T15:05:18.770323Z ACCESS POST /legacy-board/auth/login.do 302
+2026-10-27T15:05:19.122155700Z ACCESS GET /legacy-board/board/form.do 200
+2026-10-27T15:05:19.143354400Z ACCESS POST /legacy-board/board/create.do 302
+2026-10-27T15:05:19.148358800Z ACCESS POST /legacy-board/board/create.do 302
+2026-10-27T15:05:19.151358700Z ACCESS POST /legacy-board/board/create.do 302
+2026-10-27T15:05:19.155358500Z ACCESS POST /legacy-board/board/create.do 302
+2026-10-27T15:05:19.158359100Z ACCESS POST /legacy-board/board/create.do 302
+2026-10-27T15:05:19.161363100Z ACCESS POST /legacy-board/board/create.do 302
+2026-10-27T15:05:19.164363700Z ACCESS POST /legacy-board/board/create.do 302
+2026-10-27T15:05:19.167363900Z ACCESS POST /legacy-board/board/create.do 302
+2026-10-27T15:05:19.171363300Z ACCESS POST /legacy-board/board/create.do 302
+[SYNTHETIC MASK FIXTURE] phone=[REDACTED] [REDACTED] account=[REDACTED] JSESSIONID=[REDACTED] transactionId=12345678-1234-1234-1234-123456789012 classHash=abcdef12345678901234567890abcdef12
+2026-10-27T15:05:19.175866800Z ACCESS POST /legacy-board/board/create.do 302
+2026-10-27T15:05:19.574181Z ACCESS GET /legacy-board/board/list.do 200
+2026-10-27T15:05:19.588362300Z ACCESS GET /legacy-board/board/list.do 200
+2026-10-27T15:05:19.656361400Z ACCESS POST /legacy-board/board/delete.do 200
+2026-10-27T15:05:19.662368100Z ACCESS POST /legacy-board/board/delete.do 200
+2026-10-27T15:05:19.666366800Z ACCESS POST /legacy-board/board/delete.do 200
+2026-10-27T15:05:19.672366900Z ACCESS POST /legacy-board/board/delete.do 200
+2026-10-27T15:05:19.675366500Z ACCESS POST /legacy-board/board/delete.do 200
+2026-10-27T15:05:19.678878200Z ACCESS POST /legacy-board/board/delete.do 200
+2026-10-27T15:05:19.681879500Z ACCESS POST /legacy-board/board/delete.do 200
+2026-10-27T15:05:19.684878400Z ACCESS POST /legacy-board/board/delete.do 200
+2026-10-27T15:05:19.694878400Z ACCESS POST /legacy-board/board/delete.do 200
+2026-10-27T15:05:19.696879800Z ACCESS POST /legacy-board/board/delete.do 200

@@ -1,0 +1,21 @@
+{
+  "case_id": "08-thymeleaf-utilities",
+  "dataset": "training",
+  "review_status": "approved",
+  "approved_by": "Ian — 2026-10-28 사용자 메시지: M3 입력 재검토: 정답 10건 승인",
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+      "line": 7
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+      "line": 7
+    }
+  ],
+  "source_files": {
+    "src/main/webapp/WEB-INF/templates/board/list.html": "3ab127052b11716415faaa03ba927efd5eeb31989407c27c34d4d96af5dd3c2a",
+    "src/main/webapp/WEB-INF/templates/fragments/common.html": "b663ed6549f32241d83dc7fcc8c4bbf963063cb4772728e59c6c3f1ee60cd000"
+  }
+}

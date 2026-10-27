@@ -1,0 +1,149 @@
+TAP version 13
+# Subtest: stacktrace: generated class hashes and transaction IDs survive next to personal data
+ok 1 - stacktrace: generated class hashes and transaction IDs survive next to personal data
+  ---
+  duration_ms: 1.9113
+  type: 'test'
+  ...
+# Subtest: stacktrace: session credentials override the hash/UUID preservation rule
+ok 2 - stacktrace: session credentials override the hash/UUID preservation rule
+  ---
+  duration_ms: 0.3264
+  type: 'test'
+  ...
+# Subtest: stacktrace: personal data in diagnostic identifier fields is still masked
+ok 3 - stacktrace: personal data in diagnostic identifier fields is still masked
+  ---
+  duration_ms: 0.1012
+  type: 'test'
+  ...
+# Subtest: thread correlation names survive numeric masking across supported WAS formats
+not ok 4 - thread correlation names survive numeric masking across supported WAS formats
+  ---
+  duration_ms: 0.812
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:31:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    qtp1234567890-12345678901
+    + actual - expected
+    
+    + '[qtp[REDACTED]-[REDACTED]] begin\n[qtp[REDACTED]-[REDACTED]] end'
+    - '[qtp1234567890-12345678901] begin\n[qtp1234567890-12345678901] end'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: |-
+    [qtp1234567890-12345678901] begin
+    [qtp1234567890-12345678901] end
+  actual: |-
+    [qtp[REDACTED]-[REDACTED]] begin
+    [qtp[REDACTED]-[REDACTED]] end
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug-mask.test.mjs:46:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: thread exemptions preserve correlation without leaking neighboring personal data or credentials
+not ok 5 - thread exemptions preserve correlation without leaking neighboring personal data or credentials
+  ---
+  duration_ms: 0.2352
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:50:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'qtp[REDACTED]-50 phone=[REDACTED] account=[REDACTED] JSESSIONID=[REDACTED] password=[REDACTED]'
+    - 'qtp1234567890-50 phone=[REDACTED] account=[REDACTED] JSESSIONID=[REDACTED] password=[REDACTED]'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'qtp1234567890-50 phone=[REDACTED] account=[REDACTED] JSESSIONID=[REDACTED] password=[REDACTED]'
+  actual: 'qtp[REDACTED]-50 phone=[REDACTED] account=[REDACTED] JSESSIONID=[REDACTED] password=[REDACTED]'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug-mask.test.mjs:52:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: home prefixes are generalized for Windows, Linux and macOS without losing the file suffix
+not ok 6 - home prefixes are generalized for Windows, Linux and macOS without losing the file suffix
+  ---
+  duration_ms: 0.1963
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:56:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '~/repo/Mapper.xml:34'
+    - '~/repo/Mapper.xml:34'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '~/repo/Mapper.xml:34'
+  actual: '~/repo/Mapper.xml:34'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug-mask.test.mjs:67:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: home generalization and thread preservation compose with secrets and stack frames
+not ok 7 - home generalization and thread preservation compose with secrets and stack frames
+  ---
+  duration_ms: 0.3745
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:73:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'qtp[REDACTED]-50 ~/log.txt password=[REDACTED]\n' +
+    - 'qtp1234567890-50 ~/log.txt password=[REDACTED]\n' +
+        '\tat app.Service.save(Service.java:42)'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: |-
+    qtp1234567890-50 ~/log.txt password=[REDACTED]
+    	at app.Service.save(Service.java:42)
+  actual: |-
+    qtp[REDACTED]-50 ~/log.txt password=[REDACTED]
+    	at app.Service.save(Service.java:42)
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug-mask.test.mjs:75:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 3
+# fail 4
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 97.2115

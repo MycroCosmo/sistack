@@ -1,0 +1,16 @@
+{
+  "case_id": "05-paging",
+  "dataset": "training",
+  "review_status": "approved",
+  "approved_by": "Ian — 2026-10-28 사용자 메시지: M3 입력 재검토: 정답 10건 승인",
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/java/kr/sistack/board/common/Pagination.java",
+      "line": 39
+    }
+  ],
+  "source_files": {
+    "src/main/java/kr/sistack/board/common/Pagination.java": "25783bfbdf3b7b0b13c0471eb5dc163a5cefc84d2c643614bc54ae8ff9942543"
+  }
+}

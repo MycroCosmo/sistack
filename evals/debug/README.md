@@ -1,6 +1,6 @@
 # M3 학습 세트와 비공개 평가
 
-Codex가 만든 아래 10건은 **자기 작성 편향이 있는 학습 세트**다. 증상 재현 성공은 원인 위치 적중이나 일반화 성능이 아니다. 정답은 expected.draft.md/json이며 Ian의 승인 전에는 채점하지 않는다.
+Codex가 만든 아래 10건은 **자기 작성 편향이 있는 학습 세트**다. 증상 재현 성공은 원인 위치 적중이나 일반화 성능이 아니다. Ian이 2026-10-28 정답 10건을 승인했으며 승인본은 각 expected.json이다. [승인 근거](approval-20261028.json)에 기존 초안과 승인본 해시를 기록했다. expected.draft.md/json은 검토 이력으로 보존한다.
 
 | 사례 | 테스트베드 | 재현 입력 | 확인할 차이 |
 |---|---|---|---|
@@ -19,7 +19,7 @@ Codex가 만든 아래 10건은 **자기 작성 편향이 있는 학습 세트**
 
 입력 v2의 9개 symptom.log는 임시 테스트베드에서 **실제로 캡처한 로그**다. 05·10은 접근 로그만 선택하고 나머지는 Spring 초기화·Jetty·전체 예외 스택과 SQL 블록을 보존한다. 중간의 `[SYNTHETIC MASK FIXTURE]` 한 줄만 마스킹 검사용 합성 데이터다. 07은 실제 Oracle 실행 없이 MyBatis 예외 형식을 재구성했으며 `input-provenance.json`에 합성임을 명시했다. 각 provenance에는 캡처 파일·선택 방법·해시·합성 줄 위치가 있다. 마스킹 결과도 [입력 v2 실행 기록](../../docs/evidence/m3-input-v2/README.md)에 보존했다.
 
-symptom.md에는 화면에서 관찰할 수 있는 말만 적는다. 원인·SQL/서비스 구조와 정답 설명은 검토용 expected.draft에만 둔다. 위치에 대한 1차 사용자 확인은 받았으나 입력 현실성 보강 후 **10건 재GATE** 상태다.
+symptom.md에는 화면에서 관찰할 수 있는 말만 적는다. 원인·SQL/서비스 구조와 정답 설명은 검토용 expected.draft에만 둔다. 승인 후 스레드 보존·사용자 홈 일반화를 보강하고 **입력 v3**로 9건을 재캡처했다. 07은 같은 Oracle 합성 로그를 사용한다. 최신 출처와 마스킹 결과는 각 input-provenance.json을 따른다. 이전 v2 증거·동결은 보존한다.
 
 ## 임시 복사본과 분석
 
@@ -55,25 +55,25 @@ capture도 patched 실행이다. 임시 복사본에 접근/미처리 예외 필
 ## 동결과 승인 후 평가
 
 ```sh
-node scripts/eval-debug.mjs freeze docs/evidence/m3-freeze-v2.json
+node scripts/eval-debug.mjs freeze docs/evidence/m3-freeze-v3.json
 ```
 
 동결은 구현·테스트·스키마·CLI·스킬 지침의 파일 해시와 Git revision을 저장한다. 수정이 생기면 기존 동결을 덮어쓰지 않고 새 동결·새 run으로 구분한다.
-Ian의 재GATE 승인 뒤에만 expected.draft.json을 expected.json으로 복사하고 review_status=approved, approved_by에 승인 근거를 기록한다. 7번은 BoardMapper.xml의 23·26·34행을 모두 후보로 남기고 UNRESOLVED를 유지해야 한다. 하나만 제시하거나 확정하면 FAIL이다. 기존 `m3-freeze.json`과 첫 GATE 보고는 그대로 보존하고 입력 v2 이후에는 `m3-freeze-v2.json`을 사용한다.
+2026-10-28 승인을 expected.json의 review_status=approved, approved_by에 기록했다. 7번은 BoardMapper.xml의 23·26·34행을 모두 후보로 남기고 UNRESOLVED를 유지해야 한다. 하나만 제시하거나 확정하면 FAIL이다. 기존 `m3-freeze.json`·`m3-freeze-v2.json`과 GATE 보고를 보존하고 마스킹 보정 후 첫 학습 채점에는 `m3-freeze-v3.json`을 사용한다. 진단은 로그·인덱스·실제 소스를 읽고 작성하며 expected.json에서 답안을 복사하지 않는다.
 
 ```sh
-node scripts/eval-debug.mjs score <run-dir> <expected.json> training <새-score.json> docs/evidence/m3-freeze-v2.json <private-root>
+node scripts/eval-debug.mjs score <run-dir> <expected.json> training <새-score.json> docs/evidence/m3-freeze-v3.json <private-root>
 ```
 
 스킬 결과와 정답의 file/line/status를 비교한다. 기대 위치를 놓치거나 추가 후보 위치를 단정하면 전체 hit=false다. 파일 해시가 다르면 점수 대신 오류를 낸다. 승인 전 초안을 사용하거나 기존 결과를 덮어쓰는 실행은 거부한다.
 
 ## held-out은 Ian의 실제 사례만
 
-현재 실제 사례를 열거나 채점하지 않는다. **구현 동결 후** Ian이 evals/private/<id>/에 마스킹한 symptom, 관련 소스 발췌(project/), 승인한 expected.json을 넣는다. 학습 세트와 동일한 정답 JSON 계약을 쓰되 dataset=held-out, source_files는 제공한 프로젝트 상대 경로·바이트 해시다.
+현재 실제 사례를 열거나 채점하지 않는다. **구현 동결 후** Ian이 evals/private/<id>/에 마스킹한 symptom, 관련 소스 발췌(project/), 승인한 expected.json을 넣고 별도 실행을 지시한다. 학습 세트와 동일한 정답 JSON 계약을 쓰되 dataset=held-out, source_files는 제공한 프로젝트 상대 경로·바이트 해시다.
 스킬 run도 해당 private/project/.sistack/runs 아래에 둔다. 외부 저장소 소스나 실제 사례를 공개 디렉터리로 복사하지 않는다.
 
 ```sh
-node scripts/eval-debug.mjs score evals/private/<id>/project/.sistack/runs/<run-id> evals/private/<id>/expected.json held-out evals/private/<id>/score.json docs/evidence/m3-freeze-v2.json evals/private
+node scripts/eval-debug.mjs score evals/private/<id>/project/.sistack/runs/<run-id> evals/private/<id>/expected.json held-out evals/private/<id>/score.json docs/evidence/m3-freeze-v3.json evals/private
 ```
 
 동결 후 생성한 run만 채점한다. 첫 점수와 마스킹된 실행 원본·동결 revision을 private/<id>/first-run.json에 exclusive로 보존한다. 이후 재채점은 차단하며 수정 후 평가에는 별도 지시·별도 실행 계획이 필요하다. 콘솔·공개 보고에는 **위치와 적중 여부만** 출력한다. 실제 로그·소스·진단 내용은 인용·출력·커밋하지 않는다. 원본 실행 파일은 UTF-8 텍스트만 지원한다.
