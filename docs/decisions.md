@@ -1,5 +1,13 @@
 # 설계 결정
 
+## 2026-10-27 — M2.5 검토 반영·의존성 GATE
+
+- 사용자 검토에 따라 Layout Dialect의 레이아웃/본문 연결, data URL의 외부 JS AJAX 소비, JSP 1개 화면과 Thymeleaf의 리졸버 공존·반환 뷰 판정을 범위에 추가했다. 프롬프트의 「기본 ponytail lite로 필요한 부분만 읽는다」 문장은 삭제했다.
+- 삭제 AJAX와 별개로 공개 PetClinic의 화면 → Controller held-out 1건을 추가했다. 두 흐름 탐색 전 구현 동결, 두 정답 승인 후 같은 동결 구현으로 각각 첫 실행·보존·보고하는 규칙을 적용한다. 외부 JPA 구간은 제외한다.
+- 1번 GATE 제안은 Thymeleaf Spring5 3.1.5.RELEASE + Layout Dialect 3.4.0이다. 공식 배포 POM·Java 8 빌드 근거, 직접 2개·전이 7개 예상 집합과 라이선스, Thymeleaf 중복 경로 exclusion·SLF4J 버전 고정, JSP 공통코드 유지 설정을 [제안서](m2.5-dependency-proposal.md)에 구체화했다. 아직 승인된 의존성이 아니다.
+- 공개 PetClinic의 `500158f732419217507c7656904b8e6aa1bcc0d6` 커밋과 pom·라이선스만 확인했다. Java 17·Boot 4.1.0 환경을 로컬 Java 8 테스트베드와 구별한다. 클론·화면 흐름 탐색·정답 작성은 하지 않았다.
+- 이번 변경은 계획·승인 문서에 한정한다. 실제 pom·설정·코드 변경과 의존성 설치는 1번 GATE 승인 후 진행한다.
+
 ## 2026-10-27 — M2.5 계획 추가
 
 - 사용자 요청에 따라 M2와 M3 사이에 Thymeleaf 수집기 마일스톤과 `prompts/M2.5.md`를 추가했다. Ian의 JSP → Thymeleaf 이관을 위해 기존 si-trace·공통 인덱서를 확장하는 계획이며 이번 작업은 문서 작성까지만 수행한다.

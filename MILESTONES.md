@@ -27,7 +27,8 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 | 이름 | 위치 | 용도 |
 |---|---|---|
 | legacy-board | `examples/legacy-board/` (M0에서 생성) | 빌드·실행 가능한 소형 레거시 프로젝트. Spring MVC + MyBatis + JSP + jQuery, 테스트용 H2. 모든 스킬의 기본 테스트 대상 |
-| legacy-board-thymeleaf | `examples/legacy-board-thymeleaf/` (M2.5 예정) | legacy-board와 같은 Controller·Service·Mapper, Thymeleaf 화면. 검색·등록 서버 흐름 동등성과 삭제 AJAX held-out 검증 |
+| legacy-board-thymeleaf | `examples/legacy-board-thymeleaf/` (M2.5 예정) | 같은 서버 코드, Layout Dialect·data URL 외부 JS를 사용하는 Thymeleaf 화면과 공통코드 JSP 공존. 검색·등록 동등성과 삭제 AJAX held-out 검증 |
+| Spring PetClinic | `.testbeds/spring-petclinic/` (M2.5 예정, 소스 커밋 금지) | 공식 공개 프로젝트 고정 커밋의 화면 → Controller held-out 1건. 이후 JPA 구간 제외 |
 | 버그 케이스 | `evals/debug/cases/<id>/` | legacy-board에 적용하는 버그 패치 + 증상 로그. 원본 코드는 깨끗하게 유지 |
 | eGovFrame 공통컴포넌트 | 외부 클론 (`scripts/fetch-testbed.mjs`) | 실제 규모의 공개 레거시. 인덱서·si-trace 현실성 검증. 저장소에 커밋하지 않음 |
 | 실제 업무 사례 | `evals/private/` (gitignore) | Ian이 직접 넣는 마스킹된 실제 에러·코드 사례. 자기채점 방지용 |
@@ -108,24 +109,25 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 
 ## M2.5 — Thymeleaf 수집기
 
-**상태: 계획 작성 — 구현 미착수.** 실행 지시는 [prompts/M2.5.md](prompts/M2.5.md)를 따른다.
+**상태: 1번 GATE — 의존성 제안 작성, 승인 대기.** [의존성 제안서](docs/m2.5-dependency-proposal.md)와 [실행 프롬프트](prompts/M2.5.md)를 따른다. 구현·의존성 추가는 미착수다.
 
 **목표:** Ian의 JSP → Thymeleaf 이관 업무에서 to-be 화면의 이벤트부터 기존 서버 흐름까지 추적한다.
 
 **산출물**
-- `examples/legacy-board-thymeleaf/`: legacy-board의 Controller·Service·Mapper를 동일하게 유지하고 화면을 Thymeleaf로 변환. 화면 엔진 설정만 필요한 범위에서 변경
+- `examples/legacy-board-thymeleaf/`: legacy-board의 Controller·Service·Mapper를 동일하게 유지하고 화면을 Thymeleaf로 변환하되 공통코드 목록 1개는 JSP로 유지. 두 뷰 리졸버의 order·viewNames·prefix/suffix를 근거로 반환 뷰를 판정하고 불확실하면 LIKELY
 - 수집 대상: `th:action`, `th:href`/`th:src`의 `@{...}`(경로 변수·쿼리 파라미터 포함), `th:replace`/`th:insert`/`th:include` 프래그먼트, `th:inline="javascript"`의 AJAX URL
-- 학습 정답 초안 2건(검색·등록), 별도 held-out 삭제 AJAX 1건, 비교 결과와 지원 한계
+- 추가 수집: `layout:decorate`/`layout:fragment`의 레이아웃·본문 연결, `th:data-*`/`th:attr`의 data URL을 외부 JS가 읽어 AJAX 하는 흐름. 테스트베드 공통 레이아웃과 화면 1개 이상에 적용
+- 학습 정답 초안 2건(검색·등록), held-out 2건(자체 삭제 AJAX·외부 PetClinic 화면 → Controller)을 개별 등록·채점. 외부 JPA 구간은 범위 밖
 
 **완료 기준**
 - 승인된 legacy-board 검색·등록 2건과 비교해 화면 노드만 달라지고 서버 연결·상태는 동일함을 검증
 - 수집 범위의 확정·미확정 패턴 검증, 기존 JSP 학습 5건 회귀 확인, `npm test` 및 단독 설치 복사본 검사 통과
-- held-out 정답 승인 전 구현 수정 금지. 승인 후 동결 구현으로 첫 점수·원본·해시를 보존하고 보고한 뒤에만 수정 가능
+- held-out 2건의 흐름 탐색·정답 작성 전 구현 동결, 정답 승인 전 구현 수정 금지. 두 사례 모두 같은 동결 구현으로 첫 점수·원본·해시를 개별 보존·보고한 뒤 지시가 있을 때만 수정 가능
 - 테스트베드 빌드·렌더링·AJAX 동작 확인. 실행 환경이 없으면 BLOCKED와 재실행 명령 기록
 
-**[GATE]** `thymeleaf-spring5`의 Java 8 호환 버전·라이선스·전이 의존성 승인 → 검색·등록 정답 초안 승인 → 삭제 AJAX held-out 정답 승인 → 수정 전 첫 점수 보고. 각 지점에서 멈춘다.
+**[GATE]** `thymeleaf-spring5`와 `thymeleaf-layout-dialect`의 Java 8 호환 버전·라이선스·전이 의존성 및 공존 설정 승인 → 검색·등록 정답 초안 승인 → held-out 2건 정답 승인 → 수정 전 첫 점수 개별 보고. 각 지점에서 멈춘다.
 
-**Ian 할 일:** 의존성 추가안과 정답 2+1건 검토. 이번 문서 작성은 구현 착수나 의존성 추가 승인이 아니다.
+**Ian 할 일:** 먼저 1번 GATE 의존성·공존 설정안을 승인한다. 이후 학습 2건과 held-out 2건의 정답을 검토한다.
 
 ---
 
