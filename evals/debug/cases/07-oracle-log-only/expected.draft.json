@@ -7,6 +7,14 @@
   "locations": [
     {
       "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 23
+    },
+    {
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 26
+    },
+    {
+      "file": "src/main/resources/mapper/BoardMapper.xml",
       "line": 34
     }
   ],

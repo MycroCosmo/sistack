@@ -8,6 +8,8 @@ import { prepareCase } from './eval-debug.mjs';
 import { root, isMain, cli } from './common.mjs';
 import { json, save } from '../lib/trace/io.mjs';
 import { mask } from '../lib/mask/index.mjs';
+import { installCapture } from './debug-capture.mjs';
+import { StringDecoder } from 'node:string_decoder';
 
 export async function probeCase(id, base) {
   const url = new URL(base);
@@ -69,7 +71,7 @@ export async function probeCase(id, base) {
   throw new Error('실행 가능한 학습 사례가 아닙니다');
 }
 
-export async function reproduceCase(id, { maven, javaHome, output, baseline = false } = {}) {
+export async function reproduceCase(id, { maven, javaHome, output, baseline = false, capture = false } = {}) {
   if (process.platform !== 'win32') throw new Error('자동 서버 실행은 Windows용입니다. 다른 OS는 README의 수동 Jetty 절차를 따르세요');
   if (!maven || !javaHome || !output) throw new Error('Maven/JAVA_HOME/새 출력 경로 필요');
   try { await fetch('http://127.0.0.1:8080', { signal: AbortSignal.timeout(1000) }); throw new Error('8080 포트 사용 중'); }
@@ -80,12 +82,15 @@ export async function reproduceCase(id, { maven, javaHome, output, baseline = fa
     const spec = await json(path.join(root, 'evals/debug/cases', id, 'case.json'));
     for (const file of Object.keys(spec.source_files)) await copyFile(path.join(root, 'examples', prepared.testbed, file), path.join(prepared.project, file));
   }
+  const instrumentation = capture ? await installCapture(prepared.project) : [];
   let log = '', closed = false;
-  const child = spawn('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', '& $env:SISTACK_MAVEN -q jetty:run'], {
+  const command = capture ? "& $env:SISTACK_MAVEN -q '-Dfile.encoding=UTF-8' '-Dorg.eclipse.jetty.util.log.class=org.eclipse.jetty.util.log.StdErrLog' jetty:run" : '& $env:SISTACK_MAVEN -q jetty:run';
+  const child = spawn('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', command], {
     cwd: prepared.project, env: { ...process.env, JAVA_HOME: path.resolve(javaHome), SISTACK_MAVEN: path.resolve(maven) }, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
   child.on('close', () => { closed = true; });
-  const append = data => { log = (log + data.toString()).slice(-2 * 1024 * 1024); };
-  child.stdout.on('data', append); child.stderr.on('data', append);
+  const outDecoder = new StringDecoder('utf8'), errDecoder = new StringDecoder('utf8');
+  child.stdout.on('data', data => { log += outDecoder.write(data); });
+  child.stderr.on('data', data => { log += errDecoder.write(data); });
   const base = `http://127.0.0.1:8080/${prepared.testbed}`;
   try {
     let ready = false;
@@ -97,17 +102,19 @@ export async function reproduceCase(id, { maven, javaHome, output, baseline = fa
     const result = await probeCase(id, base);
     const expected = baseline ? result.healthy : result.bug;
     await save(output, { case_id: id, mode: baseline ? 'baseline' : 'patched', status: expected ? 'PASS' : 'FAIL', observed: result.observed,
-      reproduction_level: 5, java_home: javaHome, project: prepared.project, note: '증상 재현 확인이며 원인 위치 적중 평가가 아니다.' });
+      reproduction_level: 5, java_home: javaHome, project: prepared.project, instrumentation, note: '증상 재현 확인이며 원인 위치 적중 평가가 아니다.' });
     if (!expected) throw new Error('예상한 정상/결함 동작과 다릅니다');
     return { case_id: id, mode: baseline ? 'baseline' : 'patched', status: 'PASS', observed: result.observed };
   } finally {
     if (!closed) spawnSync('taskkill.exe', ['/PID', String(child.pid), '/T', '/F'], { windowsHide: true, stdio: 'ignore' });
+    if (!closed) await Promise.race([new Promise(resolve => child.once('close', resolve)), pause(3000)]);
+    log += outDecoder.end() + errDecoder.end();
     await save(output + '.server.txt', mask(log));
   }
 }
 
 if (isMain(import.meta.url)) await cli(async () => {
   const [id, maven, javaHome, output, mode] = process.argv.slice(2);
-  if (mode && mode !== 'baseline') throw new Error('마지막 옵션은 baseline만 허용합니다');
-  console.log(JSON.stringify(await reproduceCase(id, { maven, javaHome, output, baseline: mode === 'baseline' }), null, 2));
+  if (mode && !['baseline', 'capture'].includes(mode)) throw new Error('마지막 옵션은 baseline 또는 capture만 허용합니다');
+  console.log(JSON.stringify(await reproduceCase(id, { maven, javaHome, output, baseline: mode === 'baseline', capture: mode === 'capture' }), null, 2));
 });

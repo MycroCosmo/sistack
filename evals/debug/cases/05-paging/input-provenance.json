@@ -1,0 +1,10 @@
+{
+  "kind": "captured-runtime",
+  "source": "docs/evidence/m3-input-v2/runtime/05-paging.json.server.txt",
+  "source_sha256": "6800b0892d9e54c4f25fcb91c34d58f2bb0ff60d6bf26b819ff841cecdc4603f",
+  "selection": "access-only",
+  "fixture_line": 14,
+  "selected_sha256": "60ab1413b671118ed03ef1f2e72d8044c0f3e40affbed0749d279e52f72fc46b",
+  "symptom_sha256": "fed230293277ae562b40f610724d4bf81cbebf83ac670cbf62e201e351be252d",
+  "note": "임시 복사본의 로깅 계측만 추가. 예외/SQL/프레임/접근 결과를 수작업으로 작성하지 않음."
+}

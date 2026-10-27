@@ -1,3 +1,6 @@
 * text=auto eol=lf
 # Unified diff의 빈 문맥 줄은 한 칸으로 시작한다.
 evals/debug/cases/**/bug.patch whitespace=-blank-at-eol
+# 캡처한 SQL·예외 메시지의 원래 공백을 보존한다.
+evals/debug/cases/**/symptom.log whitespace=-blank-at-eol
+docs/evidence/m3-input-v2/**/*.txt whitespace=-blank-at-eol

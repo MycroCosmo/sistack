@@ -1,0 +1,10 @@
+{
+  "kind": "synthetic-oracle-format",
+  "source": "evals/debug/repro/oracle-format.log",
+  "source_sha256": "3bc45febe6383cdf9ed8fe43d306860ae4551ac35cf15f171675a152a1a23cb0",
+  "selection": "complete",
+  "fixture_line": 21,
+  "selected_sha256": "3bc45febe6383cdf9ed8fe43d306860ae4551ac35cf15f171675a152a1a23cb0",
+  "symptom_sha256": "eed72c92fe92848ae92e099dae2b2375342bb86e7916270294ddbc2448fc241a",
+  "note": "Oracle DB 실행 없이 MyBatis 형식을 재구성한 로그. 실제 캡처라고 주장하지 않음."
+}

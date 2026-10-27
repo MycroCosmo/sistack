@@ -4,13 +4,22 @@ import { mask } from '../mask/index.mjs';
 export function parseTrace(input, { packagePrefix = '' } = {}) {
   if (typeof packagePrefix !== 'string' || (packagePrefix && !/^[\w$]+(?:\.[\w$]+)*\.?$/.test(packagePrefix))) throw new Error('프로젝트 패키지 접두사 오류');
   const text = mask(input), exceptions = [], frames = [];
-  let current = null;
+  let current = null, pending = null;
   const stack = [];
   for (const [i, line] of text.split(/\r?\n/).entries()) {
+    // MyBatis의 ### 블록은 현재 예외의 메시지이며 새 스택 헤더가 아니다.
+    if (/^\s*###(?:\s|$)/.test(line)) continue;
+    const marker = /^(\s*)(Caused by:|Suppressed:)\s*$/.exec(line);
+    if (marker) {
+      pending = { label: marker[2], indent: marker[1].replaceAll('\t', '    ').length };
+      continue;
+    }
     const ex = /(?:^|\s)(?:(Caused by:|Suppressed:)\s+)?((?:[\w$]+\.)*(?:[\w$]*(?:Exception|Error)|Throwable))(?::\s*(.*))?$/.exec(line);
     if (ex) {
-      const indent = line.match(/^\s*/)[0].replaceAll('\t', '    ').length;
-      const relation = ex[1] === 'Caused by:' ? 'cause' : ex[1] === 'Suppressed:' ? 'suppressed' : 'root';
+      const indent = pending?.indent ?? line.match(/^\s*/)[0].replaceAll('\t', '    ').length;
+      const label = ex[1] ?? pending?.label;
+      const relation = label === 'Caused by:' ? 'cause' : label === 'Suppressed:' ? 'suppressed' : 'root';
+      pending = null;
       while (stack.length && (stack.at(-1).indent > indent || (relation === 'suppressed' && stack.at(-1).indent >= indent))) stack.pop();
       const parent = relation === 'root' ? null : stack.at(-1)?.id ?? null;
       if (relation === 'root') stack.length = 0;
@@ -19,6 +28,7 @@ export function parseTrace(input, { packagePrefix = '' } = {}) {
       stack.push({ id: current, indent });
       continue;
     }
+    if (line.trim()) pending = null;
     const frame = /^\s*at\s+(?:[\w.@-]+\/){0,2}([\w.$]+)\.([^\s.(]+)\(([^()]*)\)\s*$/.exec(line);
     if (frame) {
       const source = /^([^:]+\.java):(\d+)$/.exec(frame[3]);

@@ -1,3 +1,41 @@
-java.sql.SQLSyntaxErrorException: ORA-00904: "B"."CREATED_AT": invalid identifier
-	at kr.sistack.board.service.impl.BoardServiceImpl.list(BoardServiceImpl.java:25)
-synthetic phone=010-0000-0000 email=synthetic@example.invalid JSESSIONID=abcdef12345678901234567890abcdef12 transactionId=12345678-1234-1234-1234-123456789012
+2026-10-27 21:18:43.156 ERROR [http-nio-8080-exec-7] app.board.BoardQuery - Request processing failed
+org.apache.ibatis.exceptions.PersistenceException:
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: ORA-00904: "B"."CREATED_AT": invalid identifier
+### The error may exist in file [/app/WEB-INF/classes/mapper/BoardMapper.xml]
+### The error may involve kr.sistack.board.mapper.BoardMapper.selectList-Inline
+### The error occurred while setting parameters
+### SQL: SELECT * FROM (SELECT page_inner.*, ROWNUM rn FROM (SELECT b.* FROM BOARD b WHERE b.CREATED_AT >= ? AND b.CREATED_AT < ? ORDER BY b.CREATED_AT DESC, b.ID DESC) page_inner WHERE ROWNUM <= ?) WHERE rn > ?
+### Cause: java.sql.SQLSyntaxErrorException: ORA-00904: "B"."CREATED_AT": invalid identifier
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:156)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:142)
+	at app.board.BoardQuery.list(BoardQuery.java:54)
+	at app.board.BoardController.list(BoardController.java:81)
+Caused by: java.sql.SQLSyntaxErrorException: ORA-00904: "B"."CREATED_AT": invalid identifier
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:509)
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:461)
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1104)
+[SYNTHETIC MASK FIXTURE] phone=010-0000-0000 email=synthetic@example.invalid account=123456789012 JSESSIONID=abcdef12345678901234567890abcdef12 transactionId=12345678-1234-1234-1234-123456789012 classHash=abcdef12345678901234567890abcdef12
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:550)
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:268)
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:655)
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:270)
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:802)
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:984)
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1168)
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3666)
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3778)
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1081)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:65)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:80)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:65)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:158)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:110)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:90)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:154)
+	... 4 more
+2026-10-27T21:18:43.160+09:00 ACCESS GET /board/list.do 500

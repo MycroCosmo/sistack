@@ -15,7 +15,11 @@ Codex가 만든 아래 10건은 **자기 작성 편향이 있는 학습 세트**
 | [09-view-resolver](cases/09-view-resolver/expected.draft.md) | Thymeleaf/JSP | board/list 반환 | JSP resolver가 받아 JSP 404 |
 | [10-fragment-encoding](cases/10-fragment-encoding/expected.draft.md) | JSP | 목록 렌더링 | 본문 정상·paging.jspf 한글만 깨짐 |
 
-각 case.json은 대상 테스트베드의 기준 파일 해시와 패치 해시를 고정한다. 7번의 bug.patch는 빈 파일이며 Oracle 결함을 H2로 재현했다고 주장하지 않는다. symptom.log는 가짜 개인정보가 들어 있는 **합성 입력**이다. 실제 실행 증거는 docs/evidence/m3-reproduction/에 따로 둔다.
+각 case.json은 대상 테스트베드의 기준 파일 해시와 패치 해시를 고정한다. 7번의 bug.patch는 빈 파일이며 Oracle 결함을 H2로 재현했다고 주장하지 않는다.
+
+입력 v2의 9개 symptom.log는 임시 테스트베드에서 **실제로 캡처한 로그**다. 05·10은 접근 로그만 선택하고 나머지는 Spring 초기화·Jetty·전체 예외 스택과 SQL 블록을 보존한다. 중간의 `[SYNTHETIC MASK FIXTURE]` 한 줄만 마스킹 검사용 합성 데이터다. 07은 실제 Oracle 실행 없이 MyBatis 예외 형식을 재구성했으며 `input-provenance.json`에 합성임을 명시했다. 각 provenance에는 캡처 파일·선택 방법·해시·합성 줄 위치가 있다. 마스킹 결과도 [입력 v2 실행 기록](../../docs/evidence/m3-input-v2/README.md)에 보존했다.
+
+symptom.md에는 화면에서 관찰할 수 있는 말만 적는다. 원인·SQL/서비스 구조와 정답 설명은 검토용 expected.draft에만 둔다. 위치에 대한 1차 사용자 확인은 받았으나 입력 현실성 보강 후 **10건 재GATE** 상태다.
 
 ## 임시 복사본과 분석
 
@@ -36,9 +40,13 @@ node skills/si-debug/scripts/debug.mjs finish <project> debug-08-first
 ```sh
 node scripts/reproduce-debug.mjs 08-thymeleaf-utilities <mvn.cmd> <JAVA_HOME> .tmp/08-normal.json baseline
 node scripts/reproduce-debug.mjs 08-thymeleaf-utilities <mvn.cmd> <JAVA_HOME> .tmp/08-bug.json
+node scripts/reproduce-debug.mjs 08-thymeleaf-utilities <mvn.cmd> <JAVA_HOME> .tmp/capture/08-thymeleaf-utilities.json capture
 ```
 
 baseline은 임시 복사본에 원본 파일을 복사한 정상 실행이다. patched는 결함 상태가 관측돼야 PASS다. 데이터 생성은 local H2에서만 수행하며 probe 종료 시 생성 게시글 삭제를 시도한다. 5번은 초기 데이터 1건인 새 서버가 필요하다. 원인 진단 결과를 채점하지 않는 재현 도구다.
+capture도 patched 실행이다. 임시 복사본에 접근/미처리 예외 필터를 넣고 기존 공통 예외 처리기에 전체 스택 출력을 추가한다. Jetty 내장 StdErrLog를 사용해 의존성을 추가하지 않는다. 요청 본문·쿼리·쿠키를 별도로 출력하지 않으며 stdout/stderr는 UTF-8 스트림으로 끝까지 수집하고 마스킹 후 저장한다. 계측 경로는 실행 JSON에 기록한다. 원본 테스트베드는 수정하지 않는다.
+
+9건을 같은 새 디렉터리에 `<id>.json`으로 수집한 다음 `node scripts/refresh-debug-inputs.mjs <캡처 디렉터리>`로 학습 입력을 갱신한다. 이 명령은 symptom.log/md와 provenance를 갱신하므로 입력 변경이 승인된 작업에서만 실행한다. 07은 `repro/oracle-format.log`를 사용한다.
 다른 OS에서는 prepare 출력 디렉터리에서 `mvn -q jetty:run`을 실행하고 `probeCase`를 호출한다. Maven Central·JDK·서버 실행이 막히면 BLOCKED로 기록하고 같은 명령을 로컬에서 실행한다. Oracle 7번은 실행하지 않는다.
 
 예외 타입을 추가 확인하려면 `repro/M3ExceptionProbeTest.java`를 패치 임시 프로젝트의 src/test/java/kr/sistack/board/에 복사하고 `mvn -q -Dtest=M3ExceptionProbeTest -Dm3.case=08-thymeleaf-utilities test`를 실행한다. 01-binding/04-session-bypass/06-sort-sql도 같은 방식이다. 예외가 발생해야 통과하는 재현용 검사이며 M4의 수정 후 회귀 테스트와 구분한다.
@@ -47,14 +55,14 @@ baseline은 임시 복사본에 원본 파일을 복사한 정상 실행이다. 
 ## 동결과 승인 후 평가
 
 ```sh
-node scripts/eval-debug.mjs freeze docs/evidence/m3-freeze.json
+node scripts/eval-debug.mjs freeze docs/evidence/m3-freeze-v2.json
 ```
 
 동결은 구현·테스트·스키마·CLI·스킬 지침의 파일 해시와 Git revision을 저장한다. 수정이 생기면 기존 동결을 덮어쓰지 않고 새 동결·새 run으로 구분한다.
-Ian의 승인 뒤에만 expected.draft.json을 expected.json으로 복사하고 review_status=approved, approved_by에 승인 근거를 기록한다. 7번의 위치는 확인할 SQL 후보이며 확정된 실제 원인 위치가 아니다. 상태 UNRESOLVED를 유지하는지 함께 비교한다.
+Ian의 재GATE 승인 뒤에만 expected.draft.json을 expected.json으로 복사하고 review_status=approved, approved_by에 승인 근거를 기록한다. 7번은 BoardMapper.xml의 23·26·34행을 모두 후보로 남기고 UNRESOLVED를 유지해야 한다. 하나만 제시하거나 확정하면 FAIL이다. 기존 `m3-freeze.json`과 첫 GATE 보고는 그대로 보존하고 입력 v2 이후에는 `m3-freeze-v2.json`을 사용한다.
 
 ```sh
-node scripts/eval-debug.mjs score <run-dir> <expected.json> training <새-score.json> docs/evidence/m3-freeze.json <private-root>
+node scripts/eval-debug.mjs score <run-dir> <expected.json> training <새-score.json> docs/evidence/m3-freeze-v2.json <private-root>
 ```
 
 스킬 결과와 정답의 file/line/status를 비교한다. 기대 위치를 놓치거나 추가 후보 위치를 단정하면 전체 hit=false다. 파일 해시가 다르면 점수 대신 오류를 낸다. 승인 전 초안을 사용하거나 기존 결과를 덮어쓰는 실행은 거부한다.
@@ -65,7 +73,7 @@ node scripts/eval-debug.mjs score <run-dir> <expected.json> training <새-score.
 스킬 run도 해당 private/project/.sistack/runs 아래에 둔다. 외부 저장소 소스나 실제 사례를 공개 디렉터리로 복사하지 않는다.
 
 ```sh
-node scripts/eval-debug.mjs score evals/private/<id>/project/.sistack/runs/<run-id> evals/private/<id>/expected.json held-out evals/private/<id>/score.json docs/evidence/m3-freeze.json evals/private
+node scripts/eval-debug.mjs score evals/private/<id>/project/.sistack/runs/<run-id> evals/private/<id>/expected.json held-out evals/private/<id>/score.json docs/evidence/m3-freeze-v2.json evals/private
 ```
 
 동결 후 생성한 run만 채점한다. 첫 점수와 마스킹된 실행 원본·동결 revision을 private/<id>/first-run.json에 exclusive로 보존한다. 이후 재채점은 차단하며 수정 후 평가에는 별도 지시·별도 실행 계획이 필요하다. 콘솔·공개 보고에는 **위치와 적중 여부만** 출력한다. 실제 로그·소스·진단 내용은 인용·출력·커밋하지 않는다. 원본 실행 파일은 UTF-8 텍스트만 지원한다.

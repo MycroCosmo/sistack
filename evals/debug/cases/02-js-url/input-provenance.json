@@ -1,0 +1,10 @@
+{
+  "kind": "captured-runtime",
+  "source": "docs/evidence/m3-input-v2/runtime/02-js-url.json.server.txt",
+  "source_sha256": "7ade579afd9b3c9fbbe83be1b575112e853e12d4e7d99a9aa607018af34a7c3d",
+  "selection": "complete",
+  "fixture_line": 61,
+  "selected_sha256": "c5e6123ce34c5ee900570fbfe7ff55812d06be53ae8a1f047133eabc693bfc79",
+  "symptom_sha256": "5b8eea3c14f56d30ef677b1b46ab0ecf260717de91d8e84f9148f687005bc17d",
+  "note": "임시 복사본의 로깅 계측만 추가. 예외/SQL/프레임/접근 결과를 수작업으로 작성하지 않음."
+}
