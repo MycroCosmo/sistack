@@ -12,7 +12,9 @@ test('정답 freshness: 정상 근거, 소스 변경, 없는 라인/파일, 누�
     await mkdir(path.join(repositoryRoot, 'source'));
     const content = 'first\nsecond\n', file = path.join(repositoryRoot, 'source/A.java');
     await writeFile(file, content);
-    const expected = { schema_version: '1.0', review_status: 'approved', case_id: 'fixture', source_root: 'source', source_files: { 'A.java': createHash('sha256').update(content).digest('hex') }, edges: [{ evidence: [{ file: 'A.java', line: 2 }] }] };
+    const expected = { schema_version: '1.0', review_status: 'approved', case_id: 'fixture', source_root: 'source', source_files: { 'A.java': createHash('sha256').update(content).digest('hex') },
+      scope: [{ from: { name: 'C#run' }, kinds: ['calls'] }],
+      edges: [{ from: { name: 'C#run' }, to: { name: 'S#run' }, kind: 'calls', status: 'CONFIRMED', evidence: [{ file: 'A.java', line: 2 }] }] };
     const check = e => checkExpected(e, { repositoryRoot });
     assert.equal((await check(expected)).evidence_locations, 1);
     const draft = { ...expected, review_status: 'draft' };
@@ -22,6 +24,10 @@ test('정답 freshness: 정상 근거, 소스 변경, 없는 라인/파일, 누�
       await assert.rejects(check({ ...expected, extra: { evidence: [point] } }), /라인/);
     }
     await assert.rejects(check({ ...expected, edges: [{}] }), /evidence/);
+    for (const kind of ['renders', 'decorates']) {
+      assert.equal((await check({ ...expected, scope: [{ from: { name: 'C#run' }, kinds: [kind] }], edges: [{ ...expected.edges[0], kind }] })).status, 'PASS');
+    }
+    await assert.rejects(check({ ...expected, edges: [{ ...expected.edges[0], kind: 'unsupported' }] }), /종류/);
     await assert.rejects(check({ ...expected, source_root: '../source' }), /경로/);
     await writeFile(file, 'changed\nsecond\n');
     await assert.rejects(check(expected), /해시 불일치/);

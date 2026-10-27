@@ -2,6 +2,7 @@ import path from 'node:path';
 import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { root, noLinks, cli, isMain } from './common.mjs';
+import { validateExpected, assertParity } from '../lib/indexer/expected.mjs';
 
 function within(base, relative) {
   if (typeof relative !== 'string' || !relative || relative.includes('\\') || relative.includes(':') || relative.split('/').includes('..') || path.isAbsolute(relative)) throw new Error('정답 소스 경로는 내부 상대 경로여야 합니다');
@@ -12,6 +13,17 @@ function within(base, relative) {
 
 export async function checkExpected(expected, { repositoryRoot = root, allowDraft = false } = {}) {
   if (expected.schema_version !== '1.0' || !(expected.review_status === 'approved' || allowDraft && expected.review_status === 'draft') || !expected.source_files || !Object.keys(expected.source_files).length || !expected.edges?.length) throw new Error('승인 정답 계약 또는 source_files 누락');
+  const grouped = validateExpected(expected);
+  if (grouped && (expected.parity_reference || expected.edges.some(e => e.group === 'parity'))) {
+    const reference = expected.parity_reference;
+    if (!reference?.file || !/^[a-f0-9]{64}$/.test(reference.expected_sha256)) throw new Error('parity 기준 정답/해시 누락');
+    const referenceFile = within(repositoryRoot, reference.file);
+    await noLinks(referenceFile);
+    const bytes = await readFile(referenceFile), approved = JSON.parse(bytes);
+    if (createHash('sha256').update(bytes).digest('hex') !== reference.expected_sha256 || approved.review_status !== 'approved') throw new Error('parity 기준 승인 정답/해시 불일치');
+    validateExpected(approved);
+    assertParity(expected, approved);
+  }
   const sourceRoot = within(repositoryRoot, expected.source_root);
   await noLinks(sourceRoot);
   const lines = new Map();
@@ -43,7 +55,8 @@ export async function checkExpected(expected, { repositoryRoot = root, allowDraf
   };
   if (expected.edges.some(e => !Array.isArray(e.evidence) || !e.evidence.length)) throw new Error('정답 연결 evidence 누락');
   visit(expected);
-  return { case_id: expected.case_id, status: expected.review_status === 'draft' ? 'DRAFT_SOURCES_VALID' : 'PASS', source_files: lines.size, evidence_locations: evidenceCount };
+  return { case_id: expected.case_id, status: expected.review_status === 'draft' ? 'DRAFT_SOURCES_VALID' : 'PASS', source_files: lines.size, evidence_locations: evidenceCount,
+    ...(grouped ? { groups: Object.fromEntries(expected.score_groups.map(group => [group, { expected_edges: expected.edges.filter(e => e.group === group).length }])) } : {}) };
 }
 
 export async function checkAllExpected(repositoryRoot = root) {

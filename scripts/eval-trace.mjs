@@ -24,7 +24,10 @@ export async function evalTrace(runDir, expectedFile, { dataset, output, registr
     caveat: '에이전트 자기 적용 평가. training은 M1 수정에 사용한 사례다. held-out은 승인 후 첫 실행 원본을 별도 보존하고 후속 수정 결과와 합산하지 않는다.',
     score, raw: { trace, review, manifest, report } });
   await save(output, record); // 첫 결과든 후속 결과든 기존 기록은 덮어쓰지 않는다.
-  return { dataset, case_id: expected.case_id, status: score.status, expected: score.expected_edges, matched: score.matched, false_negatives: score.false_negatives.length, false_positives: score.false_positives.length, status_mismatches: score.status_mismatches.length, output };
+  const summary = s => ({ status: s.status, expected: s.expected_edges, matched: s.matched, false_negatives: s.false_negatives.length,
+    false_positives: s.false_positives.length, status_mismatches: s.status_mismatches.length });
+  return { dataset, case_id: expected.case_id, status: score.status,
+    ...(score.groups ? { groups: Object.fromEntries(Object.entries(score.groups).map(([group, s]) => [group, { ...summary(s), applicable: s.applicable }])) } : summary(score)), output };
 }
 
 if (isMain(import.meta.url)) await cli(async () => {

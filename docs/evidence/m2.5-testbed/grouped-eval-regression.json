@@ -1,0 +1,176 @@
+{
+  "reference": "7e133f1",
+  "comparator_sha256": "535014199aabd080ad411ac4f60da512ddc0a0959a63a1127fa5af1894427639",
+  "status": "PASS",
+  "method": "보존된 v2-final trace와 현재 승인 정답을 이전/현재 비교기에 동일하게 입력. 전체 누락·과탐·상태 불일치 배열까지 비교. 새 앱/수집기 실행이 아님.",
+  "results": [
+    {
+      "case_id": "egov-article-list",
+      "dataset": "held-out",
+      "unchanged": true,
+      "before": {
+        "status": "PASS",
+        "expected": 38,
+        "matched": 38,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      },
+      "after": {
+        "status": "PASS",
+        "expected": 38,
+        "matched": 38,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      }
+    },
+    {
+      "case_id": "egov-user-insert",
+      "dataset": "held-out",
+      "unchanged": true,
+      "before": {
+        "status": "PASS",
+        "expected": 11,
+        "matched": 11,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      },
+      "after": {
+        "status": "PASS",
+        "expected": 11,
+        "matched": 11,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      }
+    },
+    {
+      "case_id": "egov-id-dplct-ajax",
+      "dataset": "held-out",
+      "unchanged": true,
+      "before": {
+        "status": "PASS",
+        "expected": 17,
+        "matched": 17,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      },
+      "after": {
+        "status": "PASS",
+        "expected": 17,
+        "matched": 17,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      }
+    },
+    {
+      "case_id": "legacy-board-search",
+      "dataset": "training",
+      "unchanged": true,
+      "before": {
+        "status": "PASS",
+        "expected": 17,
+        "matched": 17,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      },
+      "after": {
+        "status": "PASS",
+        "expected": 17,
+        "matched": 17,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      }
+    },
+    {
+      "case_id": "legacy-board-create",
+      "dataset": "training",
+      "unchanged": true,
+      "before": {
+        "status": "PASS",
+        "expected": 14,
+        "matched": 14,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      },
+      "after": {
+        "status": "PASS",
+        "expected": 14,
+        "matched": 14,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      }
+    },
+    {
+      "case_id": "egov-clcode-delete",
+      "dataset": "training",
+      "unchanged": true,
+      "before": {
+        "status": "PASS",
+        "expected": 7,
+        "matched": 7,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      },
+      "after": {
+        "status": "PASS",
+        "expected": 7,
+        "matched": 7,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      }
+    },
+    {
+      "case_id": "egov-detailcode-list",
+      "dataset": "training",
+      "unchanged": true,
+      "before": {
+        "status": "PASS",
+        "expected": 13,
+        "matched": 13,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      },
+      "after": {
+        "status": "PASS",
+        "expected": 13,
+        "matched": 13,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      }
+    },
+    {
+      "case_id": "egov-rss-columns",
+      "dataset": "training",
+      "unchanged": true,
+      "before": {
+        "status": "PASS",
+        "expected": 5,
+        "matched": 5,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      },
+      "after": {
+        "status": "PASS",
+        "expected": 5,
+        "matched": 5,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": []
+      }
+    }
+  ]
+}

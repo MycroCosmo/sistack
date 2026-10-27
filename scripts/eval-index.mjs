@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { cli, isMain } from './common.mjs';
 import { sanitize } from '../lib/indexer/graph.mjs';
 import { evalIndex } from '../lib/indexer/eval.mjs';
+import { checkExpected } from './check-expected.mjs';
 
 if (isMain(import.meta.url)) await cli(async () => {
   const args = process.argv.slice(2), indexFile = args.shift(), expectedFile = args.shift();
@@ -12,6 +13,7 @@ if (isMain(import.meta.url)) await cli(async () => {
   let index, expected;
   try { [index, expected] = await Promise.all([indexFile, expectedFile].map(async f => JSON.parse(await readFile(f, 'utf8')))); }
   catch { throw new Error('인덱스/정답 JSON을 읽을 수 없습니다'); }
+  await checkExpected(expected, { allowDraft: draft });
   const result = sanitize(evalIndex(index, expected, { draft }));
   console.log(JSON.stringify(result, null, 2));
   if (result.status === 'FAIL') process.exitCode = 1;

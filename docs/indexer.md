@@ -1,5 +1,16 @@
 # M1 인덱서 사용법
 
+## M2.5 채점 계약 확장
+
+- 인덱스에 `template` 노드와 `renders`·`decorates` 연결을 허용한다. `requests`·`includes`는 기존 종류를 재사용한다. 이는 그래프 계약 확장이며 Thymeleaf 수집기는 아직 구현 전이다.
+- 새 [정답 스키마](../schemas/expected.schema.json)의 `score_groups: ["parity", "screen"]`과 edges/scope의 group을 사용하면 두 그룹을 각각 채점한다. 합산 expected/matched 필드는 출력하지 않는다. 그룹 없는 기존 정답은 이전 점수 형식을 유지한다.
+- `parity_reference`는 기존 승인 JSP 정답 파일과 SHA-256이다. check-expected는 기준 승인본의 화면 requests를 제외한 서버 from/to/kind/status와 parity가 같은지 검사한다. 파일/라인·소스 해시도 검사한다. JSON Schema만으로 표현하기 어려운 참조·중복·그룹 범위 불변조건은 `lib/indexer/expected.mjs`와 check-expected가 검증한다.
+- screen의 data AJAX 출발은 `list.html#요소ID`, fragment 도착은 `fragment파일#fragment이름`이다. requests의 도착 endpoint만 HTTP 메서드를 보존하고 쿼리·fragment를 제외한 경로로 비교한다. 다른 연결은 선택자를 그대로 비교한다.
+- 공존 전용 사례는 parity 0개를 applicable:false로 표시한다. 초안은 기존대로 DRAFT_PREVIEW/scoring:false이며 자동 승인하지 않는다.
+- 기존 8건 회귀 재현: `node scripts/check-eval-compat.mjs 7e133f1 .sistack/eval-compat-recheck.json`. 출력은 새 경로를 사용한다. 보존 v2-final trace에 같은 현재 승인 정답을 넣어 이전/현재 비교기를 대조하며 새 수집기 실행 결과가 아니다.
+
+## 기본 사용
+
 Node.js 18 이상. 추가 npm 의존성이나 DB 연결이 필요하지 않다. 기본 JSON 계약은 [index.schema.json](../schemas/index.schema.json)이다. 지원 범위는 [limitations](limitations.md)를 먼저 확인한다.
 
 ```sh

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SIStack trace expected connections v1",
+  "type": "object",
+  "required": ["schema_version", "case_id", "review_status", "source_root", "source_revision", "source_files", "scope", "edges"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "case_id": {"type": "string", "minLength": 1},
+    "review_status": {"enum": ["draft", "approved"]},
+    "source_root": {"type": "string", "minLength": 1},
+    "source_revision": {"type": ["string", "null"]},
+    "source_files": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}},
+    "score_groups": {"const": ["parity", "screen"]},
+    "parity_reference": {
+      "type": "object", "required": ["file", "expected_sha256"],
+      "properties": {"file": {"type": "string"}, "expected_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+    },
+    "scope": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/scope"}},
+    "edges": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/edge"}}
+  },
+  "allOf": [{
+    "if": {"required": ["score_groups"]},
+    "then": {"properties": {
+      "edges": {"items": {"required": ["group"]}},
+      "scope": {"items": {"required": ["group"]}}
+    }},
+    "else": {"properties": {
+      "edges": {"items": {"not": {"required": ["group"]}}},
+      "scope": {"items": {"not": {"required": ["group"]}}}
+    }}
+  }],
+  "$defs": {
+    "selector": {
+      "type": "object", "minProperties": 1, "additionalProperties": false,
+      "properties": {"name": {"type": "string", "minLength": 1}, "kind": {"type": "string", "minLength": 1}, "file": {"type": "string", "minLength": 1}, "pattern": {"type": "string", "minLength": 1}}
+    },
+    "kind": {"enum": ["calls", "requests", "maps_to", "intercepted_by", "executes", "includes", "reads", "writes", "renders", "decorates"]},
+    "group": {"enum": ["parity", "screen"]},
+    "scope": {
+      "type": "object", "required": ["from"],
+      "properties": {
+        "from": {"$ref": "#/$defs/selector"}, "kinds": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/kind"}},
+        "group": {"$ref": "#/$defs/group"}, "file": {"type": "string"}, "line": {"type": "integer", "minimum": 1}
+      }
+    },
+    "edge": {
+      "type": "object", "required": ["from", "to", "kind", "status", "evidence"],
+      "properties": {
+        "from": {"$ref": "#/$defs/selector"}, "to": {"$ref": "#/$defs/selector"},
+        "kind": {"$ref": "#/$defs/kind"}, "group": {"$ref": "#/$defs/group"},
+        "status": {"enum": ["CONFIRMED", "LIKELY", "UNRESOLVED"]}, "reason": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "minItems": 1, "items": {
+          "type": "object", "required": ["file", "line"],
+          "properties": {"file": {"type": "string"}, "line": {"type": "integer", "minimum": 1}}
+        }}
+      },
+      "allOf": [{"if": {"properties": {"status": {"enum": ["LIKELY", "UNRESOLVED"]}}}, "then": {"required": ["reason"]}}]
+    }
+  }
+}

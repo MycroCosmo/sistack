@@ -61,3 +61,31 @@ test('스킬 eval은 등록된 held-out이어도 미승인 초안과 낡은 소�
   await writeFile(path.join(s.dir, 'fixture.java'), 'changed');
   await assert.rejects(evalTrace(s.dir, s.expectedFile, options), /해시/);
 });
+
+test('스킬 eval 출력과 저장 결과는 그룹별 점수만 내고 JSP parity 변형을 차단한다', async t => {
+  const s = await fixture(t), reference = path.join(s.dir, 'reference.json');
+  await save(reference, s.expected);
+  s.expected.score_groups = ['parity', 'screen'];
+  s.expected.parity_reference = { file: path.relative(root, reference).replaceAll('\\', '/'), expected_sha256: digest(await readFile(reference)) };
+  s.expected.edges[0].group = 'parity'; s.expected.scope[0].group = 'parity';
+  s.expected.edges.push({ from: { name: 'C#run' }, to: { name: 'page.html' }, kind: 'renders', group: 'screen', status: 'CONFIRMED', evidence: [{ file: 'fixture.java', line: 1 }] });
+  s.expected.scope.push({ from: { name: 'C#run' }, kinds: ['renders'], group: 'screen' });
+  s.trace.nodes.push({ id: 'page', name: 'page.html', kind: 'template', file: 'fixture.java', line: 1 });
+  s.trace.edges.push({ from: s.trace.nodes[0].id, to: 'page', kind: 'renders', status: 'CONFIRMED', evidence: [{ file: 'fixture.java', line: 1 }] });
+  await save(s.expectedFile, s.expected, { exclusive: false });
+  await save(path.join(s.dir, 'evidence/trace.json'), s.trace, { exclusive: false });
+  const options = { dataset: 'training', output: path.join(s.dir, 'grouped.json'), registry: s.registry };
+  const result = await evalTrace(s.dir, s.expectedFile, options), record = await json(options.output);
+  assert.equal(result.groups.parity.matched, 1); assert.equal(result.groups.screen.matched, 1);
+  assert.ok(!('matched' in result)); assert.ok(!('expected' in result)); assert.ok(!('expected_edges' in record.score));
+  assert.equal(record.score.groups.screen.matched, 1);
+  const groupedExpected = structuredClone(s.expected);
+  s.expected.edges = s.expected.edges.filter(e => e.group !== 'parity');
+  s.expected.scope = s.expected.scope.filter(s => s.group !== 'parity');
+  await save(s.expectedFile, s.expected, { exclusive: false });
+  await assert.rejects(evalTrace(s.dir, s.expectedFile, { ...options, output: path.join(s.dir, 'missing-parity.json') }), /parity.*JSP/);
+  s.expected = groupedExpected;
+  s.expected.edges[0].to.name = 'Changed#run';
+  await save(s.expectedFile, s.expected, { exclusive: false });
+  await assert.rejects(evalTrace(s.dir, s.expectedFile, { ...options, output: path.join(s.dir, 'invalid.json') }), /parity.*JSP/);
+});
