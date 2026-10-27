@@ -16,7 +16,7 @@ import { collectThymeleaf, linkThymeleaf } from './thymeleaf.mjs';
 import { viewConfiguration, linkViews } from './views.mjs';
 
 const ignored = new Set(['.git', '.sistack', '.testbeds', 'node_modules', 'target', 'build', 'dist', '.idea', '.agents', '.claude', '.codex']);
-const extensions = new Set(['.java', '.jsp', '.jspf', '.js', '.xml', '.sql', '.properties', '.html']);
+const extensions = new Set(['.java', '.jsp', '.jspf', '.js', '.xml', '.sql', '.properties', '.html', '.htm', '.yml', '.yaml', '.gradle', '.kts']);
 
 export async function buildIndex(target, { progress = () => {} } = {}) {
   const started = performance.now(), root = path.resolve(target), graph = new Graph();
@@ -56,7 +56,7 @@ export async function buildIndex(target, { progress = () => {} } = {}) {
       else if (ext === '.sql') collectSql(file, text, graph);
       else if (ext === '.js') scripts.push(collectJs(file, text, graph));
       else if (ext === '.jsp' || ext === '.jspf') { const page = collectJsp(file, text, graph); pages.push(page); scripts.push(...page.inline); }
-      else if (ext === '.html') { const page = collectThymeleaf(file, text, graph); templates.push(page); scripts.push(...page.inline); }
+      else if (ext === '.html' || ext === '.htm') { const page = collectThymeleaf(file, text, graph); templates.push(page); scripts.push(...page.inline); }
       processed++;
     } catch { graph.skip({ file, line: 1 }, 'parse-failure', `${ext} 구조 파싱 실패; 나머지 파일 계속 처리`); }
   }

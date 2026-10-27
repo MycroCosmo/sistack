@@ -1,5 +1,13 @@
 # 설계 결정
 
+## 2026-10-27 — M2.5 일반 규칙 v2 수정 승인·실패 테스트 먼저
+
+- 사용자가 첫 FAIL 기준선 보존 후 네 일반 규칙 수정·새 run-id v2·학습/기존 JSP 회귀·M2.5 종료 점검을 승인했다. 첫 승인 정답·도구 지문·점수·49개 원본은 그대로 둔다. v2는 결함 수정 확인이며 일반화 성능이 아니다. M3는 시작하지 않는다.
+- 일반 합성 테스트 10건을 먼저 작성·실행해 0/10 PASS, 10 FAIL을 확인하고 `0add4e1`에 보존했다. submit 중복/다른 URL/다른 method·취소 없음, root/인자/자기 참조 fragment·잘못된 식, Maven/Gradle starter·YAML/profile 설정, 상수/private 반환 깊이·순환을 검사한다. 프로젝트/메서드 이름을 수집 규칙에 넣지 않는다.
+- submit의 선행 취소·AJAX 종류·URL/HTTP method·폼 ID·스크립트 포함 관계를 함께 보고 같은 요청이면 handler 요청에 양쪽 근거를 합친다. 다른 endpoint/메서드/조건은 기본 action을 차단 이유의 LIKELY로 남긴다. fragment는 최상위 template/selector와 중첩 괄호 인자를 구별한다.
+- Boot 기본 뷰는 build 좌표와 application*.properties/yml/yaml의 prefix/suffix만 해석한다. 재정의 없으면 classpath:/templates/+.html, profile 상충/미지원 YAML은 LIKELY다. YAML 들여쓰기/점 키·한 줄 scalar 이외 구문은 실행·완전 해석하지 않는다. Node 외부 의존성은 추가하지 않았다. 같은 클래스 상수/private String 반환은 깊이 2까지, 동적/순환/모호성은 LIKELY이며 redirect/forward는 템플릿이 아니다.
+- 수정 후 집중 26/26, 전체 npm test **107/107 PASS**, 정답 근거 13건·스킬·복사본 검사 PASS다. 최초 전체 실행의 임시 Git config 쓰기는 샌드박스 권한으로 1건 실패했고 코드 변경 없이 권한 있는 동일 명령에서 통과했다. Java 17/Maven 오프라인 JUnit 2건도 PASS, 기존 SLF4J provider 부재 경고는 유지한다.
+
 ## 2026-10-27 — held-out 확장 승인·수정 전 첫 실행
 
 - 사용자 검토를 반영해 삭제 requests를 detail.html 전체 from.file scope로 넓혔다. POST 정답은 handler 1개이며 성공 GET 이동과 기존 목록/수정 링크도 포함해 screen 4개/server 9개다. PetClinic은 세 endpoint 매핑, Boot 기본 뷰 3개(private helper 경유 포함), 매개변수 layout includes·검색/신규 requests로 확장해 screen 6개/server 3개다. 정답은 소스 사실에 따라 CONFIRMED를 유지하고 `39c30c1`에 먼저 승인 확정했다.
