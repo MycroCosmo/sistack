@@ -1,0 +1,9 @@
+{
+  "first_run_id": "m3-training-first-04-session-bypass",
+  "first_diagnosis_sha256": "81b1b50f315be7bb2e4497b30c9dc86aef8b355a8af787e04579af58e0626505",
+  "first_source_review_sha256": "d75839b09d4cc9a4418df58e31e5ebdc6122618a6aa0a52dbeca8078e78eb5a1",
+  "source_hashes_identical": true,
+  "input_log_identical": true,
+  "candidate_locations_unchanged": true,
+  "note": "첫 수동 검토를 동일 소스 해시로 재확인한 대응 비교. 신규 파서·인덱스와 run-id를 사용하며 블라인드 재분석은 아니다."
+}

@@ -1,0 +1,22 @@
+{
+  "dataset": "training",
+  "case_id": "10-fragment-encoding",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+        "start": 1,
+        "end": 1,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "9bd0161f623303bb3d0b5b9ef437a901e80c8899",
+  "tool_fingerprint": "aa14ff3d10fabd86f6bfc125d7b6a003cdb951f751ab79fc451fbc99eb90a79f",
+  "run_id": "m3-training-v4-10-fragment-encoding",
+  "expected_sha256": "474c9a7d51ab1e92d448f604df9f4f1fba78e184092ce78af34cacf92ffee4eb",
+  "report_sha256": "159e9fc3c088fe2b87c0df7cac723fc06440a96172eec6e9a7a18e8bfdde81b7",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

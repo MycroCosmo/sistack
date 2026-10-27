@@ -1,0 +1,9 @@
+{
+  "first_run_id": "m3-training-first-07-oracle-log-only",
+  "first_diagnosis_sha256": "bf2182397b218e707a7ac782375e6c56ca9b19837c703cb334a0286c3194ea4e",
+  "first_source_review_sha256": "a602fd1c5c214a6397b43212b621f63b3992e0606c62d7252b647784e222e8e3",
+  "source_hashes_identical": true,
+  "input_log_identical": true,
+  "candidate_locations_unchanged": true,
+  "note": "첫 수동 검토를 동일 소스 해시로 재확인한 대응 비교. 신규 파서·인덱스와 run-id를 사용하며 블라인드 재분석은 아니다."
+}

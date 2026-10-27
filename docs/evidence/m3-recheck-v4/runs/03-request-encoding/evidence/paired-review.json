@@ -1,0 +1,9 @@
+{
+  "first_run_id": "m3-training-first-03-request-encoding",
+  "first_diagnosis_sha256": "16cb2cafc42e9cd6cf247c9388039c51c60e97f68c426f2a5e4383a1d4cf4648",
+  "first_source_review_sha256": "8edc334d17a73363d232c25cd3f62815e320629d59125aeae54e70dc626b6172",
+  "source_hashes_identical": true,
+  "input_log_identical": true,
+  "candidate_locations_unchanged": true,
+  "note": "첫 수동 검토를 동일 소스 해시로 재확인한 대응 비교. 신규 파서·인덱스와 run-id를 사용하며 블라인드 재분석은 아니다."
+}

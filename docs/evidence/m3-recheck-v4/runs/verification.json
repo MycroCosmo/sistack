@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "masked_files": 142,
+  "valid_manifests": 10,
+  "unchanged_candidate_sets": 10,
+  "unchanged_submitted_diagnoses": 10,
+  "frozen_files": 186,
+  "approved_expected_hashes": 10,
+  "source_modified": false,
+  "app_rerun": false
+}

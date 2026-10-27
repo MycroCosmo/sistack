@@ -1,0 +1,21 @@
+{
+  "dataset": "training",
+  "case_id": "01-binding",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+        "line": 10,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "9bd0161f623303bb3d0b5b9ef437a901e80c8899",
+  "tool_fingerprint": "aa14ff3d10fabd86f6bfc125d7b6a003cdb951f751ab79fc451fbc99eb90a79f",
+  "run_id": "m3-training-v4-01-binding",
+  "expected_sha256": "a4c05719e7048ca94b632691252a77f145416352e13f5e045cdd3aa54d28b8e3",
+  "report_sha256": "9ddf3b930c273a56104a60fe7e124682122c6aa46267ef7d29dd02f991771dfe",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

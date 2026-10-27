@@ -1,0 +1,21 @@
+{
+  "dataset": "training",
+  "case_id": "06-sort-sql",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+        "line": 78,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "9bd0161f623303bb3d0b5b9ef437a901e80c8899",
+  "tool_fingerprint": "aa14ff3d10fabd86f6bfc125d7b6a003cdb951f751ab79fc451fbc99eb90a79f",
+  "run_id": "m3-training-v4-06-sort-sql",
+  "expected_sha256": "52e371577d957e73e3af085bb019a057ccbf5c2498b055f394a9c531c8138102",
+  "report_sha256": "8a0ee439579a303e6ec182b18bc90f16f78183117899a2fd498f05a831940d59",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

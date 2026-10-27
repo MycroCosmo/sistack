@@ -1,0 +1,206 @@
+{
+  "dataset": "training",
+  "evaluation": "paired-v4-recheck",
+  "frozen_revision": "9bd0161f623303bb3d0b5b9ef437a901e80c8899",
+  "tool_fingerprint": "aa14ff3d10fabd86f6bfc125d7b6a003cdb951f751ab79fc451fbc99eb90a79f",
+  "first_baseline": {
+    "revision": "aa0c3bbe296ed5b6e04b47aa92cc73e7ad3c3dd3",
+    "cases": 10,
+    "hit_cases": 8,
+    "expected_locations": 16,
+    "hit_locations": 14,
+    "extra_locations": 2
+  },
+  "cases": 10,
+  "hit_cases": 10,
+  "expected_locations": 16,
+  "hit_locations": 16,
+  "point_locations": 14,
+  "deletion_ranges": 2,
+  "extra_locations": 0,
+  "caveat": "Codex 자기 작성 학습 세트. 동일 진단 위치의 대응 비교다. 06 정답 정정과 04/10 범위 규칙 변경을 반영한 점수이며 일반화/독립 분석 성능 향상이 아니다. held-out 미열람·미실행.",
+  "scores": [
+    {
+      "dataset": "training",
+      "case_id": "01-binding",
+      "locations": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 10,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "analysis_status": "PASS",
+      "evidence_level": 5
+    },
+    {
+      "dataset": "training",
+      "case_id": "02-js-url",
+      "locations": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 4,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "analysis_status": "PASS",
+      "evidence_level": 5
+    },
+    {
+      "dataset": "training",
+      "case_id": "03-request-encoding",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/web.xml",
+          "line": 15,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "analysis_status": "PASS",
+      "evidence_level": 5
+    },
+    {
+      "dataset": "training",
+      "case_id": "04-session-bypass",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "start": 9,
+          "end": 13,
+          "hit": true
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 37,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "analysis_status": "PASS",
+      "evidence_level": 5
+    },
+    {
+      "dataset": "training",
+      "case_id": "05-paging",
+      "locations": [
+        {
+          "file": "src/main/java/kr/sistack/board/common/Pagination.java",
+          "line": 39,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "analysis_status": "PASS",
+      "evidence_level": 5
+    },
+    {
+      "dataset": "training",
+      "case_id": "06-sort-sql",
+      "locations": [
+        {
+          "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+          "line": 78,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "analysis_status": "PASS",
+      "evidence_level": 5
+    },
+    {
+      "dataset": "training",
+      "case_id": "07-oracle-log-only",
+      "locations": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 23,
+          "hit": true
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 26,
+          "hit": true
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 34,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "analysis_status": "PARTIAL",
+      "evidence_level": 2
+    },
+    {
+      "dataset": "training",
+      "case_id": "08-thymeleaf-utilities",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+          "line": 7,
+          "hit": true
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+          "line": 7,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "analysis_status": "PASS",
+      "evidence_level": 5
+    },
+    {
+      "dataset": "training",
+      "case_id": "09-view-resolver",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 35,
+          "hit": true
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 40,
+          "hit": true
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 41,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "analysis_status": "PASS",
+      "evidence_level": 5
+    },
+    {
+      "dataset": "training",
+      "case_id": "10-fragment-encoding",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+          "start": 1,
+          "end": 1,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "analysis_status": "PASS",
+      "evidence_level": 5
+    }
+  ]
+}

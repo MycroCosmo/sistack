@@ -1,0 +1,6 @@
+{
+  "command": "git apply --check",
+  "status": "PASS",
+  "source_unchanged": true,
+  "patch_applied": false
+}

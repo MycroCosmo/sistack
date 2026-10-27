@@ -1,0 +1,121 @@
+src/main/webapp/WEB-INF/web.xml
+1: <?xml version="1.0" encoding="UTF-8"?>
+2: <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+3:     <context-param>
+4:         <param-name>contextConfigLocation</param-name>
+5:         <param-value>classpath:spring/root-context.xml</param-value>
+6:     </context-param>
+7:     <listener>
+8:         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+9:     </listener>
+10:     <filter>
+11:         <filter-name>encoding</filter-name>
+12:         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+13:         <init-param>
+14:             <param-name>encoding</param-name>
+15:             <param-value>ISO-8859-1</param-value>
+16:         </init-param>
+17:         <init-param>
+18:             <param-name>forceEncoding</param-name>
+19:             <param-value>true</param-value>
+20:         </init-param>
+21:     </filter>
+22:     <filter-mapping>
+23:         <filter-name>encoding</filter-name>
+24:         <url-pattern>/*</url-pattern>
+25:     </filter-mapping>
+26:     <servlet>
+27:         <servlet-name>dispatcher</servlet-name>
+28:         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+29:         <init-param>
+30:             <param-name>contextConfigLocation</param-name>
+31:             <param-value>/WEB-INF/spring/dispatcher-servlet.xml</param-value>
+32:         </init-param>
+33:         <load-on-startup>1</load-on-startup>
+34:     </servlet>
+35:     <servlet-mapping>
+36:         <servlet-name>dispatcher</servlet-name>
+37:         <url-pattern>/</url-pattern>
+38:     </servlet-mapping>
+39:     <session-config>
+40:         <session-timeout>20</session-timeout>
+41:         <cookie-config>
+42:             <http-only>true</http-only>
+43:         </cookie-config>
+44:         <tracking-mode>COOKIE</tracking-mode>
+45:     </session-config>
+46:     <welcome-file-list>
+47:         <welcome-file>auth/login.do</welcome-file>
+48:     </welcome-file-list>
+49:     <error-page>
+50:         <error-code>403</error-code>
+51:         <location>/WEB-INF/views/error.jsp</location>
+52:     </error-page>
+53:     <error-page>
+54:         <error-code>404</error-code>
+55:         <location>/WEB-INF/views/error.jsp</location>
+56:     </error-page>
+57:     <error-page>
+58:         <error-code>500</error-code>
+59:         <location>/WEB-INF/views/error.jsp</location>
+60:     </error-page>
+61: </web-app>
+62: 
+src/main/java/kr/sistack/board/web/BoardController.java
+55:     }
+56: 
+57:     @PostMapping("/create.do")
+58:     public String create(@ModelAttribute("board") Board board, @RequestAttribute("currentUser") UserSession user) {
+59:         return "redirect:/board/detail.do?id=" + service.create(board, user.getName());
+60:     }
+61: 
+62:     @PostMapping("/update.do")
+63:     public String update(@RequestParam("id") long id, @ModelAttribute("board") Board board) {
+64:         service.update(id, board);
+65:         return "redirect:/board/detail.do?id=" + id;
+66:     }
+67: 
+68:     @PostMapping(value = "/delete.do", produces = "application/json")
+69:     @ResponseBody
+70:     public Map<String, Object> delete(@RequestParam("id") long id) {
+71:         service.delete(id);
+72:         return Collections.<String, Object>singletonMap("success", true);
+73:     }
+74: }
+75: 
+src/main/webapp/WEB-INF/views/board/form.jsp
+1: <%@ page contentType="text/html; charset=UTF-8" %>
+2: <!DOCTYPE html>
+3: <html lang="ko">
+4:     <head>
+5:         <title>게시글 작성</title>
+6:         <%@ include file="../common/header.jspf" %>
+7:     </head>
+8:     <body>
+9:         <main>
+10:             <%@ include file="../common/menu.jspf" %>
+11:             <h1>게시글 ${board.id == 0 ? '등록' : '수정'}</h1>
+12:             <c:url value="${board.id == 0 ? '/board/create.do' : '/board/update.do'}" var="saveUrl"/>
+13:             <form method="post" action="${fn:escapeXml(saveUrl)}">
+14:                 <input type="hidden" name="id" value="${board.id}">
+15:                 <input type="hidden" name="csrf" value="<c:out value='${sessionScope.csrf}'/>">
+16:                 <label>제목 <input name="title" maxlength="200" required value="<c:out value='${board.title}'/>">
+17:                 </label>
+18:                 <label>분류 <select name="category">
+19:                         <c:forEach items="${categories}" var="category">
+20:                             <option value="${fn:escapeXml(category.code)}" ${board.category == category.code ? 'selected' : ''}>
+21:                                 <c:out value="${category.label}"/>
+22:                             </option>
+23:                         </c:forEach>
+24:                     </select>
+25:                 </label>
+26:                 <label>내용
+27:                     <textarea name="content" maxlength="4000" required rows="8"><c:out value="${board.content}"/></textarea>
+28:                 </label>
+29:                 <button>저장</button>
+30:                 <a href="<c:url value='/board/list.do'/>">취소</a>
+31:             </form>
+32:         </main>
+33:     </body>
+34: </html>
+35: 

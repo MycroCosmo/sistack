@@ -1,0 +1,45 @@
+{
+  "source_reviewed": true,
+  "symptom": "게시글 제목은 한글로 잘 보여요. 그런데 목록 아래쪽 페이지 안내 글자만 깨져 보여요.",
+  "candidates": [
+    {
+      "cause": "한글 공통 JSP 조각에 pageEncoding 선언이 없어 본문과 다른 소스 인코딩으로 번역된다.",
+      "status": "CONFIRMED",
+      "level": 5,
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+          "line": 1
+        }
+      ],
+      "reason": "paging.jspf는 한글을 포함하지만 첫 줄이 div이고 pageEncoding이 없다. header.jspf는 UTF-8을 선언하며 list.jsp:70이 paging.jspf를 정적으로 포함한다. 실제 HTTP 본문은 정상 한글이고 조각만 불일치한다."
+    }
+  ],
+  "eliminated": [
+    "전체 응답은 200이고 게시판 본문 한글이 정상이므로 저장 데이터 전체 손상이나 전체 응답 인코딩 실패로 좁히지 않는다.",
+    "공통 header는 UTF-8을 선언하고 해당 조각만 선언이 없는 차이를 확인했다."
+  ],
+  "same_pattern": [
+    "다른 JSP 조각의 pageEncoding 선언을 확인했다. 한글 조각 파일마다 소스 인코딩을 명시해야 한다."
+  ],
+  "verification": [
+    "페이지 이동/건수 안내·이전/다음 한글 정상, 본문/메뉴 및 다른 조각 회귀 확인"
+  ],
+  "reproduction": {
+    "executed": true,
+    "command": "node scripts/reproduce-debug.mjs 10-fragment-encoding <mvn.cmd> <JAVA_HOME> docs/evidence/m3-mask-v3/runtime/10-fragment-encoding.json capture",
+    "artifact": "evidence/runtime-observed.json",
+    "note": "입력 수집 때 실제 앱에서 결함을 재현했다(동결 전). 같은 패치의 새 임시 복사본을 동결 후 소스로 분석했다. 수정 적용/수정 후 검증은 미실행이다. v4는 동일 입력 대응 비교이며 새 앱 실행은 아니다."
+  },
+  "proposal": {
+    "diff": "--- a/src/main/webapp/WEB-INF/views/common/paging.jspf\n+++ b/src/main/webapp/WEB-INF/views/common/paging.jspf\n@@ -1,1 +1,2 @@\n-<div class=\"paging\" aria-label=\"페이지 이동\">\n+<%@ page pageEncoding=\"UTF-8\" %>\n+<div class=\"paging\" aria-label=\"페이지 이동\">",
+    "note": "원인을 바로잡는 최소 diff 제안이며 적용하지 않았다."
+  },
+  "unverified": [
+    "수정안 미적용·수정 후 앱 회귀 미실행",
+    "Java 8/11 및 JEUS/WebLogic 실환경 미검증"
+  ],
+  "next_actions": [
+    "사용자가 수정 범위를 승인한 뒤 제안 diff 적용 및 verification 절차 실행"
+  ]
+}

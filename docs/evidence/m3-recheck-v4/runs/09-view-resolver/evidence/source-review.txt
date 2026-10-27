@@ -1,0 +1,63 @@
+src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
+1: <?xml version="1.0" encoding="UTF-8"?>
+2: <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+3:     xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+4:     xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+5:     <context:component-scan base-package="kr.sistack.board.web"/>
+6:     <mvc:annotation-driven/>
+7:     <mvc:resources mapping="/resources/**" location="/resources/"/>
+8:     <mvc:interceptors>
+9:         <mvc:interceptor>
+10:             <mvc:mapping path="/board/**"/>
+11:             <mvc:mapping path="/code/**"/>
+12:             <mvc:mapping path="/auth/logout.do"/>
+13:             <bean class="kr.sistack.board.web.LoginInterceptor">
+14:                 <constructor-arg ref="menuMapper"/>
+15:             </bean>
+16:         </mvc:interceptor>
+17:     </mvc:interceptors>
+18:     <bean id="templateResolver"
+19:           class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+20:         <property name="prefix" value="/WEB-INF/templates/"/>
+21:         <property name="suffix" value=".html"/>
+22:         <property name="templateMode" value="HTML"/>
+23:         <property name="characterEncoding" value="UTF-8"/>
+24:     </bean>
+25:     <bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
+26:         <property name="templateResolver" ref="templateResolver"/>
+27:         <property name="additionalDialects">
+28:             <set><bean class="nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect"/></set>
+29:         </property>
+30:     </bean>
+31:     <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+32:         <property name="templateEngine" ref="templateEngine"/>
+33:         <property name="characterEncoding" value="UTF-8"/>
+34:         <property name="order" value="1"/>
+35:         <property name="viewNames" value="login,error"/>
+36:     </bean>
+37:     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+38:         <property name="prefix" value="/WEB-INF/views/"/>
+39:         <property name="suffix" value=".jsp"/>
+40:         <property name="order" value="0"/>
+41:         <property name="viewNames" value="code/*,board/*"/>
+42:     </bean>
+43: </beans>
+44: 
+src/main/java/kr/sistack/board/web/BoardController.java
+30: 
+31:     @InitBinder("search")
+32:     public void searchFields(WebDataBinder binder) {
+33:         binder.setAllowedFields("page", "searchType", "keyword", "startDate", "endDate", "sort");
+34:     }
+35: 
+36:     @GetMapping("/list.do")
+37:     public String list(@ModelAttribute("search") BoardSearch search, @RequestAttribute("currentUser") UserSession user, Model model) {
+38:         model.addAttribute("boards", service.list(search));
+39:         model.addAttribute("viewer", user.getName());
+40:         model.addAttribute("paging", search);
+41:         return "board/list";
+42:     }
+43: 
+44:     @GetMapping("/detail.do")
+45:     public String detail(@RequestParam("id") long id, Model model) {
+46:         model.addAttribute("board", service.get(id));

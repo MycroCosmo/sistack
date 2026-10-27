@@ -1,0 +1,21 @@
+{
+  "dataset": "training",
+  "case_id": "03-request-encoding",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/webapp/WEB-INF/web.xml",
+        "line": 15,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "9bd0161f623303bb3d0b5b9ef437a901e80c8899",
+  "tool_fingerprint": "aa14ff3d10fabd86f6bfc125d7b6a003cdb951f751ab79fc451fbc99eb90a79f",
+  "run_id": "m3-training-v4-03-request-encoding",
+  "expected_sha256": "25cad99335871281e2fd1071860899cc021cbc8214877ace319100683d74c6c5",
+  "report_sha256": "afd391a0d0d69e56d62bcc2c35d5d7a927e3a14e24d797b080d8ae7444b383b7",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

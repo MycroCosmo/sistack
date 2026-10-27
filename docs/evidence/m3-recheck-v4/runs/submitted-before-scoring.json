@@ -1,0 +1,96 @@
+{
+  "created_at": "2026-10-27T15:34:13.814Z",
+  "frozen_revision": "9bd0161f623303bb3d0b5b9ef437a901e80c8899",
+  "submissions": [
+    {
+      "case_id": "01-binding",
+      "run_id": "m3-training-v4-01-binding",
+      "status": "PASS",
+      "diagnosis_sha256": "9a585c9f9326595509c9dda7197adb04304b1a14ff78590ac9527c936771bfed",
+      "report_sha256": "9ddf3b930c273a56104a60fe7e124682122c6aa46267ef7d29dd02f991771dfe",
+      "candidate_locations_unchanged": true,
+      "exceptions": 2
+    },
+    {
+      "case_id": "02-js-url",
+      "run_id": "m3-training-v4-02-js-url",
+      "status": "PASS",
+      "diagnosis_sha256": "ea03f717cc1cfedba34f5c0fc02eaf565c344b3c432b67a0a1ba017c3f270d03",
+      "report_sha256": "2f09d46165409e5921eee4abede40b6b21bda257292fbf54c33f8d5bb3ebe5ef",
+      "candidate_locations_unchanged": true,
+      "exceptions": 0
+    },
+    {
+      "case_id": "03-request-encoding",
+      "run_id": "m3-training-v4-03-request-encoding",
+      "status": "PASS",
+      "diagnosis_sha256": "e06fda2fdeee211ce0dac5bcf2a0e9c3935a8ca8d7eef2945e667b9a7a020dbf",
+      "report_sha256": "afd391a0d0d69e56d62bcc2c35d5d7a927e3a14e24d797b080d8ae7444b383b7",
+      "candidate_locations_unchanged": true,
+      "exceptions": 0
+    },
+    {
+      "case_id": "04-session-bypass",
+      "run_id": "m3-training-v4-04-session-bypass",
+      "status": "PASS",
+      "diagnosis_sha256": "96b6e45903d0c9cd2789718501e924bda50e5e8e37de2c9cb4fb5ee09b367a1b",
+      "report_sha256": "0e951d8e13becded0225bf35aa128088935d02132c0d0aed06d6ff1d18fe9443",
+      "candidate_locations_unchanged": true,
+      "exceptions": 1
+    },
+    {
+      "case_id": "05-paging",
+      "run_id": "m3-training-v4-05-paging",
+      "status": "PASS",
+      "diagnosis_sha256": "82fd85e2a21b67adb9bf21a430c2579f123234ea8a9aa4098919dc8df4daeeae",
+      "report_sha256": "5cb9387adf20f73af731d6a30d8367107e22bb10839e3afcb2168762471edb00",
+      "candidate_locations_unchanged": true,
+      "exceptions": 0
+    },
+    {
+      "case_id": "06-sort-sql",
+      "run_id": "m3-training-v4-06-sort-sql",
+      "status": "PASS",
+      "diagnosis_sha256": "edcdc382ab084a0f99bfd2d98b83b85ea2d740020b3aa9c96bee5dc537b792db",
+      "report_sha256": "8a0ee439579a303e6ec182b18bc90f16f78183117899a2fd498f05a831940d59",
+      "candidate_locations_unchanged": true,
+      "exceptions": 2
+    },
+    {
+      "case_id": "07-oracle-log-only",
+      "run_id": "m3-training-v4-07-oracle-log-only",
+      "status": "PARTIAL",
+      "diagnosis_sha256": "bf2182397b218e707a7ac782375e6c56ca9b19837c703cb334a0286c3194ea4e",
+      "report_sha256": "52235c44a592f3498088dceb660c5a5a918b74f63b5752e4935dc9503ef0a038",
+      "candidate_locations_unchanged": true,
+      "exceptions": 2
+    },
+    {
+      "case_id": "08-thymeleaf-utilities",
+      "run_id": "m3-training-v4-08-thymeleaf-utilities",
+      "status": "PASS",
+      "diagnosis_sha256": "1caf7516815f929f68a4aa2250cc69153be925cf7df5400119bc90e67ebeaf1d",
+      "report_sha256": "2114696132b241fccbcd118f12bd8d0ebd2b0a18bc039c5549461e04c6cf426e",
+      "candidate_locations_unchanged": true,
+      "exceptions": 7
+    },
+    {
+      "case_id": "09-view-resolver",
+      "run_id": "m3-training-v4-09-view-resolver",
+      "status": "PASS",
+      "diagnosis_sha256": "8ce21ef46bd5157bc80c2b182d7227cb7a41ea036ca2e6ff6a75c4bc6b78512d",
+      "report_sha256": "99f5b879befde787bc543e6368ec28cc6f00cafae3c628f10e36b40e12140831",
+      "candidate_locations_unchanged": true,
+      "exceptions": 0
+    },
+    {
+      "case_id": "10-fragment-encoding",
+      "run_id": "m3-training-v4-10-fragment-encoding",
+      "status": "PASS",
+      "diagnosis_sha256": "e688816051c0bf8dc4d227bd25790306a3111113c80a914d088c8f04e80c6ce8",
+      "report_sha256": "159e9fc3c088fe2b87c0df7cac723fc06440a96172eec6e9a7a18e8bfdde81b7",
+      "candidate_locations_unchanged": true,
+      "exceptions": 0
+    }
+  ]
+}

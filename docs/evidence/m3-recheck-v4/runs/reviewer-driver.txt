@@ -1,0 +1,79 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { readFile, writeFile, mkdir, cp } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
+import { prepareCase, scoreDebug } from '../scripts/eval-debug.mjs';
+import { prepareDebug, finishDebug, debugFingerprint } from '../lib/debug/index.mjs';
+import { json, save, digest, checkSources } from '../lib/trace/io.mjs';
+import { mask } from '../lib/mask/index.mjs';
+
+const repository = fileURLToPath(new URL('../', import.meta.url));
+const firstRoot = path.join(repository, 'docs/evidence/m3-training-first');
+const first = await json(path.join(firstRoot, 'summary.json'));
+const output = path.join(repository, 'docs/evidence/m3-recheck-v4/runs');
+const freeze = path.join(repository, 'docs/evidence/m3-freeze-v4.json'), frozen = await json(freeze);
+await checkSources(repository, frozen.files);
+if (frozen.tool_fingerprint !== await debugFingerprint()) throw new Error('동결 도구 불일치');
+await mkdir(output);
+const prepared = [], submissions = [];
+for (const row of first.scores) {
+  const id = row.case_id, previous = path.join(firstRoot, id), oldStage = await json(path.join(previous, 'evidence/stage.json'));
+  const p = await prepareCase(id);
+  const log = await readFile(path.join(repository, 'evals/debug/cases', id, 'symptom.log'), 'utf8');
+  const symptom = await readFile(path.join(repository, 'evals/debug/cases', id, 'symptom.md'), 'utf8');
+  const runId = 'm3-training-v4-' + id;
+  const run = await prepareDebug(p.project, { log, symptom, packagePrefix: 'kr.sistack.board', starts: ['/board/list.do'], runId });
+  const newStage = await json(path.join(run.directory, 'evidence/stage.json'));
+  if (JSON.stringify(oldStage.source_files) !== JSON.stringify(newStage.source_files)) throw new Error('대응 비교 소스 변경');
+  if (digest(await readFile(path.join(previous, 'evidence/log.txt'))) !== digest(await readFile(path.join(run.directory, 'evidence/log.txt')))) throw new Error('대응 비교 로그 변경');
+  const original = await readFile(path.join(previous, 'evidence/diagnosis.json'), 'utf8'), diagnosis = JSON.parse(original);
+  const positions = JSON.stringify(diagnosis.candidates.map(c => ({ status: c.status, locations: c.locations })));
+  if (diagnosis.reproduction.executed) {
+    await save(path.join(run.directory, diagnosis.reproduction.artifact), await readFile(path.join(previous, diagnosis.reproduction.artifact), 'utf8'));
+    diagnosis.reproduction.note += ' v4는 동일 입력 대응 비교이며 새 앱 실행은 아니다.';
+  }
+  if (id === '06-sort-sql') {
+    const diffFile = path.join(repository, 'docs/evidence/m3-training-followup/06-sort-sql-proposal.diff');
+    diagnosis.proposal.diff = await readFile(diffFile, 'utf8');
+    diagnosis.proposal.note = '첫 제안의 중복 return 문장 선택 오류를 메서드 문맥 포함 후속 diff로 보정. 실제 소스 미적용.';
+    const checked = spawnSync('git', ['apply', '--check', diffFile], { cwd: p.project, encoding: 'utf8', windowsHide: true });
+    if (checked.status !== 0) throw new Error(mask(checked.stderr));
+    await checkSources(p.project, newStage.source_files);
+    await save(path.join(run.directory, 'evidence/proposal-check.json'), { command: 'git apply --check', status: 'PASS', source_unchanged: true, patch_applied: false });
+  }
+  const review = await readFile(path.join(previous, 'evidence/source-review.txt'), 'utf8');
+  await save(path.join(run.directory, 'evidence/source-review.txt'), review);
+  await save(path.join(run.directory, 'evidence/paired-review.json'), { first_run_id: oldStage.run_id, first_diagnosis_sha256: digest(original),
+    first_source_review_sha256: digest(review), source_hashes_identical: true, input_log_identical: true, candidate_locations_unchanged: true,
+    note: '첫 수동 검토를 동일 소스 해시로 재확인한 대응 비교. 신규 파서·인덱스와 run-id를 사용하며 블라인드 재분석은 아니다.' });
+  if (JSON.stringify(diagnosis.candidates.map(c => ({ status: c.status, locations: c.locations }))) !== positions) throw new Error('원인 위치 변경');
+  await save(path.join(run.directory, 'evidence/diagnosis.json'), diagnosis);
+  const result = await finishDebug(p.project, runId);
+  const dest = path.join(output, id);
+  await cp(run.directory, dest, { recursive: true, force: false, errorOnExist: true });
+  const parsed = await json(path.join(run.directory, 'evidence/parsed.json'));
+  if (id === '06-sort-sql' && (parsed.exceptions.length !== 2 || !parsed.project_frames.every(f => f.exception === 0))) throw new Error('실제 로그 예외 체인 회귀');
+  submissions.push({ case_id: id, run_id: runId, status: result.status, diagnosis_sha256: digest(await readFile(path.join(dest, 'evidence/diagnosis.json'))),
+    report_sha256: digest(await readFile(path.join(dest, 'report.md'))), candidate_locations_unchanged: true, exceptions: parsed.exceptions.length });
+  prepared.push({ id, ...run });
+}
+await save(path.join(output, 'submitted-before-scoring.json'), { created_at: new Date().toISOString(), frozen_revision: frozen.revision, submissions });
+const approval = await json(path.join(repository, 'evals/debug/approval-20261028.json'));
+const approved = approval.amendments.at(-1).records, scores = [];
+for (const run of prepared) {
+  const expected = path.join(repository, 'evals/debug/cases', run.id, 'expected.json');
+  if (digest(await readFile(expected)) !== approved.find(r => r.case_id === run.id)?.approved_sha256) throw new Error('정정 승인 정답 해시 변경');
+  const score = await scoreDebug(run.directory, expected, { dataset: 'training', output: path.join(output, run.id, 'score.json'), freeze, repository });
+  scores.push({ ...score, analysis_status: submissions.find(s => s.case_id === run.id).status, evidence_level: run.id === '07-oracle-log-only' ? 2 : 5 });
+  console.log(JSON.stringify(score));
+}
+const locations = scores.flatMap(s => s.locations);
+await save(path.join(output, 'summary.json'), { dataset: 'training', evaluation: 'paired-v4-recheck', frozen_revision: frozen.revision, tool_fingerprint: frozen.tool_fingerprint,
+  first_baseline: { revision: first.frozen_revision, cases: first.cases, hit_cases: first.hit_cases, expected_locations: first.expected_locations, hit_locations: first.hit_locations, extra_locations: first.extra_locations },
+  cases: scores.length, hit_cases: scores.filter(s => s.hit).length, expected_locations: locations.length, hit_locations: locations.filter(p => p.hit).length,
+  point_locations: locations.filter(p => p.line !== undefined).length, deletion_ranges: locations.filter(p => p.start !== undefined).length,
+  extra_locations: scores.flatMap(s => s.extra_locations).length,
+  caveat: 'Codex 자기 작성 학습 세트. 동일 진단 위치의 대응 비교다. 06 정답 정정과 04/10 범위 규칙 변경을 반영한 점수이며 일반화/독립 분석 성능 향상이 아니다. held-out 미열람·미실행.', scores });
+await writeFile(path.join(output, 'reviewer-driver.txt'), await readFile(fileURLToPath(import.meta.url)), { flag: 'wx' });
+await checkSources(repository, frozen.files);
+console.log(JSON.stringify({ cases: scores.length, hit_cases: scores.filter(s => s.hit).length, hit_locations: locations.filter(p => p.hit).length, expected_locations: locations.length }));

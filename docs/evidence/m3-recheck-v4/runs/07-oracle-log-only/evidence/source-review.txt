@@ -1,0 +1,68 @@
+src/main/resources/mapper/BoardMapper.xml
+12:     <sql id="filters">
+13:         <where>
+14:             <if test="keyword != null and keyword != ''">
+15:                 <choose>
+16:                     <when test="searchType == 'author'">
+17:                         AND b.AUTHOR LIKE '%' || #{keyword} || '%'
+18:                     </when>
+19:                     <otherwise>AND b.TITLE LIKE '%' || #{keyword} || '%'</otherwise>
+20:                 </choose>
+21:             </if>
+22:             <if test="fromDate != null">
+23:                 AND b.CREATED_AT &gt;= #{fromDate}
+24:             </if>
+25:             <if test="untilDate != null">
+26:                 AND b.CREATED_AT &lt; #{untilDate}
+27:             </if>
+28:         </where>
+29:     </sql>
+30:     <select id="selectList" resultMap="board">
+31:         <include refid="commonSql.pageStart"/>
+32:         SELECT b.* FROM BOARD b
+33:         <include refid="filters"/>
+34:         ORDER BY ${sortColumn} DESC, b.ID DESC
+35:         <include refid="commonSql.pageEnd"/>
+36:     </select>
+37:     <select id="count" resultType="int">
+38:         SELECT COUNT(*) FROM BOARD b
+src/main/java/kr/sistack/board/domain/BoardSearch.java
+55:         endDate = value;
+56:     }
+57: 
+58:     public Date getFromDate() {
+59:         return startDate.isEmpty() ? null : Date.valueOf(startDate);
+60:     }
+61: 
+62:     public Date getUntilDate() {
+63:         return endDate.isEmpty() ? null : Date.valueOf(LocalDate.parse(endDate).plusDays(1));
+64:     }
+65: 
+66:     public String getSort() {
+67:         return sort;
+68:     }
+69: 
+70:     public void setSort(String value) {
+71:         if (!"createdAt".equals(value) && !"title".equals(value)) {
+72:             throw new IllegalArgumentException("정렬 조건을 확인하세요");
+73:         }
+74:         sort = value;
+75:     }
+76: 
+77:     public String getSortColumn() {
+78:         return "title".equals(sort) ? "b.TITLE" : "b.CREATED_AT";
+79:     }
+80: }
+81: 
+src/main/resources/mapper/CommonSql.xml
+1: <?xml version="1.0" encoding="UTF-8"?>
+2: <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+3: <mapper namespace="commonSql">
+4:     <sql id="pageStart">
+5:         SELECT * FROM (SELECT page_rows.*, ROWNUM AS ROW_NO FROM (
+6:     </sql>
+7:     <sql id="pageEnd">
+8:         ) page_rows WHERE ROWNUM &lt;= #{endRow}) WHERE ROW_NO &gt; #{offset}
+9:     </sql>
+10: </mapper>
+11: 
