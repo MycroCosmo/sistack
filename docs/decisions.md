@@ -1,5 +1,13 @@
 # 설계 결정
 
+## 2026-10-27 — M2.5 계획 추가
+
+- 사용자 요청에 따라 M2와 M3 사이에 Thymeleaf 수집기 마일스톤과 `prompts/M2.5.md`를 추가했다. Ian의 JSP → Thymeleaf 이관을 위해 기존 si-trace·공통 인덱서를 확장하는 계획이며 이번 작업은 문서 작성까지만 수행한다.
+- 새 테스트베드는 서버 Controller·Service·Mapper·SQL을 유지하고 화면과 뷰 설정만 바꾼다. 검색·등록 승인 정답의 서버 연결 동등성을 비교하고 삭제 AJAX 1건은 별도 held-out으로 둔다.
+- `thymeleaf-spring5`는 아직 추가하지 않는다. 구현 착수 후 정확한 Java 8 호환 버전·라이선스·전이 의존성·변경안을 제시하는 승인 GATE를 먼저 둔다. 이 문서 작성은 의존성 승인으로 간주하지 않는다.
+- 학습 2건의 새 화면 근거를 승인받고, held-out 초안 작성 전 구현을 동결한다. held-out 정답 승인 전 구현 수정 금지와 승인 후 첫 점수·원본 보존을 명시했다. 첫 점수 보고 후에도 지시를 기다리고 후속 결과는 별도 보존한다.
+- JPA(Repository 메서드명·@Query·@Entity/@Table), Vue3+REST(.vue·axios·router·application.yml) 수집기는 v0.2 백로그에만 추가한다. M3의 기술적 선행 조건 M1은 유지하며 예정 작업 순서는 M2 → M2.5 → M3로 기록한다.
+
 ## 2026-10-27 — M2 학습 정답 누락 보정 승인
 
 - 사용자가 `egov-clcode-delete`의 Controller#deleteCmmnClCode → EgovUserDetailsHelper#getAuthenticatedUser를 `calls / CONFIRMED`로 추가 승인했다. Controller:184의 실제 호출과 Helper:41의 static 선언을 재확인하고 Helper 소스 SHA-256을 정답 source_files에 추가했다.

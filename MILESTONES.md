@@ -12,12 +12,13 @@
 ## 전체 흐름
 
 ```text
-M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ─────────────────────────┐
+M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶ M2.5 Thymeleaf ─────┐
                             └──▶ M3 si-debug ──▶ M4 si-unit-test ──▶ M5 si-docs ──▶ M6 통합·릴리스
 ```
 
 - M1 인덱서는 네 스킬이 모두 쓰는 공통 부품이다 (흐름 골격, 에러 위치 찾기, 테스트 대상 선정, 프로그램 목록).
 - M2와 M3는 M1 이후 순서 무관.
+- M2.5는 M2 완료 후 수행한다. 이번 작업 순서는 M2 → M2.5 → M3이며 M3의 기술적 선행 조건은 M1로 유지한다.
 - M4는 M3의 버그 패치로 "테스트가 실제로 버그를 잡는지"를 검증하므로 M3 이후.
 - M5는 M4의 `test-results.json`을 입력으로 쓴다.
 
@@ -26,6 +27,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ───
 | 이름 | 위치 | 용도 |
 |---|---|---|
 | legacy-board | `examples/legacy-board/` (M0에서 생성) | 빌드·실행 가능한 소형 레거시 프로젝트. Spring MVC + MyBatis + JSP + jQuery, 테스트용 H2. 모든 스킬의 기본 테스트 대상 |
+| legacy-board-thymeleaf | `examples/legacy-board-thymeleaf/` (M2.5 예정) | legacy-board와 같은 Controller·Service·Mapper, Thymeleaf 화면. 검색·등록 서버 흐름 동등성과 삭제 AJAX held-out 검증 |
 | 버그 케이스 | `evals/debug/cases/<id>/` | legacy-board에 적용하는 버그 패치 + 증상 로그. 원본 코드는 깨끗하게 유지 |
 | eGovFrame 공통컴포넌트 | 외부 클론 (`scripts/fetch-testbed.mjs`) | 실제 규모의 공개 레거시. 인덱서·si-trace 현실성 검증. 저장소에 커밋하지 않음 |
 | 실제 업무 사례 | `evals/private/` (gitignore) | Ian이 직접 넣는 마스킹된 실제 에러·코드 사례. 자기채점 방지용 |
@@ -89,6 +91,8 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ───
 
 **목표:** "이 버튼 누르면 뭐가 실행돼?"에 근거 달린 흐름으로 답한다.
 
+**학습 정답 보정 — 2026-10-27:** 사용자 승인으로 공통분류코드 삭제의 인증 Helper 진입 호출을 추가했다. 기존 v2-final 산출물로 학습 eval을 재실행해 **5건 56/56, 누락·과탐·상태 불일치 0건**을 확인했다. 위 종료 당시 55/55·과탐 1건과 첫 held-out 60/66 기록은 보존한다. [보정 보고](docs/m2-training-correction-report.md).
+
 **완료 기준**
 - M1에서 승인된 정답 5건과 비교한 eval 통과 또는 차이 설명
 - 단순/복잡 분기 동작 확인
@@ -99,6 +103,29 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ───
 **GATE 통과:** 외부 주입 호출 기록과 공통 인증 Helper 진입 깊이를 통일해 승인본으로 확정했다. 첫 실행·역방향·누락·보충 항목과 압축 원본을 보존했다.
 
 **Ian 할 일:** 실무 코드 화면 1~2개에 로컬로 써보고 피드백
+
+---
+
+## M2.5 — Thymeleaf 수집기
+
+**상태: 계획 작성 — 구현 미착수.** 실행 지시는 [prompts/M2.5.md](prompts/M2.5.md)를 따른다.
+
+**목표:** Ian의 JSP → Thymeleaf 이관 업무에서 to-be 화면의 이벤트부터 기존 서버 흐름까지 추적한다.
+
+**산출물**
+- `examples/legacy-board-thymeleaf/`: legacy-board의 Controller·Service·Mapper를 동일하게 유지하고 화면을 Thymeleaf로 변환. 화면 엔진 설정만 필요한 범위에서 변경
+- 수집 대상: `th:action`, `th:href`/`th:src`의 `@{...}`(경로 변수·쿼리 파라미터 포함), `th:replace`/`th:insert`/`th:include` 프래그먼트, `th:inline="javascript"`의 AJAX URL
+- 학습 정답 초안 2건(검색·등록), 별도 held-out 삭제 AJAX 1건, 비교 결과와 지원 한계
+
+**완료 기준**
+- 승인된 legacy-board 검색·등록 2건과 비교해 화면 노드만 달라지고 서버 연결·상태는 동일함을 검증
+- 수집 범위의 확정·미확정 패턴 검증, 기존 JSP 학습 5건 회귀 확인, `npm test` 및 단독 설치 복사본 검사 통과
+- held-out 정답 승인 전 구현 수정 금지. 승인 후 동결 구현으로 첫 점수·원본·해시를 보존하고 보고한 뒤에만 수정 가능
+- 테스트베드 빌드·렌더링·AJAX 동작 확인. 실행 환경이 없으면 BLOCKED와 재실행 명령 기록
+
+**[GATE]** `thymeleaf-spring5`의 Java 8 호환 버전·라이선스·전이 의존성 승인 → 검색·등록 정답 초안 승인 → 삭제 AJAX held-out 정답 승인 → 수정 전 첫 점수 보고. 각 지점에서 멈춘다.
+
+**Ian 할 일:** 의존성 추가안과 정답 2+1건 검토. 이번 문서 작성은 구현 착수나 의존성 추가 승인이 아니다.
 
 ---
 
@@ -168,6 +195,8 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ───
 ## v0.2 백로그 (지금 구현하지 않음)
 
 - modern-board 테스트베드(Spring Boot + JPA) — si-migrate의 to-be 및 JPA 인덱서 수집기 검증용
+- JPA 수집기: Repository 메서드명, `@Query`, `@Entity`/`@Table`
+- Vue3+REST 수집기: `.vue`, axios, router, `application.yml`
 
 - `si-impact` (← `blast-radius`): 안전 근거 1개 증명 + SI에서 grep이 멈추는 곳 점검
 - `si-migrate`: 기준선 고정 → 이관 → 비교 (si-trace + si-unit-test + si-impact 조합)
@@ -182,6 +211,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ───
 | M0 | 3~4일 | JDK/Maven 환경 |
 | M1 | 1주 | 정답 검토 |
 | M2 | 3~4일 | |
+| M2.5 | 의존성·정답 검토 후 산정 | Thymeleaf 의존성 승인, 학습·held-out 정답 승인 |
 | M3 | 1주 | 버그 케이스 정답, 실제 사례 준비 |
 | M4 | 1주 | 레거시 테스트 환경 |
 | M5 | 4~5일 | 양식 매핑 |
