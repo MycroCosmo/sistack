@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "case_id": "legacy-board-thymeleaf-create",
-  "review_status": "draft",
+  "review_status": "approved",
   "source_revision": "bfa5098ab8ec79b4c9062fc24348c9465456aa27",
   "source_files": {
     "src/main/webapp/WEB-INF/templates/board/form.html": "ffb7fbf45362d7d2932f97b31e5b9443c16fc3b9e60dc2586f8fb81516ce638d",
@@ -613,5 +613,6 @@
     "file": "evals/trace/legacy-board-create/expected.json",
     "expected_sha256": "15b8a9758950009f98632078f603c467f5ff228138b5d413c45c687fc5d65c72"
   },
-  "approval_history": "2026-10-27 사용자가 기존 주 연결 검색 17개·등록 14개를 승인. parity/screen 승격 구조는 재검토 GATE 대기."
+  "approval_history": "2026-10-27 사용자가 기존 주 연결 검색 17개·등록 14개를 승인. parity/screen 승격 구조는 재검토 GATE 대기.",
+  "approval": "2026-10-27 사용자 승인: search/create/coexist 그룹별 채점 구조와 화면 연결 범위."
 }

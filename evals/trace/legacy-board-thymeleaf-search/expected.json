@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "case_id": "legacy-board-thymeleaf-search",
-  "review_status": "draft",
+  "review_status": "approved",
   "source_revision": "bfa5098ab8ec79b4c9062fc24348c9465456aa27",
   "source_files": {
     "src/main/webapp/WEB-INF/templates/board/list.html": "000b783cbc8a9a24346ff21468d1aeb2cbc88a8ba6a35190a1d1bf7d7a2f2f23",
@@ -843,5 +843,6 @@
     "file": "evals/trace/legacy-board-search/expected.json",
     "expected_sha256": "dc3459d1d5bb5a8c2f2ea5c42b4f8ddd52e2b5f859f996c7f18e577ab4baf62e"
   },
-  "approval_history": "2026-10-27 사용자가 기존 주 연결 검색 17개·등록 14개를 승인. parity/screen 승격 구조는 재검토 GATE 대기."
+  "approval_history": "2026-10-27 사용자가 기존 주 연결 검색 17개·등록 14개를 승인. parity/screen 승격 구조는 재검토 GATE 대기.",
+  "approval": "2026-10-27 사용자 승인: search/create/coexist 그룹별 채점 구조와 화면 연결 범위."
 }

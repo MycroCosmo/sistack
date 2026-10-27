@@ -1,4 +1,4 @@
-# 게시글 등록 — Thymeleaf — 그룹별 채점 구조 승인 대기
+# 게시글 등록 — Thymeleaf — 승인 정답
 
 경로 기준: `examples/legacy-board-thymeleaf/`, 소스 revision: `bfa5098ab8ec79b4c9062fc24348c9465456aa27`. 실제 수집기 eval은 미실행이다. JSON이 상세 근거·해시·범위의 기준이다.
 
@@ -51,8 +51,8 @@ JSP 승인본과의 정답 계약 대조는 12/12개 동일하다. 이는 from/t
 - requests의 도착 endpoint는 HTTP 메서드와 쿼리 파라미터를 제외한 경로로 비교한다.
 - renders는 Controller → 템플릿/JSP 파일, decorates는 화면 → 레이아웃, includes는 화면/레이아웃 → `fragment파일#이름`이다.
 - screen 연결은 모두 edges/scope에 포함된다. supplemental_assertions로 제외하는 항목은 없다.
-- CONFIRMED는 소스 근거 상태다. 사용자 승인·실제 앱 동작·수집기 성공을 대신하지 않는다.
+- CONFIRMED는 소스 근거 상태다. 실제 앱 동작·수집기 성공을 대신하지 않는다.
 
-## 사용자 확인 필요
+## 승인 기록
 
-이 그룹별 채점 구조와 화면 연결 범위를 검토해 주세요. 기존 주 연결 승인은 유지하며 새 구조는 재검토 GATE에서 멈춥니다.
+2026-10-27 사용자가 그룹별 채점 구조와 화면 연결 범위를 승인했다. 수집기 eval 결과는 별도 보고한다.

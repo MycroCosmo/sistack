@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "case_id": "legacy-board-thymeleaf-coexist",
-  "review_status": "draft",
+  "review_status": "approved",
   "source_revision": "bfa5098ab8ec79b4c9062fc24348c9465456aa27",
   "source_root": "examples/legacy-board-thymeleaf",
   "title": "공통코드 JSP 뷰 공존 판정",
@@ -91,5 +91,6 @@
     "parity": "적용 대상 없음",
     "screen": "CommonCodeController#list -renders-> code/list.jsp 1개 연결",
     "reporting": "parity 적용 대상 없음·screen 일치/정답을 보고하며 합산하지 않는다."
-  }
+  },
+  "approval": "2026-10-27 사용자 승인: search/create/coexist 그룹별 채점 구조와 화면 연결 범위."
 }

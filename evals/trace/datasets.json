@@ -4,7 +4,10 @@
     "legacy-board-create",
     "egov-clcode-delete",
     "egov-detailcode-list",
-    "egov-rss-columns"
+    "egov-rss-columns",
+    "legacy-board-thymeleaf-search",
+    "legacy-board-thymeleaf-create",
+    "legacy-board-thymeleaf-coexist"
   ],
   "held-out": [
     "egov-article-list",
@@ -20,5 +23,6 @@
   "v2_general_defects_fixed": true,
   "v2_generalization_performance": false,
   "v2_report": "docs/m2-final-report.md",
-  "v2_results": "docs/evidence/m2-v2/results.json"
+  "v2_results": "docs/evidence/m2-v2/results.json",
+  "thymeleaf_training_approval": "2026-10-27 그룹별 학습 3건 승인. 기존 학습 5건·held-out 3건과 구분해 보고."
 }
