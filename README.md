@@ -2,7 +2,7 @@
 
 한국 SI 개발자의 코드 흐름 파악·에러 분석·테스트·산출물 작성을 돕는 Agent Skills 모음입니다.
 
-**개발 상태: M0 완료, M1 공통 인덱서 구현·검증 후 정답 초안 GATE 승인 대기.** 업무 스킬은 아직 제공하지 않습니다. [M1 보고서](docs/m1-report.md) · [인덱서 사용법](docs/indexer.md)
+**개발 상태: M0·M1 완료. 승인 정답 5건 대비 55개 연결 일치, M2 미착수.** 업무 스킬은 아직 제공하지 않습니다. [M1 종료 보고서](docs/m1-final-report.md) · [인덱서 사용법](docs/indexer.md)
 
 | v0.1 예정 스킬 | 역할 | 구현 시점 |
 |---|---|---|
@@ -13,17 +13,19 @@
 
 [pstack](https://github.com/backnotprop/pstack)의 원칙·스킬 구조를 한국 SI 현장에 맞게 재해석합니다. 단일 모델, 기존 동작 보존, PL 승인 지점, 코드 기반 문서 산출물과 재현하지 못한 단계의 기록을 우선합니다.
 
-## M0 개발·검증
+## 개발·검증
 
 Node.js 18 이상과 Git이 필요합니다. npm 의존성 설치는 필요하지 않습니다.
 
 ```sh
+node scripts/fetch-testbed.mjs egovframe
 npm test
 node scripts/validate-manifest.mjs <manifest.json>
 node scripts/validate-skills.mjs
 node scripts/sync-shared.mjs --check
-node scripts/fetch-testbed.mjs egovframe
 ```
+
+npm test는 승인 정답의 소스 해시·근거 라인도 검사합니다. 첫 실행 전 위 fetch-testbed 명령으로 고정 eGovFrame 소스를 준비하세요. 소스가 없으면 검사를 건너뛰지 않고 BLOCKED로 종료합니다.
 
 Windows PowerShell에서 실행 정책 때문에 npm.ps1이 차단되면 `npm.cmd test`를 사용합니다. 임시 Git 저장소 쓰기를 막는 샌드박스에서는 테스트 실행 권한이 필요합니다.
 

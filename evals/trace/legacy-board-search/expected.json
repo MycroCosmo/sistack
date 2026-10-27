@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "case_id": "legacy-board-search",
-  "review_status": "draft",
+  "review_status": "approved",
   "source_revision": "fbffe3be67245ae15015af59597dea4ada200c41",
   "source_files": {
     "src/main/webapp/WEB-INF/views/board/list.jsp": "feee1bbf66ab87a91a8920595542f8ce218a300348f9efdfa2bc1f2660d224c0",
@@ -9,14 +9,17 @@
     "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java": "338abd3aa4a58c89144bfa7f13edd15b36439767a1092a583c65dda9b397b970",
     "src/main/java/kr/sistack/board/mapper/BoardMapper.java": "7912db189d1060de0e3d4aa7add93f625cb14e446dcb7daa71241d616a88bcfa",
     "src/main/resources/mapper/BoardMapper.xml": "ad194be2f97e681dea017a28c62b6a1cbd22956ac0c4471c59d1c7963278c4c0",
-    "src/main/resources/mapper/CommonSql.xml": "69553bacb0b00e4fd092fe2131d271914b4703e8f91b5d0737fc9c6d983c21cc"
+    "src/main/resources/mapper/CommonSql.xml": "69553bacb0b00e4fd092fe2131d271914b4703e8f91b5d0737fc9c6d983c21cc",
+    "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml": "1e1a10e0ea9704c9cdf5fbede8668991194a9446128c0117c9db9e0d22c5296a",
+    "src/main/java/kr/sistack/board/web/LoginInterceptor.java": "ffdc90cb080d3303862c8d9d1a53efbb50cb9437000311d2e409620f17ba3b1c",
+    "src/main/java/kr/sistack/board/mapper/MenuMapper.java": "cb950f3cb91faa8ca712669245e72bdc700ba03dd740f07f27cdc2668c282c2d"
   },
   "title": "게시판 목록 검색",
   "selection_reason": "화면→이름 주입 Service→Mapper 인터페이스→SQL include·테이블의 정상 기준선",
   "assumptions_and_questions": [
     "GET 검색과 count/selectList의 주 경로를 검토한다. 검색어·정렬 값의 전체 안전성 증명은 범위 밖이다.",
     "JS submit 핸들러의 문자열 재조합은 별도 UNRESOLVED 함정이다. 여기서는 JSP form의 선언된 기본 action을 비교한다.",
-    "인터셉터의 세션→request 전달은 별도 함정 테스트 대상으로, 이 연결 표의 실행 전제다."
+    "요청 URL의 인터셉터 매핑과 preHandle→MenuMapper→APP_MENU 경로를 포함한다. 인증·CSRF 분기에 따른 실제 실행 여부와 세션 값 전파는 정적 연결과 구분한다."
   ],
   "scope": [
     {
@@ -34,7 +37,8 @@
         "name": "GET /board/list.do"
       },
       "kinds": [
-        "maps_to"
+        "maps_to",
+        "intercepted_by"
       ]
     },
     {
@@ -85,6 +89,30 @@
       "kinds": [
         "reads",
         "includes"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+      },
+      "kinds": [
+        "reads"
       ]
     }
   ],
@@ -360,6 +388,104 @@
           "line": 7
         }
       ]
+    },
+    {
+      "from": {
+        "name": "GET /board/list.do"
+      },
+      "to": {
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+      },
+      "kind": "intercepted_by",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 36
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 14
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 11
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 14
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 38
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+      },
+      "to": {
+        "name": "APP_MENU"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 9
+        }
+      ]
     }
-  ]
+  ],
+  "source_root": "examples/legacy-board",
+  "approval": "2026-10-27 사용자 검토 조건 1~5 반영. 범위 제외와 RSS 직접 JDBC 선정 승인."
 }

@@ -5,7 +5,7 @@
   "type": "module",
   "engines": { "node": ">=18" },
   "scripts": {
-    "test": "node --test && node scripts/validate-skills.mjs && node scripts/sync-shared.mjs --check",
+    "test": "node --test && node scripts/check-expected.mjs && node scripts/validate-skills.mjs && node scripts/sync-shared.mjs --check",
     "sync-shared": "node scripts/sync-shared.mjs"
   },
   "license": "MIT"

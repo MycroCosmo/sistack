@@ -14,24 +14,30 @@ node scripts/query-index.mjs examples/legacy-board/.sistack/index/index.json --t
 
 질의의 `--from`과 `--to`는 하나만 지정한다. 정확한 JSP 경로, URL 경로, `HTTP /경로`, `전체패키지.클래스#메서드`, `클래스#메서드`, `namespace.id`, DB 객체 이름을 사용한다. 이름이 중복이면 모든 후보를 시작점으로 삼는다. `--depth`는 0~100이며 기본값은 8이다. JSON 출력의 frontier가 있으면 지정 깊이 밖에 연결이 더 있다. DB 객체 이름은 대문자로 정규화한다.
 
-## 초안 비교
+## 승인 정답 비교
 
 ```sh
-node scripts/eval-index.mjs examples/legacy-board/.sistack/index/index.json evals/trace/legacy-board-search/expected.draft.json --draft
+node scripts/eval-index.mjs examples/legacy-board/.sistack/index/index.json evals/trace/legacy-board-search/expected.json
 ```
 
-초안은 반드시 `--draft`로 실행한다. 결과는 `DRAFT_PREVIEW`, `scoring: false`이며 차이가 있어도 정확도 통과/실패를 선언하지 않는다. 승인 후 `expected.json`과 `review_status: approved`를 사용할 때만 PASS/FAIL을 반환한다. 이번 M1 GATE에서는 승인용 파일을 만들지 않았다.
+승인본 expected.json과 review_status: approved를 사용할 때 PASS/FAIL을 반환한다. 새 초안은 expected.draft.json과 명시적 `--draft`로만 미리보기하며 DRAFT_PREVIEW, scoring: false를 반환한다.
 
-정답의 scope는 출발 노드·관계 종류·선택적인 근거 위치로 비교 범위를 정한다. 같은 이름의 DB별 SQL은 논리 연결로 비교하며 하나라도 상태가 다르면 상태 불일치로 표시한다. source_revision이 다르거나 작업 트리에 변경이 있으면 모든 정답 근거 파일의 SHA-256이 같아야 비교할 수 있다. 해시 일치는 범위 밖 설정 변경의 무해함을 보증하지 않는다.
+정답의 scope는 출발 노드·관계 종류·선택적인 근거 위치로 비교 범위를 정한다. file 선택자를 지정한 SQL은 해당 DB 파일만 정답으로 인정한다. 이름만 지정한 경우 DB 변형이 논리 연결로 묶이며 하나라도 상태가 다르면 상태 불일치로 표시한다. source_revision이 다르거나 작업 트리에 변경이 있으면 모든 정답 근거 파일의 SHA-256이 같아야 비교할 수 있다. 해시 일치는 범위 밖 설정 변경의 무해함을 보증하지 않는다.
 
-## 이번 GATE 재현
+## M1 최종 검증 재현
 
 ```sh
 node scripts/fetch-testbed.mjs egovframe
-node scripts/build-index.mjs .testbeds/egovframe --out .sistack/m1-egov-index.json --summary --force
-node scripts/build-index.mjs examples/legacy-board --out .sistack/m1-legacy-index.json --summary --force
-node scripts/eval-index.mjs .sistack/m1-egov-index.json evals/trace/egov-detailcode-list/expected.draft.json --draft
+node scripts/build-index.mjs .testbeds/egovframe --out .sistack/m1-egov-final-index.json --summary --force
+node scripts/build-index.mjs examples/legacy-board --out .sistack/m1-legacy-final-index.json --summary --force
+node scripts/eval-index.mjs .sistack/m1-egov-final-index.json evals/trace/egov-detailcode-list/expected.json
 npm test
 ```
 
-`--force`는 이 예제의 파생 인덱스를 다시 만들 때만 사용한다. eGovFrame은 고정 커밋을 재사용하며 수정한 checkout을 덮어쓰지 않는다. 실제 애플리케이션/DB를 실행하지 않는다. 검사 결과와 한계는 [GATE 보고서](m1-report.md)에 기록했다.
+`--force`는 이 예제의 파생 인덱스를 다시 만들 때만 사용한다. eGovFrame은 고정 커밋을 재사용하며 수정한 checkout을 덮어쓰지 않는다. 실제 애플리케이션/DB를 실행하지 않는다. 검사 결과와 한계는 [종료 보고서](m1-final-report.md)에 기록했다.
+
+## 정답의 근거 유지
+
+`node scripts/check-expected.mjs`는 evals/trace의 승인 JSON 전체를 검사하며 npm test에도 포함된다. source_root는 저장소 상대 경로, source_files는 원본 바이트의 SHA-256이다. 모든 evidence는 해시가 고정된 파일의 실제 라인을 가리켜야 한다. 소스가 없으면 BLOCKED, 해시/라인이 달라지면 FAIL로 종료하며 정답을 자동 수정하지 않는다. 승인본을 바꾸려면 소스를 다시 읽고 사용자 검토 조건에 따라 수정한다.
+
+정적 endpoint→인터셉터 관계는 intercepted_by다. 세션/CSRF 분기와 실제 요청 성공 여부는 별도 검증 대상이다. mapperLocations로 선택된 SQL의 executes에는 설정 근거를 추가하며, candidates에는 선택되지 않은 동일 sqlId 노드가 남는다. 미해결 설정에서는 가능한 SQL 후보를 LIKELY로 연결한다.

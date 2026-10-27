@@ -1,21 +1,31 @@
 {
   "schema_version": "1.0",
   "case_id": "egov-clcode-delete",
-  "review_status": "draft",
+  "review_status": "approved",
   "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
   "source_files": {
     "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp": "7dfeb221e03db4677d0829a38873f603f50c29a2c4b9227178be53e123c8ad7c",
     "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java": "4f22f3101f6d406dc4d1913909eb99c4cb37f8110e1042f60318c1f4af06a4a6",
     "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/EgovCcmCmmnClCodeManageServiceImpl.java": "94744826710efb9ce5b1cde9bba33fd2138ed484ee054e2d892e7a849f6d6aa3",
     "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/CmmnClCodeManageDAO.java": "42c979341ea2a9d30d743749f14c9d715ceaac83b3f840fbdbc5d682b3d7f58d",
-    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml": "56f1b439f556684e48a27a3c1da4cd9e92f0435f05e9344bb683f9b36ccff7e9"
+    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml": "56f1b439f556684e48a27a3c1da4cd9e92f0435f05e9344bb683f9b36ccff7e9",
+    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml": "88570d8fcaf9c2d2badafa0605e4d83b1a3ce0299ab4acefc61cbdbda4726dee",
+    "src/main/resources/egovframework/spring/com/context-mapper.xml": "805ec8f98e29de2100230ed55301bdf6b5a643bc17a9e8f6e2c19879e83a7cdd",
+    "src/main/resources/egovframework/spring/com/context-datasource.xml": "98bbd700194f1a69c24d55c2526fe2e451294d5194eeb21aed99fd28f2c039e1",
+    "src/main/resources/egovframework/egovProps/globals.properties": "89262500869a4828f18a6ed872c38ae5c897adf91adfdf0c6f8d04d7f10227ec",
+    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_altibase.xml": "4835a0d747119f0e4ba18a1c510fa16dbeb99c07662841ef619c71c8550493ba",
+    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_cubrid.xml": "06788513db81ee2edb35ec2fc14acefc927d831f421549ef98d2e93dbcd4836d",
+    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_goldilocks.xml": "4835a0d747119f0e4ba18a1c510fa16dbeb99c07662841ef619c71c8550493ba",
+    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_maria.xml": "88570d8fcaf9c2d2badafa0605e4d83b1a3ce0299ab4acefc61cbdbda4726dee",
+    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_postgres.xml": "7384a5ae5f0f57ad1a6d212302b5344226b8c06bb41bed1e9cccd7a8a9b9801e",
+    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_tibero.xml": "25d21f8e5d38756646d5f532724c499394b4dc547e9b9aa603b91412162b84f2"
   },
   "title": "공통분류코드 삭제",
   "selection_reason": "단순 CRUD 메뉴. delete라는 이름과 실제 UPDATE USE_AT=N SQL의 차이를 확인",
   "assumptions_and_questions": [
-    "DB별 XML이 공존하므로 활성 Mapper 선택은 LIKELY다. Oracle XML의 실제 쓰기는 DELETE가 아닌 UPDATE다.",
     "fn_egov_delete_code의 동일 폼 action 할당→submit을 한 흐름으로 본다. 실행 여부는 confirm 입력에 달려 있다.",
-    "삭제 후 forward로 목록을 다시 읽는 후속 흐름은 범위 밖이다."
+    "삭제 후 forward로 목록을 다시 읽는 후속 흐름은 범위 밖이다.",
+    "context-mapper.xml의 mapperLocations와 등록된 globals.properties의 Globals.DbType=mysql을 근거로 mysql 매핑을 확정한다. 다른 DB XML은 후보로만 기록한다. 외부 런타임 override와 실제 DB 실행은 검증 범위 밖이다."
   ],
   "scope": [
     {
@@ -60,7 +70,8 @@
     },
     {
       "from": {
-        "name": "CmmnClCodeManage.deleteCmmnClCode"
+        "name": "CmmnClCodeManage.deleteCmmnClCode",
+        "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml"
       },
       "kinds": [
         "writes"
@@ -173,10 +184,11 @@
         "name": "egovframework.com.sym.ccm.ccc.service.impl.CmmnClCodeManageDAO#deleteCmmnClCode"
       },
       "to": {
-        "name": "CmmnClCodeManage.deleteCmmnClCode"
+        "name": "CmmnClCodeManage.deleteCmmnClCode",
+        "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml"
       },
       "kind": "executes",
-      "status": "LIKELY",
+      "status": "CONFIRMED",
       "evidence": [
         {
           "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/CmmnClCodeManageDAO.java",
@@ -187,19 +199,39 @@
           "line": 79
         },
         {
-          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml",
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml",
           "line": 8
         },
         {
-          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml",
-          "line": 115
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml",
+          "line": 103
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+          "line": 15
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 9
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+          "line": 12
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 20
         }
-      ],
-      "reason": "DB별 동일 namespace.id가 공존하며 런타임 선택은 미확정"
+      ]
     },
     {
       "from": {
-        "name": "CmmnClCodeManage.deleteCmmnClCode"
+        "name": "CmmnClCodeManage.deleteCmmnClCode",
+        "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml"
       },
       "to": {
         "name": "COMTCCMMNCLCODE"
@@ -208,14 +240,50 @@
       "status": "CONFIRMED",
       "evidence": [
         {
-          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml",
-          "line": 118
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml",
+          "line": 106
         },
         {
-          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml",
-          "line": 119
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml",
+          "line": 107
         }
       ]
     }
-  ]
+  ],
+  "source_root": ".testbeds/egovframe",
+  "approval": "2026-10-27 사용자 검토 조건 1~5 반영. 범위 제외와 RSS 직접 JDBC 선정 승인.",
+  "mapping_selection": {
+    "selected_file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml",
+    "candidate_files": [
+      "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_altibase.xml",
+      "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_cubrid.xml",
+      "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_goldilocks.xml",
+      "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_maria.xml",
+      "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml",
+      "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_postgres.xml",
+      "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_tibero.xml"
+    ],
+    "evidence": [
+      {
+        "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+        "line": 9
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/context-mapper.xml",
+        "line": 15
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+        "line": 9
+      },
+      {
+        "file": "src/main/resources/egovframework/spring/com/context-datasource.xml",
+        "line": 12
+      },
+      {
+        "file": "src/main/resources/egovframework/egovProps/globals.properties",
+        "line": 20
+      }
+    ]
+  }
 }

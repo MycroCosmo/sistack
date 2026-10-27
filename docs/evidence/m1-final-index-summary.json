@@ -1,0 +1,58 @@
+{
+  "egov": {
+    "target": ".testbeds/egovframe",
+    "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
+    "source_dirty": false,
+    "created_at": "2026-10-27T03:32:30.046Z",
+    "indexer_version": "0.1.0",
+    "processed_files": 5785,
+    "duration_ms": 59025,
+    "nodes": 56583,
+    "edges": 48684,
+    "status": {
+      "CONFIRMED": 46764,
+      "LIKELY": 272,
+      "UNRESOLVED": 1648
+    },
+    "unresolved": 1666,
+    "skipped": 1338,
+    "skipped_patterns": {
+      "jsp-scriptlet": 571,
+      "unsupported-extension": 460,
+      "external-script": 293,
+      "nested-java-type": 4,
+      "vendor-js": 3,
+      "excluded-directory": 2,
+      "java-declaration": 2,
+      "file-read-encoding": 1,
+      "js-braces": 1,
+      "interceptor-runtime-order": 1
+    }
+  },
+  "legacy": {
+    "target": "examples/legacy-board",
+    "source_revision": "51e29a354493a221b9815d4b84ab47cda668019c",
+    "source_dirty": false,
+    "created_at": "2026-10-27T03:33:11.955Z",
+    "indexer_version": "0.1.0",
+    "processed_files": 38,
+    "duration_ms": 177,
+    "nodes": 154,
+    "edges": 114,
+    "status": {
+      "CONFIRMED": 110,
+      "LIKELY": 0,
+      "UNRESOLVED": 4
+    },
+    "unresolved": 5,
+    "skipped": 16,
+    "skipped_patterns": {
+      "external-script": 7,
+      "unsupported-extension": 3,
+      "excluded-directory": 2,
+      "mapping-conditions": 2,
+      "vendor-js": 1,
+      "interceptor-runtime-order": 1
+    }
+  }
+}

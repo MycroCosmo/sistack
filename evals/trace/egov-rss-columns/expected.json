@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "case_id": "egov-rss-columns",
-  "review_status": "draft",
+  "review_status": "approved",
   "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
   "source_files": {
     "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/ion/rss/EgovRssTagManageRegist.jsp": "4655631460a411dcd34855d78fdc5420f7c186bff9c69a2c63671f5e178b119f",
@@ -194,5 +194,7 @@
       ],
       "reason": "동적 sSQL의 대상 테이블은 사용자 입력과 whitelist·DB 분기에 의존"
     }
-  ]
+  ],
+  "source_root": ".testbeds/egovframe",
+  "approval": "2026-10-27 사용자 검토 조건 1~5 반영. 범위 제외와 RSS 직접 JDBC 선정 승인."
 }

@@ -1,21 +1,25 @@
 {
   "schema_version": "1.0",
   "case_id": "legacy-board-create",
-  "review_status": "draft",
+  "review_status": "approved",
   "source_revision": "fbffe3be67245ae15015af59597dea4ada200c41",
   "source_files": {
     "src/main/webapp/WEB-INF/views/board/form.jsp": "8ed0c020451cfa8b84faab83d9c8631360af1eeaa32b07dd254eae7e274f14b9",
     "src/main/java/kr/sistack/board/web/BoardController.java": "227d0a21ed2932322e94453c3af9c6a6921076936ae759d3d4eed6c863de6e73",
     "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java": "338abd3aa4a58c89144bfa7f13edd15b36439767a1092a583c65dda9b397b970",
     "src/main/java/kr/sistack/board/mapper/BoardMapper.java": "7912db189d1060de0e3d4aa7add93f625cb14e446dcb7daa71241d616a88bcfa",
-    "src/main/resources/mapper/BoardMapper.xml": "ad194be2f97e681dea017a28c62b6a1cbd22956ac0c4471c59d1c7963278c4c0"
+    "src/main/resources/mapper/BoardMapper.xml": "ad194be2f97e681dea017a28c62b6a1cbd22956ac0c4471c59d1c7963278c4c0",
+    "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml": "1e1a10e0ea9704c9cdf5fbede8668991194a9446128c0117c9db9e0d22c5296a",
+    "src/main/java/kr/sistack/board/web/LoginInterceptor.java": "ffdc90cb080d3303862c8d9d1a53efbb50cb9437000311d2e409620f17ba3b1c",
+    "src/main/java/kr/sistack/board/mapper/MenuMapper.java": "cb950f3cb91faa8ca712669245e72bdc700ba03dd740f07f27cdc2668c282c2d"
   },
   "title": "게시글 등록",
   "selection_reason": "조건부 JSP 저장 URL과 쓰기 SQL·selectKey를 확인하는 등록 기준선",
   "assumptions_and_questions": [
-    "board.id == 0인 신규 등록 분기를 선택한다. JSP EL의 삼항식과 fn:escapeXml(saveUrl)을 따라가면 POST /board/create.do다. 이 조건부 연결을 CONFIRMED로 평가할지 검토가 필요하다.",
+    "등록 화면의 리터럴 삼항식 두 분기를 모두 도달 가능 경로로 보아 POST /board/create.do와 POST /board/update.do를 CONFIRMED로 기록한다. update의 Controller 이후 업무 흐름은 이 등록 사례의 범위 밖이다.",
     "validate의 내부 값 검사는 연결 표 밖이지만 호출 자체는 포함한다.",
-    "selectKey의 DUAL 읽기와 BOARD 쓰기를 구분한다. 실제 운영 Oracle 접속은 하지 않는다."
+    "selectKey의 DUAL 읽기와 BOARD 쓰기를 구분한다. 실제 운영 Oracle 접속은 하지 않는다.",
+    "요청 URL의 인터셉터 매핑과 preHandle→MenuMapper→APP_MENU 경로를 포함한다. 인증·CSRF 분기에 따른 실제 실행 여부와 세션 값 전파는 정적 연결과 구분한다."
   ],
   "scope": [
     {
@@ -33,7 +37,8 @@
         "name": "POST /board/create.do"
       },
       "kinds": [
-        "maps_to"
+        "maps_to",
+        "intercepted_by"
       ]
     },
     {
@@ -68,6 +73,38 @@
         "reads",
         "writes"
       ]
+    },
+    {
+      "from": {
+        "name": "POST /board/update.do"
+      },
+      "kinds": [
+        "intercepted_by"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+      },
+      "kinds": [
+        "reads"
+      ]
     }
   ],
   "edges": [
@@ -92,6 +129,30 @@
         {
           "file": "src/main/java/kr/sistack/board/web/BoardController.java",
           "line": 57
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/views/board/form.jsp"
+      },
+      "to": {
+        "name": "POST /board/update.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 12
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 62
         }
       ]
     },
@@ -238,6 +299,132 @@
           "line": 48
         }
       ]
+    },
+    {
+      "from": {
+        "name": "POST /board/create.do"
+      },
+      "to": {
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+      },
+      "kind": "intercepted_by",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 57
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "POST /board/update.do"
+      },
+      "to": {
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+      },
+      "kind": "intercepted_by",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 62
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 10
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 14
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 11
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 14
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+          "line": 38
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 10
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+      },
+      "to": {
+        "name": "APP_MENU"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 9
+        }
+      ]
     }
-  ]
+  ],
+  "source_root": "examples/legacy-board",
+  "approval": "2026-10-27 사용자 검토 조건 1~5 반영. 범위 제외와 RSS 직접 JDBC 선정 승인."
 }
