@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "preserved_files": 1155,
+  "frozen_files": 190,
+  "first_and_v5_unchanged": true,
+  "examples_and_provided_projects_unchanged": true,
+  "v5_all_file_comparison_reproduced": 3,
+  "proposal_changes": 0,
+  "location_rescoring": false,
+  "application_execution": false
+}

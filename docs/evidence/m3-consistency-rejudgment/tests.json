@@ -1,0 +1,18 @@
+{
+  "command": "npm.cmd test",
+  "status": "PASS",
+  "tests": 143,
+  "passed": 143,
+  "failed": 0,
+  "skipped": 0,
+  "new_rejudgment_tests": 4,
+  "expected_freshness": "PASS",
+  "validate_skills": "PASS",
+  "sync_shared_check": "PASS",
+  "initial_sandbox_attempt": {
+    "passed": 142,
+    "failed": 1,
+    "reason": "기존 core.test.mjs 임시 Git config 쓰기 권한 제한"
+  },
+  "retry": "동일 명령을 권한 있는 환경에서 실행, exit code 0"
+}

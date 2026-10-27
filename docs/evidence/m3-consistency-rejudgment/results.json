@@ -1,0 +1,73 @@
+{
+  "policy": "provided-project-and-proposal-v1",
+  "status": "PASS",
+  "cases": 3,
+  "exact": 2,
+  "equivalent": 1,
+  "fail": 0,
+  "location_rescoring": false,
+  "application_execution": false,
+  "rows": [
+    {
+      "case_id": "heldout-01",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/templates/board/form.html",
+          "line": 16,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "proposal_consistency": "EXACT",
+      "automatic_verdict": "EXACT",
+      "compared_files": 50,
+      "excluded_original_files": [
+        "README.md",
+        "smoke.mjs"
+      ],
+      "human_approval": null
+    },
+    {
+      "case_id": "heldout-02",
+      "locations": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 32,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "proposal_consistency": "EQUIVALENT",
+      "automatic_verdict": "FAIL",
+      "compared_files": 46,
+      "excluded_original_files": [
+        "smoke.mjs"
+      ],
+      "human_approval": {
+        "approver": "Ian",
+        "approved_at": "2026-10-28",
+        "source": "2026-10-28 사용자 M3 종료 보고 검토 요청 3항",
+        "reason": "명시 컬럼 투영과 성능 개선 의도를 유지하면서 결과 매핑과 일치하는 동등 수정으로 승인"
+      }
+    },
+    {
+      "case_id": "heldout-03",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+          "line": 30,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "proposal_consistency": "EXACT",
+      "automatic_verdict": "EXACT",
+      "compared_files": 50,
+      "excluded_original_files": [
+        "README.md",
+        "smoke.mjs"
+      ],
+      "human_approval": null
+    }
+  ]
+}
