@@ -1,0 +1,50 @@
+{
+  "method": "그룹별 정답 수·JSP 기준선 계약 대조. 실제 Thymeleaf 수집기 eval은 미실행.",
+  "cases": [
+    {
+      "case_id": "legacy-board-thymeleaf-search",
+      "groups": {
+        "parity": {
+          "expected": 16,
+          "reference_matches": 16,
+          "eval": "NOT_RUN"
+        },
+        "screen": {
+          "expected": 7,
+          "eval": "NOT_RUN"
+        }
+      },
+      "status": "DRAFT_SOURCES_VALID"
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-create",
+      "groups": {
+        "parity": {
+          "expected": 12,
+          "reference_matches": 12,
+          "eval": "NOT_RUN"
+        },
+        "screen": {
+          "expected": 5,
+          "eval": "NOT_RUN"
+        }
+      },
+      "status": "DRAFT_SOURCES_VALID"
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-coexist",
+      "groups": {
+        "parity": {
+          "expected": 0,
+          "reference_matches": 0,
+          "eval": "NOT_RUN"
+        },
+        "screen": {
+          "expected": 1,
+          "eval": "NOT_RUN"
+        }
+      },
+      "status": "DRAFT_SOURCES_VALID"
+    }
+  ]
+}

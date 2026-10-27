@@ -109,7 +109,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 
 ## M2.5 — Thymeleaf 수집기
 
-**상태: 학습 정답 2건 GATE — 승인 대기.** 1번 GATE 승인 후 의존성 9개 일치·Groovy 4.0.25 선택을 확인하고 공존 테스트베드를 구축했다. JUnit 2건·HTTP 학습 smoke·브라우저·npm test 74건 통과. [GATE 보고](docs/m2.5-training-gate-report.md)의 검색·등록 초안을 검토한다. Java 8 런타임은 BLOCKED, 수집기·새 eval·held-out은 미착수다.
+**상태: 그룹별 학습 정답 3건 GATE — 구조 재검토 대기.** 기존 검색 17개·등록 14개 주 연결은 사용자 승인. parity/screen 분리와 화면 연결 승격, 독립 공존 사례를 반영했다. [그룹별 GATE 보고](docs/m2.5-grouped-gate-report.md)를 검토한다. 기존 승인 8건의 비교기 결과 동일, npm test 81건 통과. 수집기·새 학습 채점·held-out은 미착수이며 Java 8 런타임은 BLOCKED다.
 
 **목표:** Ian의 JSP → Thymeleaf 이관 업무에서 to-be 화면의 이벤트부터 기존 서버 흐름까지 추적한다.
 
@@ -118,17 +118,19 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 - 수집 대상: `th:action`, `th:href`/`th:src`의 `@{...}`(경로 변수·쿼리 파라미터 포함), `th:replace`/`th:insert`/`th:include` 프래그먼트, `th:inline="javascript"`의 AJAX URL
 - 추가 수집: `layout:decorate`/`layout:fragment`의 레이아웃·본문 연결, `th:data-*`/`th:attr`의 data URL을 외부 JS가 읽어 AJAX 하는 흐름. 테스트베드 공통 레이아웃과 화면 1개 이상에 적용
 - 수집기 단계의 추가 검증: viewNames 무제한 + `checkExistence=true`의 템플릿 존재/fallback 합성 사례, Thymeleaf 3.0 유틸 객체 구문 읽기. 테스트베드는 viewNames 방식과 3.1.5 렌더링을 유지
-- 학습 정답 초안 2건(검색·등록), held-out 2건(자체 삭제 AJAX·외부 PetClinic 화면 → Controller)을 개별 등록·채점. 외부 JPA 구간은 범위 밖
+- 그룹별 학습 초안 3건: 검색(parity 16/screen 7), 등록(parity 12/screen 5), 독립 공존(parity 해당 없음/screen 1). 기존 화면 요청도 screen에 포함하고 보충 항목을 채점에서 제외하지 않음
+- held-out 2건(자체 삭제 AJAX·외부 PetClinic 화면 → Controller)은 개별 등록·채점. 외부 JPA 구간은 범위 밖
 
 **완료 기준**
 - 승인된 legacy-board 검색·등록 2건과 비교해 화면 노드만 달라지고 서버 연결·상태는 동일함을 검증
-- 수집 범위의 확정·미확정 패턴 검증, 기존 JSP 학습 5건 회귀 확인, `npm test` 및 단독 설치 복사본 검사 통과
+- 사례별 parity·screen 일치/정답을 따로 보고하고 합산하지 않음. 서버 parity의 from/to/kind/status는 JSP 승인본과 동일해야 함
+- 수집 범위의 확정·미확정 패턴 검증, 기존 JSP 승인 8건 회귀 확인(학습·held-out 구분), `npm test` 및 단독 설치 복사본 검사 통과
 - held-out 2건의 흐름 탐색·정답 작성 전 구현 동결, 정답 승인 전 구현 수정 금지. 두 사례 모두 같은 동결 구현으로 첫 점수·원본·해시를 개별 보존·보고한 뒤 지시가 있을 때만 수정 가능
 - 테스트베드 빌드·렌더링·AJAX 동작 확인. 실행 환경이 없으면 BLOCKED와 재실행 명령 기록
 
-**[GATE]** `thymeleaf-spring5`와 `thymeleaf-layout-dialect`의 Java 8 호환 버전·라이선스·전이 의존성 및 공존 설정 승인 → 검색·등록 정답 초안 승인 → held-out 2건 정답 승인 → 수정 전 첫 점수 개별 보고. 각 지점에서 멈춘다.
+**[GATE]** 의존성·공존 설정 승인(완료) → 검색·등록·공존의 그룹별 채점 구조 승인(현재) → held-out 2건 정답 승인 → 수정 전 첫 점수 개별 보고. 각 지점에서 멈춘다.
 
-**Ian 할 일:** 학습 2건의 expected.draft JSON/MD와 보충 검토 범위를 승인한다. 그 후 수집기 구현을 진행하며 held-out 2건은 별도 정답 GATE를 거친다.
+**Ian 할 일:** 학습 3건의 expected.draft JSON/MD에서 parity/screen 구조와 승격한 screen 연결을 검토한다. 그 후 수집기 구현을 진행하며 held-out 2건은 별도 정답 GATE를 거친다.
 
 ---
 

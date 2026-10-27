@@ -4,7 +4,8 @@
 
 - 테스트베드 렌더링 검증 기준은 Thymeleaf **3.1.5.RELEASE**다. 수집기 요구 범위에는 Thymeleaf 3.0 문법과 3.1에서 제거된 `#request`·`#response`·`#session`·`#servletContext`를 포함하지만, 해당 식을 실행하거나 3.1에서 렌더링 가능하다고 간주하지 않는다. 정적 부분만 확정하고 런타임 값 의존은 미확정으로 남긴다.
 - 뷰 판정은 viewNames 방식과 `checkExistence=true`·viewNames 무제한일 때의 파일 존재/fallback 방식을 구별한다. 테스트베드는 viewNames를 사용하고 checkExistence 패턴은 수집기 구현 단계의 합성 테스트 대상이다.
-- viewNames 공존 테스트베드는 구축했고 JDK 17의 JUnit·로컬 HTTP·브라우저에서 3.1.5 렌더링을 확인했다. Java 8 런타임은 구성된 환경에 없어 BLOCKED다. 현재 학습 정답 2건 승인 대기이며 위 수집기 지원·합성 테스트의 완료를 주장하지 않는다. 학습 정답 승인 이후 구현한다.
+- viewNames 공존 테스트베드는 구축했고 JDK 17의 JUnit·로컬 HTTP·브라우저에서 3.1.5 렌더링을 확인했다. Java 8 런타임은 구성된 환경에 없어 BLOCKED다. 현재 검색·등록·독립 공존 3건의 그룹별 채점 구조 승인 대기이며 위 수집기 지원·합성 테스트의 완료를 주장하지 않는다. 학습 정답 승인 이후 구현한다.
+- `renders`·`decorates`·기존 `requests`/`includes`의 screen 채점 계약과 parity/screen 분리 비교기는 구현했다. 실제 Thymeleaf 수집기는 아직 없으므로 새 학습 사례의 그룹별 일치 점수는 미실행이다. 기존 승인 8건 회귀는 보존 trace에 같은 승인 정답을 입력한 비교기 호환성 검증이다.
 
 ## 기존 지원 범위
 

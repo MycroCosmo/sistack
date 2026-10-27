@@ -1,0 +1,670 @@
+
+> sistack@0.0.0 test
+> node --test && node scripts/check-expected.mjs && node scripts/validate-skills.mjs && node scripts/sync-shared.mjs --check
+
+TAP version 13
+# Subtest: 정답 freshness: 정상 근거, 소스 변경, 없는 라인/파일, 누락 소스, 경로 이탈
+ok 1 - 정답 freshness: 정상 근거, 소스 변경, 없는 라인/파일, 누락 소스, 경로 이탈
+  ---
+  duration_ms: 78.0175
+  type: 'test'
+  ...
+# Subtest: 합성 개인정보·비밀값을 제거하고 마스킹은 재실행해도 같다
+ok 2 - 합성 개인정보·비밀값을 제거하고 마스킹은 재실행해도 같다
+  ---
+  duration_ms: 2.9928
+  type: 'test'
+  ...
+# Subtest: 오탐 경계: 날짜·행번호·SQL과 일반 메시지를 보존
+ok 3 - 오탐 경계: 날짜·행번호·SQL과 일반 메시지를 보존
+  ---
+  duration_ms: 0.3406
+  type: 'test'
+  ...
+# Subtest: manifest 필수 필드·상태·증거·날짜·연계 필드를 검증
+ok 4 - manifest 필수 필드·상태·증거·날짜·연계 필드를 검증
+  ---
+  duration_ms: 1.5775
+  type: 'test'
+  ...
+# Subtest: manifest CLI는 성공·실패 종료 코드를 반환하고 잘못된 JSON 내용을 출력하지 않는다
+ok 5 - manifest CLI는 성공·실패 종료 코드를 반환하고 잘못된 JSON 내용을 출력하지 않는다
+  ---
+  duration_ms: 147.4489
+  type: 'test'
+  ...
+# Subtest: 스킬 이름·설명·본문·참조의 잘못된 입력을 거부
+ok 6 - 스킬 이름·설명·본문·참조의 잘못된 입력을 거부
+  ---
+  duration_ms: 40.2999
+  type: 'test'
+  ...
+# Subtest: 네 기본 설치 경로와 명시 dest를 결정
+ok 7 - 네 기본 설치 경로와 명시 dest를 결정
+  ---
+  duration_ms: 0.3892
+  type: 'test'
+  ...
+# 기존 경로:
+# si-example/
+# si-example\\SKILL.md
+# si-example\\agents\\openai.yaml
+# si-example\\references\\usage.md
+# si-example\\scripts\\check.mjs
+# si-example\\scripts\\lib\\mask\\index.mjs
+# si-trace/
+# si-trace\\SKILL.md
+# si-trace\\references\\example-complex.md
+# si-trace\\references\\example-simple.md
+# si-trace\\references\\explorer-prompt.md
+# si-trace\\references\\jsp-jquery.md
+# si-trace\\references\\mybatis-ibatis.md
+# si-trace\\references\\output-format.md
+# si-trace\\references\\spring-mvc.md
+# si-trace\\scripts\\lib\\indexer\\config.mjs
+# si-trace\\scripts\\lib\\indexer\\eval.mjs
+# si-trace\\scripts\\lib\\indexer\\expected.mjs
+# si-trace\\scripts\\lib\\indexer\\graph.mjs
+# si-trace\\scripts\\lib\\indexer\\ibatis.mjs
+# si-trace\\scripts\\lib\\indexer\\index.mjs
+# si-trace\\scripts\\lib\\indexer\\java.mjs
+# si-trace\\scripts\\lib\\indexer\\js.mjs
+# si-trace\\scripts\\lib\\indexer\\jsp.mjs
+# si-trace\\scripts\\lib\\indexer\\mybatis.mjs
+# si-trace\\scripts\\lib\\indexer\\profiles.mjs
+# si-trace\\scripts\\lib\\indexer\\query.mjs
+# si-trace\\scripts\\lib\\indexer\\source.mjs
+# si-trace\\scripts\\lib\\indexer\\spring.mjs
+# si-trace\\scripts\\lib\\indexer\\sql.mjs
+# si-trace\\scripts\\lib\\manifest\\index.mjs
+# si-trace\\scripts\\lib\\mask\\index.mjs
+# si-trace\\scripts\\lib\\trace\\index.mjs
+# si-trace\\scripts\\lib\\trace\\io.mjs
+# si-trace\\scripts\\lib\\trace\\report.mjs
+# si-trace\\scripts\\schemas\\manifest.schema.json
+# si-trace\\scripts\\trace.mjs
+# 기존 경로:
+# si-example/
+# si-example\\SKILL.md
+# si-example\\agents\\openai.yaml
+# si-example\\references\\usage.md
+# si-example\\scripts\\check.mjs
+# si-example\\scripts\\lib\\mask\\index.mjs
+# si-trace/
+# si-trace\\SKILL.md
+# si-trace\\references\\example-complex.md
+# si-trace\\references\\example-simple.md
+# si-trace\\references\\explorer-prompt.md
+# si-trace\\references\\jsp-jquery.md
+# si-trace\\references\\mybatis-ibatis.md
+# si-trace\\references\\output-format.md
+# si-trace\\references\\spring-mvc.md
+# si-trace\\scripts\\lib\\indexer\\config.mjs
+# si-trace\\scripts\\lib\\indexer\\eval.mjs
+# si-trace\\scripts\\lib\\indexer\\expected.mjs
+# si-trace\\scripts\\lib\\indexer\\graph.mjs
+# si-trace\\scripts\\lib\\indexer\\ibatis.mjs
+# si-trace\\scripts\\lib\\indexer\\index.mjs
+# si-trace\\scripts\\lib\\indexer\\java.mjs
+# si-trace\\scripts\\lib\\indexer\\js.mjs
+# si-trace\\scripts\\lib\\indexer\\jsp.mjs
+# si-trace\\scripts\\lib\\indexer\\mybatis.mjs
+# si-trace\\scripts\\lib\\indexer\\profiles.mjs
+# si-trace\\scripts\\lib\\indexer\\query.mjs
+# si-trace\\scripts\\lib\\indexer\\source.mjs
+# si-trace\\scripts\\lib\\indexer\\spring.mjs
+# si-trace\\scripts\\lib\\indexer\\sql.mjs
+# si-trace\\scripts\\lib\\manifest\\index.mjs
+# si-trace\\scripts\\lib\\mask\\index.mjs
+# si-trace\\scripts\\lib\\trace\\index.mjs
+# si-trace\\scripts\\lib\\trace\\io.mjs
+# si-trace\\scripts\\lib\\trace\\report.mjs
+# si-trace\\scripts\\schemas\\manifest.schema.json
+# si-trace\\scripts\\trace.mjs
+# Subtest: 공통 모듈 차이를 탐지하고 단독 설치·충돌 보존·명시적 덮어쓰기를 실제 확인
+ok 8 - 공통 모듈 차이를 탐지하고 단독 설치·충돌 보존·명시적 덮어쓰기를 실제 확인
+  ---
+  duration_ms: 1557.974
+  type: 'test'
+  ...
+# Subtest: 외부 테스트베드는 고정 커밋을 재사용하고 변경된 파일을 보존
+ok 9 - 외부 테스트베드는 고정 커밋을 재사용하고 변경된 파일을 보존
+  ---
+  duration_ms: 811.7114
+  type: 'test'
+  ...
+# Subtest: 두 그룹을 따로 채점하고 합산 필드를 제공하지 않는다
+ok 10 - 두 그룹을 따로 채점하고 합산 필드를 제공하지 않는다
+  ---
+  duration_ms: 3.236
+  type: 'test'
+  ...
+# Subtest: screen 누락·과탐·상태 오류가 parity 점수에 섞이지 않는다
+ok 11 - screen 누락·과탐·상태 오류가 parity 점수에 섞이지 않는다
+  ---
+  duration_ms: 1.0135
+  type: 'test'
+  ...
+# Subtest: requests만 쿼리 없는 경로와 메서드로 비교하고 다른 경로·메서드는 실패한다
+ok 12 - requests만 쿼리 없는 경로와 메서드로 비교하고 다른 경로·메서드는 실패한다
+  ---
+  duration_ms: 0.4828
+  type: 'test'
+  ...
+# Subtest: 그룹 누락·겹친 scope·중복·허용하지 않은 종류와 parity 변형을 거부한다
+ok 13 - 그룹 누락·겹친 scope·중복·허용하지 않은 종류와 parity 변형을 거부한다
+  ---
+  duration_ms: 0.9847
+  type: 'test'
+  ...
+# Subtest: 공존 전용 사례의 parity 0건을 적용 대상 없음으로 표시한다
+ok 14 - 공존 전용 사례의 parity 0건을 적용 대상 없음으로 표시한다
+  ---
+  duration_ms: 0.3641
+  type: 'test'
+  ...
+# Subtest: 스키마·실제 그래프·정답 검증기가 같은 연결 종류를 사용한다
+ok 15 - 스키마·실제 그래프·정답 검증기가 같은 연결 종류를 사용한다
+  ---
+  duration_ms: 5.7241
+  type: 'test'
+  ...
+# Subtest: 초안을 정식 채점하지 않고 명시적 미리보기만 허용
+ok 16 - 초안을 정식 채점하지 않고 명시적 미리보기만 허용
+  ---
+  duration_ms: 2.2417
+  type: 'test'
+  ...
+# Subtest: 연결을 잘못된 대상으로 바꾸면 누락과 과탐을 각각 검출
+ok 17 - 연결을 잘못된 대상으로 바꾸면 누락과 과탐을 각각 검출
+  ---
+  duration_ms: 0.4078
+  type: 'test'
+  ...
+# Subtest: 상태 불일치는 연결 누락과 구분
+ok 18 - 상태 불일치는 연결 누락과 구분
+  ---
+  duration_ms: 1.2371
+  type: 'test'
+  ...
+# Subtest: 동일 이름이라도 승인한 DB 파일과 다른 선언은 누락과 과탐으로 검출한다
+ok 19 - 동일 이름이라도 승인한 DB 파일과 다른 선언은 누락과 과탐으로 검출한다
+  ---
+  duration_ms: 0.4526
+  type: 'test'
+  ...
+# Subtest: 범위 밖 연결을 과탐으로 세지 않고 비교 revision을 강제
+ok 20 - 범위 밖 연결을 과탐으로 세지 않고 비교 revision을 강제
+  ---
+  duration_ms: 0.2574
+  type: 'test'
+  ...
+# Subtest: 커밋이 달라도 모든 근거 파일 해시가 같을 때만 비교하고 차이를 표시
+ok 21 - 커밋이 달라도 모든 근거 파일 해시가 같을 때만 비교하고 차이를 표시
+  ---
+  duration_ms: 0.268
+  type: 'test'
+  ...
+# Subtest: 스킬 eval은 세트를 분리하고 원본·점수를 보존하며 첫 결과를 덮어쓰지 않는다
+ok 22 - 스킬 eval은 세트를 분리하고 원본·점수를 보존하며 첫 결과를 덮어쓰지 않는다
+  ---
+  duration_ms: 120.1639
+  type: 'test'
+  ...
+# Subtest: 스킬 eval은 등록된 held-out이어도 미승인 초안과 낡은 소스를 채점하지 않는다
+ok 23 - 스킬 eval은 등록된 held-out이어도 미승인 초안과 낡은 소스를 채점하지 않는다
+  ---
+  duration_ms: 49.0897
+  type: 'test'
+  ...
+# Subtest: 스킬 eval 출력과 저장 결과는 그룹별 점수만 내고 JSP parity 변형을 차단한다
+ok 24 - 스킬 eval 출력과 저장 결과는 그룹별 점수만 내고 JSP parity 변형을 차단한다
+  ---
+  duration_ms: 117.7872
+  type: 'test'
+  ...
+# Subtest: CLI 실제 빌드·양방향 질의·기존 출력 보존·잘못된 JSON 비노출
+ok 25 - CLI 실제 빌드·양방향 질의·기존 출력 보존·잘못된 JSON 비노출
+  ---
+  duration_ms: 677.2835
+  type: 'test'
+  ...
+# Subtest: 정적 인터셉터 매핑은 요청 URL에서 메뉴 조회 SQL까지 이어진다
+ok 26 - 정적 인터셉터 매핑은 요청 URL에서 메뉴 조회 SQL까지 이어진다
+  ---
+  duration_ms: 8.3021
+  type: 'test'
+  ...
+# Subtest: 인터셉터 exclude-mapping은 해당 endpoint 연결을 제외한다
+ok 27 - 인터셉터 exclude-mapping은 해당 endpoint 연결을 제외한다
+  ---
+  duration_ms: 69.5309
+  type: 'test'
+  ...
+# Subtest: JSP c:url 리터럴 삼항식은 두 도달 가능 요청과 선언 근거를 남긴다
+ok 28 - JSP c:url 리터럴 삼항식은 두 도달 가능 요청과 선언 근거를 남긴다
+  ---
+  duration_ms: 1.1551
+  type: 'test'
+  ...
+# Subtest: JSP 삼항식의 동적 분기는 임의로 확정하지 않는다
+ok 29 - JSP 삼항식의 동적 분기는 임의로 확정하지 않는다
+  ---
+  duration_ms: 59.7731
+  type: 'test'
+  ...
+# Subtest: mapperLocations 프로퍼티 선택: mysql
+ok 30 - mapperLocations 프로퍼티 선택: mysql
+  ---
+  duration_ms: 71.496
+  type: 'test'
+  ...
+# Subtest: mapperLocations 프로퍼티 선택: oracle
+ok 31 - mapperLocations 프로퍼티 선택: oracle
+  ---
+  duration_ms: 67.6948
+  type: 'test'
+  ...
+# Subtest: mapperLocations 프로퍼티 선택: missing
+ok 32 - mapperLocations 프로퍼티 선택: missing
+  ---
+  duration_ms: 78.8535
+  type: 'test'
+  ...
+# Subtest: extends와 implements를 함께 선언한 구현체로 주입 호출을 연결한다
+ok 33 - extends와 implements를 함께 선언한 구현체로 주입 호출을 연결한다
+  ---
+  duration_ms: 74.699
+  type: 'test'
+  ...
+# Subtest: 설정 미확정이면 단일 SQL 선언도 LIKELY: missing-property
+ok 34 - 설정 미확정이면 단일 SQL 선언도 LIKELY: missing-property
+  ---
+  duration_ms: 73.4982
+  type: 'test'
+  ...
+# Subtest: 설정 미확정이면 단일 SQL 선언도 LIKELY: multiple-factories
+ok 35 - 설정 미확정이면 단일 SQL 선언도 LIKELY: multiple-factories
+  ---
+  duration_ms: 81.8331
+  type: 'test'
+  ...
+# Subtest: 설정 미확정이면 단일 SQL 선언도 LIKELY: conflicting-property
+ok 36 - 설정 미확정이면 단일 SQL 선언도 LIKELY: conflicting-property
+  ---
+  duration_ms: 71.551
+  type: 'test'
+  ...
+# Subtest: 주석 제거는 문자열의 //와 라인 번호를 보존한다
+ok 37 - 주석 제거는 문자열의 //와 라인 번호를 보존한다
+  ---
+  duration_ms: 0.2151
+  type: 'test'
+  ...
+# Subtest: jsp 수집: c:url form, include, 인라인 요청을 분리한다
+ok 38 - jsp 수집: c:url form, include, 인라인 요청을 분리한다
+  ---
+  duration_ms: 0.2471
+  type: 'test'
+  ...
+# Subtest: js 수집: ajax/post/get/fetch/location/submit과 주석을 구분한다
+ok 39 - js 수집: ajax/post/get/fetch/location/submit과 주석을 구분한다
+  ---
+  duration_ms: 0.4025
+  type: 'test'
+  ...
+# Subtest: java 수집: 클래스/메서드/주입 선언을 실제 구문으로 식별한다
+ok 40 - java 수집: 클래스/메서드/주입 선언을 실제 구문으로 식별한다
+  ---
+  duration_ms: 0.1929
+  type: 'test'
+  ...
+# Subtest: mybatis 수집: namespace, 조각, resultMap, 치환 위치
+ok 41 - mybatis 수집: namespace, 조각, resultMap, 치환 위치
+  ---
+  duration_ms: 0.1774
+  type: 'test'
+  ...
+# Subtest: ibatis2 수집: sqlMap namespace/id와 include를 연결할 자료 수집
+ok 42 - ibatis2 수집: sqlMap namespace/id와 include를 연결할 자료 수집
+  ---
+  duration_ms: 0.107
+  type: 'test'
+  ...
+# Subtest: SQL 수집: 읽기/쓰기/procedure와 문자열·주석을 구분한다
+ok 43 - SQL 수집: 읽기/쓰기/procedure와 문자열·주석을 구분한다
+  ---
+  duration_ms: 0.3187
+  type: 'test'
+  ...
+# Subtest: spring 수집: 클래스 경로, 배열, method 속성과 XML handler mapping
+ok 44 - spring 수집: 클래스 경로, 배열, method 속성과 XML handler mapping
+  ---
+  duration_ms: 71.3314
+  type: 'test'
+  ...
+# Subtest: 함정 01: 목록 form.submit의 함수 반환 action은 UNRESOLVED
+ok 45 - 함정 01: 목록 form.submit의 함수 반환 action은 UNRESOLVED
+  ---
+  duration_ms: 0.1335
+  type: 'test'
+  ...
+# Subtest: 함정 02: JSP contextPath 선언 + 단일 리터럴 삭제 경로는 CONFIRMED
+ok 46 - 함정 02: JSP contextPath 선언 + 단일 리터럴 삭제 경로는 CONFIRMED
+  ---
+  duration_ms: 0.5801
+  type: 'test'
+  ...
+# Subtest: 함정 03: 동명 list는 주입 타입으로 구분
+ok 47 - 함정 03: 동명 list는 주입 타입으로 구분
+  ---
+  duration_ms: 2.2075
+  type: 'test'
+  ...
+# Subtest: 함정 04: 공통 paging.jspf는 두 목록에서 공유
+ok 48 - 함정 04: 공통 paging.jspf는 두 목록에서 공유
+  ---
+  duration_ms: 0.3159
+  type: 'test'
+  ...
+# Subtest: 함정 05: namespace 내부·외부 SQL include
+ok 49 - 함정 05: namespace 내부·외부 SQL include
+  ---
+  duration_ms: 0.4577
+  type: 'test'
+  ...
+# Subtest: 함정 06: ${sortColumn}는 치환 위험 위치로 남김
+ok 50 - 함정 06: ${sortColumn}는 치환 위험 위치로 남김
+  ---
+  duration_ms: 0.0395
+  type: 'test'
+  ...
+# Subtest: 함정 07: 주석 속 oldList 요청은 미수집
+ok 51 - 함정 07: 주석 속 oldList 요청은 미수집
+  ---
+  duration_ms: 0.6013
+  type: 'test'
+  ...
+# Subtest: 함정 08: 인터셉터 request 속성과 Controller 소비를 기록하되 값 전파는 미확정
+ok 52 - 함정 08: 인터셉터 request 속성과 Controller 소비를 기록하되 값 전파는 미확정
+  ---
+  duration_ms: 0.1424
+  type: 'test'
+  ...
+# Subtest: 함정 09: SqlSessionTemplate 문자열 sqlId
+ok 53 - 함정 09: SqlSessionTemplate 문자열 sqlId
+  ---
+  duration_ms: 0.2478
+  type: 'test'
+  ...
+# Subtest: 함정 10: XML·어노테이션 Mapper 둘 다 SQL로 연결
+ok 54 - 함정 10: XML·어노테이션 Mapper 둘 다 SQL로 연결
+  ---
+  duration_ms: 0.4576
+  type: 'test'
+  ...
+# Subtest: 함정 11: 이름 주입→서비스 Impl 및 타입 주입→Mapper
+ok 55 - 함정 11: 이름 주입→서비스 Impl 및 타입 주입→Mapper
+  ---
+  duration_ms: 0.4483
+  type: 'test'
+  ...
+# Subtest: 함정 12: HashMap offset/endRow와 parameterType map 기록
+ok 56 - 함정 12: HashMap offset/endRow와 parameterType map 기록
+  ---
+  duration_ms: 0.06
+  type: 'test'
+  ...
+# Subtest: 함정 13: 공통코드 AJAX 문자열 조합은 endpoint 선언과 별개로 UNRESOLVED
+ok 57 - 함정 13: 공통코드 AJAX 문자열 조합은 endpoint 선언과 별개로 UNRESOLVED
+  ---
+  duration_ms: 0.0895
+  type: 'test'
+  ...
+# Subtest: 함정 14: 삭제 endpoint→controller→서비스→SQL
+ok 58 - 함정 14: 삭제 endpoint→controller→서비스→SQL
+  ---
+  duration_ms: 0.1881
+  type: 'test'
+  ...
+# Subtest: 정상 흐름: 게시판 목록 화면에서 BOARD까지 확정 연결과 역방향 질의
+ok 59 - 정상 흐름: 게시판 목록 화면에서 BOARD까지 확정 연결과 역방향 질의
+  ---
+  duration_ms: 0.2695
+  type: 'test'
+  ...
+# Subtest: 구현 다중 후보는 LIKELY이고 후보 id를 제공
+ok 60 - 구현 다중 후보는 LIKELY이고 후보 id를 제공
+  ---
+  duration_ms: 64.1854
+  type: 'test'
+  ...
+# Subtest: 파싱 실패·비공개·테스트 제외·마스킹·Git 없는 대상
+ok 61 - 파싱 실패·비공개·테스트 제외·마스킹·Git 없는 대상
+  ---
+  duration_ms: 73.073
+  type: 'test'
+  ...
+# Subtest: contextPath가 선언되지 않은 ctx 조합을 확정하지 않는다
+ok 62 - contextPath가 선언되지 않은 ctx 조합을 확정하지 않는다
+  ---
+  duration_ms: 58.5302
+  type: 'test'
+  ...
+# Subtest: 호출처럼 보이는 Java/JS 문자열을 실행 연결로 오인하지 않는다
+ok 63 - 호출처럼 보이는 Java/JS 문자열을 실행 연결로 오인하지 않는다
+  ---
+  duration_ms: 63.2077
+  type: 'test'
+  ...
+# Subtest: 콤마 JOIN 및 MERGE USING 읽기 대상을 구분한다
+ok 64 - 콤마 JOIN 및 MERGE USING 읽기 대상을 구분한다
+  ---
+  duration_ms: 0.3905
+  type: 'test'
+  ...
+# Subtest: 개인정보는 마스킹하되 불투명 해시는 식별자로 보존한다
+ok 65 - 개인정보는 마스킹하되 불투명 해시는 식별자로 보존한다
+  ---
+  duration_ms: 0.098
+  type: 'test'
+  ...
+# Subtest: 반복 SQL은 연결 하나로 묶고 근거 위치 제한을 표시한다
+ok 66 - 반복 SQL은 연결 하나로 묶고 근거 위치 제한을 표시한다
+  ---
+  duration_ms: 2.4722
+  type: 'test'
+  ...
+# Subtest: static: import·같은 패키지·중첩 반환 타입으로 로컬 static overload를 연결한다
+ok 67 - static: import·같은 패키지·중첩 반환 타입으로 로컬 static overload를 연결한다
+  ---
+  duration_ms: 121.181
+  type: 'test'
+  ...
+# Subtest: static: 외부 import 호출은 내부를 만들지 않고 external로 기록한다
+ok 68 - static: 외부 import 호출은 내부를 만들지 않고 external로 기록한다
+  ---
+  duration_ms: 80.7061
+  type: 'test'
+  ...
+# Subtest: JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의 기본 action을 쓴다
+ok 69 - JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의 기본 action을 쓴다
+  ---
+  duration_ms: 71.8834
+  type: 'test'
+  ...
+# Subtest: profile: 활성 프로필 미확정이면 빈·인터셉터를 조건이 적힌 LIKELY로 둔다
+ok 70 - profile: 활성 프로필 미확정이면 빈·인터셉터를 조건이 적힌 LIKELY로 둔다
+  ---
+  duration_ms: 92.814
+  type: 'test'
+  ...
+# Subtest: profile: 등록된 설정의 활성 프로필로 비활성 빈·인터셉터를 제외한다
+ok 71 - profile: 등록된 설정의 활성 프로필로 비활성 빈·인터셉터를 제외한다
+  ---
+  duration_ms: 75.2885
+  type: 'test'
+  ...
+# Subtest: profile: 바깥 인터셉터가 조건부 ref 빈을 쓰는 경우도 LIKELY다
+ok 72 - profile: 바깥 인터셉터가 조건부 ref 빈을 쓰는 경우도 LIKELY다
+  ---
+  duration_ms: 63.55
+  type: 'test'
+  ...
+# Subtest: fragment: href=\#와 javascript:void(0)는 요청이 아니며 실제 링크는 유지한다
+ok 73 - fragment: href=\#와 javascript:void(0)는 요청이 아니며 실제 링크는 유지한다
+  ---
+  duration_ms: 82.9786
+  type: 'test'
+  ...
+# Subtest: mask: 32/40/64자 16진수·UUID를 보존하면서 실제 개인정보는 마스킹한다
+ok 74 - mask: 32/40/64자 16진수·UUID를 보존하면서 실제 개인정보는 마스킹한다
+  ---
+  duration_ms: 0.2876
+  type: 'test'
+  ...
+# Subtest: eval 해시 필드는 일반 마스킹과 분리해 유효한 식별자를 보존한다
+ok 75 - eval 해시 필드는 일반 마스킹과 분리해 유효한 식별자를 보존한다
+  ---
+  duration_ms: 0.703
+  type: 'test'
+  ...
+# Subtest: prepare→원문 검토→finish 산출물과 manifest, 소스 보존·새 인덱스
+ok 76 - prepare→원문 검토→finish 산출물과 manifest, 소스 보존·새 인덱스
+  ---
+  duration_ms: 327.8849
+  type: 'test'
+  ...
+# Subtest: 소스 변경·허위 라인·미검토 파일은 최종 보고 생성을 차단한다
+ok 77 - 소스 변경·허위 라인·미검토 파일은 최종 보고 생성을 차단한다
+  ---
+  duration_ms: 137.0629
+  type: 'test'
+  ...
+# Subtest: 시작점 0건과 경로 이탈, 복잡 분기의 실제 탐색 기록을 검증한다
+ok 78 - 시작점 0건과 경로 이탈, 복잡 분기의 실제 탐색 기록을 검증한다
+  ---
+  duration_ms: 243.1327
+  type: 'test'
+  ...
+# Subtest: 복잡도는 긴 단일 체인과 20개 분기 경로를 구분한다
+ok 79 - 복잡도는 긴 단일 체인과 20개 분기 경로를 구분한다
+  ---
+  duration_ms: 0.4365
+  type: 'test'
+  ...
+# Subtest: DB 선택 후 부분 그래프가 질의 밖 후보 id 때문에 깨지지 않는다
+ok 80 - DB 선택 후 부분 그래프가 질의 밖 후보 id 때문에 깨지지 않는다
+  ---
+  duration_ms: 105.8132
+  type: 'test'
+  ...
+# Subtest: si-trace 폴더만 복사해 CLI를 실행해도 상위 저장소 없이 동작한다
+ok 81 - si-trace 폴더만 복사해 CLI를 실행해도 상위 저장소 없이 동작한다
+  ---
+  duration_ms: 304.3415
+  type: 'test'
+  ...
+1..81
+# tests 81
+# suites 0
+# pass 81
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2704.3481
+[
+  {
+    "case_id": "egov-article-list",
+    "status": "PASS",
+    "source_files": 46,
+    "evidence_locations": 190
+  },
+  {
+    "case_id": "egov-clcode-delete",
+    "status": "PASS",
+    "source_files": 16,
+    "evidence_locations": 31
+  },
+  {
+    "case_id": "egov-detailcode-list",
+    "status": "PASS",
+    "source_files": 15,
+    "evidence_locations": 44
+  },
+  {
+    "case_id": "egov-id-dplct-ajax",
+    "status": "PASS",
+    "source_files": 22,
+    "evidence_locations": 141
+  },
+  {
+    "case_id": "egov-rss-columns",
+    "status": "PASS",
+    "source_files": 4,
+    "evidence_locations": 17
+  },
+  {
+    "case_id": "egov-user-insert",
+    "status": "PASS",
+    "source_files": 15,
+    "evidence_locations": 101
+  },
+  {
+    "case_id": "legacy-board-create",
+    "status": "PASS",
+    "source_files": 8,
+    "evidence_locations": 37
+  },
+  {
+    "case_id": "legacy-board-search",
+    "status": "PASS",
+    "source_files": 9,
+    "evidence_locations": 41
+  },
+  {
+    "case_id": "legacy-board-thymeleaf-coexist",
+    "status": "DRAFT_SOURCES_VALID",
+    "source_files": 3,
+    "evidence_locations": 10,
+    "groups": {
+      "parity": {
+        "expected_edges": 0
+      },
+      "screen": {
+        "expected_edges": 1
+      }
+    }
+  },
+  {
+    "case_id": "legacy-board-thymeleaf-create",
+    "status": "DRAFT_SOURCES_VALID",
+    "source_files": 10,
+    "evidence_locations": 54,
+    "groups": {
+      "parity": {
+        "expected_edges": 12
+      },
+      "screen": {
+        "expected_edges": 5
+      }
+    }
+  },
+  {
+    "case_id": "legacy-board-thymeleaf-search",
+    "status": "DRAFT_SOURCES_VALID",
+    "source_files": 13,
+    "evidence_locations": 80,
+    "groups": {
+      "parity": {
+        "expected_edges": 16
+      },
+      "screen": {
+        "expected_edges": 7
+      }
+    }
+  }
+]
+PASS: 스킬 2개
+PASS: 공통 모듈 2개 스킬 확인

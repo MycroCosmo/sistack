@@ -1,5 +1,14 @@
 # 설계 결정
 
+## 2026-10-27 — Thymeleaf 그룹별 채점 구조 재검토
+
+- 사용자가 기존 검색 17개·등록 14개 주 연결을 승인하고 보충 항목을 실제 채점에 포함하도록 지시했다. 기존 주 연결 중 화면 출발 requests 1개·2개는 screen으로, 순수 서버 연결 16개·12개는 parity로 분류했다. parity_reference의 승인 JSP 정답 SHA-256과 from/to/kind/status를 check-expected에서 검증하며 parity 삭제·변형도 차단한다.
+- 검색 보충 7개 중 jsp-coexistence를 독립 `legacy-board-thymeleaf-coexist`로 옮기고 나머지 6개를 screen edges/scope로 승격했다. 등록의 보충 3개도 screen으로 승격했다. 결과는 검색 parity 16/screen 7, 등록 parity 12/screen 5, 공존 parity 적용 없음/screen 1이다. 이는 채점 범위의 연결 수이며 새 수집기 점수가 아니다.
+- `renders`·`decorates` 종류와 template 노드를 그래프 스키마에 추가했다. data AJAX는 기존 requests(`list.html#요소ID` → GET /code/listJson.do), fragment 연결은 includes(`파일#fragment이름`)로 표현한다. requests의 도착 endpoint만 HTTP 메서드와 쿼리 제외 경로로 비교한다.
+- 그룹별 정답 스키마·검증·evalIndex/evalTrace 출력에는 parity와 screen 결과만 제공하며 합산 expected/matched를 생성하지 않는다. 그룹 없는 기존 정답은 이전 점수 형식을 유지한다. 그룹 사이 scope 중복과 중복 연결은 거부한다.
+- 보존된 v2-final trace와 같은 현재 승인 정답을 수정 전(7e133f1)·현재 비교기에 입력했다. 기존 8건 모두 상태·일치/정답·누락·과탐·상태 불일치 배열이 동일했다. [회귀 결과](evidence/m2.5-testbed/grouped-eval-regression.json). 이전 평가 원본과 기존 승인 정답은 바꾸지 않았다.
+- 새 구조는 expected.draft 3건으로 남긴다. 실제 Thymeleaf 학습 eval·수집기 구현·held-out 탐색은 시작하지 않고 다시 GATE 보고한다.
+
 ## 2026-10-27 — M2.5 학습 정답 초안 GATE
 
 - 테스트베드 소스 revision `bfa5098`을 기준으로 Thymeleaf 검색·등록 `expected.draft.json`/`expected.draft.md`를 작성했다. 기존 승인 JSON을 서버 기준선으로 사용하고 새 화면·설정·JS 원문을 직접 대조했다. 인덱서 출력은 사용하지 않았다.

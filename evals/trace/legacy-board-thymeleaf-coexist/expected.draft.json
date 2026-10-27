@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "case_id": "legacy-board-thymeleaf-coexist",
+  "review_status": "draft",
+  "source_revision": "bfa5098ab8ec79b4c9062fc24348c9465456aa27",
+  "source_root": "examples/legacy-board-thymeleaf",
+  "title": "공통코드 JSP 뷰 공존 판정",
+  "selection_reason": "검색·등록과 독립적인 Controller 반환 뷰의 JSP 선택",
+  "score_groups": [
+    "parity",
+    "screen"
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "kr.sistack.board.web.CommonCodeController#list"
+      },
+      "kinds": [
+        "renders"
+      ],
+      "group": "screen"
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "kr.sistack.board.web.CommonCodeController#list"
+      },
+      "to": {
+        "name": "src/main/webapp/WEB-INF/views/code/list.jsp"
+      },
+      "kind": "renders",
+      "group": "screen",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/CommonCodeController.java",
+          "line": 25
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/CommonCodeController.java",
+          "line": 28
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 34
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 35
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 37
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 38
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 39
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 40
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 41
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+          "line": 1
+        }
+      ],
+      "reason": "code/list는 Thymeleaf viewNames에 맞지 않고 JSP code/*에 맞는다. JSP 존재도 확인한다."
+    }
+  ],
+  "source_files": {
+    "src/main/java/kr/sistack/board/web/CommonCodeController.java": "ca74a2e20ad4210a950b5cee7ac3f05809552e4f497a37acada4d0e22b127a90",
+    "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml": "6547bb4015ffa7df58692615d49770a7e4b4996a3c190ba129a2cb0ee23a9cd3",
+    "src/main/webapp/WEB-INF/views/code/list.jsp": "1e14d74bc30469867916e1ab8dfa45698925a640b6ac94e0cbdbbc540928eff4"
+  },
+  "assumptions_and_questions": [
+    "서버 조회 호출·SQL은 평가하지 않는다. parity는 적용 대상 없음이다.",
+    "order 1 Thymeleaf viewNames는 code/list에 맞지 않고 order 2 JSP code/*와 prefix/suffix·존재 파일이 선택 근거다.",
+    "checkExistence fallback 합성 검증은 이 사례와 별도다."
+  ],
+  "evaluation_contract": {
+    "parity": "적용 대상 없음",
+    "screen": "CommonCodeController#list -renders-> code/list.jsp 1개 연결",
+    "reporting": "parity 적용 대상 없음·screen 일치/정답을 보고하며 합산하지 않는다."
+  }
+}
