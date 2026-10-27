@@ -1,0 +1,11 @@
+{
+  "path": "docs/evidence/m2.5-heldout-first/originals.json.gz",
+  "files": 49,
+  "archive_bytes": 152162,
+  "sha256": "9f860cbac4687e1c7688896d1d5d9750e54ca71fa315c6c13d3a8c9a64bd483f",
+  "payload_sha256": "53f301a25f9e797ba30ebf07e6c0e7130a44bdbba5b3a0b60481c788818497bc",
+  "verification": "해제·파일별 SHA-256·로컬 원본 바이트 일치",
+  "excluded": [
+    ".source-review-snippets.txt (대상 소스 원문 로컬 확인용, 아카이브/커밋 제외)"
+  ]
+}

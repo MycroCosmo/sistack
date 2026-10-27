@@ -1,0 +1,99 @@
+{
+  "phase": "FIRST_RESULTS_BEFORE_ANY_FIX",
+  "recorded_at": "2026-10-27T09:30:00.362Z",
+  "implementation_revision": "fd1b93c69a64db5e54d72bb8eee0cefb19405f5b",
+  "tool_fingerprint": "8e5bdc83d9c4da2a4efee1b5d709ff1bb6126ddb9475ae9c7b3d7973a367eec0",
+  "approval_revision": "39c30c1",
+  "groups": [
+    "screen",
+    "server"
+  ],
+  "aggregate_score_generated": false,
+  "collector_changes": 0,
+  "results": [
+    {
+      "case_id": "thymeleaf-board-delete-ajax",
+      "run_id": "m25-heldout-delete-first-20261027-01",
+      "source_root": "examples/legacy-board-thymeleaf",
+      "source_revision": "39c30c181f87dd8281444bac69c23d5ab53b4dad",
+      "source_dirty": false,
+      "approved_expected_sha256": "a78497ae6e41eed0cb441adcff1a17c047411422a5ab2aa9bf844da35321dcc1",
+      "tool_fingerprint": "8e5bdc83d9c4da2a4efee1b5d709ff1bb6126ddb9475ae9c7b3d7973a367eec0",
+      "analysis_status": "PARTIAL",
+      "status": "FAIL",
+      "groups": {
+        "screen": {
+          "status": "FAIL",
+          "expected": 4,
+          "matched": 4,
+          "false_negatives": 0,
+          "false_positives": 1,
+          "status_mismatches": 0,
+          "expected_projection_sha256": "1aeff98bd21d696ba668b1a98bdeadb86fad9cab26dc8bef3e7b479839b3c3f3",
+          "eval_sha256": "e24b0ea1c10150f34873810dcdaa225646c3d69460b4627a262dbe6b7111b12c",
+          "expected_projection": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\evidence\\expected-screen.json",
+          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\first-screen-eval.json"
+        },
+        "server": {
+          "status": "PASS",
+          "expected": 9,
+          "matched": 9,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "expected_projection_sha256": "94b696ea9d3503bb8b095b0e1fcee055a7ae8b99205babe458b2bfc09f15d2aa",
+          "eval_sha256": "65ff6a87e817ce31d997121380533fbc58774d2d168417bb72e502055b4b227a",
+          "expected_projection": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\evidence\\expected-server.json",
+          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\first-server-eval.json"
+        }
+      },
+      "raw_index_sha256": "3c99d6b9cb768fd99ec0c5071b4dd936afde59756a4cef5834cafe94ba4a675e",
+      "raw_query_sha256": "4c8b30fb04eed789f5a0c62b23341e6edc7c75a7a8dd73b6a9744a7b1212eac6",
+      "actual_scope_edges": 14,
+      "manual_edges_added": 0,
+      "actual_edges_removed_within_scope": 0
+    },
+    {
+      "case_id": "petclinic-owner-find",
+      "run_id": "m25-heldout-petclinic-first-20261027-01",
+      "source_root": ".testbeds/spring-petclinic",
+      "source_revision": "500158f732419217507c7656904b8e6aa1bcc0d6",
+      "source_dirty": false,
+      "approved_expected_sha256": "ee6fe2a6db36c2799a34c2de0a202b6c50697c386972777181aabc1c4ac95ee8",
+      "tool_fingerprint": "8e5bdc83d9c4da2a4efee1b5d709ff1bb6126ddb9475ae9c7b3d7973a367eec0",
+      "analysis_status": "PARTIAL",
+      "status": "FAIL",
+      "groups": {
+        "screen": {
+          "status": "FAIL",
+          "expected": 6,
+          "matched": 2,
+          "false_negatives": 4,
+          "false_positives": 1,
+          "status_mismatches": 0,
+          "expected_projection_sha256": "85f5e8cdf43c1d2f408755600cb29b55f1d3f4108c533727e5760ee926abcc75",
+          "eval_sha256": "81664ce3a8bb3099524918a759ebc5e93d1ffce21cf0646804758ac9bc59c433",
+          "expected_projection": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\evidence\\expected-screen.json",
+          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\first-screen-eval.json"
+        },
+        "server": {
+          "status": "PASS",
+          "expected": 3,
+          "matched": 3,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "expected_projection_sha256": "f522c3f93d9ee06ed1aa75cad0f6682e095e86784156c5197fe9b68ccdba804f",
+          "eval_sha256": "ba77d6ffacc19f7ecdfd2e502d0b05dbb1234fb7407a29c95b19734019d5e02f",
+          "expected_projection": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\evidence\\expected-server.json",
+          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\first-server-eval.json"
+        }
+      },
+      "raw_index_sha256": "2b68fe21bbdaf216c0333bfc305f85832f908dbb633d09113b5275454c1206a4",
+      "raw_query_sha256": "bd205ed1038947496d6bd24a0882753c30a84281e09f109854c1f36582fc218f",
+      "actual_scope_edges": 6,
+      "manual_edges_added": 0,
+      "actual_edges_removed_within_scope": 0
+    }
+  ]
+}

@@ -27,8 +27,8 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 | 이름 | 위치 | 용도 |
 |---|---|---|
 | legacy-board | `examples/legacy-board/` (M0에서 생성) | 빌드·실행 가능한 소형 레거시 프로젝트. Spring MVC + MyBatis + JSP + jQuery, 테스트용 H2. 모든 스킬의 기본 테스트 대상 |
-| legacy-board-thymeleaf | `examples/legacy-board-thymeleaf/` (M2.5 구축 완료) | 같은 서버 코드, Layout Dialect·data URL 외부 JS와 JSP 공존. 학습 3건 승인·검증 완료, 구현 동결 후 삭제 AJAX 초안 GATE |
-| Spring PetClinic | `.testbeds/spring-petclinic/` (고정 SHA 클론 완료, 소스 커밋 금지) | `500158f`의 검색 화면 → Controller held-out 초안 GATE. 이후 JPA 구간 제외 |
+| legacy-board-thymeleaf | `examples/legacy-board-thymeleaf/` (M2.5 구축 완료) | 같은 서버 코드, Thymeleaf/JSP 공존. 학습 검증 완료, 삭제 AJAX 첫 점수 screen 과탐 1건 FAIL·미수정 |
+| Spring PetClinic | `.testbeds/spring-petclinic/` (고정 SHA 클론 완료, 소스 커밋 금지) | `500158f`의 화면·Controller·기본 뷰·layout 첫 점수 screen 누락 4/과탐 1 FAIL·미수정. JPA 제외 |
 | 버그 케이스 | `evals/debug/cases/<id>/` | legacy-board에 적용하는 버그 패치 + 증상 로그. 원본 코드는 깨끗하게 유지 |
 | eGovFrame 공통컴포넌트 | 외부 클론 (`scripts/fetch-testbed.mjs`) | 실제 규모의 공개 레거시. 인덱서·si-trace 현실성 검증. 저장소에 커밋하지 않음 |
 | 실제 업무 사례 | `evals/private/` (gitignore) | Ian이 직접 넣는 마스킹된 실제 에러·코드 사례. 자기채점 방지용 |
@@ -109,7 +109,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 
 ## M2.5 — Thymeleaf 수집기
 
-**상태: 학습 검증 완료·구현 동결, held-out 정답 2건 GATE.** 학습 3건을 승인본으로 확정했다. 검색 parity 16/16·screen 7/7, 등록 12/12·5/5, 공존 parity 적용 없음·screen 1/1이다. 기존 JSP 승인 8건 새 인덱싱 회귀와 npm test 97건 통과. `fd1b93c` 구현 동결 후 두 held-out을 소스만 읽어 작성했고 아직 채점하지 않았다. [현재 GATE 보고](docs/m2.5-heldout-gate-report.md)를 검토한다. Java 8 런타임은 BLOCKED다.
+**상태: held-out 수정 전 첫 점수 GATE — 두 사례 FAIL, 구현 미수정.** 학습은 검색 parity 16/16·screen 7/7, 등록 12/12·5/5, 공존 해당 없음·1/1이며 기존 JSP 8건 회귀·npm test 97건을 통과했다. `fd1b93c` 동결 구현으로 확장 승인 정답을 처음 실행했다. 삭제 screen 4/4·과탐 1/server 9/9, PetClinic screen 2/6·누락 4·과탐 1/server 3/3이다. 합산하지 않으며 [첫 점수 보고](docs/m2.5-heldout-first-report.md)에서 후속 지시를 기다린다. Java 8 런타임은 BLOCKED다.
 
 **목표:** Ian의 JSP → Thymeleaf 이관 업무에서 to-be 화면의 이벤트부터 기존 서버 흐름까지 추적한다.
 

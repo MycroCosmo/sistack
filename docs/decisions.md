@@ -1,5 +1,13 @@
 # 설계 결정
 
+## 2026-10-27 — held-out 확장 승인·수정 전 첫 실행
+
+- 사용자 검토를 반영해 삭제 requests를 detail.html 전체 from.file scope로 넓혔다. POST 정답은 handler 1개이며 성공 GET 이동과 기존 목록/수정 링크도 포함해 screen 4개/server 9개다. PetClinic은 세 endpoint 매핑, Boot 기본 뷰 3개(private helper 경유 포함), 매개변수 layout includes·검색/신규 requests로 확장해 screen 6개/server 3개다. 정답은 소스 사실에 따라 CONFIRMED를 유지하고 `39c30c1`에 먼저 승인 확정했다.
+- Boot starter·@SpringBootApplication·application.properties 및 profile properties의 prefix/suffix 재정의 부재·템플릿 파일·WebConfiguration을 확인했다. [공식 MVC 설명](https://docs.spring.io/spring-boot/how-to/spring-mvc.html)의 기본 classpath:/templates/와 .html을 적용했다. Controller의 private addPaginationModel 반환을 뷰 근거로 확인하되 JPA·SQL 분석은 하지 않는다. redirect는 보충 응답 설명이다. LICENSE.txt는 provenance 해시로 보존하며 수집 지원 대상인 실제 근거 파일과 구별했다.
+- frozen 비교기 enum(parity/screen)을 바꾸지 않기 위해 screen/server를 report_group으로 고정하고 각 그룹의 승인 scope/edges만 그대로 투영해 동일 evalTrace로 개별 평가했다. 투영은 원본 승인 해시를 포함하며 두 그룹의 완전 분할을 검증했다. actual은 기대 도착 노드로 여과하지 않았고 full-index와 scope trace의 결과가 같음을 확인했다. server를 임의 parity로 바꾸거나 합산 점수를 만들지 않는다.
+- 두 사례를 같은 동결 설치본으로 각각 한 번 실행했다. 삭제 screen 4/4·과탐 1/server 9/9, PetClinic screen 2/6·누락 4·과탐 1/server 3/3이다. 상태 불일치는 모두 0이며 두 사례 FAIL이다. 삭제 th:action 중복 POST, PetClinic renders 3개·실제 fragment includes 누락과 unknown includes 과탐을 미수정 상태로 남겼다. [첫 점수 보고](m2.5-heldout-first-report.md).
+- first run-id 2개와 native 그룹별 첫 eval 4개·전체 인덱스·query·검토·manifest·보고서·승인본/해시 등 49개 원본을 [아카이브](evidence/m2.5-heldout-first/README.md)에 보존했다. 코드·테스트·스키마·비교기·설치본·테스트베드 변경 0개, 동결 138개 파일·도구 지문은 전후 동일하다. 두 manifest는 PARTIAL, 계약 검증은 PASS다. 실패 원본을 덮어쓰지 않고 「수정 전 첫 점수」 GATE에서 중지한다.
+
 ## 2026-10-27 — Thymeleaf 학습 완료·구현 동결·held-out 초안 GATE
 
 - 사용자 승인에 따라 검색·등록·공존 3건을 expected 승인본으로 확정했다(`29a549d`). 최종 구현은 `fd1b93c`이며 npm test 97/97, 설치본 prepare/finish·evalTrace로 검색 parity 16/16·screen 7/7, 등록 12/12·5/5, 공존 parity 적용 없음·screen 1/1을 확인했다. 그룹별 누락·과탐·상태 불일치 모두 0이며 합산 점수는 만들지 않았다. 기존 승인 JSP/eGovFrame 8건도 새 인덱싱 회귀에서 각각 통과했다. [결과·원본](evidence/m2.5-training/README.md).

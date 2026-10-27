@@ -3,7 +3,9 @@
 ## M2.5 — Thymeleaf 정적 수집
 
 - 승인 학습 3건의 결과는 검색 parity 16/16·screen 7/7, 등록 12/12·5/5, 공존 parity 적용 없음·screen 1/1이다. 기존 JSP 승인 8건도 새 인덱싱 회귀로 확인했다. 선언한 scope의 정적 연결 비교이며 합산 일반화 점수가 아니다. 실제 스킬 run 3건은 외부 AOP/서버 설정·이번 앱/DB 재실행 미확인으로 PARTIAL이다. [현재 근거](m2.5-heldout-gate-report.md).
-- 구현은 `fd1b93c`에서 동결했다. 신규 삭제 AJAX·PetClinic 화면→Controller는 source-only 초안 2건 GATE이며 아직 미채점이다. 삭제 테스트베드는 이전 전체 인덱싱에 포함돼 외부 블라인드 표본과 같다고 주장하지 않는다. PetClinic은 고정 `500158f`·Java 17/Boot 4.1.0 선언 기준이며 빌드·JPA 분석은 수행하지 않았다. JPA 구간은 구현·평가 모두 범위 밖이다.
+- 구현 `fd1b93c`의 동결 지문으로 확장 승인 held-out을 첫 실행했다. 삭제 screen 4/4·과탐 1/server 9/9, PetClinic screen 2/6·누락 4·과탐 1/server 3/3이며 두 사례 FAIL·미수정이다. screen/server는 승인 라벨의 scope/edges를 투영해 동일 frozen 비교기로 별도 채점했고 원본 full-index/trace 결과 일치도 검증했다. [첫 점수·원본](m2.5-heldout-first-report.md).
+- 현재 수집기는 preventDefault로 기본 submit이 취소된 삭제 폼에서도 th:action POST를 별도 생성한다. PetClinic의 Boot 기본 뷰·private helper 반환 경유 renders가 누락되고 매개변수 layout을 실제 fragment로 연결하지 못했다. source-only 정답의 CONFIRMED를 낮추거나 unknown 출력을 제거하지 않았다. 후속 수정은 사용자 지시 전까지 진행하지 않는다.
+- 삭제 테스트베드는 이전 전체 인덱싱에 포함돼 외부 블라인드 표본과 같다고 주장하지 않는다. PetClinic은 고정 `500158f`·Java 17/Boot 4.1.0 선언 기준이며 빌드·JPA 분석은 수행하지 않았다. JPA 구간은 구현·평가 모두 범위 밖이다. 첫 score FAIL과 실제 스킬 manifest PARTIAL을 구별하며, 보존한 그래프 재검증은 새 평가 실행으로 보지 않는다.
 - 테스트베드 렌더링 검증 기준은 Thymeleaf **3.1.5.RELEASE**다. 수집기 요구 범위에는 Thymeleaf 3.0 문법과 3.1에서 제거된 `#request`·`#response`·`#session`·`#servletContext`를 포함하지만, 해당 식을 실행하거나 3.1에서 렌더링 가능하다고 간주하지 않는다. 정적 부분만 확정하고 런타임 값 의존은 미확정으로 남긴다.
 - `.html`의 th:action, th:href/th:src URL 식, 경로 변수·쿼리, 정적 이름의 th:replace/insert/include, layout:decorate/fragment, inline JavaScript URL, data URL의 외부 JS 소비를 수집한다. fragment 내부 요청과 같은 파일의 fragment도 연결한다. 레이아웃 본문은 layout_bindings와 decorates 근거에 남기며 여러 화면의 본문을 전역 includes로 연결하지 않는다.
 - 뷰 판정은 XML bean 참조의 resolver order·viewNames·prefix/suffix와 정적 파일 존재에 한정한다. checkExistence=true·viewNames 무제한일 때의 존재/fallback을 합성 검증했다. 동순위·조건 미확정·동적 prefix는 LIKELY다. 임의 Java 설정·Spring Boot 자동 설정·캐시·커스텀 resolver·다중 templateResolver의 복잡한 선택을 실제 컨테이너처럼 실행하지 않는다.

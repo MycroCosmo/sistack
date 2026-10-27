@@ -17,7 +17,7 @@
     "petclinic-owner-find"
   ],
   "held_out_status": "V2_DEFECT_CONFIRMATION_RECORDED",
-  "note": "학습 5건과 held-out 3건을 분리한다. 승인본·동결 구현의 첫 실행 60/66과 원본을 보존했다. 첫 보고 후 승인된 일반 결함 수정의 v2는 66/66이며 일반화 성능이 아니다. 첫 결과와 덮어쓰거나 합산하지 않는다.",
+  "note": "기존 M2 학습 5건/held-out 3건의 첫 실행 60/66과 v2 66/66 원본을 보존한다. 추가 M2.5 학습 3건과 held-out 2건의 그룹별 결과는 별도 기록하며 이전 결과와 덮어쓰거나 합산하지 않는다. v2는 일반화 성능이 아니다.",
   "first_run_report": "docs/m2-heldout-first-report.md",
   "first_run_results": "docs/evidence/m2-heldout-first/results.json",
   "case_tuning_performed": false,
@@ -28,13 +28,16 @@
   "v2_results": "docs/evidence/m2-v2/results.json",
   "thymeleaf_training_approval": "2026-10-27 그룹별 학습 3건 승인. 기존 학습 5건·held-out 3건과 구분해 보고.",
   "thymeleaf_held_out_pending": {
-    "status": "APPROVED_FIRST_RUN_PENDING",
+    "status": "FIRST_RESULTS_RECORDED_GATE",
     "cases": [
       "thymeleaf-board-delete-ajax",
       "petclinic-owner-find"
     ],
     "frozen_baseline": "docs/evidence/m2.5-heldout/baseline.json",
     "report": "docs/m2.5-heldout-first-report.md",
-    "note": "2026-10-27 사용자 검토 확장 반영·승인본 확정. screen/server 독립 보고. 동일 동결 구현으로 두 사례 첫 실행 후 수정 전 점수 GATE."
+    "note": "2026-10-27 확장 승인본으로 같은 동결 구현의 첫 실행을 완료했다. 삭제 screen 4/4·과탐 1/server 9/9, PetClinic screen 2/6·누락 4·과탐 1/server 3/3. 두 사례 FAIL·미수정이며 수정 전 첫 점수 GATE에서 중지한다.",
+    "first_results": "docs/evidence/m2.5-heldout-first/results.json",
+    "originals": "docs/evidence/m2.5-heldout-first/archive.json",
+    "fixes_performed": false
   }
 }
