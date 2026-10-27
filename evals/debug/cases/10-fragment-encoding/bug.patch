@@ -1,0 +1,8 @@
+diff --git a/src/main/webapp/WEB-INF/views/common/paging.jspf b/src/main/webapp/WEB-INF/views/common/paging.jspf
+--- a/src/main/webapp/WEB-INF/views/common/paging.jspf
++++ b/src/main/webapp/WEB-INF/views/common/paging.jspf
+@@ -1,4 +1,3 @@
+-<%@ page pageEncoding="UTF-8" %>
+ <div class="paging" aria-label="페이지 이동">
+     <c:if test="${paging.page > 1}">
+         <button type="button" data-page="${paging.page - 1}">이전</button>

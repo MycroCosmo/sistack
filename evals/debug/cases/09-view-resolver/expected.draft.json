@@ -1,0 +1,24 @@
+{
+  "case_id": "09-view-resolver",
+  "dataset": "training",
+  "review_status": "draft",
+  "approved_by": null,
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+      "line": 35
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+      "line": 40
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+      "line": 41
+    }
+  ],
+  "source_files": {
+    "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml": "3625e4f32ce62d448dd3ffb831dbde226e727aac499270fb4072cbfbbe88b9ee"
+  }
+}

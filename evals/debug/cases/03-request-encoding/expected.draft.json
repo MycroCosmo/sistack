@@ -1,0 +1,16 @@
+{
+  "case_id": "03-request-encoding",
+  "dataset": "training",
+  "review_status": "draft",
+  "approved_by": null,
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/webapp/WEB-INF/web.xml",
+      "line": 15
+    }
+  ],
+  "source_files": {
+    "src/main/webapp/WEB-INF/web.xml": "ebdda8ddb90185318ca120baf035b0cb6d91db9eb3c4ec7742ac0f4f9e2fe7ad"
+  }
+}

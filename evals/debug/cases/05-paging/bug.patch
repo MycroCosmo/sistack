@@ -1,0 +1,11 @@
+diff --git a/src/main/java/kr/sistack/board/common/Pagination.java b/src/main/java/kr/sistack/board/common/Pagination.java
+--- a/src/main/java/kr/sistack/board/common/Pagination.java
++++ b/src/main/java/kr/sistack/board/common/Pagination.java
+@@ -36,6 +36,6 @@
+     }
+ 
+     public int getLastPage() {
+-        return Math.max(1, (total + getPageSize() - 1) / getPageSize());
++        return Math.max(1, total / getPageSize());
+     }
+ }

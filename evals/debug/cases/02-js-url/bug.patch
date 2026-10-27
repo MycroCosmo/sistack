@@ -1,0 +1,12 @@
+diff --git a/src/main/webapp/resources/board.js b/src/main/webapp/resources/board.js
+--- a/src/main/webapp/resources/board.js
++++ b/src/main/webapp/resources/board.js
+@@ -1,7 +1,7 @@
+ $(function () {
+   var form = $('#searchForm');
+   function listUrl() {
+-    return form.attr('data-base') + '/' + 'list' + '.do';
++    return form.attr('data-base') + '/' + 'lists' + '.do';
+   }
+ 
+   form.on('submit', function () {

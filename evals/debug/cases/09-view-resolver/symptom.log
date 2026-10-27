@@ -1,0 +1,2 @@
+view=board/list forward=/WEB-INF/views/board/list.jsp HTTP=404
+synthetic phone=010-0000-0000 email=synthetic@example.invalid JSESSIONID=abcdef12345678901234567890abcdef12 transactionId=12345678-1234-1234-1234-123456789012

@@ -1,5 +1,18 @@
 # 설계 결정
 
+## 2026-10-27 — M3 si-debug 학습 사례·동결 경계
+
+- M2.5 완료를 사용자가 승인했고 M3 시작 전 프롬프트를 10건·held-out 동결·마스킹 조건으로 보강해 `87adf55`로 커밋했다. 외부 의존성은 추가하지 않았다.
+- si-debug는 로그 마스킹/Java 예외 체인 파서 → 기존 인덱서 직접 호출 → 소스 기반 후보 소거 → diff 제안의 읽기 전용 경로다. si-trace 실행에 의존하지 않으며 공유 IO를 포함한 공통 모듈·manifest 스키마를 복사해 단독 설치한다.
+- 원인 확정은 로그 키워드 자동 분류로 대체하지 않는다. 제출된 원인 위치를 소스 해시·라인으로 검증하고 실행하지 않은 4~5단계는 거부한다. 재현 파일 존재 검사는 실제 실행의 진실성까지 증명하지 않으므로 에이전트가 명령·출력을 확인한다.
+- 스택트레이스 회귀에서 JSESSIONID의 해시 값이 남는 실패를 먼저 확인했다. 세션 ID 라벨을 해시 보존보다 먼저 마스킹한다. 정상 클래스 해시와 트랜잭션 UUID는 유지하며 transactionId에 들어간 전화번호·명시적 account 값은 계속 가린다.
+- 자체 10건은 자기 작성 편향이 있는 학습 세트다. 패치 9건은 지정 테스트베드의 OS 임시 복사본에만 적용한다. Oracle 로그 전용 1건은 빈 패치와 UNRESOLVED 후보로 두며 H2 재현으로 Oracle 원인을 단정하지 않는다.
+- 패치 적용 전에 원본과 패치 해시를 확인하고, 적용 후 원본 해시 불변을 검사한다. Git autocrlf 영향은 임시 변경 파일의 LF 정규화로 제거한다. 원본 테스트베드와 승인된 기존 정답은 수정하지 않는다.
+- 3번의 최초 필터 매핑 누락 패치는 Jetty의 기본 UTF-8 처리로 증상을 재현하지 못했다. FAIL 기록을 보존하고 요청 encoding=ISO-8859-1 오설정으로 보강했다. 같은 정상본은 한글 일치, 패치본은 불일치를 확인했다. M3 프롬프트의 인코딩 사례 범주에 값 오설정을 명시했다.
+- 실제 사례는 구현 동결 후 Ian이 제공한다. 비교기는 동결된 코드/지침/테스트·소스 freshness·승인 정답을 검사하고 private 경계 안에 첫 실행 원본과 점수를 exclusive 보존한다. 공개 결과는 위치·적중 여부뿐이며 재실행으로 첫 실패를 대체하지 않는다.
+- [MyBatis @Param](https://mybatis.org/mybatis-3/java-api.html)을 확인했다. 단일 scalar에서 @Param 삭제만으로 반드시 실패한다고 가정하지 않고 명시적 role/roleKey 불일치를 패치한다.
+- [Spring 뷰 리졸버 순서](https://docs.spring.io/spring/reference/web/webmvc/mvc-servlet/viewresolver.html), [Thymeleaf 3.1 튜토리얼](https://www.thymeleaf.org/doc/tutorials/3.1/usingthymeleaf.html), [3.1 변경 기록](https://github.com/thymeleaf/thymeleaf/blob/3.1-master/ChangeLog.txt), [Oracle ORA-00904](https://docs.oracle.com/en/error-help/db/ora-00904/)를 참고했다. 배포 설정·실제 렌더링을 함께 확인하며 문서만으로 런타임 원인을 확정하지 않는다. 과거 Thymeleaf 3.1 what's-new URL은 이번 조회에서 404였다.
+
 ## 2026-10-27 — M2.5 v2 검증·종료
 
 - 최종 구현 `2ff7c22`, 도구 지문 `37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827`의 새 run-id `m25-v2-{delete,petclinic,search,create,coexist}-20261027-02`로 검증했다. 삭제 screen 4/4·server 9/9, PetClinic screen 6/6·server 3/3, 학습 검색 16/16·7/7/등록 12/12·5/5/공존 해당 없음·1/1 모두 PASS, 각 그룹 오류 0이다. 기존 JSP 8건도 원문을 다시 인덱싱해 개별 PASS다. v2는 결함 수정 확인이며 일반화 성능이 아니다.

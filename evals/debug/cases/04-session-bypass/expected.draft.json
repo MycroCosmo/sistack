@@ -1,0 +1,21 @@
+{
+  "case_id": "04-session-bypass",
+  "dataset": "training",
+  "review_status": "draft",
+  "approved_by": null,
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+      "line": 9
+    },
+    {
+      "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+      "line": 37
+    }
+  ],
+  "source_files": {
+    "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml": "f49a27fecd77250066bb97101047367351b99f61b5aef4cbe0e62b90ea104292",
+    "src/main/java/kr/sistack/board/web/BoardController.java": "68a208d023831ca76bbccb1c79327a5b70359cc7679fe4e242674b7aafc5cfe7"
+  }
+}

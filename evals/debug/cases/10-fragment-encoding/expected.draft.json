@@ -1,0 +1,16 @@
+{
+  "case_id": "10-fragment-encoding",
+  "dataset": "training",
+  "review_status": "draft",
+  "approved_by": null,
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+      "line": 1
+    }
+  ],
+  "source_files": {
+    "src/main/webapp/WEB-INF/views/common/paging.jspf": "e10151053ebffa330f003d13c1cdbf522d161cc1fc47fe77fdf1430263161cbe"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "06-sort-sql",
+  "dataset": "training",
+  "review_status": "draft",
+  "approved_by": null,
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+      "line": 67
+    }
+  ],
+  "source_files": {
+    "src/main/java/kr/sistack/board/domain/BoardSearch.java": "6e2583fad2d71b82a1301337d91e540ecd340e3ca650d8ad2fe2503a5e8e7ba5"
+  }
+}

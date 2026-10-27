@@ -1,0 +1,10 @@
+diff --git a/src/main/java/kr/sistack/board/mapper/MenuMapper.java b/src/main/java/kr/sistack/board/mapper/MenuMapper.java
+--- a/src/main/java/kr/sistack/board/mapper/MenuMapper.java
++++ b/src/main/java/kr/sistack/board/mapper/MenuMapper.java
+@@ -7,5 +7,5 @@
+ 
+ public interface MenuMapper {
+     @Select("SELECT LABEL, URL FROM APP_MENU WHERE ROLE_KEY = #{role} ORDER BY MENU_ORDER")
+-    List<Menu> selectList(@Param("role") String role);
++    List<Menu> selectList(@Param("roleKey") String role);
+ }

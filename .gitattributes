@@ -1,1 +1,3 @@
 * text=auto eol=lf
+# Unified diff의 빈 문맥 줄은 한 칸으로 시작한다.
+evals/debug/cases/**/bug.patch whitespace=-blank-at-eol

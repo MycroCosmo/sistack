@@ -6,7 +6,7 @@ export async function syncShared({ base = root, check = false } = {}) {
   const dirs = await validateSkills(path.join(base, 'skills'));
   const differences = [];
   for (const dir of dirs) {
-    const groups = ['mask', ...(path.basename(dir) === 'si-trace' ? ['indexer', 'trace', 'manifest'] : [])];
+    const groups = ['mask', ...(['si-trace', 'si-debug'].includes(path.basename(dir)) ? ['indexer', 'trace', 'manifest'] : []), ...(path.basename(dir) === 'si-debug' ? ['debug'] : [])];
     for (const group of groups) {
       const source = path.join(base, 'lib', group), names = await files(source);
       const destination = path.join(dir, 'scripts/lib', group);
@@ -16,10 +16,10 @@ export async function syncShared({ base = root, check = false } = {}) {
       for (const name of names) if (!await sameFile(path.join(source, name), path.join(destination, name))) differences.push(`${path.basename(dir)}/${group}/${name}`);
       if (!check) await copyFiles(source, destination, names, true);
     }
-    if (path.basename(dir) === 'si-trace') {
+    if (['si-trace', 'si-debug'].includes(path.basename(dir))) {
       const source = path.join(base, 'schemas'), destination = path.join(dir, 'scripts/schemas');
       const name = 'manifest.schema.json';
-      if (!await sameFile(path.join(source, name), path.join(destination, name))) differences.push(`si-trace/${name}`);
+      if (!await sameFile(path.join(source, name), path.join(destination, name))) differences.push(`${path.basename(dir)}/${name}`);
       if (!check) await copyFiles(source, destination, [name], true);
     }
   }

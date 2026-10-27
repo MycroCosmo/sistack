@@ -1,0 +1,11 @@
+diff --git a/src/main/java/kr/sistack/board/domain/BoardSearch.java b/src/main/java/kr/sistack/board/domain/BoardSearch.java
+--- a/src/main/java/kr/sistack/board/domain/BoardSearch.java
++++ b/src/main/java/kr/sistack/board/domain/BoardSearch.java
+@@ -75,6 +75,6 @@
+     }
+ 
+     public String getSortColumn() {
+-        return "title".equals(sort) ? "b.TITLE" : "b.CREATED_AT";
++        return sort;
+     }
+ }

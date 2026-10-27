@@ -1,0 +1,23 @@
+diff --git a/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml b/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
+--- a/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
++++ b/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
+@@ -7,7 +7,6 @@
+     <mvc:resources mapping="/resources/**" location="/resources/"/>
+     <mvc:interceptors>
+         <mvc:interceptor>
+-            <mvc:mapping path="/board/**"/>
+             <mvc:mapping path="/code/**"/>
+             <mvc:mapping path="/auth/logout.do"/>
+             <bean class="kr.sistack.board.web.LoginInterceptor">
+diff --git a/src/main/java/kr/sistack/board/web/BoardController.java b/src/main/java/kr/sistack/board/web/BoardController.java
+--- a/src/main/java/kr/sistack/board/web/BoardController.java
++++ b/src/main/java/kr/sistack/board/web/BoardController.java
+@@ -34,7 +34,7 @@
+     }
+ 
+     @GetMapping("/list.do")
+-    public String list(@ModelAttribute("search") BoardSearch search, @RequestAttribute("currentUser") UserSession user, Model model) {
++    public String list(@ModelAttribute("search") BoardSearch search, @RequestAttribute(value = "currentUser", required = false) UserSession user, Model model) {
+         model.addAttribute("boards", service.list(search));
+         model.addAttribute("viewer", user.getName());
+         model.addAttribute("paging", search);

@@ -1,0 +1,24 @@
+diff --git a/src/main/webapp/WEB-INF/templates/board/list.html b/src/main/webapp/WEB-INF/templates/board/list.html
+--- a/src/main/webapp/WEB-INF/templates/board/list.html
++++ b/src/main/webapp/WEB-INF/templates/board/list.html
+@@ -4,7 +4,7 @@
+ <body>
+     <section layout:fragment="content">
+         <h1>게시판 목록</h1>
+-        <p><span th:text="${viewer}"></span>님</p>
++        <p><span th:text="${#request.getAttribute('viewer')}"></span>님</p>
+         <form id="searchForm" method="get" th:action="@{/board/list.do}">
+             <input type="hidden" name="page" th:value="${search.page}">
+             <label>검색 조건
+diff --git a/src/main/webapp/WEB-INF/templates/fragments/common.html b/src/main/webapp/WEB-INF/templates/fragments/common.html
+--- a/src/main/webapp/WEB-INF/templates/fragments/common.html
++++ b/src/main/webapp/WEB-INF/templates/fragments/common.html
+@@ -4,7 +4,7 @@
+     <nav th:fragment="menu" th:if="${session.loginUser != null}" aria-label="주 메뉴">
+         <a th:each="menu : ${menus}" th:href="@{${menu.url}}" th:text="${menu.label}"></a>
+         <form method="post" th:action="@{/auth/logout.do}">
+-            <input type="hidden" name="csrf" th:value="${session.csrf}">
++            <input type="hidden" name="csrf" th:value="${#session.getAttribute('csrf')}">
+             <button>로그아웃</button>
+         </form>
+     </nav>

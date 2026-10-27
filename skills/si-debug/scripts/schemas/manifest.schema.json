@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sistack.local/schemas/manifest.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "skill", "created_at", "source_revision", "status", "inputs", "evidence", "unverified", "next_actions"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "run_id": { "type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,127}$" },
+    "skill": { "enum": ["si-example", "si-trace", "si-debug", "si-unit-test", "si-docs"] },
+    "created_at": { "type": "string", "format": "date-time" },
+    "source_revision": { "type": ["string", "null"], "minLength": 1 },
+    "status": { "enum": ["PASS", "FAIL", "PARTIAL", "BLOCKED"] },
+    "inputs": { "type": "object", "additionalProperties": { "type": "string" } },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["path", "level", "description"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "line": { "type": "integer", "minimum": 1 },
+          "level": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "description": { "type": "string", "minLength": 1 },
+          "connection_status": { "enum": ["CONFIRMED", "LIKELY", "UNRESOLVED"] }
+        }
+      }
+    },
+    "unverified": { "$ref": "#/$defs/strings" },
+    "next_actions": { "$ref": "#/$defs/strings" },
+    "request_id": { "type": "string", "minLength": 1 },
+    "requirement_ids": { "$ref": "#/$defs/strings" },
+    "parent_run_ids": { "$ref": "#/$defs/strings" }
+  },
+  "$defs": {
+    "strings": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+  }
+}

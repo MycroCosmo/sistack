@@ -1,0 +1,16 @@
+{
+  "case_id": "02-js-url",
+  "dataset": "training",
+  "review_status": "draft",
+  "approved_by": null,
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/webapp/resources/board.js",
+      "line": 4
+    }
+  ],
+  "source_files": {
+    "src/main/webapp/resources/board.js": "63b188b6a5aa98029f40a94e2565a2fbb8f45c8bd7c1bae055035afb012b4d83"
+  }
+}

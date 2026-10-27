@@ -1,0 +1,16 @@
+{
+  "case_id": "01-binding",
+  "dataset": "training",
+  "review_status": "draft",
+  "approved_by": null,
+  "status": "CONFIRMED",
+  "locations": [
+    {
+      "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+      "line": 10
+    }
+  ],
+  "source_files": {
+    "src/main/java/kr/sistack/board/mapper/MenuMapper.java": "ef2e36ea08660a1571b0de956f5b06ee07801ff07afe27fe3428449e6f280097"
+  }
+}

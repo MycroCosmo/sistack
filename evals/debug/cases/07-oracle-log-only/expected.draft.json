@@ -1,0 +1,16 @@
+{
+  "case_id": "07-oracle-log-only",
+  "dataset": "training",
+  "review_status": "draft",
+  "approved_by": null,
+  "status": "UNRESOLVED",
+  "locations": [
+    {
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 34
+    }
+  ],
+  "source_files": {
+    "src/main/resources/mapper/BoardMapper.xml": "ad194be2f97e681dea017a28c62b6a1cbd22956ac0c4471c59d1c7963278c4c0"
+  }
+}

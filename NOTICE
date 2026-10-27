@@ -11,6 +11,14 @@ Design references:
 Third-party Java dependencies retain their own licenses.
 See docs/decisions.md for the approved dependency inventory.
 
+M3 adapted design structure:
+- pstack skills/poteto-mode/playbooks/bug-fix.md,
+  skills/principle-fix-root-causes/SKILL.md, skills/tdd/SKILL.md,
+  skills/principle-prove-it-works/SKILL.md (MIT), consulted 2026-10-27.
+  si-debug adapts candidate elimination, root-cause tracing, and verification
+  to log-first SI analysis with explicit approval and unreproduced boundaries.
+  No model-specific delegation workflow or verbatim prompt text is copied.
+
 M2 adapted design structure:
 - pstack skills/how/SKILL.md and references/explorer-prompt.md,
   references/explainer-prompt.md, consulted on 2026-10-27 (MIT).
