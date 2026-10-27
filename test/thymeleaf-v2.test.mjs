@@ -99,6 +99,10 @@ test('v2 Boot: YAML 문서·flow mapping 미지원은 확정하지 않는다',as
     assert.ok(!edges.some(e=>e.kind==='renders'&&e.status==='CONFIRMED'));
   });
 });
+test('v2 Boot: 같은 루트 Maven/Gradle의 동일 starter 선언은 설정 상충이 아니다',async()=>{
+  await fixture({'pom.xml':pom,'build.gradle':'dependencies { implementation "org.springframework.boot:spring-boot-starter-thymeleaf" }',
+    [html]:'editor'},edges=>assert.ok(edges.some(e=>e.from==='demo.Editor#edit'&&e.to===html&&e.kind==='renders'&&e.status==='CONFIRMED')));
+});
 test('v2 반환 뷰: 같은 클래스 상수·private 반환 깊이 2와 근거',async()=>{
   await fixture({'spring.xml':xml,[html]:'editor','Editor.java':`package demo;
 @Controller

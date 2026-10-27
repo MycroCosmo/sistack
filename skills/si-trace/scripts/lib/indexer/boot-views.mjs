@@ -44,7 +44,8 @@ export function bootViewConfiguration(files, graph) {
   if (!declarations.length) return [];
   const sources = files.filter(f => /(?:^|\/)application(?:-[\w.-]+)?\.(?:properties|ya?ml)$/.test(f.file))
     .map(f => ({ ...f, base: /(?:^|\/)application\./.test(f.file), docs: settings(f.file,f.text,/\.ya?ml$/.test(f.file)) }));
-  const defaults = { prefix:'classpath:/templates/', suffix:'.html', evidence:[...declarations], uncertain:declarations.length !== 1 || sources.filter(s=>s.base).length > 1 };
+  const buildRoots = new Set(declarations.map(at => at.file.replace(/(?:^|\/)[^/]+$/, '')));
+  const defaults = { prefix:'classpath:/templates/', suffix:'.html', evidence:[...declarations], uncertain:buildRoots.size !== 1 || sources.filter(s=>s.base).length > 1 };
   const bases = sources.filter(s=>s.base);
   let variants = [defaults];
   for (const source of bases) variants = variants.flatMap(base=>source.docs.map(doc=>({ ...base, ...doc.values,
