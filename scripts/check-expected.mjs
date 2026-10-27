@@ -1,7 +1,10 @@
 import path from 'node:path';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir, rm } from 'node:fs/promises';
+import os from 'node:os';
 import { createHash } from 'node:crypto';
-import { root, noLinks, cli, isMain } from './common.mjs';
+import { root, noLinks, cli, isMain, exists } from './common.mjs';
+import { prepareCase } from './eval-debug.mjs';
+import { validateDebugExpected } from '../lib/debug/expected.mjs';
 import { validateExpected, assertParity } from '../lib/indexer/expected.mjs';
 
 function within(base, relative) {
@@ -11,7 +14,11 @@ function within(base, relative) {
   return target;
 }
 
-export async function checkExpected(expected, { repositoryRoot = root, allowDraft = false } = {}) {
+export async function checkExpected(expected, { repositoryRoot = root, sourceRoot: debugSource, allowDraft = false } = {}) {
+  if (['training', 'held-out'].includes(expected.dataset) && Array.isArray(expected.locations)) {
+    if (!debugSource) throw new Error('debug 정답은 패치 적용 임시 sourceRoot 필요');
+    return validateDebugExpected(expected, debugSource, { allowDraft });
+  }
   if (expected.schema_version !== '1.0' || !(expected.review_status === 'approved' || allowDraft && expected.review_status === 'draft') || !expected.source_files || !Object.keys(expected.source_files).length || !expected.edges?.length) throw new Error('승인 정답 계약 또는 source_files 누락');
   const grouped = validateExpected(expected);
   if (grouped && (expected.parity_reference || expected.edges.some(e => e.group === 'parity'))) {
@@ -73,6 +80,20 @@ export async function checkAllExpected(repositoryRoot = root) {
     const expected = JSON.parse(await readFile(file, 'utf8'));
     if (draft && expected.review_status !== 'draft') throw new Error('draft 파일을 승인 정답으로 사용할 수 없습니다');
     results.push(await checkExpected(expected, { repositoryRoot, allowDraft: draft }));
+  }
+  const debugCases = path.join(repositoryRoot, 'evals/debug/cases');
+  if (await exists(debugCases)) {
+    for (const entry of (await readdir(debugCases, { withFileTypes: true })).filter(e => e.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
+      const expectedFile = path.join(debugCases, entry.name, 'expected.json');
+      if (!await exists(expectedFile)) continue;
+      const expected = JSON.parse(await readFile(expectedFile, 'utf8'));
+      const prepared = await prepareCase(entry.name, { repository: repositoryRoot });
+      try { results.push(await checkExpected(expected, { repositoryRoot, sourceRoot: prepared.project })); }
+      finally {
+        if (!path.resolve(prepared.project).startsWith(path.join(os.tmpdir(), 'sistack-debug-'))) throw new Error('임시 경로 정리 범위 오류');
+        await rm(prepared.project, { recursive: true, force: true });
+      }
+    }
   }
   return results;
 }

@@ -9,4 +9,5 @@
 | 타입 변환/NULL 오류 | resultMap, JDBC 타입, typeHandler, nullable 값 | 실패 컬럼과 Java 타입·처리기를 대조. 임의 기본값 삽입 금지 |
 
 iBatis 2는 sqlMap namespace/id, parameterClass·parameterMap, #키#와 $키$를 해당 버전 기준으로 읽는다. MyBatis 규칙을 그대로 확정 적용하지 않는다.
+`###` 블록, `Cause: ...`, `nested exception is ...`에 반복된 예외명은 메시지다. 실제 줄 시작 예외 헤더와 `Caused by:`/`Suppressed:`를 구별해 체인과 프로젝트 프레임의 소속을 확인한다. 메시지 안의 예외명을 별도 root로 늘리지 않는다.
 공식 참고: https://mybatis.org/mybatis-3/java-api.html , https://mybatis.org/mybatis-3/sqlmap-xml.html

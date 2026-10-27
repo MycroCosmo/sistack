@@ -14,7 +14,7 @@ export function parseTrace(input, { packagePrefix = '' } = {}) {
       pending = { label: marker[2], indent: marker[1].replaceAll('\t', '    ').length };
       continue;
     }
-    const ex = /(?:^|\s)(?:(Caused by:|Suppressed:)\s+)?((?:[\w$]+\.)*(?:[\w$]*(?:Exception|Error)|Throwable))(?::\s*(.*))?$/.exec(line);
+    const ex = /^\s*(?:Exception in thread "[^"]+"\s+)?(?:(Caused by:|Suppressed:)\s+)?((?:[\w$]+\.)*(?:[\w$]*(?:Exception|Error)|Throwable))(?::\s*(.*))?$/.exec(line);
     if (ex) {
       const indent = pending?.indent ?? line.match(/^\s*/)[0].replaceAll('\t', '    ').length;
       const label = ex[1] ?? pending?.label;

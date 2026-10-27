@@ -2,20 +2,41 @@
   "case_id": "09-view-resolver",
   "dataset": "training",
   "review_status": "approved",
-  "approved_by": "Ian — 2026-10-28 사용자 메시지: M3 입력 재검토: 정답 10건 승인",
+  "approved_by": "Ian — 2026-10-28 사용자 메시지: M3 입력 재검토: 정답 10건 승인; 2026-10-28 정답 정정·소속 문맥·삭제형 범위 규칙 승인",
   "status": "CONFIRMED",
   "locations": [
     {
       "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
-      "line": 35
+      "line": 35,
+      "enclosing": {
+        "kind": "xml-element",
+        "name": "bean",
+        "attributes": {
+          "class": "org.thymeleaf.spring5.view.ThymeleafViewResolver"
+        }
+      }
     },
     {
       "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
-      "line": 40
+      "line": 40,
+      "enclosing": {
+        "kind": "xml-element",
+        "name": "bean",
+        "attributes": {
+          "class": "org.springframework.web.servlet.view.InternalResourceViewResolver"
+        }
+      }
     },
     {
       "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
-      "line": 41
+      "line": 41,
+      "enclosing": {
+        "kind": "xml-element",
+        "name": "bean",
+        "attributes": {
+          "class": "org.springframework.web.servlet.view.InternalResourceViewResolver"
+        }
+      }
     }
   ],
   "source_files": {

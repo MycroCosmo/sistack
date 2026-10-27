@@ -1,0 +1,142 @@
+TAP version 13
+# Subtest: MyBatis repeated message exceptions stay inside the wrapper and retain project frame ownership
+not ok 1 - MyBatis repeated message exceptions stay inside the wrapper and retain project frame ownership
+  ---
+  duration_ms: 16.3915
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-inputs.test.mjs:32:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    ... Skipped lines
+    
+      [
+        [
+          'org.springframework.jdbc.BadSqlGrammarException',
+          'root',
+          null
+    ...
+          'org.h2.jdbc.JdbcSQLSyntaxErrorException',
+    +     'root',
+    +     null
+    +   ],
+    +   [
+    +     'org.h2.jdbc.JdbcSQLSyntaxErrorException',
+          'cause',
+    +     1
+    -     0
+        ]
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      0: 'org.springframework.jdbc.BadSqlGrammarException'
+      1: 'root'
+      2: ~
+    1:
+      0: 'org.h2.jdbc.JdbcSQLSyntaxErrorException'
+      1: 'cause'
+      2: 0
+  actual:
+    0:
+      0: 'org.springframework.jdbc.BadSqlGrammarException'
+      1: 'root'
+      2: ~
+    1:
+      0: 'org.h2.jdbc.JdbcSQLSyntaxErrorException'
+      1: 'root'
+      2: ~
+    2:
+      0: 'org.h2.jdbc.JdbcSQLSyntaxErrorException'
+      1: 'cause'
+      2: 1
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug-inputs.test.mjs:35:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: message Cause and nested exception mentions do not create roots; a separate real stack still does
+not ok 2 - message Cause and nested exception mentions do not create roots; a separate real stack still does
+  ---
+  duration_ms: 0.7585
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-inputs.test.mjs:44:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        [
+          'root',
+          null
+        ],
+        [
+    +     'root',
+    +     null
+    +   ],
+    +   [
+    +     'root',
+    +     null
+    +   ],
+    +   [
+          'cause',
+    +     2
+    -     0
+        ],
+        [
+          'root',
+          null
+        ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      0: 'root'
+      1: ~
+    1:
+      0: 'cause'
+      1: 0
+    2:
+      0: 'root'
+      1: ~
+  actual:
+    0:
+      0: 'root'
+      1: ~
+    1:
+      0: 'root'
+      1: ~
+    2:
+      0: 'root'
+      1: ~
+    3:
+      0: 'cause'
+      1: 2
+    4:
+      0: 'root'
+      1: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug-inputs.test.mjs:47:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 0
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 154.0923

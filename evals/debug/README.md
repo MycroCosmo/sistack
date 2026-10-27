@@ -55,17 +55,33 @@ capture도 patched 실행이다. 임시 복사본에 접근/미처리 예외 필
 ## 동결과 승인 후 평가
 
 ```sh
-node scripts/eval-debug.mjs freeze docs/evidence/m3-freeze-v3.json
+node scripts/eval-debug.mjs freeze docs/evidence/m3-freeze-v4.json
 ```
 
 동결은 구현·테스트·스키마·CLI·스킬 지침의 파일 해시와 Git revision을 저장한다. 수정이 생기면 기존 동결을 덮어쓰지 않고 새 동결·새 run으로 구분한다.
 2026-10-28 승인을 expected.json의 review_status=approved, approved_by에 기록했다. 7번은 BoardMapper.xml의 23·26·34행을 모두 후보로 남기고 UNRESOLVED를 유지해야 한다. 하나만 제시하거나 확정하면 FAIL이다. 기존 `m3-freeze.json`·`m3-freeze-v2.json`과 GATE 보고를 보존하고 마스킹 보정 후 첫 학습 채점에는 `m3-freeze-v3.json`을 사용한다. 진단은 로그·인덱스·실제 소스를 읽고 작성하며 expected.json에서 답안을 복사하지 않는다.
 
 ```sh
-node scripts/eval-debug.mjs score <run-dir> <expected.json> training <새-score.json> docs/evidence/m3-freeze-v3.json <private-root>
+node scripts/eval-debug.mjs score <run-dir> <expected.json> training <새-score.json> docs/evidence/m3-freeze-v4.json <private-root>
 ```
 
-스킬 결과와 정답의 file/line/status를 비교한다. 기대 위치를 놓치거나 추가 후보 위치를 단정하면 전체 hit=false다. 파일 해시가 다르면 점수 대신 오류를 낸다. 승인 전 초안을 사용하거나 기존 결과를 덮어쓰는 실행은 거부한다.
+스킬 결과와 정답의 위치/status를 비교한다. 기대 위치를 놓치거나 추가 후보 위치를 단정하면 전체 hit=false다. 파일 해시가 다르면 점수 대신 오류를 낸다. 승인 전 초안을 사용하거나 기존 결과를 덮어쓰는 실행은 거부한다.
+
+## 위치 정정과 삭제형 범위 (v4)
+
+첫 8/10 원본은 docs/evidence/m3-training-first/와 e136ce1에 보존한다. 2026-10-28 사용자 승인으로 06 정답을 getSort():67에서 getSortColumn() 반환문:78로 정정했고, approval-20261028.json의 amendments에 승인 오류·정정 사유·날짜·전후 위치/해시를 추가했다. 처음 records는 바꾸지 않았다.
+
+모든 승인 위치에는 구조 문맥을 뜻하는 enclosing이 필수다. 예:
+
+```json
+{"file":"src/main/java/kr/sistack/board/domain/BoardSearch.java","line":78,"enclosing":{"kind":"java-method","name":"BoardSearch#getSortColumn"}}
+```
+
+`check-expected.mjs`는 승인 debug 사례도 임시 복사본에 패치를 적용한 상태에서 해시·라인·enclosing을 확인한다. 동일한 return 문장이 다른 메서드에 있어도 거부한다. 지원 문맥은 java-method(클래스#메서드), java-type, javascript-function(이름 있는 함수), xml-element(요소명+attributes 또는 직접 자식 name/text), markup-tag(시작 태그+attributes), jsp-preamble/directives다. 소속이 모호하거나 지원하지 않는 형태는 추정하지 않고 실패한다.
+
+삭제형 원인에만 line 대신 `{file,start,end,enclosing}`을 쓴다. 같은 file/status이고 진단 line이 start..end에 있으면 일치하며 양 끝을 포함한다. 범위는 실제 enclosing 안에 있어야 한다. 04는 mvc:interceptor 블록의 승인 범위 9..13이다. 10은 첫 콘텐츠 앞 지시어 삽입 경계 1..1이며 본문 전체를 허용하지 않는다. 일반 원인은 정확한 line 비교를 유지한다. Oracle 세 UNRESOLVED 후보 조건도 유지한다.
+
+v4 재검증에는 `docs/evidence/m3-freeze-v4.json`과 새 run-id를 사용한다. 첫 진단 위치는 유지한 대응 비교이며 정답 정정/비교 규칙 변경에 따른 점수 차이를 분석 개선으로 주장하지 않는다. held-out 첫 실행도 이후 별도 지시 시 최신 v4 동결을 사용한다.
 
 ## held-out은 Ian의 실제 사례만
 
@@ -73,7 +89,7 @@ node scripts/eval-debug.mjs score <run-dir> <expected.json> training <새-score.
 스킬 run도 해당 private/project/.sistack/runs 아래에 둔다. 외부 저장소 소스나 실제 사례를 공개 디렉터리로 복사하지 않는다.
 
 ```sh
-node scripts/eval-debug.mjs score evals/private/<id>/project/.sistack/runs/<run-id> evals/private/<id>/expected.json held-out evals/private/<id>/score.json docs/evidence/m3-freeze-v3.json evals/private
+node scripts/eval-debug.mjs score evals/private/<id>/project/.sistack/runs/<run-id> evals/private/<id>/expected.json held-out evals/private/<id>/score.json docs/evidence/m3-freeze-v4.json evals/private
 ```
 
 동결 후 생성한 run만 채점한다. 첫 점수와 마스킹된 실행 원본·동결 revision을 private/<id>/first-run.json에 exclusive로 보존한다. 이후 재채점은 차단하며 수정 후 평가에는 별도 지시·별도 실행 계획이 필요하다. 콘솔·공개 보고에는 **위치와 적중 여부만** 출력한다. 실제 로그·소스·진단 내용은 인용·출력·커밋하지 않는다. 원본 실행 파일은 UTF-8 텍스트만 지원한다.

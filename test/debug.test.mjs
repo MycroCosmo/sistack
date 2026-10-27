@@ -101,7 +101,7 @@ test('eval rejects draft answers and keeps held-out first score immutable withou
   const data = review(); data.candidates[0].locations = [{ file: 'C.java', line: 1 }];
   await save(path.join(prep.directory, 'evidence/diagnosis.json'), data); await finishDebug(project, 'first');
   const expectedFile = path.join(privateRoot, 'synthetic/expected.json');
-  const expected = { case_id: 'synthetic', dataset: 'held-out', review_status: 'draft', approved_by: null, locations: [{ file: 'C.java', line: 1 }], status: 'CONFIRMED', source_files: { 'C.java': digest('class C {}\n') } };
+  const expected = { case_id: 'synthetic', dataset: 'held-out', review_status: 'draft', approved_by: null, locations: [{ file: 'C.java', line: 1, enclosing: { kind: 'java-type', name: 'C' } }], status: 'CONFIRMED', source_files: { 'C.java': digest('class C {}\n') } };
   await save(expectedFile, expected);
   const options = { dataset: 'held-out', output: path.join(privateRoot, 'synthetic/score.json'), freeze: frozen, repository, privateRoot };
   await assert.rejects(scoreDebug(prep.directory, expectedFile, options), /승인/);

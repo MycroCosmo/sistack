@@ -2,20 +2,41 @@
   "case_id": "07-oracle-log-only",
   "dataset": "training",
   "review_status": "approved",
-  "approved_by": "Ian — 2026-10-28 사용자 메시지: M3 입력 재검토: 정답 10건 승인",
+  "approved_by": "Ian — 2026-10-28 사용자 메시지: M3 입력 재검토: 정답 10건 승인; 2026-10-28 정답 정정·소속 문맥·삭제형 범위 규칙 승인",
   "status": "UNRESOLVED",
   "locations": [
     {
       "file": "src/main/resources/mapper/BoardMapper.xml",
-      "line": 23
+      "line": 23,
+      "enclosing": {
+        "kind": "xml-element",
+        "name": "sql",
+        "attributes": {
+          "id": "filters"
+        }
+      }
     },
     {
       "file": "src/main/resources/mapper/BoardMapper.xml",
-      "line": 26
+      "line": 26,
+      "enclosing": {
+        "kind": "xml-element",
+        "name": "sql",
+        "attributes": {
+          "id": "filters"
+        }
+      }
     },
     {
       "file": "src/main/resources/mapper/BoardMapper.xml",
-      "line": 34
+      "line": 34,
+      "enclosing": {
+        "kind": "xml-element",
+        "name": "select",
+        "attributes": {
+          "id": "selectList"
+        }
+      }
     }
   ],
   "source_files": {

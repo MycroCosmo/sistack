@@ -53,5 +53,349 @@
       "draft_sha256": "d6d82d36442736e15fddc5b44ff169e9bbf6d7977a414b2190855223f6276828",
       "approved_sha256": "0f565658ae9e2482971fe371c5fd470f4d1f3788f6efea322b33236329a67b6c"
     }
+  ],
+  "amendments": [
+    {
+      "id": "m3-location-v4",
+      "approved_by": "Ian",
+      "approved_on": "2026-10-28",
+      "reason": "사용자가 승인 오류 정정과 구조 문맥 검증·삭제형 범위 규칙 및 재채점을 지시함. 첫 8/10과 원승인 records는 보존.",
+      "approval_error": {
+        "case_id": "06-sort-sql",
+        "originally_approved_on": "2026-10-28",
+        "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+        "previous": {
+          "line": 67,
+          "enclosing": "BoardSearch#getSort"
+        },
+        "corrected": {
+          "line": 78,
+          "enclosing": "BoardSearch#getSortColumn"
+        },
+        "reason": "기존 초안의 동일 return sort 텍스트를 잘못 승인한 행 번호 오류. 실제 bug.patch는 getSortColumn의 반환문을 변경한다.",
+        "corrected_on": "2026-10-28"
+      },
+      "deletion_policy": {
+        "matching": "같은 file/status이며 진단 line이 승인 start..end(양 끝 포함) 안에 있을 때 일치. 범위는 enclosing 안에 있어야 함.",
+        "cases": [
+          "04-session-bypass: interceptor 9..13",
+          "10-fragment-encoding: JSP 지시어 삽입 경계 1..1"
+        ]
+      },
+      "records": [
+        {
+          "case_id": "01-binding",
+          "previous_approved_sha256": "35b3e1d9a54b8781c25fb8fb6ce766b3b363bf1da07c31904ad189fc6f50522c",
+          "approved_sha256": "a4c05719e7048ca94b632691252a77f145416352e13f5e045cdd3aa54d28b8e3",
+          "previous_locations": [
+            {
+              "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+              "line": 10
+            }
+          ],
+          "locations": [
+            {
+              "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+              "line": 10,
+              "enclosing": {
+                "kind": "java-method",
+                "name": "MenuMapper#selectList"
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "02-js-url",
+          "previous_approved_sha256": "6fa7299785b3285bc392e338142957d320f9fdbd68633fcaa59b3ffd339e19ce",
+          "approved_sha256": "522dc12b6a7c90770124aaed1052ff0c454a6bde66a2a3410b9966ca350fa41c",
+          "previous_locations": [
+            {
+              "file": "src/main/webapp/resources/board.js",
+              "line": 4
+            }
+          ],
+          "locations": [
+            {
+              "file": "src/main/webapp/resources/board.js",
+              "line": 4,
+              "enclosing": {
+                "kind": "javascript-function",
+                "name": "listUrl"
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "03-request-encoding",
+          "previous_approved_sha256": "a174feeade96ed967f7d378a5f424f0e8171568af3988f1a20fb8833a7b63e2a",
+          "approved_sha256": "25cad99335871281e2fd1071860899cc021cbc8214877ace319100683d74c6c5",
+          "previous_locations": [
+            {
+              "file": "src/main/webapp/WEB-INF/web.xml",
+              "line": 15
+            }
+          ],
+          "locations": [
+            {
+              "file": "src/main/webapp/WEB-INF/web.xml",
+              "line": 15,
+              "enclosing": {
+                "kind": "xml-element",
+                "name": "init-param",
+                "child": {
+                  "name": "param-name",
+                  "text": "encoding"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "04-session-bypass",
+          "previous_approved_sha256": "dbd3748951842ba433da98ec4c9f48924aff5a007b0448e06213225f227cadac",
+          "approved_sha256": "f9a3645589d063c4bd666b9ad61a4f7014d25425ba9cfdbc6476797f5f3a8ea3",
+          "previous_locations": [
+            {
+              "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+              "line": 9
+            },
+            {
+              "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+              "line": 37
+            }
+          ],
+          "locations": [
+            {
+              "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+              "enclosing": {
+                "kind": "xml-element",
+                "name": "mvc:interceptor"
+              },
+              "start": 9,
+              "end": 13
+            },
+            {
+              "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+              "line": 37,
+              "enclosing": {
+                "kind": "java-method",
+                "name": "BoardController#list"
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "05-paging",
+          "previous_approved_sha256": "352e2981840d73b9e255812bc083b0e9048046a32d3e44f96d8b362ba23424fb",
+          "approved_sha256": "b4d728f085003754dee1d227dba6fefca175b6ba0583d85463f5fb29fa61b1a9",
+          "previous_locations": [
+            {
+              "file": "src/main/java/kr/sistack/board/common/Pagination.java",
+              "line": 39
+            }
+          ],
+          "locations": [
+            {
+              "file": "src/main/java/kr/sistack/board/common/Pagination.java",
+              "line": 39,
+              "enclosing": {
+                "kind": "java-method",
+                "name": "Pagination#getLastPage"
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "06-sort-sql",
+          "previous_approved_sha256": "9af4fbe0de7291121faca63cf3f0f04a0afb5e00bda38fd2fd478f1e770d8a7e",
+          "approved_sha256": "52e371577d957e73e3af085bb019a057ccbf5c2498b055f394a9c531c8138102",
+          "previous_locations": [
+            {
+              "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+              "line": 67
+            }
+          ],
+          "locations": [
+            {
+              "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+              "line": 78,
+              "enclosing": {
+                "kind": "java-method",
+                "name": "BoardSearch#getSortColumn"
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "07-oracle-log-only",
+          "previous_approved_sha256": "2425cbc32bcf97bc85158ceddb487bdeb7af4ebc88b04f5f31e5d7c4d10469ba",
+          "approved_sha256": "abb7a83499acb2e53d478613651507e31fbf95b1278f79ad117994ae09d513f4",
+          "previous_locations": [
+            {
+              "file": "src/main/resources/mapper/BoardMapper.xml",
+              "line": 23
+            },
+            {
+              "file": "src/main/resources/mapper/BoardMapper.xml",
+              "line": 26
+            },
+            {
+              "file": "src/main/resources/mapper/BoardMapper.xml",
+              "line": 34
+            }
+          ],
+          "locations": [
+            {
+              "file": "src/main/resources/mapper/BoardMapper.xml",
+              "line": 23,
+              "enclosing": {
+                "kind": "xml-element",
+                "name": "sql",
+                "attributes": {
+                  "id": "filters"
+                }
+              }
+            },
+            {
+              "file": "src/main/resources/mapper/BoardMapper.xml",
+              "line": 26,
+              "enclosing": {
+                "kind": "xml-element",
+                "name": "sql",
+                "attributes": {
+                  "id": "filters"
+                }
+              }
+            },
+            {
+              "file": "src/main/resources/mapper/BoardMapper.xml",
+              "line": 34,
+              "enclosing": {
+                "kind": "xml-element",
+                "name": "select",
+                "attributes": {
+                  "id": "selectList"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "08-thymeleaf-utilities",
+          "previous_approved_sha256": "4842cf544ed2bd6a7fa8cc3360ac4d0365e833efbf90347534ad29862dede886",
+          "approved_sha256": "89f1651234372e14fad85a76495cfe8daeb3a3d76f40f4423ef8a87efeae21f4",
+          "previous_locations": [
+            {
+              "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+              "line": 7
+            },
+            {
+              "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+              "line": 7
+            }
+          ],
+          "locations": [
+            {
+              "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+              "line": 7,
+              "enclosing": {
+                "kind": "markup-tag",
+                "name": "span",
+                "attributes": {
+                  "th:text": "${#request.getAttribute('viewer')}"
+                }
+              }
+            },
+            {
+              "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+              "line": 7,
+              "enclosing": {
+                "kind": "markup-tag",
+                "name": "input",
+                "attributes": {
+                  "name": "csrf"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "09-view-resolver",
+          "previous_approved_sha256": "134475529196a6584df969c7e020aea1003c0741d5ee0923606d4ff2662eb893",
+          "approved_sha256": "df93a505cb40e2863e08a4b2b23f440d0203ae22de637c87364e5a67327aa40b",
+          "previous_locations": [
+            {
+              "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+              "line": 35
+            },
+            {
+              "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+              "line": 40
+            },
+            {
+              "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+              "line": 41
+            }
+          ],
+          "locations": [
+            {
+              "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+              "line": 35,
+              "enclosing": {
+                "kind": "xml-element",
+                "name": "bean",
+                "attributes": {
+                  "class": "org.thymeleaf.spring5.view.ThymeleafViewResolver"
+                }
+              }
+            },
+            {
+              "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+              "line": 40,
+              "enclosing": {
+                "kind": "xml-element",
+                "name": "bean",
+                "attributes": {
+                  "class": "org.springframework.web.servlet.view.InternalResourceViewResolver"
+                }
+              }
+            },
+            {
+              "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+              "line": 41,
+              "enclosing": {
+                "kind": "xml-element",
+                "name": "bean",
+                "attributes": {
+                  "class": "org.springframework.web.servlet.view.InternalResourceViewResolver"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "case_id": "10-fragment-encoding",
+          "previous_approved_sha256": "0f565658ae9e2482971fe371c5fd470f4d1f3788f6efea322b33236329a67b6c",
+          "approved_sha256": "474c9a7d51ab1e92d448f604df9f4f1fba78e184092ce78af34cacf92ffee4eb",
+          "previous_locations": [
+            {
+              "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+              "line": 1
+            }
+          ],
+          "locations": [
+            {
+              "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+              "enclosing": {
+                "kind": "jsp-preamble",
+                "name": "directives"
+              },
+              "start": 1,
+              "end": 1
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

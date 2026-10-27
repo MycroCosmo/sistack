@@ -7,6 +7,7 @@ import { json, save, digest, inside, noLinks, checkSources } from '../lib/trace/
 import { debugFingerprint } from '../lib/debug/index.mjs';
 import { mask } from '../lib/mask/index.mjs';
 import { validateManifest } from '../lib/manifest/index.mjs';
+import { validateDebugExpected, coordinates, matchesLocation } from '../lib/debug/expected.mjs';
 
 const ignored = new Set(['.git', 'target', '.sistack', 'node_modules', '.agents', '.claude']);
 async function inventory(base, prefix = '') {
@@ -59,7 +60,7 @@ export async function freezeDebug(output, { repository = root } = {}) {
     ...await inventory(path.join(repository, 'scripts')).then(a => a.map(p => `scripts/${p}`)),
     ...await inventory(path.join(repository, 'schemas')).then(a => a.map(p => `schemas/${p}`)),
     ...await inventory(path.join(repository, 'test')).then(a => a.map(p => `test/${p}`)),
-    ...await inventory(path.join(repository, 'evals/debug')).then(a => a.filter(p => !p.endsWith('/expected.json')).map(p => `evals/debug/${p}`))];
+    ...await inventory(path.join(repository, 'evals/debug')).then(a => a.map(p => `evals/debug/${p}`))];
   const files = Object.fromEntries(await Promise.all(names.sort().map(async f => [f, digest(await readFile(await inside(repository, f)))])));
   const rev = spawnSync('git', ['rev-parse', 'HEAD'], { cwd: repository, encoding: 'utf8', windowsHide: true });
   if (rev.status !== 0) throw new Error('동결 revision 없음');
@@ -89,11 +90,10 @@ export async function scoreDebug(runDir, expectedFile, { dataset, output, freeze
   const project = path.resolve(runDir, '../../..');
   await checkSources(project, stage.source_files);
   for (const [file, hash] of Object.entries(expected.source_files)) if (stage.source_files[file] !== hash) throw new Error('정답과 실행 소스 불일치');
-  for (const p of expected.locations) if (!expected.source_files[p.file] || !Number.isInteger(p.line) || p.line < 1) throw new Error('정답 위치 계약 오류');
-  await checkSources(project, expected.source_files, expected.locations);
-  const locations = expected.locations.map(p => ({ file: p.file, line: p.line, hit: diagnosis.candidates.some(c => c.status === expected.status && c.locations.some(q => q.file === p.file && q.line === p.line)) }));
+  await validateDebugExpected(expected, project);
+  const locations = expected.locations.map(p => ({ ...coordinates(p), hit: diagnosis.candidates.some(c => c.status === expected.status && c.locations.some(q => matchesLocation(p, q))) }));
   const actual = diagnosis.candidates.flatMap(c => c.locations.map(p => ({ ...p, status: c.status })));
-  const extras = actual.filter(p => !expected.locations.some(q => p.file === q.file && p.line === q.line && p.status === expected.status));
+  const extras = actual.filter(p => !expected.locations.some(q => matchesLocation(q, p) && p.status === expected.status));
   const score = { locations, hit: locations.every(p => p.hit) && extras.length === 0, extra_locations: extras.map(({file, line}) => ({file, line})) };
   if (dataset === 'held-out') {
     const first = await inside(privateRoot, `${expected.case_id}/first-run.json`);

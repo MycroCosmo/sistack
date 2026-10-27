@@ -7,3 +7,4 @@ docs/evidence/m3-input-v2/**/*.txt whitespace=-blank-at-eol
 docs/evidence/m3-mask-v3/**/*.txt whitespace=-blank-at-eol
 docs/evidence/m3-mask-v3/masking-red.txt whitespace=-blank-at-eol,-space-before-tab
 docs/evidence/m3-training-first/**/*.txt whitespace=-blank-at-eol,-space-before-tab
+docs/evidence/m3-recheck-v4/**/*.txt whitespace=-blank-at-eol,-space-before-tab

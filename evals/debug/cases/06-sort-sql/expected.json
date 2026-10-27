@@ -2,12 +2,16 @@
   "case_id": "06-sort-sql",
   "dataset": "training",
   "review_status": "approved",
-  "approved_by": "Ian — 2026-10-28 사용자 메시지: M3 입력 재검토: 정답 10건 승인",
+  "approved_by": "Ian — 2026-10-28 사용자 메시지: M3 입력 재검토: 정답 10건 승인; 2026-10-28 정답 정정·소속 문맥·삭제형 범위 규칙 승인",
   "status": "CONFIRMED",
   "locations": [
     {
       "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
-      "line": 67
+      "line": 78,
+      "enclosing": {
+        "kind": "java-method",
+        "name": "BoardSearch#getSortColumn"
+      }
     }
   ],
   "source_files": {

@@ -29,6 +29,27 @@ test('MyBatis diagnostic blocks do not replace the real exception chain', async 
   assert.deepEqual(jetty.exceptions.map(e => [e.relation, e.parent]), [['root', null], ['cause', 0]]);
 });
 
+test('MyBatis repeated message exceptions stay inside the wrapper and retain project frame ownership', async () => {
+  const log = await readFile(path.join(root, 'evals/debug/cases/06-sort-sql/symptom.log'), 'utf8');
+  const parsed = parseTrace(log, { packagePrefix: 'kr.sistack.board' });
+  assert.deepEqual(parsed.exceptions.map(e => [e.type, e.relation, e.parent]), [
+    ['org.springframework.jdbc.BadSqlGrammarException', 'root', null],
+    ['org.h2.jdbc.JdbcSQLSyntaxErrorException', 'cause', 0]
+  ]);
+  assert.ok(parsed.project_frames.length > 0);
+  assert.ok(parsed.project_frames.every(f => f.exception === 0));
+  assert.equal(parsed.text, mask(log));
+});
+
+test('message Cause and nested exception mentions do not create roots; a separate real stack still does', () => {
+  const log = 'app.WrapperException: failed\nCause: java.sql.SQLException: repeated\n; nested exception is java.sql.SQLException: repeated\n\tat app.C.run(C.java:8)\nCaused by: java.sql.SQLException: actual\n\tat app.Db.query(Db.java:4)\njava.io.IOException: separate request\n\tat app.IO.read(IO.java:2)';
+  const parsed = parseTrace(log, { packagePrefix: 'app' });
+  assert.deepEqual(parsed.exceptions.map(e => [e.relation, e.parent]), [['root', null], ['cause', 0], ['root', null]]);
+  assert.deepEqual(parsed.frames.map(f => f.exception), [0, 1, 2]);
+  assert.equal(parsed.text, log);
+  assert.equal(parseTrace('Exception in thread "main" java.lang.IllegalStateException: stop').exceptions[0].type, 'java.lang.IllegalStateException');
+});
+
 test('all ten inputs preserve captured lines and mask only the inserted synthetic privacy values', async () => {
   for (const id of Object.keys(descriptions)) {
     const base = path.join(root, 'evals/debug/cases', id);
@@ -110,7 +131,7 @@ test('scoring fails a single SQL candidate or a definitive claim; three unresolv
   await save(freeze, { created_at: '2020-01-01T00:00:00.000Z', revision: 'synthetic', tool_fingerprint: await debugFingerprint(), files: { 'Query.java': digest(source) } });
   const locations = [2, 3, 4].map(line => ({ file: 'Query.java', line }));
   const expectedFile = path.join(repository, 'expected.json');
-  await save(expectedFile, { case_id: 'synthetic-oracle', dataset: 'training', review_status: 'approved', approved_by: 'synthetic test fixture only', status: 'UNRESOLVED', locations, source_files: { 'Query.java': digest(source) } });
+  await save(expectedFile, { case_id: 'synthetic-oracle', dataset: 'training', review_status: 'approved', approved_by: 'synthetic test fixture only', status: 'UNRESOLVED', locations: locations.map(p => ({ ...p, enclosing: { kind: 'java-type', name: 'Query' } })), source_files: { 'Query.java': digest(source) } });
   for (const [runId, candidates, hit] of [
     ['one', [{ status: 'UNRESOLVED', locations: locations.slice(0, 1) }], false],
     ['definitive', [{ status: 'CONFIRMED', locations }], false],

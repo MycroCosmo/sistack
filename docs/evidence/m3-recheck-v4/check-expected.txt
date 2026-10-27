@@ -1,0 +1,164 @@
+[
+  {
+    "case_id": "egov-article-list",
+    "status": "PASS",
+    "source_files": 46,
+    "evidence_locations": 190
+  },
+  {
+    "case_id": "egov-clcode-delete",
+    "status": "PASS",
+    "source_files": 16,
+    "evidence_locations": 31
+  },
+  {
+    "case_id": "egov-detailcode-list",
+    "status": "PASS",
+    "source_files": 15,
+    "evidence_locations": 44
+  },
+  {
+    "case_id": "egov-id-dplct-ajax",
+    "status": "PASS",
+    "source_files": 22,
+    "evidence_locations": 141
+  },
+  {
+    "case_id": "egov-rss-columns",
+    "status": "PASS",
+    "source_files": 4,
+    "evidence_locations": 17
+  },
+  {
+    "case_id": "egov-user-insert",
+    "status": "PASS",
+    "source_files": 15,
+    "evidence_locations": 101
+  },
+  {
+    "case_id": "legacy-board-create",
+    "status": "PASS",
+    "source_files": 8,
+    "evidence_locations": 37
+  },
+  {
+    "case_id": "legacy-board-search",
+    "status": "PASS",
+    "source_files": 9,
+    "evidence_locations": 41
+  },
+  {
+    "case_id": "legacy-board-thymeleaf-coexist",
+    "status": "PASS",
+    "source_files": 3,
+    "evidence_locations": 10,
+    "groups": {
+      "parity": {
+        "expected_edges": 0
+      },
+      "screen": {
+        "expected_edges": 1
+      }
+    }
+  },
+  {
+    "case_id": "legacy-board-thymeleaf-create",
+    "status": "PASS",
+    "source_files": 10,
+    "evidence_locations": 54,
+    "groups": {
+      "parity": {
+        "expected_edges": 12
+      },
+      "screen": {
+        "expected_edges": 5
+      }
+    }
+  },
+  {
+    "case_id": "legacy-board-thymeleaf-search",
+    "status": "PASS",
+    "source_files": 13,
+    "evidence_locations": 80,
+    "groups": {
+      "parity": {
+        "expected_edges": 16
+      },
+      "screen": {
+        "expected_edges": 7
+      }
+    }
+  },
+  {
+    "case_id": "petclinic-owner-find",
+    "status": "PASS",
+    "source_files": 10,
+    "evidence_locations": 41
+  },
+  {
+    "case_id": "thymeleaf-board-delete-ajax",
+    "status": "PASS",
+    "source_files": 10,
+    "evidence_locations": 44
+  },
+  {
+    "case_id": "01-binding",
+    "status": "PASS",
+    "source_files": 1,
+    "evidence_locations": 1
+  },
+  {
+    "case_id": "02-js-url",
+    "status": "PASS",
+    "source_files": 1,
+    "evidence_locations": 1
+  },
+  {
+    "case_id": "03-request-encoding",
+    "status": "PASS",
+    "source_files": 1,
+    "evidence_locations": 1
+  },
+  {
+    "case_id": "04-session-bypass",
+    "status": "PASS",
+    "source_files": 2,
+    "evidence_locations": 2
+  },
+  {
+    "case_id": "05-paging",
+    "status": "PASS",
+    "source_files": 1,
+    "evidence_locations": 1
+  },
+  {
+    "case_id": "06-sort-sql",
+    "status": "PASS",
+    "source_files": 1,
+    "evidence_locations": 1
+  },
+  {
+    "case_id": "07-oracle-log-only",
+    "status": "PASS",
+    "source_files": 1,
+    "evidence_locations": 3
+  },
+  {
+    "case_id": "08-thymeleaf-utilities",
+    "status": "PASS",
+    "source_files": 2,
+    "evidence_locations": 2
+  },
+  {
+    "case_id": "09-view-resolver",
+    "status": "PASS",
+    "source_files": 1,
+    "evidence_locations": 3
+  },
+  {
+    "case_id": "10-fragment-encoding",
+    "status": "PASS",
+    "source_files": 1,
+    "evidence_locations": 1
+  }
+]
