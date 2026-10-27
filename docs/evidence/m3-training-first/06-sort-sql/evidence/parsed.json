@@ -1,0 +1,1503 @@
+{
+  "exceptions": [
+    {
+      "id": 0,
+      "parent": null,
+      "relation": "root",
+      "type": "org.springframework.jdbc.BadSqlGrammarException",
+      "message": "",
+      "log_line": 120
+    },
+    {
+      "id": 1,
+      "parent": null,
+      "relation": "root",
+      "type": "org.h2.jdbc.JdbcSQLSyntaxErrorException",
+      "message": "Column \"CREATEDAT\" not found; SQL statement:",
+      "log_line": 145
+    },
+    {
+      "id": 2,
+      "parent": 1,
+      "relation": "cause",
+      "type": "org.h2.jdbc.JdbcSQLSyntaxErrorException",
+      "message": "Column \"CREATEDAT\" not found; SQL statement:",
+      "log_line": 239,
+      "elided_frames": 79
+    }
+  ],
+  "frames": [
+    {
+      "exception": 1,
+      "class": "org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator",
+      "method": "doTranslate",
+      "file": "SQLErrorCodeSQLExceptionTranslator.java",
+      "line": 236,
+      "origin": "SQLErrorCodeSQLExceptionTranslator.java:236",
+      "log_line": 156,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator",
+      "method": "translate",
+      "file": "AbstractFallbackSQLExceptionTranslator.java",
+      "line": 73,
+      "origin": "AbstractFallbackSQLExceptionTranslator.java:73",
+      "log_line": 157,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.mybatis.spring.MyBatisExceptionTranslator",
+      "method": "translateExceptionIfPossible",
+      "file": "MyBatisExceptionTranslator.java",
+      "line": 92,
+      "origin": "MyBatisExceptionTranslator.java:92",
+      "log_line": 158,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor",
+      "method": "invoke",
+      "file": "SqlSessionTemplate.java",
+      "line": 439,
+      "origin": "SqlSessionTemplate.java:439",
+      "log_line": 159,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "jdk.proxy4.$Proxy40",
+      "method": "selectList",
+      "file": null,
+      "line": null,
+      "origin": "Unknown Source",
+      "log_line": 160,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.mybatis.spring.SqlSessionTemplate",
+      "method": "selectList",
+      "file": "SqlSessionTemplate.java",
+      "line": 224,
+      "origin": "SqlSessionTemplate.java:224",
+      "log_line": 161,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.binding.MapperMethod",
+      "method": "executeForMany",
+      "file": "MapperMethod.java",
+      "line": 147,
+      "origin": "MapperMethod.java:147",
+      "log_line": 162,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.binding.MapperMethod",
+      "method": "execute",
+      "file": "MapperMethod.java",
+      "line": 80,
+      "origin": "MapperMethod.java:80",
+      "log_line": 163,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker",
+      "method": "invoke",
+      "file": "MapperProxy.java",
+      "line": 141,
+      "origin": "MapperProxy.java:141",
+      "log_line": 164,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.binding.MapperProxy",
+      "method": "invoke",
+      "file": "MapperProxy.java",
+      "line": 86,
+      "origin": "MapperProxy.java:86",
+      "log_line": 165,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "jdk.proxy4.$Proxy41",
+      "method": "selectList",
+      "file": null,
+      "line": null,
+      "origin": "Unknown Source",
+      "log_line": 166,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "method": "list",
+      "file": "BoardServiceImpl.java",
+      "line": 25,
+      "origin": "BoardServiceImpl.java:25",
+      "log_line": 167,
+      "project": true
+    },
+    {
+      "exception": 1,
+      "class": "jdk.internal.reflect.NativeMethodAccessorImpl",
+      "method": "invoke0",
+      "file": null,
+      "line": null,
+      "origin": "Native Method",
+      "log_line": 168,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "jdk.internal.reflect.NativeMethodAccessorImpl",
+      "method": "invoke",
+      "file": "NativeMethodAccessorImpl.java",
+      "line": 77,
+      "origin": "NativeMethodAccessorImpl.java:77",
+      "log_line": 169,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl",
+      "method": "invoke",
+      "file": "DelegatingMethodAccessorImpl.java",
+      "line": 43,
+      "origin": "DelegatingMethodAccessorImpl.java:43",
+      "log_line": 170,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "java.lang.reflect.Method",
+      "method": "invoke",
+      "file": "Method.java",
+      "line": 569,
+      "origin": "Method.java:569",
+      "log_line": 171,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.aop.support.AopUtils",
+      "method": "invokeJoinpointUsingReflection",
+      "file": "AopUtils.java",
+      "line": 344,
+      "origin": "AopUtils.java:344",
+      "log_line": 172,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.aop.framework.JdkDynamicAopProxy",
+      "method": "invoke",
+      "file": "JdkDynamicAopProxy.java",
+      "line": 234,
+      "origin": "JdkDynamicAopProxy.java:234",
+      "log_line": 173,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "jdk.proxy4.$Proxy43",
+      "method": "list",
+      "file": null,
+      "line": null,
+      "origin": "Unknown Source",
+      "log_line": 174,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "kr.sistack.board.web.BoardController",
+      "method": "list",
+      "file": "BoardController.java",
+      "line": 38,
+      "origin": "BoardController.java:38",
+      "log_line": 175,
+      "project": true
+    },
+    {
+      "exception": 1,
+      "class": "jdk.internal.reflect.NativeMethodAccessorImpl",
+      "method": "invoke0",
+      "file": null,
+      "line": null,
+      "origin": "Native Method",
+      "log_line": 176,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "jdk.internal.reflect.NativeMethodAccessorImpl",
+      "method": "invoke",
+      "file": "NativeMethodAccessorImpl.java",
+      "line": 77,
+      "origin": "NativeMethodAccessorImpl.java:77",
+      "log_line": 177,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl",
+      "method": "invoke",
+      "file": "DelegatingMethodAccessorImpl.java",
+      "line": 43,
+      "origin": "DelegatingMethodAccessorImpl.java:43",
+      "log_line": 178,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "java.lang.reflect.Method",
+      "method": "invoke",
+      "file": "Method.java",
+      "line": 569,
+      "origin": "Method.java:569",
+      "log_line": 179,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.method.support.InvocableHandlerMethod",
+      "method": "doInvoke",
+      "file": "InvocableHandlerMethod.java",
+      "line": 205,
+      "origin": "InvocableHandlerMethod.java:205",
+      "log_line": 180,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.method.support.InvocableHandlerMethod",
+      "method": "invokeForRequest",
+      "file": "InvocableHandlerMethod.java",
+      "line": 150,
+      "origin": "InvocableHandlerMethod.java:150",
+      "log_line": 181,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod",
+      "method": "invokeAndHandle",
+      "file": "ServletInvocableHandlerMethod.java",
+      "line": 117,
+      "origin": "ServletInvocableHandlerMethod.java:117",
+      "log_line": 182,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter",
+      "method": "invokeHandlerMethod",
+      "file": "RequestMappingHandlerAdapter.java",
+      "line": 903,
+      "origin": "RequestMappingHandlerAdapter.java:903",
+      "log_line": 183,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter",
+      "method": "handleInternal",
+      "file": "RequestMappingHandlerAdapter.java",
+      "line": 809,
+      "origin": "RequestMappingHandlerAdapter.java:809",
+      "log_line": 184,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter",
+      "method": "handle",
+      "file": "AbstractHandlerMethodAdapter.java",
+      "line": 87,
+      "origin": "AbstractHandlerMethodAdapter.java:87",
+      "log_line": 185,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.servlet.DispatcherServlet",
+      "method": "doDispatch",
+      "file": "DispatcherServlet.java",
+      "line": 1072,
+      "origin": "DispatcherServlet.java:1072",
+      "log_line": 186,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.servlet.DispatcherServlet",
+      "method": "doService",
+      "file": "DispatcherServlet.java",
+      "line": 965,
+      "origin": "DispatcherServlet.java:965",
+      "log_line": 187,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.servlet.FrameworkServlet",
+      "method": "processRequest",
+      "file": "FrameworkServlet.java",
+      "line": 1006,
+      "origin": "FrameworkServlet.java:1006",
+      "log_line": 188,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.servlet.FrameworkServlet",
+      "method": "doGet",
+      "file": "FrameworkServlet.java",
+      "line": 898,
+      "origin": "FrameworkServlet.java:898",
+      "log_line": 189,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "javax.servlet.http.HttpServlet",
+      "method": "service",
+      "file": "HttpServlet.java",
+      "line": 687,
+      "origin": "HttpServlet.java:687",
+      "log_line": 190,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.servlet.FrameworkServlet",
+      "method": "service",
+      "file": "FrameworkServlet.java",
+      "line": 883,
+      "origin": "FrameworkServlet.java:883",
+      "log_line": 191,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "javax.servlet.http.HttpServlet",
+      "method": "service",
+      "file": "HttpServlet.java",
+      "line": 790,
+      "origin": "HttpServlet.java:790",
+      "log_line": 192,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.ServletHolder$NotAsync",
+      "method": "service",
+      "file": "ServletHolder.java",
+      "line": 1459,
+      "origin": "ServletHolder.java:1459",
+      "log_line": 193,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.ServletHolder",
+      "method": "handle",
+      "file": "ServletHolder.java",
+      "line": 799,
+      "origin": "ServletHolder.java:799",
+      "log_line": 194,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.ServletHandler$ChainEnd",
+      "method": "doFilter",
+      "file": "ServletHandler.java",
+      "line": 1656,
+      "origin": "ServletHandler.java:1656",
+      "log_line": 195,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter",
+      "method": "doFilter",
+      "file": "WebSocketUpgradeFilter.java",
+      "line": 292,
+      "origin": "WebSocketUpgradeFilter.java:292",
+      "log_line": 196,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.FilterHolder",
+      "method": "doFilter",
+      "file": "FilterHolder.java",
+      "line": 193,
+      "origin": "FilterHolder.java:193",
+      "log_line": 197,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.ServletHandler$Chain",
+      "method": "doFilter",
+      "file": "ServletHandler.java",
+      "line": 1626,
+      "origin": "ServletHandler.java:1626",
+      "log_line": 198,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.filter.CharacterEncodingFilter",
+      "method": "doFilterInternal",
+      "file": "CharacterEncodingFilter.java",
+      "line": 201,
+      "origin": "CharacterEncodingFilter.java:201",
+      "log_line": 199,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.springframework.web.filter.OncePerRequestFilter",
+      "method": "doFilter",
+      "file": "OncePerRequestFilter.java",
+      "line": 117,
+      "origin": "OncePerRequestFilter.java:117",
+      "log_line": 200,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.FilterHolder",
+      "method": "doFilter",
+      "file": "FilterHolder.java",
+      "line": 193,
+      "origin": "FilterHolder.java:193",
+      "log_line": 201,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.ServletHandler$Chain",
+      "method": "doFilter",
+      "file": "ServletHandler.java",
+      "line": 1626,
+      "origin": "ServletHandler.java:1626",
+      "log_line": 202,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "kr.sistack.capture.CaptureFilter",
+      "method": "doFilter",
+      "file": "CaptureFilter.java",
+      "line": 30,
+      "origin": "CaptureFilter.java:30",
+      "log_line": 203,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.FilterHolder",
+      "method": "doFilter",
+      "file": "FilterHolder.java",
+      "line": 201,
+      "origin": "FilterHolder.java:201",
+      "log_line": 204,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.ServletHandler$Chain",
+      "method": "doFilter",
+      "file": "ServletHandler.java",
+      "line": 1626,
+      "origin": "ServletHandler.java:1626",
+      "log_line": 205,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.ServletHandler",
+      "method": "doHandle",
+      "file": "ServletHandler.java",
+      "line": 552,
+      "origin": "ServletHandler.java:552",
+      "log_line": 206,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.ScopedHandler",
+      "method": "handle",
+      "file": "ScopedHandler.java",
+      "line": 143,
+      "origin": "ScopedHandler.java:143",
+      "log_line": 207,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.security.SecurityHandler",
+      "method": "handle",
+      "file": "SecurityHandler.java",
+      "line": 600,
+      "origin": "SecurityHandler.java:600",
+      "log_line": 208,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.HandlerWrapper",
+      "method": "handle",
+      "file": "HandlerWrapper.java",
+      "line": 127,
+      "origin": "HandlerWrapper.java:127",
+      "log_line": 209,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.ScopedHandler",
+      "method": "nextHandle",
+      "file": "ScopedHandler.java",
+      "line": 235,
+      "origin": "ScopedHandler.java:235",
+      "log_line": 210,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.session.SessionHandler",
+      "method": "doHandle",
+      "file": "SessionHandler.java",
+      "line": 1624,
+      "origin": "SessionHandler.java:1624",
+      "log_line": 211,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.ScopedHandler",
+      "method": "nextHandle",
+      "file": "ScopedHandler.java",
+      "line": 233,
+      "origin": "ScopedHandler.java:233",
+      "log_line": 212,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.ContextHandler",
+      "method": "doHandle",
+      "file": "ContextHandler.java",
+      "line": 1440,
+      "origin": "ContextHandler.java:1440",
+      "log_line": 213,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.ScopedHandler",
+      "method": "nextScope",
+      "file": "ScopedHandler.java",
+      "line": 188,
+      "origin": "ScopedHandler.java:188",
+      "log_line": 214,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.servlet.ServletHandler",
+      "method": "doScope",
+      "file": "ServletHandler.java",
+      "line": 505,
+      "origin": "ServletHandler.java:505",
+      "log_line": 215,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.session.SessionHandler",
+      "method": "doScope",
+      "file": "SessionHandler.java",
+      "line": 1594,
+      "origin": "SessionHandler.java:1594",
+      "log_line": 216,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.ScopedHandler",
+      "method": "nextScope",
+      "file": "ScopedHandler.java",
+      "line": 186,
+      "origin": "ScopedHandler.java:186",
+      "log_line": 217,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.ContextHandler",
+      "method": "doScope",
+      "file": "ContextHandler.java",
+      "line": 1355,
+      "origin": "ContextHandler.java:1355",
+      "log_line": 218,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.ScopedHandler",
+      "method": "handle",
+      "file": "ScopedHandler.java",
+      "line": 141,
+      "origin": "ScopedHandler.java:141",
+      "log_line": 219,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.ContextHandlerCollection",
+      "method": "handle",
+      "file": "ContextHandlerCollection.java",
+      "line": 191,
+      "origin": "ContextHandlerCollection.java:191",
+      "log_line": 220,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.HandlerCollection",
+      "method": "handle",
+      "file": "HandlerCollection.java",
+      "line": 146,
+      "origin": "HandlerCollection.java:146",
+      "log_line": 221,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.handler.HandlerWrapper",
+      "method": "handle",
+      "file": "HandlerWrapper.java",
+      "line": 127,
+      "origin": "HandlerWrapper.java:127",
+      "log_line": 222,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.Server",
+      "method": "handle",
+      "file": "Server.java",
+      "line": 516,
+      "origin": "Server.java:516",
+      "log_line": 223,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.HttpChannel",
+      "method": "lambda$handle$1",
+      "file": "HttpChannel.java",
+      "line": 487,
+      "origin": "HttpChannel.java:487",
+      "log_line": 224,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.HttpChannel",
+      "method": "dispatch",
+      "file": "HttpChannel.java",
+      "line": 732,
+      "origin": "HttpChannel.java:732",
+      "log_line": 225,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.HttpChannel",
+      "method": "handle",
+      "file": "HttpChannel.java",
+      "line": 479,
+      "origin": "HttpChannel.java:479",
+      "log_line": 226,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.server.HttpConnection",
+      "method": "onFillable",
+      "file": "HttpConnection.java",
+      "line": 277,
+      "origin": "HttpConnection.java:277",
+      "log_line": 227,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.io.AbstractConnection$ReadCallback",
+      "method": "succeeded",
+      "file": "AbstractConnection.java",
+      "line": 311,
+      "origin": "AbstractConnection.java:311",
+      "log_line": 228,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.io.FillInterest",
+      "method": "fillable",
+      "file": "FillInterest.java",
+      "line": 105,
+      "origin": "FillInterest.java:105",
+      "log_line": 229,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.io.ChannelEndPoint$1",
+      "method": "run",
+      "file": "ChannelEndPoint.java",
+      "line": 104,
+      "origin": "ChannelEndPoint.java:104",
+      "log_line": 230,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.util.thread.strategy.EatWhatYouKill",
+      "method": "runTask",
+      "file": "EatWhatYouKill.java",
+      "line": 338,
+      "origin": "EatWhatYouKill.java:338",
+      "log_line": 231,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.util.thread.strategy.EatWhatYouKill",
+      "method": "doProduce",
+      "file": "EatWhatYouKill.java",
+      "line": 315,
+      "origin": "EatWhatYouKill.java:315",
+      "log_line": 232,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.util.thread.strategy.EatWhatYouKill",
+      "method": "tryProduce",
+      "file": "EatWhatYouKill.java",
+      "line": 173,
+      "origin": "EatWhatYouKill.java:173",
+      "log_line": 233,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.util.thread.strategy.EatWhatYouKill",
+      "method": "run",
+      "file": "EatWhatYouKill.java",
+      "line": 131,
+      "origin": "EatWhatYouKill.java:131",
+      "log_line": 234,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread",
+      "method": "run",
+      "file": "ReservedThreadExecutor.java",
+      "line": 409,
+      "origin": "ReservedThreadExecutor.java:409",
+      "log_line": 235,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.util.thread.QueuedThreadPool",
+      "method": "runJob",
+      "file": "QueuedThreadPool.java",
+      "line": 883,
+      "origin": "QueuedThreadPool.java:883",
+      "log_line": 236,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.eclipse.jetty.util.thread.QueuedThreadPool$Runner",
+      "method": "run",
+      "file": "QueuedThreadPool.java",
+      "line": 1034,
+      "origin": "QueuedThreadPool.java:1034",
+      "log_line": 237,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "java.lang.Thread",
+      "method": "run",
+      "file": "Thread.java",
+      "line": 840,
+      "origin": "Thread.java:840",
+      "log_line": 238,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.message.DbException",
+      "method": "getJdbcSQLException",
+      "file": "DbException.java",
+      "line": 514,
+      "origin": "DbException.java:514",
+      "log_line": 249,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.message.DbException",
+      "method": "getJdbcSQLException",
+      "file": "DbException.java",
+      "line": 489,
+      "origin": "DbException.java:489",
+      "log_line": 250,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.message.DbException",
+      "method": "get",
+      "file": "DbException.java",
+      "line": 223,
+      "origin": "DbException.java:223",
+      "log_line": 251,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.message.DbException",
+      "method": "get",
+      "file": "DbException.java",
+      "line": 199,
+      "origin": "DbException.java:199",
+      "log_line": 252,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.expression.ExpressionColumn",
+      "method": "getColumnException",
+      "file": "ExpressionColumn.java",
+      "line": 244,
+      "origin": "ExpressionColumn.java:244",
+      "log_line": 253,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.expression.ExpressionColumn",
+      "method": "optimizeOther",
+      "file": "ExpressionColumn.java",
+      "line": 226,
+      "origin": "ExpressionColumn.java:226",
+      "log_line": 254,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.expression.ExpressionColumn",
+      "method": "optimize",
+      "file": "ExpressionColumn.java",
+      "line": 213,
+      "origin": "ExpressionColumn.java:213",
+      "log_line": 255,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.query.Select",
+      "method": "optimizeExpressionsAndPreserveAliases",
+      "file": "Select.java",
+      "line": 1290,
+      "origin": "Select.java:1290",
+      "log_line": 256,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.query.Select",
+      "method": "prepareExpressions",
+      "file": "Select.java",
+      "line": 1167,
+      "origin": "Select.java:1167",
+      "log_line": 257,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.table.DerivedTable",
+      "method": "<init>",
+      "file": "DerivedTable.java",
+      "line": 41,
+      "origin": "DerivedTable.java:41",
+      "log_line": 258,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.query.Query",
+      "method": "toTable",
+      "file": "Query.java",
+      "line": 1012,
+      "origin": "Query.java:1012",
+      "log_line": 259,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "readDerivedTableWithCorrelation",
+      "file": "Parser.java",
+      "line": 1843,
+      "origin": "Parser.java:1843",
+      "log_line": 260,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "readTablePrimary",
+      "file": "Parser.java",
+      "line": 1720,
+      "origin": "Parser.java:1720",
+      "log_line": 261,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "readTableReference",
+      "file": "Parser.java",
+      "line": 2268,
+      "origin": "Parser.java:2268",
+      "log_line": 262,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseSelectFromPart",
+      "file": "Parser.java",
+      "line": 2718,
+      "origin": "Parser.java:2718",
+      "log_line": 263,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseSelect",
+      "file": "Parser.java",
+      "line": 2824,
+      "origin": "Parser.java:2824",
+      "log_line": 264,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQueryPrimary",
+      "file": "Parser.java",
+      "line": 2708,
+      "origin": "Parser.java:2708",
+      "log_line": 265,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQueryTerm",
+      "file": "Parser.java",
+      "line": 2564,
+      "origin": "Parser.java:2564",
+      "log_line": 266,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQueryExpressionBody",
+      "file": "Parser.java",
+      "line": 2543,
+      "origin": "Parser.java:2543",
+      "log_line": 267,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQueryExpressionBodyAndEndOfQuery",
+      "file": "Parser.java",
+      "line": 2536,
+      "origin": "Parser.java:2536",
+      "log_line": 268,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQueryExpression",
+      "file": "Parser.java",
+      "line": 2529,
+      "origin": "Parser.java:2529",
+      "log_line": 269,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "readDerivedTableWithCorrelation",
+      "file": "Parser.java",
+      "line": 1821,
+      "origin": "Parser.java:1821",
+      "log_line": 270,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "readTablePrimary",
+      "file": "Parser.java",
+      "line": 1720,
+      "origin": "Parser.java:1720",
+      "log_line": 271,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "readTableReference",
+      "file": "Parser.java",
+      "line": 2268,
+      "origin": "Parser.java:2268",
+      "log_line": 272,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseSelectFromPart",
+      "file": "Parser.java",
+      "line": 2718,
+      "origin": "Parser.java:2718",
+      "log_line": 273,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseSelect",
+      "file": "Parser.java",
+      "line": 2824,
+      "origin": "Parser.java:2824",
+      "log_line": 274,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQueryPrimary",
+      "file": "Parser.java",
+      "line": 2708,
+      "origin": "Parser.java:2708",
+      "log_line": 275,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQueryTerm",
+      "file": "Parser.java",
+      "line": 2564,
+      "origin": "Parser.java:2564",
+      "log_line": 276,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQueryExpressionBody",
+      "file": "Parser.java",
+      "line": 2543,
+      "origin": "Parser.java:2543",
+      "log_line": 277,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQueryExpressionBodyAndEndOfQuery",
+      "file": "Parser.java",
+      "line": 2536,
+      "origin": "Parser.java:2536",
+      "log_line": 278,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQueryExpression",
+      "file": "Parser.java",
+      "line": 2529,
+      "origin": "Parser.java:2529",
+      "log_line": 279,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parseQuery",
+      "file": "Parser.java",
+      "line": 2498,
+      "origin": "Parser.java:2498",
+      "log_line": 280,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parsePrepared",
+      "file": "Parser.java",
+      "line": 627,
+      "origin": "Parser.java:627",
+      "log_line": 281,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parse",
+      "file": "Parser.java",
+      "line": 592,
+      "origin": "Parser.java:592",
+      "log_line": 282,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "parse",
+      "file": "Parser.java",
+      "line": 564,
+      "origin": "Parser.java:564",
+      "log_line": 283,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.command.Parser",
+      "method": "prepareCommand",
+      "file": "Parser.java",
+      "line": 483,
+      "origin": "Parser.java:483",
+      "log_line": 284,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.engine.SessionLocal",
+      "method": "prepareLocal",
+      "file": "SessionLocal.java",
+      "line": 639,
+      "origin": "SessionLocal.java:639",
+      "log_line": 285,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.engine.SessionLocal",
+      "method": "prepareCommand",
+      "file": "SessionLocal.java",
+      "line": 559,
+      "origin": "SessionLocal.java:559",
+      "log_line": 286,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.jdbc.JdbcConnection",
+      "method": "prepareCommand",
+      "file": "JdbcConnection.java",
+      "line": 1166,
+      "origin": "JdbcConnection.java:1166",
+      "log_line": 287,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.jdbc.JdbcPreparedStatement",
+      "method": "<init>",
+      "file": "JdbcPreparedStatement.java",
+      "line": 93,
+      "origin": "JdbcPreparedStatement.java:93",
+      "log_line": 288,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.h2.jdbc.JdbcConnection",
+      "method": "prepareStatement",
+      "file": "JdbcConnection.java",
+      "line": 316,
+      "origin": "JdbcConnection.java:316",
+      "log_line": 289,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.executor.statement.PreparedStatementHandler",
+      "method": "instantiateStatement",
+      "file": "PreparedStatementHandler.java",
+      "line": 88,
+      "origin": "PreparedStatementHandler.java:88",
+      "log_line": 290,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.executor.statement.BaseStatementHandler",
+      "method": "prepare",
+      "file": "BaseStatementHandler.java",
+      "line": 90,
+      "origin": "BaseStatementHandler.java:90",
+      "log_line": 291,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.executor.statement.RoutingStatementHandler",
+      "method": "prepare",
+      "file": "RoutingStatementHandler.java",
+      "line": 60,
+      "origin": "RoutingStatementHandler.java:60",
+      "log_line": 292,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.executor.SimpleExecutor",
+      "method": "prepareStatement",
+      "file": "SimpleExecutor.java",
+      "line": 90,
+      "origin": "SimpleExecutor.java:90",
+      "log_line": 293,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.executor.SimpleExecutor",
+      "method": "doQuery",
+      "file": "SimpleExecutor.java",
+      "line": 64,
+      "origin": "SimpleExecutor.java:64",
+      "log_line": 294,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.executor.BaseExecutor",
+      "method": "queryFromDatabase",
+      "file": "BaseExecutor.java",
+      "line": 336,
+      "origin": "BaseExecutor.java:336",
+      "log_line": 295,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.executor.BaseExecutor",
+      "method": "query",
+      "file": "BaseExecutor.java",
+      "line": 158,
+      "origin": "BaseExecutor.java:158",
+      "log_line": 296,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.executor.CachingExecutor",
+      "method": "query",
+      "file": "CachingExecutor.java",
+      "line": 110,
+      "origin": "CachingExecutor.java:110",
+      "log_line": 297,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.executor.CachingExecutor",
+      "method": "query",
+      "file": "CachingExecutor.java",
+      "line": 90,
+      "origin": "CachingExecutor.java:90",
+      "log_line": 298,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.session.defaults.DefaultSqlSession",
+      "method": "selectList",
+      "file": "DefaultSqlSession.java",
+      "line": 154,
+      "origin": "DefaultSqlSession.java:154",
+      "log_line": 299,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.session.defaults.DefaultSqlSession",
+      "method": "selectList",
+      "file": "DefaultSqlSession.java",
+      "line": 147,
+      "origin": "DefaultSqlSession.java:147",
+      "log_line": 300,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.apache.ibatis.session.defaults.DefaultSqlSession",
+      "method": "selectList",
+      "file": "DefaultSqlSession.java",
+      "line": 142,
+      "origin": "DefaultSqlSession.java:142",
+      "log_line": 301,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "jdk.internal.reflect.NativeMethodAccessorImpl",
+      "method": "invoke0",
+      "file": null,
+      "line": null,
+      "origin": "Native Method",
+      "log_line": 302,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "jdk.internal.reflect.NativeMethodAccessorImpl",
+      "method": "invoke",
+      "file": "NativeMethodAccessorImpl.java",
+      "line": 77,
+      "origin": "NativeMethodAccessorImpl.java:77",
+      "log_line": 303,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl",
+      "method": "invoke",
+      "file": "DelegatingMethodAccessorImpl.java",
+      "line": 43,
+      "origin": "DelegatingMethodAccessorImpl.java:43",
+      "log_line": 304,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "java.lang.reflect.Method",
+      "method": "invoke",
+      "file": "Method.java",
+      "line": 569,
+      "origin": "Method.java:569",
+      "log_line": 305,
+      "project": false
+    },
+    {
+      "exception": 2,
+      "class": "org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor",
+      "method": "invoke",
+      "file": "SqlSessionTemplate.java",
+      "line": 425,
+      "origin": "SqlSessionTemplate.java:425",
+      "log_line": 306,
+      "project": false
+    }
+  ],
+  "project_frames": [
+    {
+      "exception": 1,
+      "class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "method": "list",
+      "file": "BoardServiceImpl.java",
+      "line": 25,
+      "origin": "BoardServiceImpl.java:25",
+      "log_line": 167,
+      "project": true
+    },
+    {
+      "exception": 1,
+      "class": "kr.sistack.board.web.BoardController",
+      "method": "list",
+      "file": "BoardController.java",
+      "line": 38,
+      "origin": "BoardController.java:38",
+      "log_line": 175,
+      "project": true
+    }
+  ],
+  "database_codes": [],
+  "unverified": [
+    "예외 체인은 로그 구조이며 원인 확정이 아니다"
+  ],
+  "mapped_frames": [
+    {
+      "exception": 1,
+      "class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "method": "list",
+      "file": "BoardServiceImpl.java",
+      "line": 25,
+      "origin": "BoardServiceImpl.java:25",
+      "log_line": 167,
+      "project": true,
+      "candidates": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 25
+        }
+      ],
+      "status": "UNRESOLVED"
+    },
+    {
+      "exception": 1,
+      "class": "kr.sistack.board.web.BoardController",
+      "method": "list",
+      "file": "BoardController.java",
+      "line": 38,
+      "origin": "BoardController.java:38",
+      "log_line": 175,
+      "project": true,
+      "candidates": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 38
+        }
+      ],
+      "status": "UNRESOLVED"
+    }
+  ]
+}

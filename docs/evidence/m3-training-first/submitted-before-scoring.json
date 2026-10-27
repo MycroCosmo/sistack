@@ -1,0 +1,76 @@
+{
+  "created_at": "2026-10-27T15:14:32.875Z",
+  "frozen_revision": "aa0c3bbe296ed5b6e04b47aa92cc73e7ad3c3dd3",
+  "submitted": [
+    {
+      "case_id": "01-binding",
+      "run_id": "m3-training-first-01-binding",
+      "status": "PASS",
+      "diagnosis_sha256": "f3ddfb6c817c3e286f089123a48776b319049af8d45effb67719b9e3db2ba938",
+      "report_sha256": "c17682701e8385e5f79f58063e158a2b0322a89698aaf08b67e2b9793d528f97"
+    },
+    {
+      "case_id": "02-js-url",
+      "run_id": "m3-training-first-02-js-url",
+      "status": "PASS",
+      "diagnosis_sha256": "94d50de7f4427df18be903feaa68850c0851065df578171d31560f4efcbdb644",
+      "report_sha256": "add2d76a04b9eed776e91e93357ab3fff5fff5d3590bc332a0849896d236d28d"
+    },
+    {
+      "case_id": "03-request-encoding",
+      "run_id": "m3-training-first-03-request-encoding",
+      "status": "PASS",
+      "diagnosis_sha256": "16cb2cafc42e9cd6cf247c9388039c51c60e97f68c426f2a5e4383a1d4cf4648",
+      "report_sha256": "27857553460e1706aef558cb344c3ce66d60095163bea3b712124002aae8d8ba"
+    },
+    {
+      "case_id": "04-session-bypass",
+      "run_id": "m3-training-first-04-session-bypass",
+      "status": "PASS",
+      "diagnosis_sha256": "81b1b50f315be7bb2e4497b30c9dc86aef8b355a8af787e04579af58e0626505",
+      "report_sha256": "76d34ca93446a00502e6d8a9f649d2900011f7276447b03e598de0d1d7c910e2"
+    },
+    {
+      "case_id": "05-paging",
+      "run_id": "m3-training-first-05-paging",
+      "status": "PASS",
+      "diagnosis_sha256": "c9b02a0fce1d2955277df2a8b69ad5bcceebfbb0017c8fb5b49eeae88651779e",
+      "report_sha256": "d9eac02291f630ab5bb0e1f673c1c1b218ce9708c3144e0c9c6dfc388d1d01f2"
+    },
+    {
+      "case_id": "06-sort-sql",
+      "run_id": "m3-training-first-06-sort-sql",
+      "status": "PASS",
+      "diagnosis_sha256": "349d86fcbfdc12496cd997c150766d7473d105a3b28000a311b71c6ce752b9a1",
+      "report_sha256": "8a992027faf89e1799dae3dced0c4a8a4d11c81dfb2978ccf3ba04fc00c4ea24"
+    },
+    {
+      "case_id": "07-oracle-log-only",
+      "run_id": "m3-training-first-07-oracle-log-only",
+      "status": "PARTIAL",
+      "diagnosis_sha256": "bf2182397b218e707a7ac782375e6c56ca9b19837c703cb334a0286c3194ea4e",
+      "report_sha256": "52235c44a592f3498088dceb660c5a5a918b74f63b5752e4935dc9503ef0a038"
+    },
+    {
+      "case_id": "08-thymeleaf-utilities",
+      "run_id": "m3-training-first-08-thymeleaf-utilities",
+      "status": "PASS",
+      "diagnosis_sha256": "c8c7b5f340d1df4ec305d8d2348840e3f3d9efbcb6a246ab58c5feecdc6b1bc7",
+      "report_sha256": "1bd55c2be9b5d6ea58ce1748477d164104e9d7428b4eefbc95b52a1e5e954352"
+    },
+    {
+      "case_id": "09-view-resolver",
+      "run_id": "m3-training-first-09-view-resolver",
+      "status": "PASS",
+      "diagnosis_sha256": "bdf34304c3a9b5629af49eaa7aa85f8676f87e7dfc7be431d9afe2e9f16cd464",
+      "report_sha256": "b5216bf6ede03d64336c049665df10217e1b87fd411bfe7964df19e9138c4b1f"
+    },
+    {
+      "case_id": "10-fragment-encoding",
+      "run_id": "m3-training-first-10-fragment-encoding",
+      "status": "PASS",
+      "diagnosis_sha256": "ddf75b2419be270e9b5a058cdb7613ee23c24797de427be82d37954c811eee88",
+      "report_sha256": "ade3b6e72ce2fe8192158d27691cf72d0cc58c5bb1776d6982ed861dfd26c937"
+    }
+  ]
+}

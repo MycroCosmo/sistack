@@ -1,0 +1,69 @@
+src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
+1: <?xml version="1.0" encoding="UTF-8"?>
+2: <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+3:     xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+4:     xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+5:     <context:component-scan base-package="kr.sistack.board.web"/>
+6:     <mvc:annotation-driven/>
+7:     <mvc:resources mapping="/resources/**" location="/resources/"/>
+8:     <mvc:interceptors>
+9:         <mvc:interceptor>
+10:             <mvc:mapping path="/code/**"/>
+11:             <mvc:mapping path="/auth/logout.do"/>
+12:             <bean class="kr.sistack.board.web.LoginInterceptor">
+13:                 <constructor-arg ref="menuMapper"/>
+14:             </bean>
+15:         </mvc:interceptor>
+16:     </mvc:interceptors>
+17:     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+18:         <property name="prefix" value="/WEB-INF/views/"/>
+19:         <property name="suffix" value=".jsp"/>
+20:     </bean>
+21: </beans>
+22: 
+src/main/java/kr/sistack/board/web/LoginInterceptor.java
+18:     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+19:         HttpSession session = request.getSession(false);
+20:         UserSession user = session == null ? null : (UserSession) session.getAttribute("loginUser");
+21:         if (user == null) {
+22:             response.sendRedirect(request.getContextPath() + "/auth/login.do");
+23:             return false;
+24:         }
+25:         String route = String.valueOf(request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE));
+26:         boolean admin = route.startsWith("/code/") || route.equals("/board/form.do")
+27:             || route.equals("/board/create.do") || route.equals("/board/update.do") || route.equals("/board/delete.do");
+28:         if (admin && !"ADMIN".equals(user.getRole())) {
+29:             response.sendError(403);
+30:             return false;
+31:         }
+32:         Object csrf = session.getAttribute("csrf");
+33:         if ("POST".equals(request.getMethod()) && (!(csrf instanceof String) || !csrf.equals(request.getParameter("csrf")))) {
+34:             response.sendError(403);
+35:             return false;
+36:         }
+37:         request.setAttribute("currentUser", user);
+38:         request.setAttribute("menus", menus.selectList(user.getRole()));
+39:         return true;
+40:     }
+41: }
+42: 
+src/main/java/kr/sistack/board/web/BoardController.java
+25: 
+26:     @InitBinder("board")
+27:     public void boardFields(WebDataBinder binder) {
+28:         binder.setAllowedFields("title", "content", "category");
+29:     }
+30: 
+31:     @InitBinder("search")
+32:     public void searchFields(WebDataBinder binder) {
+33:         binder.setAllowedFields("page", "searchType", "keyword", "startDate", "endDate", "sort");
+34:     }
+35: 
+36:     @GetMapping("/list.do")
+37:     public String list(@ModelAttribute("search") BoardSearch search, @RequestAttribute(value = "currentUser", required = false) UserSession user, Model model) {
+38:         model.addAttribute("boards", service.list(search));
+39:         model.addAttribute("viewer", user.getName());
+40:         model.addAttribute("paging", search);
+41:         return "board/list";
+42:     }
+43: 

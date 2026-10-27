@@ -1,0 +1,96 @@
+src/main/webapp/WEB-INF/templates/fragments/common.html
+1: <!DOCTYPE html>
+2: <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+3: <body>
+4:     <nav th:fragment="menu" th:if="${session.loginUser != null}" aria-label="주 메뉴">
+5:         <a th:each="menu : ${menus}" th:href="@{${menu.url}}" th:text="${menu.label}"></a>
+6:         <form method="post" th:action="@{/auth/logout.do}">
+7:             <input type="hidden" name="csrf" th:value="${#session.getAttribute('csrf')}">
+8:             <button>로그아웃</button>
+9:         </form>
+10:     </nav>
+11:     <div th:fragment="paging" class="paging" aria-label="페이지 이동">
+12:         <button th:if="${paging.page > 1}" type="button" th:data-page="${paging.page - 1}">이전</button>
+13:         <span th:text="|${paging.page} / ${paging.lastPage} 페이지 · ${paging.total}건|"></span>
+14:         <button th:if="${paging.page < paging.lastPage}" type="button" th:data-page="${paging.page + 1}">다음</button>
+15:     </div>
+16: </body>
+17: </html>
+18: 
+src/main/java/kr/sistack/board/web/BoardController.java
+30: 
+31:     @InitBinder("search")
+32:     public void searchFields(WebDataBinder binder) {
+33:         binder.setAllowedFields("page", "searchType", "keyword", "startDate", "endDate", "sort");
+34:     }
+35: 
+36:     @GetMapping("/list.do")
+37:     public String list(@ModelAttribute("search") BoardSearch search, @RequestAttribute("currentUser") UserSession user, Model model) {
+38:         model.addAttribute("boards", service.list(search));
+39:         model.addAttribute("viewer", user.getName());
+40:         model.addAttribute("paging", search);
+41:         return "board/list";
+42:     }
+43: 
+44:     @GetMapping("/detail.do")
+45:     public String detail(@RequestParam("id") long id, Model model) {
+46:         model.addAttribute("board", service.get(id));
+pom.xml
+10:         <spring.version>5.3.39</spring.version>
+11:     </properties>
+12:     <dependencyManagement>
+13:         <dependencies>
+14:             <dependency>
+15:                 <groupId>org.slf4j</groupId>
+16:                 <artifactId>slf4j-api</artifactId>
+17:                 <version>2.0.17</version>
+18:             </dependency>
+19:         </dependencies>
+20:     </dependencyManagement>
+21:     <dependencies>
+22:         <dependency>
+23:             <groupId>org.thymeleaf</groupId>
+24:             <artifactId>thymeleaf-spring5</artifactId>
+25:             <version>3.1.5.RELEASE</version>
+26:         </dependency>
+27:         <dependency>
+28:             <groupId>nz.net.ultraq.thymeleaf</groupId>
+29:             <artifactId>thymeleaf-layout-dialect</artifactId>
+30:             <version>3.4.0</version>
+31:             <exclusions>
+32:                 <exclusion>
+33:                     <groupId>org.thymeleaf</groupId>
+34:                     <artifactId>thymeleaf</artifactId>
+35:                 </exclusion>
+36:             </exclusions>
+37:         </dependency>
+38: 
+39:         <dependency>
+40:             <groupId>javax.annotation</groupId>
+41:             <artifactId>javax.annotation-api</artifactId>
+42:             <version>1.3.2</version>
+43:             <scope>compile</scope>
+44:         </dependency>
+45:         <dependency>
+46:             <groupId>com.fasterxml.jackson.core</groupId>
+47:             <artifactId>jackson-databind</artifactId>
+48:             <version>2.20.2</version>
+49:         </dependency>
+50:         <dependency>
+51:             <groupId>org.springframework</groupId>
+52:             <artifactId>spring-webmvc</artifactId>
+53:             <version>${spring.version}</version>
+54:         </dependency>
+55:         <dependency>
+56:             <groupId>org.springframework</groupId>
+57:             <artifactId>spring-jdbc</artifactId>
+58:             <version>${spring.version}</version>
+59:         </dependency>
+60:         <dependency>
+61:             <groupId>org.mybatis</groupId>
+62:             <artifactId>mybatis</artifactId>
+63:             <version>3.5.19</version>
+64:         </dependency>
+65:         <dependency>
+src/main/webapp/WEB-INF/templates/board/list.html:7:         <p><span th:text="${#request.getAttribute('viewer')}"></span>님</p>
+src/main/webapp/WEB-INF/templates/fragments/common.html:7:             <input type="hidden" name="csrf" th:value="${#session.getAttribute('csrf')}">

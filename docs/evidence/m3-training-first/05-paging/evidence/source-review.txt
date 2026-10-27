@@ -1,0 +1,76 @@
+src/main/java/kr/sistack/board/common/Pagination.java
+1: package kr.sistack.board.common;
+2: 
+3: public class Pagination {
+4:     private int page = 1;
+5:     private int total;
+6: 
+7:     public int getPage() {
+8:         return page;
+9:     }
+10: 
+11:     public void setPage(int page) {
+12:         if (page < 1 || page > 100000) {
+13:             throw new IllegalArgumentException("페이지 범위를 확인하세요");
+14:         }
+15:         this.page = page;
+16:     }
+17: 
+18:     public int getPageSize() {
+19:         return 10;
+20:     }
+21: 
+22:     public int getOffset() {
+23:         return (page - 1) * getPageSize();
+24:     }
+25: 
+26:     public int getEndRow() {
+27:         return page * getPageSize();
+28:     }
+29: 
+30:     public int getTotal() {
+31:         return total;
+32:     }
+33: 
+34:     public void setTotal(int total) {
+35:         this.total = total;
+36:     }
+37: 
+38:     public int getLastPage() {
+39:         return Math.max(1, total / getPageSize());
+40:     }
+41: }
+42: 
+src/main/webapp/WEB-INF/views/common/paging.jspf
+1: <%@ page pageEncoding="UTF-8" %>
+2: <div class="paging" aria-label="페이지 이동">
+3:     <c:if test="${paging.page > 1}">
+4:         <button type="button" data-page="${paging.page - 1}">이전</button>
+5:     </c:if>
+6:     <span>
+7:         <c:out value="${paging.page}"/> / <c:out value="${paging.lastPage}"/> 페이지 · <c:out value="${paging.total}"/>건</span>
+8:     <c:if test="${paging.page < paging.lastPage}">
+9:         <button type="button" data-page="${paging.page + 1}">다음</button>
+10:     </c:if>
+11: </div>
+12: 
+src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java
+18:     @Override
+19:     public List<Board> list(BoardSearch search) {
+20:         if (search.getFromDate() != null && search.getUntilDate() != null
+21:                 && !search.getFromDate().before(search.getUntilDate())) {
+22:             throw new IllegalArgumentException("시작일과 종료일을 확인하세요");
+23:         }
+24:         search.setTotal(mapper.count(search));
+25:         return mapper.selectList(search);
+26:     }
+27: 
+28:     @Override
+29:     public Board get(long id) {
+30:         Board board = mapper.selectOne(id);
+31:         if (board == null) {
+32:             throw new NotFoundException();
+33:         }
+34:         return board;
+35:     }
+36: 

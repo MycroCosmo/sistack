@@ -1,0 +1,21 @@
+{
+  "dataset": "training",
+  "case_id": "05-paging",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/java/kr/sistack/board/common/Pagination.java",
+        "line": 39,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "aa0c3bbe296ed5b6e04b47aa92cc73e7ad3c3dd3",
+  "tool_fingerprint": "f05f66d0c9ee30d1567747a39441bee826b1038e592063760757c548563cf7fe",
+  "run_id": "m3-training-first-05-paging",
+  "expected_sha256": "352e2981840d73b9e255812bc083b0e9048046a32d3e44f96d8b362ba23424fb",
+  "report_sha256": "d9eac02291f630ab5bb0e1f673c1c1b218ce9708c3144e0c9c6dfc388d1d01f2",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

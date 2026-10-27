@@ -1,0 +1,31 @@
+{
+  "dataset": "training",
+  "case_id": "09-view-resolver",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+        "line": 35,
+        "hit": true
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+        "line": 40,
+        "hit": true
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+        "line": 41,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "aa0c3bbe296ed5b6e04b47aa92cc73e7ad3c3dd3",
+  "tool_fingerprint": "f05f66d0c9ee30d1567747a39441bee826b1038e592063760757c548563cf7fe",
+  "run_id": "m3-training-first-09-view-resolver",
+  "expected_sha256": "134475529196a6584df969c7e020aea1003c0741d5ee0923606d4ff2662eb893",
+  "report_sha256": "b5216bf6ede03d64336c049665df10217e1b87fd411bfe7964df19e9138c4b1f",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

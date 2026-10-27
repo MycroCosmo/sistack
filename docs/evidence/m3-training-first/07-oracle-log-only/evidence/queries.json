@@ -1,0 +1,621 @@
+[
+  {
+    "direction": "forward",
+    "depth": 8,
+    "roots": [
+      "ded13c1bc0bb4868e396bf42eced7f9fc6f42fb8eb1ff61173d733d9bbd64338"
+    ],
+    "nodes": [
+      {
+        "id": "20cd6e13d5cfbb3054303f0b3f3ec45e31c9b60f4257ec20b6887036a823b951",
+        "kind": "method",
+        "name": "kr.sistack.board.mapper.BoardMapper#selectList",
+        "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+        "line": 8,
+        "details": {
+          "owner": "kr.sistack.board.mapper.BoardMapper",
+          "static": false,
+          "return_type": "java.util.List",
+          "parameters": [
+            {
+              "type": "kr.sistack.board.domain.BoardSearch",
+              "name": "search"
+            }
+          ],
+          "request_attributes": [],
+          "map_keys": [],
+          "session_reads": [],
+          "request_writes": []
+        }
+      },
+      {
+        "id": "3c09dee087dacc43df570f8edb34cd8772af352605c4942137686c7cf0560e71",
+        "kind": "method",
+        "name": "kr.sistack.board.mapper.BoardMapper#count",
+        "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+        "line": 10,
+        "details": {
+          "owner": "kr.sistack.board.mapper.BoardMapper",
+          "static": false,
+          "return_type": "kr.sistack.board.mapper.int",
+          "parameters": [
+            {
+              "type": "kr.sistack.board.domain.BoardSearch",
+              "name": "search"
+            }
+          ],
+          "request_attributes": [],
+          "map_keys": [],
+          "session_reads": [],
+          "request_writes": []
+        }
+      },
+      {
+        "id": "7f3a96554483ddd2465be83b65d420077d3fa2842eac3c4b5f23b9ef3189713b",
+        "kind": "method",
+        "name": "kr.sistack.board.mapper.MenuMapper#selectList",
+        "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+        "line": 10,
+        "details": {
+          "owner": "kr.sistack.board.mapper.MenuMapper",
+          "static": false,
+          "return_type": "java.util.List",
+          "parameters": [
+            {
+              "type": "kr.sistack.board.mapper.String",
+              "name": "role"
+            }
+          ],
+          "request_attributes": [],
+          "map_keys": [],
+          "session_reads": [],
+          "request_writes": []
+        }
+      },
+      {
+        "id": "0b1a6c7a1902ce8c8682966336888d10c2c4fdb4cd64b832283c84c936ab55b1",
+        "kind": "method",
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#list",
+        "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+        "line": 19,
+        "details": {
+          "owner": "kr.sistack.board.service.impl.BoardServiceImpl",
+          "static": false,
+          "return_type": "java.util.List",
+          "parameters": [
+            {
+              "type": "kr.sistack.board.domain.BoardSearch",
+              "name": "search"
+            }
+          ],
+          "request_attributes": [],
+          "map_keys": [],
+          "session_reads": [],
+          "request_writes": []
+        }
+      },
+      {
+        "id": "54b42bdbe7ed54e51c2328c45f0518e20690306802c426310ec870a7a608cf2f",
+        "kind": "method",
+        "name": "kr.sistack.board.web.BoardController#list",
+        "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+        "line": 37,
+        "details": {
+          "owner": "kr.sistack.board.web.BoardController",
+          "static": false,
+          "return_type": "kr.sistack.board.web.String",
+          "parameters": [
+            {
+              "type": "kr.sistack.board.domain.BoardSearch",
+              "name": "search"
+            },
+            {
+              "type": "kr.sistack.board.web.UserSession",
+              "name": "user"
+            },
+            {
+              "type": "org.springframework.ui.Model",
+              "name": "model"
+            }
+          ],
+          "request_attributes": [
+            "currentUser"
+          ],
+          "map_keys": [],
+          "session_reads": [],
+          "request_writes": []
+        }
+      },
+      {
+        "id": "23939dc4cafa716279f8896d0978312479cbdb7b89ad0cd17682c54544ca536f",
+        "kind": "method",
+        "name": "kr.sistack.board.web.LoginInterceptor#preHandle",
+        "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+        "line": 18,
+        "details": {
+          "owner": "kr.sistack.board.web.LoginInterceptor",
+          "static": false,
+          "return_type": "kr.sistack.board.web.boolean",
+          "parameters": [
+            {
+              "type": "javax.servlet.http.HttpServletRequest",
+              "name": "request"
+            },
+            {
+              "type": "javax.servlet.http.HttpServletResponse",
+              "name": "response"
+            },
+            {
+              "type": "kr.sistack.board.web.Object",
+              "name": "handler"
+            }
+          ],
+          "request_attributes": [],
+          "map_keys": [],
+          "session_reads": [
+            "loginUser",
+            "csrf"
+          ],
+          "request_writes": [
+            "currentUser",
+            "menus"
+          ]
+        }
+      },
+      {
+        "id": "756a873325c3b54d2fc8f6e5c6e66a547ab7a2ca74f8f6a5671ad4ea8b217c89",
+        "kind": "table",
+        "name": "APP_MENU",
+        "file": "src/main/resources/db/oracle/ddl.sql",
+        "line": 6,
+        "details": {
+          "declaration": true
+        }
+      },
+      {
+        "id": "f6011aa91b92fc64f0c3faf0605ac133d8fd4cd7b90ed4360a7ee16f80808687",
+        "kind": "table",
+        "name": "BOARD",
+        "file": "src/main/resources/db/oracle/ddl.sql",
+        "line": 15,
+        "details": {
+          "declaration": true
+        }
+      },
+      {
+        "id": "9b0084e8bdcbc1bd0c8e76c4c2869617647aa3930282a6822f0561012e13868c",
+        "kind": "resultMap",
+        "name": "kr.sistack.board.mapper.BoardMapper.board",
+        "file": "src/main/resources/mapper/BoardMapper.xml",
+        "line": 4,
+        "details": {
+          "namespace": "kr.sistack.board.mapper.BoardMapper",
+          "statement": "board",
+          "dialect": "mybatis",
+          "parameter_type": null
+        }
+      },
+      {
+        "id": "83c05c6280726bafd91c5505864b9264fb2f68806fa25e82e84bb5edb12be94d",
+        "kind": "fragment",
+        "name": "kr.sistack.board.mapper.BoardMapper.filters",
+        "file": "src/main/resources/mapper/BoardMapper.xml",
+        "line": 12,
+        "details": {
+          "namespace": "kr.sistack.board.mapper.BoardMapper",
+          "statement": "filters",
+          "dialect": "mybatis",
+          "parameter_type": null,
+          "parameters": [
+            "keyword",
+            "keyword",
+            "fromDate",
+            "untilDate"
+          ],
+          "substitutions": []
+        }
+      },
+      {
+        "id": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+        "kind": "sql",
+        "name": "kr.sistack.board.mapper.BoardMapper.selectList",
+        "file": "src/main/resources/mapper/BoardMapper.xml",
+        "line": 30,
+        "details": {
+          "namespace": "kr.sistack.board.mapper.BoardMapper",
+          "statement": "selectList",
+          "dialect": "mybatis",
+          "parameter_type": null,
+          "parameters": [],
+          "substitutions": [
+            "sortColumn"
+          ]
+        }
+      },
+      {
+        "id": "1e815d84adeec59a6d42acea92cfe3bf3a15df126f98f3bca804d2bb40be48a6",
+        "kind": "sql",
+        "name": "kr.sistack.board.mapper.BoardMapper.count",
+        "file": "src/main/resources/mapper/BoardMapper.xml",
+        "line": 37,
+        "details": {
+          "namespace": "kr.sistack.board.mapper.BoardMapper",
+          "statement": "count",
+          "dialect": "mybatis",
+          "parameter_type": null,
+          "parameters": [],
+          "substitutions": []
+        }
+      },
+      {
+        "id": "84dca681aa1e6d5fb4a7f573e6e300b81ea972d5836c818507e3849b4ea03878",
+        "kind": "fragment",
+        "name": "commonSql.pageStart",
+        "file": "src/main/resources/mapper/CommonSql.xml",
+        "line": 4,
+        "details": {
+          "namespace": "commonSql",
+          "statement": "pageStart",
+          "dialect": "mybatis",
+          "parameter_type": null,
+          "parameters": [],
+          "substitutions": []
+        }
+      },
+      {
+        "id": "d4c681e15adcad90c16500f56527e9c48049bcff5994a7df56ecc927aca35cfa",
+        "kind": "fragment",
+        "name": "commonSql.pageEnd",
+        "file": "src/main/resources/mapper/CommonSql.xml",
+        "line": 7,
+        "details": {
+          "namespace": "commonSql",
+          "statement": "pageEnd",
+          "dialect": "mybatis",
+          "parameter_type": null,
+          "parameters": [
+            "endRow",
+            "offset"
+          ],
+          "substitutions": []
+        }
+      },
+      {
+        "id": "ded13c1bc0bb4868e396bf42eced7f9fc6f42fb8eb1ff61173d733d9bbd64338",
+        "kind": "endpoint",
+        "name": "GET /board/list.do",
+        "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+        "line": 36,
+        "details": {
+          "path": "/board/list.do",
+          "http_method": "GET"
+        }
+      },
+      {
+        "id": "91b83926cb0a6ed9e53e3b10a4ccaedf493f58692c2888c6e21dceda1597f263",
+        "kind": "sql",
+        "name": "kr.sistack.board.mapper.MenuMapper.selectList",
+        "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+        "line": 9,
+        "details": {
+          "dialect": "mybatis-annotation"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "from": "ded13c1bc0bb4868e396bf42eced7f9fc6f42fb8eb1ff61173d733d9bbd64338",
+        "to": "54b42bdbe7ed54e51c2328c45f0518e20690306802c426310ec870a7a608cf2f",
+        "kind": "maps_to",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+            "line": 36
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+            "line": 37
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+            "line": 19
+          }
+        ]
+      },
+      {
+        "from": "ded13c1bc0bb4868e396bf42eced7f9fc6f42fb8eb1ff61173d733d9bbd64338",
+        "to": "23939dc4cafa716279f8896d0978312479cbdb7b89ad0cd17682c54544ca536f",
+        "kind": "intercepted_by",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+            "line": 10
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+            "line": 18
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+            "line": 36
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+            "line": 9
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+            "line": 13
+          }
+        ]
+      },
+      {
+        "from": "54b42bdbe7ed54e51c2328c45f0518e20690306802c426310ec870a7a608cf2f",
+        "to": "0b1a6c7a1902ce8c8682966336888d10c2c4fdb4cd64b832283c84c936ab55b1",
+        "kind": "calls",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+            "line": 38
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+            "line": 19
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+            "line": 21
+          }
+        ]
+      },
+      {
+        "from": "23939dc4cafa716279f8896d0978312479cbdb7b89ad0cd17682c54544ca536f",
+        "to": "7f3a96554483ddd2465be83b65d420077d3fa2842eac3c4b5f23b9ef3189713b",
+        "kind": "calls",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+            "line": 38
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+            "line": 10
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/web/LoginInterceptor.java",
+            "line": 11
+          }
+        ]
+      },
+      {
+        "from": "0b1a6c7a1902ce8c8682966336888d10c2c4fdb4cd64b832283c84c936ab55b1",
+        "to": "3c09dee087dacc43df570f8edb34cd8772af352605c4942137686c7cf0560e71",
+        "kind": "calls",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+            "line": 24
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+            "line": 10
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+            "line": 16
+          }
+        ]
+      },
+      {
+        "from": "0b1a6c7a1902ce8c8682966336888d10c2c4fdb4cd64b832283c84c936ab55b1",
+        "to": "20cd6e13d5cfbb3054303f0b3f3ec45e31c9b60f4257ec20b6887036a823b951",
+        "kind": "calls",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+            "line": 25
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+            "line": 8
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+            "line": 16
+          }
+        ]
+      },
+      {
+        "from": "7f3a96554483ddd2465be83b65d420077d3fa2842eac3c4b5f23b9ef3189713b",
+        "to": "91b83926cb0a6ed9e53e3b10a4ccaedf493f58692c2888c6e21dceda1597f263",
+        "kind": "executes",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+            "line": 10
+          },
+          {
+            "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+            "line": 9
+          }
+        ]
+      },
+      {
+        "from": "3c09dee087dacc43df570f8edb34cd8772af352605c4942137686c7cf0560e71",
+        "to": "1e815d84adeec59a6d42acea92cfe3bf3a15df126f98f3bca804d2bb40be48a6",
+        "kind": "executes",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+            "line": 10
+          },
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 37
+          },
+          {
+            "file": "src/main/resources/spring/root-context.xml",
+            "line": 8
+          }
+        ],
+        "candidates": []
+      },
+      {
+        "from": "20cd6e13d5cfbb3054303f0b3f3ec45e31c9b60f4257ec20b6887036a823b951",
+        "to": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+        "kind": "executes",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+            "line": 8
+          },
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 30
+          },
+          {
+            "file": "src/main/resources/spring/root-context.xml",
+            "line": 8
+          }
+        ],
+        "candidates": []
+      },
+      {
+        "from": "91b83926cb0a6ed9e53e3b10a4ccaedf493f58692c2888c6e21dceda1597f263",
+        "to": "756a873325c3b54d2fc8f6e5c6e66a547ab7a2ca74f8f6a5671ad4ea8b217c89",
+        "kind": "reads",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+            "line": 9
+          }
+        ]
+      },
+      {
+        "from": "1e815d84adeec59a6d42acea92cfe3bf3a15df126f98f3bca804d2bb40be48a6",
+        "to": "f6011aa91b92fc64f0c3faf0605ac133d8fd4cd7b90ed4360a7ee16f80808687",
+        "kind": "reads",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 38
+          }
+        ]
+      },
+      {
+        "from": "1e815d84adeec59a6d42acea92cfe3bf3a15df126f98f3bca804d2bb40be48a6",
+        "to": "83c05c6280726bafd91c5505864b9264fb2f68806fa25e82e84bb5edb12be94d",
+        "kind": "includes",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 39
+          },
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 12
+          }
+        ]
+      },
+      {
+        "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+        "to": "f6011aa91b92fc64f0c3faf0605ac133d8fd4cd7b90ed4360a7ee16f80808687",
+        "kind": "reads",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 32
+          }
+        ]
+      },
+      {
+        "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+        "to": "84dca681aa1e6d5fb4a7f573e6e300b81ea972d5836c818507e3849b4ea03878",
+        "kind": "includes",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 31
+          },
+          {
+            "file": "src/main/resources/mapper/CommonSql.xml",
+            "line": 4
+          }
+        ]
+      },
+      {
+        "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+        "to": "83c05c6280726bafd91c5505864b9264fb2f68806fa25e82e84bb5edb12be94d",
+        "kind": "includes",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 33
+          },
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 12
+          }
+        ]
+      },
+      {
+        "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+        "to": "d4c681e15adcad90c16500f56527e9c48049bcff5994a7df56ecc927aca35cfa",
+        "kind": "includes",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 35
+          },
+          {
+            "file": "src/main/resources/mapper/CommonSql.xml",
+            "line": 7
+          }
+        ]
+      },
+      {
+        "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+        "to": "9b0084e8bdcbc1bd0c8e76c4c2869617647aa3930282a6822f0561012e13868c",
+        "kind": "maps_to",
+        "status": "CONFIRMED",
+        "evidence": [
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 30
+          },
+          {
+            "file": "src/main/resources/mapper/BoardMapper.xml",
+            "line": 4
+          }
+        ]
+      }
+    ],
+    "frontier": [],
+    "unresolved": [
+      {
+        "file": "src/main/resources/mapper/BoardMapper.xml",
+        "line": 34,
+        "from": "bd7bd07e6c90c4b4dc719eac73e53fafb8739b3dbfb4a6b4f0151e99ec4438cb",
+        "pattern": "sql-substitution",
+        "reason": "${}는 문자열 치환이며 허용 값/분기 안전성을 정적 인덱서가 보증하지 않음",
+        "constants": []
+      }
+    ]
+  }
+]

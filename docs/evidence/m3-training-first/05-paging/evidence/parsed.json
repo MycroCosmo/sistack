@@ -1,0 +1,11 @@
+{
+  "exceptions": [],
+  "frames": [],
+  "project_frames": [],
+  "database_codes": [],
+  "unverified": [
+    "예외 체인은 로그 구조이며 원인 확정이 아니다",
+    "예외가 없는 증상 또는 지원하지 않는 로그 형식"
+  ],
+  "mapped_frames": []
+}

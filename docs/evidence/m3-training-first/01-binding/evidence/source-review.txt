@@ -1,0 +1,39 @@
+src/main/java/kr/sistack/board/mapper/MenuMapper.java
+1: package kr.sistack.board.mapper;
+2: 
+3: import java.util.List;
+4: import org.apache.ibatis.annotations.Select;
+5: import org.apache.ibatis.annotations.Param;
+6: import kr.sistack.board.domain.Menu;
+7: 
+8: public interface MenuMapper {
+9:     @Select("SELECT LABEL, URL FROM APP_MENU WHERE ROLE_KEY = #{role} ORDER BY MENU_ORDER")
+10:     List<Menu> selectList(@Param("roleKey") String role);
+11: }
+12: 
+src/main/java/kr/sistack/board/web/LoginInterceptor.java
+18:     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+19:         HttpSession session = request.getSession(false);
+20:         UserSession user = session == null ? null : (UserSession) session.getAttribute("loginUser");
+21:         if (user == null) {
+22:             response.sendRedirect(request.getContextPath() + "/auth/login.do");
+23:             return false;
+24:         }
+25:         String route = String.valueOf(request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE));
+26:         boolean admin = route.startsWith("/code/") || route.equals("/board/form.do")
+27:             || route.equals("/board/create.do") || route.equals("/board/update.do") || route.equals("/board/delete.do");
+28:         if (admin && !"ADMIN".equals(user.getRole())) {
+29:             response.sendError(403);
+30:             return false;
+31:         }
+32:         Object csrf = session.getAttribute("csrf");
+33:         if ("POST".equals(request.getMethod()) && (!(csrf instanceof String) || !csrf.equals(request.getParameter("csrf")))) {
+34:             response.sendError(403);
+35:             return false;
+36:         }
+37:         request.setAttribute("currentUser", user);
+38:         request.setAttribute("menus", menus.selectList(user.getRole()));
+39:         return true;
+40:     }
+41: }
+42: 

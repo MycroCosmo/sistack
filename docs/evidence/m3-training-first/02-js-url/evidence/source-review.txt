@@ -1,0 +1,90 @@
+src/main/webapp/resources/board.js
+1: $(function () {
+2:   var form = $('#searchForm');
+3:   function listUrl() {
+4:     return form.attr('data-base') + '/' + 'lists' + '.do';
+5:   }
+6: 
+7:   form.on('submit', function () {
+8:     form.attr('action', listUrl());
+9:     form.find('[name=page]').val(1);
+10:   });
+11: 
+12:   $('[data-page]').on('click', function () {
+13:     form.attr('action', listUrl());
+14:     form.find('[name=page]').val($(this).attr('data-page'));
+15:     form[0].submit();
+16:   });
+17: 
+18:   $('#loadCodes').on('click', function () {
+19:     var button = $(this);
+20:     $.ajax({
+21:       url: form.attr('data-base') + '/list' + 'Json.do',
+22:       type: 'GET',
+23:       dataType: 'json',
+24:       data: {
+25:         page: form.find('[name=page]').val()
+src/main/java/kr/sistack/board/web/BoardController.java
+25: 
+26:     @InitBinder("board")
+27:     public void boardFields(WebDataBinder binder) {
+28:         binder.setAllowedFields("title", "content", "category");
+29:     }
+30: 
+31:     @InitBinder("search")
+32:     public void searchFields(WebDataBinder binder) {
+33:         binder.setAllowedFields("page", "searchType", "keyword", "startDate", "endDate", "sort");
+34:     }
+35: 
+36:     @GetMapping("/list.do")
+37:     public String list(@ModelAttribute("search") BoardSearch search, @RequestAttribute("currentUser") UserSession user, Model model) {
+38:         model.addAttribute("boards", service.list(search));
+39:         model.addAttribute("viewer", user.getName());
+40:         model.addAttribute("paging", search);
+41:         return "board/list";
+42:     }
+43: 
+44:     @GetMapping("/detail.do")
+45:     public String detail(@RequestParam("id") long id, Model model) {
+46:         model.addAttribute("board", service.get(id));
+47:         return "board/detail";
+48:     }
+49: 
+50:     @GetMapping("/form.do")
+51:     public String form(@RequestParam(value = "id", required = false) Long id, Model model) {
+52:         model.addAttribute("board", id == null ? new Board() : service.get(id));
+src/main/webapp/WEB-INF/views/board/list.jsp
+1: <%@ page contentType="text/html; charset=UTF-8" %>
+2: <!DOCTYPE html>
+3: <html lang="ko">
+4:     <head>
+5:         <title>게시판 목록</title>
+6:         <%@ include file="../common/header.jspf" %>
+7:     </head>
+8:     <body>
+9:         <main>
+10:             <%@ include file="../common/menu.jspf" %>
+11:             <h1>게시판 목록</h1>
+12:             <p>
+13:                 <c:out value="${viewer}"/>님</p>
+14:             <form id="searchForm" method="get" action="<c:url value='/board/list.do'/>" data-base="<c:url value='/board'/>">
+15:                 <input type="hidden" name="page" value="${search.page}">
+16:                 <label>검색 조건 <select name="searchType">
+17:                         <option value="title" ${search.searchType == 'title' ? 'selected' : ''}>제목</option>
+18:                         <option value="author" ${search.searchType == 'author' ? 'selected' : ''}>작성자</option>
+19:                     </select>
+20:                 </label>
+21:                 <label>검색어 <input name="keyword" maxlength="100" value="<c:out value='${search.keyword}'/>">
+22:                 </label>
+23:                 <label>시작일 <input type="date" name="startDate" value="<c:out value='${search.startDate}'/>">
+24:                 </label>
+25:                 <label>종료일 <input type="date" name="endDate" value="<c:out value='${search.endDate}'/>">
+26:                 </label>
+27:                 <label>정렬 <select name="sort">
+28:                         <option value="createdAt" ${search.sort == 'createdAt' ? 'selected' : ''}>등록일</option>
+29:                         <option value="title" ${search.sort == 'title' ? 'selected' : ''}>제목</option>
+30:                     </select>
+31:                 </label>
+32:                 <button type="submit">검색</button>
+33:             </form>
+34:             <table>

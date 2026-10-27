@@ -1,0 +1,54 @@
+> AI의 PASS는 PL/PM 승인이나 고객 검수 완료가 아닙니다.
+
+# si-debug
+
+상태: PASS (원인 분석 범위). 수정 적용 없음.
+
+## 증상 요약
+로그인하고 게시판 목록을 열면 404 오류가 떠요. 새로고침해도 똑같아요.
+
+## 원인
+- CONFIRMED · 증거 5단계 · 공존 뷰 설정에서 Thymeleaf 대상에서 board/*를 빼고 JSP에 먼저 맡겨 존재하지 않는 JSP 경로로 해석된다.
+  src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml:35, src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml:40, src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml:41
+  Controller는 board/list를 반환한다. Thymeleaf viewNames는 login,error뿐이고 JSP resolver는 order=0, viewNames=code/*,board/*다. 실제 인덱스에는 templates/board/list.html이 있고 views/board JSP는 없으며 요청은 404다.
+
+재현: 실행 — 입력 수집 때 실제 앱에서 결함을 재현했다(동결 전). 같은 패치의 새 임시 복사본을 동결 후 소스로 분석했다. 수정 적용/수정 후 검증은 미실행이다.
+
+## 원인까지의 경로
+@GetMapping(/list.do)와 board/list HTML이 있으므로 컨트롤러 경로나 HTML 파일 자체 부재가 아니다.
+JSP resolver가 먼저 board/*를 수용하므로 Thymeleaf 표현식 평가에 도달하는 08번 오류와 경로가 다르다.
+
+## 수정안
+원인을 바로잡는 최소 diff 제안이며 적용하지 않았다.
+
+```diff
+--- a/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
++++ b/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
+@@ -35,1 +35,1 @@
+-        <property name="viewNames" value="login,error"/>
++        <property name="viewNames" value="board/*,login,error"/>
+
+--- a/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
++++ b/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
+@@ -40,1 +40,1 @@
+-        <property name="order" value="0"/>
++        <property name="order" value="2"/>
+
+--- a/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
++++ b/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml
+@@ -41,1 +41,1 @@
+-        <property name="viewNames" value="code/*,board/*"/>
++        <property name="viewNames" value="code/*"/>
+```
+
+동일 패턴 확인: board/detail·form도 같은 board/* 뷰 그룹이므로 목록 외 두 화면의 resolver 선택을 확인해야 한다.
+
+## 확인 방법
+board/list/detail/form은 HTML로 200, code/list는 JSP로 200, resolver 선택과 양쪽 인코딩 회귀 확인
+
+## 확정 못 한 것
+수정안 미적용·수정 후 앱 회귀 미실행
+Java 8/11 및 JEUS/WebLogic 실환경 미검증
+
+## 다음 작업
+사용자가 수정 범위를 승인한 뒤 제안 diff 적용 및 verification 절차 실행
