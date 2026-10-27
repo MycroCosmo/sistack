@@ -12,7 +12,9 @@
   "held-out": [
     "egov-article-list",
     "egov-user-insert",
-    "egov-id-dplct-ajax"
+    "egov-id-dplct-ajax",
+    "thymeleaf-board-delete-ajax",
+    "petclinic-owner-find"
   ],
   "held_out_status": "V2_DEFECT_CONFIRMATION_RECORDED",
   "note": "학습 5건과 held-out 3건을 분리한다. 승인본·동결 구현의 첫 실행 60/66과 원본을 보존했다. 첫 보고 후 승인된 일반 결함 수정의 v2는 66/66이며 일반화 성능이 아니다. 첫 결과와 덮어쓰거나 합산하지 않는다.",
@@ -26,10 +28,13 @@
   "v2_results": "docs/evidence/m2-v2/results.json",
   "thymeleaf_training_approval": "2026-10-27 그룹별 학습 3건 승인. 기존 학습 5건·held-out 3건과 구분해 보고.",
   "thymeleaf_held_out_pending": {
-    "status": "DRAFT_GATE_UNSCORED",
-    "cases": ["thymeleaf-board-delete-ajax", "petclinic-owner-find"],
-    "report": "docs/m2.5-heldout-gate-report.md",
+    "status": "APPROVED_FIRST_RUN_PENDING",
+    "cases": [
+      "thymeleaf-board-delete-ajax",
+      "petclinic-owner-find"
+    ],
     "frozen_baseline": "docs/evidence/m2.5-heldout/baseline.json",
-    "note": "미승인 초안은 기존 held-out 배열에 등록하지 않는다. 승인 후 같은 동결 구현으로 각각 첫 실행·채점하고 원본을 보존한다."
+    "report": "docs/m2.5-heldout-first-report.md",
+    "note": "2026-10-27 사용자 검토 확장 반영·승인본 확정. screen/server 독립 보고. 동일 동결 구현으로 두 사례 첫 실행 후 수정 전 점수 GATE."
   }
 }

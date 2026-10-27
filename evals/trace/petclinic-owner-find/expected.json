@@ -1,0 +1,416 @@
+{
+  "schema_version": "1.0",
+  "review_status": "approved",
+  "preparation": {
+    "method": "source-only",
+    "collector_run": false,
+    "evaluation_run": false,
+    "implementation_revision": "fd1b93c69a64db5e54d72bb8eee0cefb19405f5b",
+    "frozen_at": "2026-10-27T08:25:46.999Z",
+    "tool_fingerprint": "8e5bdc83d9c4da2a4efee1b5d709ff1bb6126ddb9475ae9c7b3d7973a367eec0"
+  },
+  "case_id": "petclinic-owner-find",
+  "title": "PetClinic 소유주 검색 화면 → Controller",
+  "source_root": ".testbeds/spring-petclinic",
+  "source_revision": "500158f732419217507c7656904b8e6aa1bcc0d6",
+  "source_repository": "https://github.com/spring-projects/spring-petclinic.git",
+  "source_license": "Apache-2.0",
+  "source_technology": {
+    "java": "17 (pom.xml:19)",
+    "spring_boot": "4.1.0 (pom.xml:8)",
+    "thymeleaf": "spring-boot-starter-thymeleaf (pom.xml:56)",
+    "jpa": "범위 밖 (starter 선언만 확인)"
+  },
+  "selection_reason": "공식 공개 프로젝트의 검색 form → GET endpoint → Controller라는 독립 외부 화면 흐름 1건. 고정 SHA의 소스만 읽어 작성.",
+  "assumptions_and_questions": [
+    "사용자 검토 수정에 따라 확정한 승인본이다. Boot 기본값 미지원이나 private helper 경유 때문에 소스상 CONFIRMED 연결을 낮추지 않는다.",
+    "검색 화면 전체 requests/includes, GET /owners/find·/owners·/owners/new 매핑, initFindForm/processFindForm의 renders가 범위다. renders/includes/requests는 screen, maps_to는 server다.",
+    "Boot 자동 설정 진입·starter·prefix/suffix 재정의 부재·실제 파일에 따라 classpath:/templates/ + .html을 적용한다. 공식 Spring Boot MVC 설명을 함께 확인했다. 런타임 환경 override는 별도다.",
+    "findOwners.html:3의 html 루트 th:replace는 인자를 가진 layout fragment 참조다. body fragment 인자의 실제 렌더링은 실행하지 않는다.",
+    "processFindForm은 결과 없음에서 findOwners(:119), 복수 결과에서 private addPaginationModel(:129→138)을 경유해 ownersList를 반환한다. redirect 응답(:113,:125)은 보충 항목이다.",
+    "Controller 내부 helper의 뷰 반환만 확인한다. JPA Repository 메서드명·@Query·Entity·Table·SQL·DB는 구현·평가 모두 제외한다. initCreationForm의 반환 뷰 등 추가 범위는 만들지 않는다.",
+    "Java 17/Boot 4.1.0 선언을 유지하고 빌드·서버·DB는 실행하지 않는다. LICENSE.txt는 수집기 지원 확장자가 아니므로 출처 해시는 provenance_files로 보존하고 eval source_files에는 실제 근거 파일만 둔다.",
+    "승인 JSP 서버 기준선이 없으므로 parity가 아닌 screen/server로 개별 채점한다. 학습 세트/다른 사례와 합산하지 않는다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/resources/templates/owners/findOwners.html"
+      },
+      "kinds": [
+        "requests",
+        "includes"
+      ],
+      "report_group": "screen"
+    },
+    {
+      "from": {
+        "name": "GET /owners"
+      },
+      "kinds": [
+        "maps_to"
+      ],
+      "report_group": "server"
+    },
+    {
+      "from": {
+        "name": "GET /owners/find"
+      },
+      "kinds": [
+        "maps_to"
+      ],
+      "report_group": "server"
+    },
+    {
+      "from": {
+        "name": "GET /owners/new"
+      },
+      "kinds": [
+        "maps_to"
+      ],
+      "report_group": "server"
+    },
+    {
+      "from": {
+        "name": "org.springframework.samples.petclinic.owner.OwnerController#initFindForm"
+      },
+      "kinds": [
+        "renders"
+      ],
+      "report_group": "screen"
+    },
+    {
+      "from": {
+        "name": "org.springframework.samples.petclinic.owner.OwnerController#processFindForm"
+      },
+      "kinds": [
+        "renders"
+      ],
+      "report_group": "screen"
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/resources/templates/owners/findOwners.html"
+      },
+      "to": {
+        "name": "GET /owners"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/templates/owners/findOwners.html",
+          "line": 9
+        },
+        {
+          "file": "src/main/resources/templates/owners/findOwners.html",
+          "line": 14
+        },
+        {
+          "file": "src/main/resources/templates/owners/findOwners.html",
+          "line": 25
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 94
+        }
+      ],
+      "report_group": "screen"
+    },
+    {
+      "from": {
+        "name": "GET /owners"
+      },
+      "to": {
+        "name": "org.springframework.samples.petclinic.owner.OwnerController#processFindForm"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 16
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 48
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 94
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 95
+        }
+      ],
+      "report_group": "server"
+    },
+    {
+      "from": {
+        "name": "GET /owners/find"
+      },
+      "to": {
+        "name": "org.springframework.samples.petclinic.owner.OwnerController#initFindForm"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "report_group": "server",
+      "evidence": [
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 89
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 90
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "org.springframework.samples.petclinic.owner.OwnerController#initFindForm"
+      },
+      "to": {
+        "name": "src/main/resources/templates/owners/findOwners.html"
+      },
+      "kind": "renders",
+      "status": "CONFIRMED",
+      "report_group": "screen",
+      "evidence": [
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 91
+        },
+        {
+          "file": "pom.xml",
+          "line": 56
+        },
+        {
+          "file": "src/main/resources/application.properties",
+          "line": 7
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+          "line": 28
+        },
+        {
+          "file": "src/main/resources/templates/owners/findOwners.html",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/resources/templates/owners/findOwners.html"
+      },
+      "to": {
+        "name": "src/main/resources/templates/fragments/layout.html#layout"
+      },
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "report_group": "screen",
+      "evidence": [
+        {
+          "file": "src/main/resources/templates/owners/findOwners.html",
+          "line": 3
+        },
+        {
+          "file": "src/main/resources/templates/fragments/layout.html",
+          "line": 3
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "src/main/resources/templates/owners/findOwners.html"
+      },
+      "to": {
+        "name": "GET /owners/new"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "report_group": "screen",
+      "evidence": [
+        {
+          "file": "src/main/resources/templates/owners/findOwners.html",
+          "line": 29
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "GET /owners/new"
+      },
+      "to": {
+        "name": "org.springframework.samples.petclinic.owner.OwnerController#initCreationForm"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "report_group": "server",
+      "evidence": [
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 72
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "org.springframework.samples.petclinic.owner.OwnerController#processFindForm"
+      },
+      "to": {
+        "name": "src/main/resources/templates/owners/findOwners.html"
+      },
+      "kind": "renders",
+      "status": "CONFIRMED",
+      "report_group": "screen",
+      "evidence": [
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 119
+        },
+        {
+          "file": "pom.xml",
+          "line": 56
+        },
+        {
+          "file": "src/main/resources/application.properties",
+          "line": 7
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+          "line": 28
+        },
+        {
+          "file": "src/main/resources/templates/owners/findOwners.html",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "org.springframework.samples.petclinic.owner.OwnerController#processFindForm"
+      },
+      "to": {
+        "name": "src/main/resources/templates/owners/ownersList.html"
+      },
+      "kind": "renders",
+      "status": "CONFIRMED",
+      "report_group": "screen",
+      "evidence": [
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 129
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 132
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 138
+        },
+        {
+          "file": "pom.xml",
+          "line": 56
+        },
+        {
+          "file": "src/main/resources/application.properties",
+          "line": 7
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+          "line": 28
+        },
+        {
+          "file": "src/main/resources/templates/owners/ownersList.html",
+          "line": 1
+        }
+      ]
+    }
+  ],
+  "source_files": {
+    "src/main/resources/templates/owners/findOwners.html": "7a468ec3c1965741387b284280bb55830e76e9ccb971642d30107c9cb932169f",
+    "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java": "611115841f671065ca2796fbb096102d56ce6aafd20bfe9a264f0a6968cca3ff",
+    "pom.xml": "7979e9f7fa4123290fe657c75357fa8b54323d1f2b00a8e7c6f888e234e9d52d",
+    "src/main/resources/templates/fragments/layout.html": "c9897dfc448b160eb581f7c7a69c6dba85f0d8ac2e434ecd63109db304370e20",
+    "src/main/resources/templates/owners/ownersList.html": "000447a54a72d5391f82d6d683db12748aef20632f1983c897bc4e1445857160",
+    "src/main/resources/application.properties": "09aed1a412969657c0db6509a4f1ee06121f4c71fe05600c295611eca9777f12",
+    "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java": "9d99b4b59cc6e185e9a27964b24ede04180ca34211a7e19f968249ee3dac9df3",
+    "src/main/resources/application-mysql.properties": "0f70b73eef1979cbfc28843c1afd08c3dfca691deb19b66e99bfefe7d88a7de8",
+    "src/main/resources/application-postgres.properties": "751dad09e0ec5dfcb744761152c9062030cecfc4fb96af760ebd818976883287",
+    "src/main/java/org/springframework/samples/petclinic/system/WebConfiguration.java": "d9eb227f4ffcd434b2000ac30fce9b5e341f85e893c4b3536b50fbbc15384b92"
+  },
+  "approval": "2026-10-27 사용자 held-out 검토 수정 반영 후 확정·첫 실행 승인. 소스 사실을 기준으로 하며 동결 구현 미지원도 CONFIRMED 유지.",
+  "report_groups": [
+    "screen",
+    "server"
+  ],
+  "group_reporting": "동결 비교기는 parity/screen만 기본 지원하므로 report_group 메타데이터로 screen/server를 구분한다. 각 그룹을 승인 scope/edges 그대로 투영해 동일한 동결 evalTrace로 별도 채점한다. 합산 점수는 생성하지 않는다.",
+  "provenance_files": {
+    "LICENSE.txt": "10e30e9bd8834d52c72cef7f67fc0adc1c14e3e83b816ed39e0c9b9b284b27e9"
+  },
+  "configuration_basis": {
+    "prefix": "classpath:/templates/",
+    "suffix": ".html",
+    "evidence": [
+      {
+        "file": "pom.xml",
+        "line": 56
+      },
+      {
+        "file": "src/main/resources/application.properties",
+        "line": 7
+      },
+      {
+        "file": "src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java",
+        "line": 28
+      }
+    ],
+    "note": "공개 소스 기본 구성: properties 3개에 prefix/suffix 재정의 없음, 독자 view resolver/EnableWebMvc 없음, 대상 템플릿 존재. 외부 환경 override를 가정하지 않는다.",
+    "official_reference": "https://docs.spring.io/spring-boot/how-to/spring-mvc.html"
+  },
+  "supplemental_assertions": [
+    {
+      "claim": "processFindForm의 redirect:/owners 및 redirect:/owners/{id} 응답은 렌더링 파일 연결이 아니다. 보충 설명이며 점수 밖이다.",
+      "evidence": [
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 113
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 125
+        }
+      ]
+    },
+    {
+      "claim": "private addPaginationModel의 리터럴 owners/ownersList 반환을 Controller renders 근거에 포함한다. private helper 호출 자체·JPA 구간은 채점하지 않는다.",
+      "evidence": [
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 129
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 132
+        },
+        {
+          "file": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java",
+          "line": 138
+        }
+      ]
+    }
+  ]
+}
