@@ -119,3 +119,11 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - 전체 원본 골격과 보고용 요청 범위 그래프를 둘 다 남긴다. 범위 밖 오류는 별도 소스 검토 결함으로 설명하며 승인 scope 과탐 수와 혼합하지 않는다. Helper 내부 위임·응답 view·외부 ID 생성기와 뷰 기반 테이블은 보충 항목으로 보고한다.
 - 반복 메타데이터가 큰 원본 59개 파일은 UTF-8 바이트·파일별 SHA-256을 담은 gzip JSON으로 보존했다. Node 표준 라이브러리로 압축 해제·파일 해시·실제 원본 바이트 대조를 수행했다. 보고서·점수·누락은 일반 Markdown/JSON으로도 제공한다.
 - 첫 스킬 eval의 AJAX expected_sha256이 일반 마스킹으로 손상된 사실을 무결성 검사에서 확인했다. 첫 레코드를 덮어쓰거나 구현을 고치지 않고 결함 자체를 보존했다. 유효한 해시는 첫 골격 기록과 승인 정답 바이트를 대조해 요약에 별도 기록했으며 출처·마스킹된 기록값을 함께 남겼다. 연결 점수는 바뀌지 않았다.
+
+### M2 v2 — 일반 결함 수정 기준
+
+- static 호출은 import와 같은 패키지의 로컬 클래스 선언으로 연결한다. 메서드의 static 여부·인자 수·직접 파라미터 및 중첩 로컬 호출 반환 타입으로 overload를 좁힌다. 유일한 선언만 CONFIRMED이며 모호한 overload는 LIKELY, 외부 import는 external-static UNRESOLVED다. eGovFrame 메서드명이나 파일명을 규칙에 넣지 않는다.
+- JS submit은 같은 함수·같은 폼 수신자의 선행 action만 사용한다. 대입이 없으면 JSP 폼의 기본 action과 onsubmit 바인딩/폼 참조를 확인한다. 다른 함수의 action을 가져오지 않는다. href fragment/javascript:void(0)는 요청에서 제외한다.
+- XML 조건부 빈·인터셉터는 profile 상태를 함께 전파한다. 등록된 property-placeholder 위치의 spring.profiles.active/default 및 리터럴 Java System.setProperty를 해석한다. 비활성은 제외하고 미확정 조건은 reason에 적어 LIKELY로 기록한다. 임의 Java 계산과 서버 override를 실행해 추정하지 않는다. eGovFrame의 동적 Java 프로필 계산은 자동 확정 범위 밖이므로 조건부 선언은 LIKELY로 남을 수 있다.
+- 개인정보 마스킹 전에 비밀값·명시적 계좌/카드 라벨을 우선 처리한다. 그 밖의 32/40/64자 16진수와 UUID는 식별자로 보존한다. 구조화된 *_sha256/source_hash/tool_fingerprint 필드는 유효한 식별자일 때 일반 마스킹을 생략한다. 원래 개인정보 회귀 테스트도 유지한다.
+- 5개 결함에 대한 합성 실패 테스트 8개를 수정 전에 실행해 8개 모두 실패함을 확인했다. 조건부 ref 빈과 비밀 라벨 회귀도 추가 재현했다. 첫 held-out 기준선과 승인 정답은 바꾸지 않고 v2에 새 run-id를 사용한다. v2는 결함 수정 확인이며 일반화 성능 평가가 아니다.

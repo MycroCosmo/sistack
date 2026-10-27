@@ -28,12 +28,13 @@ export function collectJs(file, source, graph, { baseOffset = 0, fullSource = so
     if (end < 0) { graph.skip(at(start), 'js-braces', 'JS 함수 중괄호를 해석하지 못함'); continue; }
     const child = graph.add('js', `${file}#${m[1] || 'handler:' + at(m.index).line}`, at(m.index), { selector: m[3] || null });
     graph.edge(node, child, 'includes', [loc(node), loc(child)]);
-    blocks.push({ start, end, node: child, selector: m[3] || null });
+    blocks.push({ start, end, node: child, name: m[1], selector: m[3] || null });
   }
   const requests = [];
-  const add = (index, raw, verb) => {
-    const block = blocks.filter(b => b.start <= index && b.end >= index).at(-1);
-    requests.push({ from: block?.node || node, selector: block?.selector, raw, verb, at: at(index), page });
+  const owner = index => blocks.filter(b => b.start <= index && b.end >= index).at(-1);
+  const add = (index, raw, verb, formReceiver = null) => {
+    const block = owner(index);
+    requests.push({ from: block?.node || node, selector: block?.selector, functionName: block?.name, formReceiver, raw, verb, at: at(index), page });
   };
   for (const m of text.matchAll(/\burl\s*:\s*/g)) {
     if (!shape[m.index]?.trim()) continue;
@@ -51,15 +52,27 @@ export function collectJs(file, source, graph, { baseOffset = 0, fullSource = so
   }
   for (const m of text.matchAll(/\b(?:\w+(?:\[0\])?\.)+submit\s*\(/g)) {
     if (!shape[m.index]?.trim()) continue;
-    const before = text.slice(Math.max(0, m.index - 1200), m.index);
-    const assignments = [...before.matchAll(/\.action\s*=\s*([^;\n]+)/g)];
-    add(m.index, assignments.at(-1)?.[1] || '', 'ANY');
+    const block = owner(m.index), start = block ? block.start + 1 : 0;
+    const receiver = m[0].slice(0, m[0].lastIndexOf('submit')).replace(/\.$/, '');
+    const before = text.slice(start, m.index);
+    const assignments = [...before.matchAll(/\b((?:\w+(?:\[0\])?\.)+)action\s*=\s*([^;\n]+)/g)]
+      .filter(a => a[1].replace(/\.$/, '') === receiver && owner(start + a.index) === block);
+    add(m.index, assignments.at(-1)?.[2] || '', 'ANY', receiver);
   }
   return { file, node, text, requests, page };
 }
 
 export function linkJs(scripts, pages, graph) {
   for (const script of scripts) for (const req of script.requests) {
+    if (req.formReceiver) {
+      const pagesWithForm = pages.filter(p => req.page ? p.node.id === req.page.id : p.scripts.some(s => s.node.id === script.node.id));
+      const forms = pagesWithForm.flatMap(p => (p.forms || []).filter(f =>
+        req.formReceiver === `document.forms[${f.index}]` || req.formReceiver === `document.${f.name || f.id}` || req.functionName && req.functionName === f.handler));
+      if (!req.raw && forms.length === 1 && forms[0].routes.length === 1) {
+        connectRequest(graph, req.from, forms[0].routes[0].route, forms[0].verb, req.at, [forms[0].at, ...forms[0].routes[0].evidence]); continue;
+      }
+      if (forms.length === 1) req.verb = forms[0].verb;
+    }
     const value = literal(req.raw);
     if (value !== null) { connectRequest(graph, req.from, value.trim(), req.verb, req.at); continue; }
     const context = /^([\w$]+)\s*\+\s*(['"])(\/[^'"]*)\2$/.exec(req.raw);

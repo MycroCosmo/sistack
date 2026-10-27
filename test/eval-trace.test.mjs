@@ -24,7 +24,7 @@ async function fixture(t) {
   await save(path.join(dir, 'manifest.json'), manifest);
   await save(path.join(dir, 'evidence/trace.json'), trace);
   await save(path.join(dir, 'evidence/review.json'), { source_reviewed: true, hidden_paths: hiddenCategories });
-  await save(path.join(dir, 'evidence/stage.json'), { tool_fingerprint: 'fixture-version' });
+  await save(path.join(dir, 'evidence/stage.json'), { tool_fingerprint: 'f5ba71140b5275fb235f7686563039ec03b6cfe453bae4327f936487ff1256c1' });
   await save(path.join(dir, 'report.md'), '> AI의 PASS는 PL/PM 승인이나 고객 검수 완료가 아닙니다.\n\n## 함정\n\n합성 fixture');
   const expectedFile = path.join(dir, 'expected.json'), registry = path.join(dir, 'sets.json');
   await save(expectedFile, expected); await save(registry, { training: ['synthetic'], 'held-out': [] });
@@ -40,6 +40,9 @@ test('스킬 eval은 세트를 분리하고 원본·점수를 보존하며 첫 �
   const before = await readFile(output);
   const record = await json(output);
   assert.equal(record.dataset, 'training'); assert.deepEqual(record.raw.trace, s.trace);
+  assert.equal(record.tool_fingerprint, 'f5ba71140b5275fb235f7686563039ec03b6cfe453bae4327f936487ff1256c1');
+  assert.equal(record.expected_sha256, digest(await readFile(s.expectedFile)));
+  assert.equal(record.report_sha256, digest(await readFile(path.join(s.dir, 'report.md'))));
   await assert.rejects(evalTrace(s.dir, s.expectedFile, options), /EEXIST/);
   assert.deepEqual(await readFile(output), before);
   s.trace.edges = [];
