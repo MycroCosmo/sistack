@@ -1,0 +1,61 @@
+{
+  "exceptions": [
+    {
+      "id": 0,
+      "parent": null,
+      "relation": "root",
+      "type": "java.sql.SQLSyntaxErrorException",
+      "message": "ORA-00904: \"B\".\"CREATED_AT\": invalid identifier",
+      "log_line": 1
+    }
+  ],
+  "frames": [
+    {
+      "exception": 0,
+      "class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "method": "list",
+      "file": "BoardServiceImpl.java",
+      "line": 25,
+      "origin": "BoardServiceImpl.java:25",
+      "log_line": 2,
+      "project": true
+    }
+  ],
+  "project_frames": [
+    {
+      "exception": 0,
+      "class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "method": "list",
+      "file": "BoardServiceImpl.java",
+      "line": 25,
+      "origin": "BoardServiceImpl.java:25",
+      "log_line": 2,
+      "project": true
+    }
+  ],
+  "database_codes": [
+    "ORA-00904"
+  ],
+  "unverified": [
+    "예외 체인은 로그 구조이며 원인 확정이 아니다"
+  ],
+  "mapped_frames": [
+    {
+      "exception": 0,
+      "class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "method": "list",
+      "file": "BoardServiceImpl.java",
+      "line": 25,
+      "origin": "BoardServiceImpl.java:25",
+      "log_line": 2,
+      "project": true,
+      "candidates": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 25
+        }
+      ],
+      "status": "UNRESOLVED"
+    }
+  ]
+}

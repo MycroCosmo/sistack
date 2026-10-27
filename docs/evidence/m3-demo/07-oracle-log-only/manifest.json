@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "m3-demo-07-oracle-log-only",
+  "skill": "si-debug",
+  "created_at": "2026-10-27T14:15:56.809Z",
+  "source_revision": null,
+  "status": "PARTIAL",
+  "inputs": {
+    "symptom": "# 07-oracle-log-only\n\n테스트베드: legacy-board. Codex 자체 작성 학습 세트이며 자기 작성 편향이 있다.\n\n현장 Oracle에서만 목록이 실패합니다. 실행 DB·배포 SQL·스키마는 제공되지 않았습니다.\n\n로그는 합성 증상 예시이며 실제 실행 기록과 구분한다. 재현 절차는 ../../README.md를 따른다.\n",
+    "starts": "[\"/board/list.do\"]",
+    "package_prefix": "kr.sistack.board"
+  },
+  "evidence": [
+    {
+      "path": "evidence/diagnosis.json",
+      "level": 2,
+      "description": "소스 검토·후보 소거와 재현 한계"
+    }
+  ],
+  "unverified": [
+    "현장 Oracle의 실제 스키마·실행 SQL·배포 revision"
+  ],
+  "next_actions": [
+    "마스킹된 실행 SQL 및 컬럼 메타데이터를 요청"
+  ]
+}

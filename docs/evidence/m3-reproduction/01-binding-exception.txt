@@ -1,0 +1,12 @@
+10�� 27, 2026 11:11:13 ���� org.springframework.test.context.support.AbstractTestContextBootstrapper getDefaultTestExecutionListenerClassNames
+����: Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+10�� 27, 2026 11:11:13 ���� org.springframework.test.context.support.AbstractTestContextBootstrapper getTestExecutionListeners
+����: Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1f0f1111, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@49c386c8, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@56528192, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@6e0dec4a, org.springframework.test.context.support.DirtiesContextTestExecutionListener@96def03, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5ccddd20, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1ed1993a, org.springframework.test.context.event.EventPublishingTestExecutionListener@1f3f4916]
+10�� 27, 2026 11:11:15 ���� org.springframework.mock.web.MockServletContext log
+����: Initializing Spring TestDispatcherServlet ''
+10�� 27, 2026 11:11:15 ���� org.springframework.web.servlet.FrameworkServlet initServletBean
+����: Initializing Servlet ''
+10�� 27, 2026 11:11:15 ���� org.springframework.web.servlet.FrameworkServlet initServletBean
+����: Completed initialization in 1 ms
+M3 exception: org.mybatis.spring.MyBatisSystemException
+M3 exception: org.apache.ibatis.binding.BindingException

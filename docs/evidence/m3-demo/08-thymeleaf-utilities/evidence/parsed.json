@@ -1,0 +1,19 @@
+{
+  "exceptions": [
+    {
+      "id": 0,
+      "parent": null,
+      "relation": "root",
+      "type": "org.thymeleaf.exceptions.TemplateProcessingException",
+      "message": "Exception evaluating SpringEL expression: #request.getAttribute('viewer')",
+      "log_line": 1
+    }
+  ],
+  "frames": [],
+  "project_frames": [],
+  "database_codes": [],
+  "unverified": [
+    "예외 체인은 로그 구조이며 원인 확정이 아니다"
+  ],
+  "mapped_frames": []
+}

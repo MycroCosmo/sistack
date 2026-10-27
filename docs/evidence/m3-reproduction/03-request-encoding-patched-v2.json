@@ -1,0 +1,13 @@
+{
+  "case_id": "03-request-encoding",
+  "mode": "patched",
+  "status": "PASS",
+  "observed": {
+    "status": 200,
+    "stored_title_matches": false
+  },
+  "reproduction_level": 5,
+  "java_home": "C:/Users/Ian/.jdks/corretto-17.0.14",
+  "project": "C:\\Users\\Ian\\AppData\\Local\\Temp\\sistack-debug-X22VSr",
+  "note": "증상 재현 확인이며 원인 위치 적중 평가가 아니다."
+}

@@ -29,7 +29,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 | legacy-board | `examples/legacy-board/` (M0에서 생성) | 빌드·실행 가능한 소형 레거시 프로젝트. Spring MVC + MyBatis + JSP + jQuery, 테스트용 H2. 모든 스킬의 기본 테스트 대상 |
 | legacy-board-thymeleaf | `examples/legacy-board-thymeleaf/` (M2.5 종료) | 같은 서버 코드·Thymeleaf/JSP 공존. 학습/삭제 v2 PASS·Java 17 브라우저 삭제 확인. 첫 FAIL 보존, Java 8 런타임 BLOCKED |
 | Spring PetClinic | `.testbeds/spring-petclinic/` (고정 SHA, 소스 커밋 금지) | `500158f` 화면·Controller·기본 뷰·layout v2 PASS. 첫 FAIL 보존, JPA 제외 |
-| 버그 케이스 | `evals/debug/cases/<id>/` | legacy-board에 적용하는 버그 패치 + 증상 로그. 원본 코드는 깨끗하게 유지 |
+| 버그 케이스 | `evals/debug/cases/<id>/` | 두 legacy-board 테스트베드의 임시 복사본에만 적용하는 학습 패치 9건 + Oracle 로그 전용 1건. 자기 작성 편향 명시 |
 | eGovFrame 공통컴포넌트 | 외부 클론 (`scripts/fetch-testbed.mjs`) | 실제 규모의 공개 레거시. 인덱서·si-trace 현실성 검증. 저장소에 커밋하지 않음 |
 | 실제 업무 사례 | `evals/private/` (gitignore) | Ian이 직접 넣는 마스킹된 실제 에러·코드 사례. 자기채점 방지용 |
 
@@ -109,6 +109,8 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 
 ## M2.5 — Thymeleaf 수집기
 
+**사용자 완료 승인: 2026-10-27.** 아래 종료 검증 기록을 승인받고 M3를 별도 지시로 시작했다.
+
 **상태: 종료 — 승인 범위 구현·정적 검증·Java 17 앱 검증 완료, Java 8 런타임 BLOCKED.** 일반 규칙의 실패 테스트 후 v2를 새 run-id로 실행했다. 삭제 screen 4/4·server 9/9, PetClinic screen 6/6·server 3/3, 학습 3건·기존 JSP 8건 회귀 모두 PASS다. npm test 108/108, Java JUnit 2건·HTTP·실제 브라우저 삭제도 통과했다. 첫 FAIL/원본은 그대로 보존했고 **v2는 결함 수정 확인이며 일반화 성능이 아니다**. [M2.5 종료 보고](docs/m2.5-final-report.md)를 따른다. M3는 시작하지 않았다.
 
 **목표:** Ian의 JSP → Thymeleaf 이관 업무에서 to-be 화면의 이벤트부터 기존 서버 흐름까지 추적한다.
@@ -136,14 +138,18 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 
 ## M3 — si-debug (← pstack bug-fix, fix-root-causes)
 
+**상태: 정답 승인 GATE — 2026-10-27.** 프롬프트 보강 `87adf55` 후 si-debug·학습 10건·정답 초안을 작성했다. 최종 npm test 118/118, 실행 가능 9건의 정상·결함 HTTP 비교 및 실제 예외 타입 4건을 검증했다. 원인 위치 적중 채점은 승인 전 미실행이다. [GATE 보고](docs/m3-report.md). 실제 held-out은 동결 후 Ian이 제공하며 첫 점수는 수정 전 기준선으로 보존한다.
+
 **목표:** 스택트레이스·로그·증상으로 원인을 찾고, 근거와 수정안을 낸다.
 
 **완료 기준**
-- 버그 케이스 7건 eval: 원인 위치 적중률, 증거 단계 보고
+- 자체 학습 10건 eval: 원인 위치 적중 수·증거 단계·자기 작성 편향 보고
 - 로그 마스킹 테스트 통과
+- 스택트레이스 클래스 해시·트랜잭션 ID 보존과 세션 ID·개인정보 마스킹 회귀 통과
 - 재현 불가 케이스에서 근거 없이 단정하지 않음
+- 구현 동결 후 실제 held-out 첫 실행·점수·리비전을 비공개로 보존하고 학습과 분리 보고
 
-**[GATE]** 버그 케이스 정답 초안 승인 + Ian이 `evals/private/`에 실제 에러 사례 2~3건 추가
+**[GATE]** 버그 케이스 10건 정답 초안 승인 + 구현 동결 후 Ian이 `evals/private/`에 실제 에러 사례 2~3건 추가. 정답 승인 전 채점하지 않는다.
 
 **Ian 할 일:** 실제 업무 에러 로그를 마스킹해 넣기 (1시간)
 

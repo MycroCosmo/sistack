@@ -1,0 +1,15 @@
+{
+  "case_id": "05-paging",
+  "mode": "baseline",
+  "status": "PASS",
+  "observed": {
+    "created": 10,
+    "total": 11,
+    "second_page_status": 200,
+    "next_link": true
+  },
+  "reproduction_level": 5,
+  "java_home": "C:/Users/Ian/.jdks/corretto-17.0.14",
+  "project": "C:\\Users\\Ian\\AppData\\Local\\Temp\\sistack-debug-VgFqp0",
+  "note": "증상 재현 확인이며 원인 위치 적중 평가가 아니다."
+}
