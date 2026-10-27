@@ -1,0 +1,76 @@
+TAP version 13
+# Subtest: 스킬 eval은 세트를 분리하고 원본·점수를 보존하며 첫 결과를 덮어쓰지 않는다
+ok 1 - 스킬 eval은 세트를 분리하고 원본·점수를 보존하며 첫 결과를 덮어쓰지 않는다
+  ---
+  duration_ms: 128.2946
+  type: 'test'
+  ...
+# Subtest: 스킬 eval은 등록된 held-out이어도 미승인 초안과 낡은 소스를 채점하지 않는다
+ok 2 - 스킬 eval은 등록된 held-out이어도 미승인 초안과 낡은 소스를 채점하지 않는다
+  ---
+  duration_ms: 67.0277
+  type: 'test'
+  ...
+# Subtest: static: import·같은 패키지·중첩 반환 타입으로 로컬 static overload를 연결한다
+ok 3 - static: import·같은 패키지·중첩 반환 타입으로 로컬 static overload를 연결한다
+  ---
+  duration_ms: 106.6049
+  type: 'test'
+  ...
+# Subtest: static: 외부 import 호출은 내부를 만들지 않고 external로 기록한다
+ok 4 - static: 외부 import 호출은 내부를 만들지 않고 external로 기록한다
+  ---
+  duration_ms: 90.7683
+  type: 'test'
+  ...
+# Subtest: JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의 기본 action을 쓴다
+ok 5 - JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의 기본 action을 쓴다
+  ---
+  duration_ms: 64.503
+  type: 'test'
+  ...
+# Subtest: profile: 활성 프로필 미확정이면 빈·인터셉터를 조건이 적힌 LIKELY로 둔다
+ok 6 - profile: 활성 프로필 미확정이면 빈·인터셉터를 조건이 적힌 LIKELY로 둔다
+  ---
+  duration_ms: 79.0172
+  type: 'test'
+  ...
+# Subtest: profile: 등록된 설정의 활성 프로필로 비활성 빈·인터셉터를 제외한다
+ok 7 - profile: 등록된 설정의 활성 프로필로 비활성 빈·인터셉터를 제외한다
+  ---
+  duration_ms: 86.4487
+  type: 'test'
+  ...
+# Subtest: profile: 바깥 인터셉터가 조건부 ref 빈을 쓰는 경우도 LIKELY다
+ok 8 - profile: 바깥 인터셉터가 조건부 ref 빈을 쓰는 경우도 LIKELY다
+  ---
+  duration_ms: 77.6268
+  type: 'test'
+  ...
+# Subtest: fragment: href=\#와 javascript:void(0)는 요청이 아니며 실제 링크는 유지한다
+ok 9 - fragment: href=\#와 javascript:void(0)는 요청이 아니며 실제 링크는 유지한다
+  ---
+  duration_ms: 122.4241
+  type: 'test'
+  ...
+# Subtest: mask: 32/40/64자 16진수·UUID를 보존하면서 실제 개인정보는 마스킹한다
+ok 10 - mask: 32/40/64자 16진수·UUID를 보존하면서 실제 개인정보는 마스킹한다
+  ---
+  duration_ms: 0.2379
+  type: 'test'
+  ...
+# Subtest: eval 해시 필드는 일반 마스킹과 분리해 유효한 식별자를 보존한다
+ok 11 - eval 해시 필드는 일반 마스킹과 분리해 유효한 식별자를 보존한다
+  ---
+  duration_ms: 0.7707
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 754.9332

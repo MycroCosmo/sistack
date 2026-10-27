@@ -2,11 +2,11 @@
 
 한국 SI 개발자의 코드 흐름 파악·에러 분석·테스트·산출물 작성을 돕는 Agent Skills 모음입니다.
 
-**개발 상태: M0·M1 완료, M2 수정 전 held-out 첫 평가 기록.** 학습 5건/55개 연결과 별도로, 승인된 held-out 3건은 60/66 일치·누락 6건입니다. 사례 대응 구현 수정은 하지 않았습니다. [첫 평가 보고서](docs/m2-heldout-first-report.md) · [인덱서 사용법](docs/indexer.md)
+**개발 상태: M0·M1·M2 완료.** si-trace 일반 결함을 수정하고 첫 held-out 60/66 기준선을 보존했습니다. v2는 66/66인 결함 수정 확인이며 일반화 성능이 아닙니다. 학습 55개 연결은 모두 일치하나 정답에 없는 실제 호출 1건을 차이로 보고했습니다. [M2 종료 보고](docs/m2-final-report.md) · [첫 평가](docs/m2-heldout-first-report.md) · [인덱서 사용법](docs/indexer.md)
 
 | v0.1 예정 스킬 | 역할 | 구현 시점 |
 |---|---|---|
-| si-trace | 화면 이벤트부터 SQL·테이블까지 흐름 파악 | 구현됨, M2 GATE 대기 |
+| si-trace | 화면 이벤트부터 SQL·테이블까지 흐름 파악 | M2 완료, 활성화 2문항 미실행 |
 | si-debug | 로그·증상에서 원인과 수정안 도출 | M3 |
 | si-unit-test | 레거시 Java 단위 테스트 작성·실행 | M4 |
 | si-docs | 코드·테스트 근거로 xlsx 산출물 작성 | M5 |
@@ -39,7 +39,7 @@ node scripts/install.mjs --target codex --scope repo --dest .tmp/install-check
 
 Codex는 저장소 `.agents/skills/` 또는 사용자 `~/.agents/skills/`, Claude Code는 `.claude/skills/` 또는 `~/.claude/skills/`에 설치합니다. `--dest`는 최종 스킬 상위 폴더를 지정합니다. 기존 경로를 먼저 나열하고 중단하며, 검토 후 `--force`를 주면 같은 파일을 덮어씁니다.
 
-`si-trace`와 설치 확인용 `si-example`이 설치됩니다. 새 Codex 세션에서 `$si-trace examples/legacy-board의 /board/list.do 흐름을 추적해 줘`로 사용합니다. 산출물은 대상 프로젝트 `.sistack/runs/<run-id>/`에 남습니다. 설치본 CLI는 검증했으며 Codex 명시·자동 활성화는 아직 BLOCKED입니다. [수동 확인 절차](docs/manual-checks.md)를 참고하세요.
+`si-trace`와 설치 확인용 `si-example`이 설치됩니다. 새 Codex 세션에서 `$si-trace examples/legacy-board의 /board/list.do 흐름을 추적해 줘`로 사용합니다. 산출물은 대상 프로젝트 `.sistack/runs/<run-id>/`에 남습니다. Codex 명시 호출 PASS, 자동 활성화 1/3 PASS이며 나머지 두 문항은 미실행입니다. [수동 확인 절차](docs/manual-checks.md)를 참고하세요.
 
 ## 테스트베드
 

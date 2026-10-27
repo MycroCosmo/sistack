@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: profile: 활성 프로필 미확정이면 빈·인터셉터를 조건이 적힌 LIKELY로 둔다
+ok 1 - profile: 활성 프로필 미확정이면 빈·인터셉터를 조건이 적힌 LIKELY로 둔다
+  ---
+  duration_ms: 110.2255
+  type: 'test'
+  ...
+# Subtest: profile: 등록된 설정의 활성 프로필로 비활성 빈·인터셉터를 제외한다
+ok 2 - profile: 등록된 설정의 활성 프로필로 비활성 빈·인터셉터를 제외한다
+  ---
+  duration_ms: 85.7345
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 297.51

@@ -85,7 +85,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ───
 
 ## M2 — si-trace (← pstack `how`)
 
-**상태: PARTIAL — held-out 승인 및 수정 전 첫 평가 기록.** 학습 5건/55개와 별도로 held-out 3건/66개 중 60개 일치·누락 6건, 범위 내 과탐·상태 불일치 0건. 동결 구현과 원본·점수를 보존했으며 사례 대응 구현 수정은 하지 않았다. npm test 65건 통과. 별도 Codex 활성화 확인은 미완료. [첫 평가 보고서](docs/m2-heldout-first-report.md), [이전 GATE 기록](docs/m2-report.md).
+**상태: 완료 — 2026-10-27 일반 결함 수정 및 v2 확인.** 첫 held-out 60/66과 원본은 그대로 보존했다. v2는 66/66이며 일반화 성능이 아니다. 학습 55개 연결 일치·누락 0개, 정답에 없는 실제 Helper 호출 1건의 비교 FAIL을 설명했다. npm test 74건, manifest 8건 검증 통과. 명시 호출 PASS, 자동 활성화 1/3 PASS·2/3 미실행을 구분한다. [종료 보고서](docs/m2-final-report.md), [첫 평가 보고서](docs/m2-heldout-first-report.md), [이전 GATE 기록](docs/m2-report.md). M3는 시작하지 않았다.
 
 **목표:** "이 버튼 누르면 뭐가 실행돼?"에 근거 달린 흐름으로 답한다.
 

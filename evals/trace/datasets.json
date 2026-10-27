@@ -11,9 +11,14 @@
     "egov-user-insert",
     "egov-id-dplct-ajax"
   ],
-  "held_out_status": "FROZEN_FIRST_RUN_RECORDED",
-  "note": "학습 5건과 held-out 3건을 분리한다. 승인본·동결 구현의 첫 실행 점수와 원본을 보존했다. 해당 첫 보고 전에는 사례 대응 구현 수정을 하지 않았으며 후속 결과와 덮어쓰거나 합산하지 않는다.",
+  "held_out_status": "V2_DEFECT_CONFIRMATION_RECORDED",
+  "note": "학습 5건과 held-out 3건을 분리한다. 승인본·동결 구현의 첫 실행 60/66과 원본을 보존했다. 첫 보고 후 승인된 일반 결함 수정의 v2는 66/66이며 일반화 성능이 아니다. 첫 결과와 덮어쓰거나 합산하지 않는다.",
   "first_run_report": "docs/m2-heldout-first-report.md",
   "first_run_results": "docs/evidence/m2-heldout-first/results.json",
-  "case_tuning_performed": false
+  "case_tuning_performed": false,
+  "case_tuning_performed_scope": "승인 정답 확정부터 수정 전 첫 보고까지의 기록",
+  "v2_general_defects_fixed": true,
+  "v2_generalization_performance": false,
+  "v2_report": "docs/m2-final-report.md",
+  "v2_results": "docs/evidence/m2-v2/results.json"
 }

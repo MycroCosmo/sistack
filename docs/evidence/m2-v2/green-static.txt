@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: static: import·같은 패키지·중첩 반환 타입으로 로컬 static overload를 연결한다
+ok 1 - static: import·같은 패키지·중첩 반환 타입으로 로컬 static overload를 연결한다
+  ---
+  duration_ms: 95.7093
+  type: 'test'
+  ...
+# Subtest: static: 외부 import 호출은 내부를 만들지 않고 external로 기록한다
+ok 2 - static: 외부 import 호출은 내부를 만들지 않고 external로 기록한다
+  ---
+  duration_ms: 71.435
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 261.1341

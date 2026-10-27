@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: mask: 32/40/64자 16진수·UUID를 보존하면서 실제 개인정보는 마스킹한다
+ok 1 - mask: 32/40/64자 16진수·UUID를 보존하면서 실제 개인정보는 마스킹한다
+  ---
+  duration_ms: 1.7354
+  type: 'test'
+  ...
+# Subtest: eval 해시 필드는 일반 마스킹과 분리해 유효한 식별자를 보존한다
+ok 2 - eval 해시 필드는 일반 마스킹과 분리해 유효한 식별자를 보존한다
+  ---
+  duration_ms: 0.7056
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 93.9097

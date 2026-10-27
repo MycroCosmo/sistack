@@ -1,0 +1,27 @@
+{
+  "explicit": {
+    "run_id": "trace-list-explicit-20261027-01",
+    "status": "PASS",
+    "skill": "si-trace",
+    "path": "examples/legacy-board/.sistack/runs/trace-list-explicit-20261027-01/manifest.json",
+    "sha256": "00ce8be52bb65fb2110928876adaf34e7e2cc9988bd9b161d86c30721d3cf70c",
+    "evidence": "사용자 실제 호출 보고 + 로컬 manifest 검증; 재실행 안 함"
+  },
+  "automatic": {
+    "passed": 1,
+    "total": 3,
+    "question": "examples/legacy-board의 게시판 목록 화면 데이터는 어디서 조회돼?",
+    "run": {
+      "run_id": "trace-board-list-20261027",
+      "status": "PASS",
+      "skill": "si-trace",
+      "path": "examples/legacy-board/.sistack/runs/trace-board-list-20261027/manifest.json",
+      "sha256": "8231c888f2f717b5ec65acd810f4cde8403812d44f62691f3f792f05c46db819",
+      "evidence": "사용자 실제 호출 보고 + 로컬 manifest 검증; 재실행 안 함"
+    },
+    "unexecuted_questions": [
+      2,
+      3
+    ]
+  }
+}

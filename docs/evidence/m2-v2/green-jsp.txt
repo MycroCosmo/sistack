@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의 기본 action을 쓴다
+ok 1 - JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의 기본 action을 쓴다
+  ---
+  duration_ms: 83.2347
+  type: 'test'
+  ...
+# Subtest: fragment: href=\#와 javascript:void(0)는 요청이 아니며 실제 링크는 유지한다
+ok 2 - fragment: href=\#와 javascript:void(0)는 요청이 아니며 실제 링크는 유지한다
+  ---
+  duration_ms: 61.7593
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 241.086
