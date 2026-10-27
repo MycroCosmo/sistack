@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "run_id": "m3-training-v5-02-js-url",
+  "applied_to_temporary_copy": true,
+  "comparison": "bug.patch reverse",
+  "normalization": "CRLF→LF only; all other characters and file sets exact",
+  "compared_files": 47,
+  "different_files": [],
+  "project_unchanged": true,
+  "diagnosis_sha256": "e2773833277c6ee083fa125de95bf0d801cc722d89833f97c54f10d650612451",
+  "score_sha256": "e46e6eb37116ba12a0690355eeb7c8dbe39d49b693baf1b1a11cb96c84bb5af6",
+  "proposal_sha256": "4c17baa6fd0943687f48554485462ca10a190dea37620df49d06d5d2bfadc060",
+  "verified_at": "2026-10-27T16:28:59.808Z"
+}

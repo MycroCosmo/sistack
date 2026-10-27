@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "run_id": "m3-training-v5-06-sort-sql",
+  "applied_to_temporary_copy": true,
+  "comparison": "bug.patch reverse",
+  "normalization": "CRLF→LF only; all other characters and file sets exact",
+  "compared_files": 47,
+  "different_files": [],
+  "project_unchanged": true,
+  "diagnosis_sha256": "98d0a81c852a89b81bdcbad29645f00250a0d3ab20d77181648e2294a5fea371",
+  "score_sha256": "77353faf03fa1073af7c9bc3baf630c31a4bd074418e17442a17f1ea297439d6",
+  "proposal_sha256": "1540889df264d7464c7238876d92900b20d2da7d5d0cf8c8c83e30f187de336a",
+  "verified_at": "2026-10-27T16:29:11.431Z"
+}

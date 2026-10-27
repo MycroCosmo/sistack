@@ -1,0 +1,29 @@
+{
+  "dataset": "training",
+  "case_id": "08-thymeleaf-utilities",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+        "line": 7,
+        "hit": true
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+        "line": 7,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "6a750e53a575bcf1aa28051b0933030131acdb6b",
+  "tool_fingerprint": "b3471953796e758468c511359ca8ba3d7aade30c141e65acacd3bed33ef13fe4",
+  "phase": "first",
+  "scored_at": "2026-10-27T16:28:48.310Z",
+  "diagnosis_sha256": "87dc3e40f3d9f41b7ce71db1edd133cce880b2281b5b54f50d804e91b5b9ee98",
+  "run_id": "m3-training-v5-08-thymeleaf-utilities",
+  "expected_sha256": "89f1651234372e14fad85a76495cfe8daeb3a3d76f40f4423ef8a87efeae21f4",
+  "report_sha256": "937567b24443a3891d04bc660818d2e88c9cb7cfd35eff47d55cd4127d7765d6",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

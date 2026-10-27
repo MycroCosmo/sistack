@@ -1,0 +1,2 @@
+동일 소스 해시를 재확인하고 모든 인덱싱 소스를 읽었다. 기존 분석을 재사용한 대응 검증이며 블라인드가 아니다.
+pageSize=10일 때 total/getPageSize()는 11/10=1이다. paging.jspf:8은 현재 페이지<lastPage일 때만 다음 버튼을 만들며 service는 실제 count를 total에 넣는다. 2페이지 직접 요청은 200이다.

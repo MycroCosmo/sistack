@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "run_id": "m3-training-v5-10-fragment-encoding",
+  "applied_to_temporary_copy": true,
+  "comparison": "bug.patch reverse",
+  "normalization": "CRLF→LF only; all other characters and file sets exact",
+  "compared_files": 47,
+  "different_files": [],
+  "project_unchanged": true,
+  "diagnosis_sha256": "3f2c2cb83542a0ce9e60b5f33a72595d5d53c8963410f49e729eddd5859e4a13",
+  "score_sha256": "e08e32c57f2ef359d121ad1d6092653d2dd054a11174324e2e00a39d34eef30d",
+  "proposal_sha256": "52f58da82964bf89dbbfe9bf3b1dad57ce5d7bd979e8d5b9a1880ab92cbde59a",
+  "verified_at": "2026-10-27T16:29:17.005Z"
+}

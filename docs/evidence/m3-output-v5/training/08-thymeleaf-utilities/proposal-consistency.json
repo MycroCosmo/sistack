@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "run_id": "m3-training-v5-08-thymeleaf-utilities",
+  "applied_to_temporary_copy": true,
+  "comparison": "bug.patch reverse",
+  "normalization": "CRLF→LF only; all other characters and file sets exact",
+  "compared_files": 52,
+  "different_files": [],
+  "project_unchanged": true,
+  "diagnosis_sha256": "87dc3e40f3d9f41b7ce71db1edd133cce880b2281b5b54f50d804e91b5b9ee98",
+  "score_sha256": "3f24aafffedcedc86b6fb72c1a1c5d61f1c1c829b157034b859484d55d918592",
+  "proposal_sha256": "a4e289fe1bf772d98fa301ef69bd9baa774b73f507fc0f5bd9ec78280b288e01",
+  "verified_at": "2026-10-27T16:29:13.518Z"
+}

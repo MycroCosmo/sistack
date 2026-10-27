@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "run_id": "m3-training-v5-09-view-resolver",
+  "applied_to_temporary_copy": true,
+  "comparison": "bug.patch reverse",
+  "normalization": "CRLF→LF only; all other characters and file sets exact",
+  "compared_files": 52,
+  "different_files": [],
+  "project_unchanged": true,
+  "diagnosis_sha256": "308ee85d2ea65fdbef073035ae96e730903f7de621577aa339bf22d2547b3236",
+  "score_sha256": "b4720507fde066f111afe8f9c0bb9f479cd2f31e0fff0619cc26f7ebce17285f",
+  "proposal_sha256": "3aa97a9feb1f4bd56717071897d20604530648979c3ae42ebd3a42d5f72ca9fc",
+  "verified_at": "2026-10-27T16:29:15.654Z"
+}

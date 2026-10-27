@@ -1,0 +1,58 @@
+{
+  "source_reviewed": true,
+  "symptom": "로그인하고 게시판 목록을 열면 404 오류가 떠요. 새로고침해도 똑같아요.\n",
+  "candidates": [
+    {
+      "cause": "Thymeleaf viewNames=login,error가 board/*를 제외하고 JSP order=0, viewNames=code/*,board/*가 board/list를 먼저 받아 없는 JSP로 해석한다.",
+      "identifiers": [
+        "login,error",
+        "board/*",
+        "order=0",
+        "code/*,board/*",
+        "board/list"
+      ],
+      "status": "CONFIRMED",
+      "level": 3,
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 35
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 40
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 41
+        }
+      ],
+      "reason": "Controller는 board/list를 반환한다. Thymeleaf viewNames는 login,error뿐이고 JSP resolver는 order=0, viewNames=code/*,board/*다. 실제 인덱스에는 templates/board/list.html이 있고 views/board JSP는 없으며 요청은 404다."
+    }
+  ],
+  "eliminated": [
+    "@GetMapping(/list.do)와 board/list HTML이 있으므로 컨트롤러 경로나 HTML 파일 자체 부재가 아니다.",
+    "JSP resolver가 먼저 board/*를 수용하므로 Thymeleaf 표현식 평가에 도달하는 08번 오류와 경로가 다르다."
+  ],
+  "same_pattern": [
+    "board/detail·form도 같은 board/* 뷰 그룹이므로 목록 외 두 화면의 resolver 선택을 확인해야 한다."
+  ],
+  "verification": [
+    "board/list/detail/form은 HTML로 200, code/list는 JSP로 200, resolver 선택과 양쪽 인코딩 회귀 확인"
+  ],
+  "reproduction": {
+    "executed": false,
+    "note": "새 실행은 동일 소스 재검토와 Node 분석이다. 이전 앱 재현 증거는 별도 보존하며 이번에는 WAS/DB를 재실행하지 않았다."
+  },
+  "proposal": {
+    "diff": "diff --git a/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml b/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml\n--- a/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml\n+++ b/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml\n@@ -32,12 +32,12 @@\n         <property name=\"templateEngine\" ref=\"templateEngine\"/>\n         <property name=\"characterEncoding\" value=\"UTF-8\"/>\n         <property name=\"order\" value=\"1\"/>\n-        <property name=\"viewNames\" value=\"login,error\"/>\n+        <property name=\"viewNames\" value=\"board/*,login,error\"/>\n     </bean>\n     <bean class=\"org.springframework.web.servlet.view.InternalResourceViewResolver\">\n         <property name=\"prefix\" value=\"/WEB-INF/views/\"/>\n         <property name=\"suffix\" value=\".jsp\"/>\n-        <property name=\"order\" value=\"0\"/>\n-        <property name=\"viewNames\" value=\"code/*,board/*\"/>\n+        <property name=\"order\" value=\"2\"/>\n+        <property name=\"viewNames\" value=\"code/*\"/>\n     </bean>\n </beans>\n",
+    "note": "현재 결함 소스에서 원인을 바로잡는 제안이다. 원본과 비교해 생성하지 않았고 원본에는 적용하지 않는다."
+  },
+  "unverified": [
+    "수정 후 런타임 회귀 미실행",
+    "Java/WAS 실환경 미검증"
+  ],
+  "next_actions": [
+    "승인된 범위에서 수정 후 앱 회귀 실행"
+  ]
+}

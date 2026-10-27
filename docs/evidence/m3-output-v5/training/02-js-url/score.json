@@ -1,0 +1,24 @@
+{
+  "dataset": "training",
+  "case_id": "02-js-url",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/webapp/resources/board.js",
+        "line": 4,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "6a750e53a575bcf1aa28051b0933030131acdb6b",
+  "tool_fingerprint": "b3471953796e758468c511359ca8ba3d7aade30c141e65acacd3bed33ef13fe4",
+  "phase": "first",
+  "scored_at": "2026-10-27T16:28:45.454Z",
+  "diagnosis_sha256": "e2773833277c6ee083fa125de95bf0d801cc722d89833f97c54f10d650612451",
+  "run_id": "m3-training-v5-02-js-url",
+  "expected_sha256": "522dc12b6a7c90770124aaed1052ff0c454a6bde66a2a3410b9966ca350fa41c",
+  "report_sha256": "2d314c664c0ee85b1ae7dd200eab2514b378110770773b02b93b7d399cf46219",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

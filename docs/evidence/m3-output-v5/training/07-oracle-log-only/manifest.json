@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "m3-training-v5-07-oracle-log-only",
+  "skill": "si-debug",
+  "created_at": "2026-10-27T16:25:50.622Z",
+  "source_revision": null,
+  "status": "PARTIAL",
+  "inputs": {
+    "symptom": "회사에서 게시판을 조회하면 오류가 나요. 날짜를 넣고 검색했어요. 제 PC에서는 같은 화면이 열려요.\n",
+    "starts": "[\"/board/list.do\"]",
+    "package_prefix": "kr.sistack.board"
+  },
+  "evidence": [
+    {
+      "path": "evidence/diagnosis.json",
+      "level": 2,
+      "description": "소스 검토·후보 소거와 재현 한계"
+    }
+  ],
+  "unverified": [
+    "실제 Oracle DB 미접속·미재현",
+    "합성 로그와 실제 배포 SQL/바인딩 값 일치 여부, 세 참조 중 실패 지점 미확정"
+  ],
+  "next_actions": [
+    "승인된 환경에서 사용자가 schema/컬럼/동의어 정보를 확인하고 배포 Mapper 리비전을 제공하도록 요청"
+  ]
+}

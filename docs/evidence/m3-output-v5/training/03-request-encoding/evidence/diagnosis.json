@@ -1,0 +1,47 @@
+{
+  "source_reviewed": true,
+  "symptom": "글 쓸 때는 제목이 한글로 잘 보여요. 저장하고 다시 열어 보면 제목 글자가 깨져 있어요.\n",
+  "candidates": [
+    {
+      "cause": "CharacterEncodingFilter의 encoding=ISO-8859-1이 UTF-8 폼 요청을 잘못 해석한다.",
+      "identifiers": [
+        "ISO-8859-1",
+        "UTF-8"
+      ],
+      "status": "CONFIRMED",
+      "level": 3,
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/web.xml",
+          "line": 15
+        }
+      ],
+      "reason": "필터 매핑 /*와 forceEncoding=true는 살아 있으나 encoding 값이 ISO-8859-1이다. 폼 JSP는 UTF-8이고 저장 후 제목이 달라졌으며 요청 자체는 성공했다."
+    }
+  ],
+  "eliminated": [
+    "필터 매핑 자체 누락은 아니다. web.xml:22~25에서 모든 경로에 적용된다.",
+    "Controller create는 바인딩된 Board를 전달하며 JSP 파일은 UTF-8을 선언한다. 오류 응답/바인딩 거부에 따른 저장 실패도 아니다."
+  ],
+  "same_pattern": [
+    "같은 필터를 쓰는 게시글 수정과 한글 검색 파라미터도 영향 범위다."
+  ],
+  "verification": [
+    "한글 제목/본문 등록·수정·검색 왕복 일치, ASCII 입력과 로그인 동작 회귀 확인"
+  ],
+  "reproduction": {
+    "executed": false,
+    "note": "새 실행은 동일 소스 재검토와 Node 분석이다. 이전 앱 재현 증거는 별도 보존하며 이번에는 WAS/DB를 재실행하지 않았다."
+  },
+  "proposal": {
+    "diff": "diff --git a/src/main/webapp/WEB-INF/web.xml b/src/main/webapp/WEB-INF/web.xml\n--- a/src/main/webapp/WEB-INF/web.xml\n+++ b/src/main/webapp/WEB-INF/web.xml\n@@ -12,7 +12,7 @@\n         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>\n         <init-param>\n             <param-name>encoding</param-name>\n-            <param-value>ISO-8859-1</param-value>\n+            <param-value>UTF-8</param-value>\n         </init-param>\n         <init-param>\n             <param-name>forceEncoding</param-name>\n",
+    "note": "현재 결함 소스에서 원인을 바로잡는 제안이다. 원본과 비교해 생성하지 않았고 원본에는 적용하지 않는다."
+  },
+  "unverified": [
+    "수정 후 런타임 회귀 미실행",
+    "Java/WAS 실환경 미검증"
+  ],
+  "next_actions": [
+    "승인된 범위에서 수정 후 앱 회귀 실행"
+  ]
+}

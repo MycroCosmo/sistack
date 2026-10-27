@@ -1,0 +1,2 @@
+동일 소스 해시를 재확인하고 모든 인덱싱 소스를 읽었다. 기존 분석을 재사용한 대응 검증이며 블라인드가 아니다.
+로그의 Available parameters=[roleKey,param1]와 @Select의 #{role}, 메서드의 @Param("roleKey")를 대조했다. LoginInterceptor:38은 실패가 전파된 호출부다.

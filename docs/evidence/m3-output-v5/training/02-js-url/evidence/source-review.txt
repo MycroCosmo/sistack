@@ -1,0 +1,2 @@
+동일 소스 해시를 재확인하고 모든 인덱싱 소스를 읽었다. 기존 분석을 재사용한 대응 검증이며 블라인드가 아니다.
+list.jsp:14의 기본 action은 list.do다. 같은 폼의 submit에서 listUrl()이 lists.do를 생성하고 action을 덮어쓴다. 실제 JS 실행으로 만든 URL도 lists.do/404다.

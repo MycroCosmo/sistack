@@ -1,0 +1,77 @@
+{
+  "created_at": "2026-10-27T16:25:54.879Z",
+  "evaluation": "paired-output-contract-v5",
+  "baseline_comparison_started": false,
+  "submissions": [
+    {
+      "case_id": "01-binding",
+      "run_id": "m3-training-v5-01-binding",
+      "diagnosis_sha256": "b44cd4ed5093908ab193c3b7ffa9f95b0fb3c3b2f7304e2c98bc4a0c9e998a69",
+      "report_sha256": "ac76bae768330c532bed1daaac763d96d99ddf651399bf48e2a1712263f84a33",
+      "evidence_level": 3
+    },
+    {
+      "case_id": "02-js-url",
+      "run_id": "m3-training-v5-02-js-url",
+      "diagnosis_sha256": "e2773833277c6ee083fa125de95bf0d801cc722d89833f97c54f10d650612451",
+      "report_sha256": "2d314c664c0ee85b1ae7dd200eab2514b378110770773b02b93b7d399cf46219",
+      "evidence_level": 3
+    },
+    {
+      "case_id": "03-request-encoding",
+      "run_id": "m3-training-v5-03-request-encoding",
+      "diagnosis_sha256": "237aa141fc547c147c5f9270962b6c7181f62a0a66e9f4cece79f82a3866877d",
+      "report_sha256": "079a22a9de39d41c6e477d0ad41983f80e4bf56018035e312252cb5f21ac7599",
+      "evidence_level": 3
+    },
+    {
+      "case_id": "04-session-bypass",
+      "run_id": "m3-training-v5-04-session-bypass",
+      "diagnosis_sha256": "e9d678b3b9701fee9f76dff0c5897fe2beaf7e69108b37d2d7bd74da4cace658",
+      "report_sha256": "5d4049e5487c8d55ee75d4b2220f4fbd41d004ad45751f80329708ca47cec489",
+      "evidence_level": 3
+    },
+    {
+      "case_id": "05-paging",
+      "run_id": "m3-training-v5-05-paging",
+      "diagnosis_sha256": "571acd5e0f0b65cdcfd93c5025d0e69d841495a920a10fa11a6a4bebdb1ab5d9",
+      "report_sha256": "15848b852cead6733669eb23671c05e7836a9b71382c5d1013c2c486c4789fd1",
+      "evidence_level": 3
+    },
+    {
+      "case_id": "06-sort-sql",
+      "run_id": "m3-training-v5-06-sort-sql",
+      "diagnosis_sha256": "98d0a81c852a89b81bdcbad29645f00250a0d3ab20d77181648e2294a5fea371",
+      "report_sha256": "f676bfbc793cc7ed677948fb10868112f1e015ee09d41e8b9016d4363305caf0",
+      "evidence_level": 3
+    },
+    {
+      "case_id": "07-oracle-log-only",
+      "run_id": "m3-training-v5-07-oracle-log-only",
+      "diagnosis_sha256": "ee6642e39378f41796a7e8be16e26e7dd59d87c31bd4992f27583d73d8e30c55",
+      "report_sha256": "484f7b4db22b99a45a761d18865ccf6d3051c087cff9cdef78412cb9bbb3a167",
+      "evidence_level": 2
+    },
+    {
+      "case_id": "08-thymeleaf-utilities",
+      "run_id": "m3-training-v5-08-thymeleaf-utilities",
+      "diagnosis_sha256": "87dc3e40f3d9f41b7ce71db1edd133cce880b2281b5b54f50d804e91b5b9ee98",
+      "report_sha256": "937567b24443a3891d04bc660818d2e88c9cb7cfd35eff47d55cd4127d7765d6",
+      "evidence_level": 3
+    },
+    {
+      "case_id": "09-view-resolver",
+      "run_id": "m3-training-v5-09-view-resolver",
+      "diagnosis_sha256": "308ee85d2ea65fdbef073035ae96e730903f7de621577aa339bf22d2547b3236",
+      "report_sha256": "07453f1bebf5f5c22cb3739b34446033b9fd48475f0116c0d68d2e1ad417449e",
+      "evidence_level": 3
+    },
+    {
+      "case_id": "10-fragment-encoding",
+      "run_id": "m3-training-v5-10-fragment-encoding",
+      "diagnosis_sha256": "3f2c2cb83542a0ce9e60b5f33a72595d5d53c8963410f49e729eddd5859e4a13",
+      "report_sha256": "3eee02dd14e995598edf9358c0891b99642e56a68b8d36a5bb93bc30a2ecee32",
+      "evidence_level": 3
+    }
+  ]
+}

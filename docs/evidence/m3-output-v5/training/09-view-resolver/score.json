@@ -1,0 +1,34 @@
+{
+  "dataset": "training",
+  "case_id": "09-view-resolver",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+        "line": 35,
+        "hit": true
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+        "line": 40,
+        "hit": true
+      },
+      {
+        "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+        "line": 41,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "6a750e53a575bcf1aa28051b0933030131acdb6b",
+  "tool_fingerprint": "b3471953796e758468c511359ca8ba3d7aade30c141e65acacd3bed33ef13fe4",
+  "phase": "first",
+  "scored_at": "2026-10-27T16:28:49.128Z",
+  "diagnosis_sha256": "308ee85d2ea65fdbef073035ae96e730903f7de621577aa339bf22d2547b3236",
+  "run_id": "m3-training-v5-09-view-resolver",
+  "expected_sha256": "df93a505cb40e2863e08a4b2b23f440d0203ae22de637c87364e5a67327aa40b",
+  "report_sha256": "07453f1bebf5f5c22cb3739b34446033b9fd48475f0116c0d68d2e1ad417449e",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

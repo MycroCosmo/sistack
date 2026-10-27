@@ -1,0 +1,2 @@
+동일 소스 해시를 재확인하고 모든 인덱싱 소스를 읽었다. 기존 분석을 재사용한 대응 검증이며 블라인드가 아니다.
+setter는 createdAt/title만 허용하지만 getSortColumn은 sort를 그대로 반환한다. Mapper:34는 ${sortColumn}으로 직접 치환하며 실제 SQL과 H2 예외는 CREATEDAT 미존재를 가리킨다. title 정렬은 200이다.

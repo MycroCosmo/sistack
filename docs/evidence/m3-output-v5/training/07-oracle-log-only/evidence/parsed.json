@@ -1,0 +1,301 @@
+{
+  "exceptions": [
+    {
+      "id": 0,
+      "parent": null,
+      "relation": "root",
+      "type": "org.apache.ibatis.exceptions.PersistenceException",
+      "message": "",
+      "log_line": 2
+    },
+    {
+      "id": 1,
+      "parent": 0,
+      "relation": "cause",
+      "type": "java.sql.SQLSyntaxErrorException",
+      "message": "ORA-00904: \"B\".\"CREATED_AT\": invalid identifier",
+      "log_line": 16,
+      "elided_frames": 4
+    }
+  ],
+  "frames": [
+    {
+      "exception": 0,
+      "class": "org.apache.ibatis.exceptions.ExceptionFactory",
+      "method": "wrapException",
+      "file": "ExceptionFactory.java",
+      "line": 30,
+      "origin": "ExceptionFactory.java:30",
+      "log_line": 10,
+      "project": false
+    },
+    {
+      "exception": 0,
+      "class": "org.apache.ibatis.session.defaults.DefaultSqlSession",
+      "method": "selectList",
+      "file": "DefaultSqlSession.java",
+      "line": 156,
+      "origin": "DefaultSqlSession.java:156",
+      "log_line": 11,
+      "project": false
+    },
+    {
+      "exception": 0,
+      "class": "org.apache.ibatis.session.defaults.DefaultSqlSession",
+      "method": "selectList",
+      "file": "DefaultSqlSession.java",
+      "line": 147,
+      "origin": "DefaultSqlSession.java:147",
+      "log_line": 12,
+      "project": false
+    },
+    {
+      "exception": 0,
+      "class": "org.apache.ibatis.session.defaults.DefaultSqlSession",
+      "method": "selectList",
+      "file": "DefaultSqlSession.java",
+      "line": 142,
+      "origin": "DefaultSqlSession.java:142",
+      "log_line": 13,
+      "project": false
+    },
+    {
+      "exception": 0,
+      "class": "app.board.BoardQuery",
+      "method": "list",
+      "file": "BoardQuery.java",
+      "line": 54,
+      "origin": "BoardQuery.java:54",
+      "log_line": 14,
+      "project": false
+    },
+    {
+      "exception": 0,
+      "class": "app.board.BoardController",
+      "method": "list",
+      "file": "BoardController.java",
+      "line": 81,
+      "origin": "BoardController.java:81",
+      "log_line": 15,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.T4CTTIoer11",
+      "method": "processError",
+      "file": "T4CTTIoer11.java",
+      "line": 509,
+      "origin": "T4CTTIoer11.java:509",
+      "log_line": 18,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.T4CTTIoer11",
+      "method": "processError",
+      "file": "T4CTTIoer11.java",
+      "line": 461,
+      "origin": "T4CTTIoer11.java:461",
+      "log_line": 19,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.T4C8Oall",
+      "method": "processError",
+      "file": "T4C8Oall.java",
+      "line": 1104,
+      "origin": "T4C8Oall.java:1104",
+      "log_line": 20,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.T4CTTIfun",
+      "method": "receive",
+      "file": "T4CTTIfun.java",
+      "line": 550,
+      "origin": "T4CTTIfun.java:550",
+      "log_line": 22,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.T4CTTIfun",
+      "method": "doRPC",
+      "file": "T4CTTIfun.java",
+      "line": 268,
+      "origin": "T4CTTIfun.java:268",
+      "log_line": 23,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.T4C8Oall",
+      "method": "doOALL",
+      "file": "T4C8Oall.java",
+      "line": 655,
+      "origin": "T4C8Oall.java:655",
+      "log_line": 24,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.T4CPreparedStatement",
+      "method": "doOall8",
+      "file": "T4CPreparedStatement.java",
+      "line": 270,
+      "origin": "T4CPreparedStatement.java:270",
+      "log_line": 25,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.T4CPreparedStatement",
+      "method": "executeForDescribe",
+      "file": "T4CPreparedStatement.java",
+      "line": 802,
+      "origin": "T4CPreparedStatement.java:802",
+      "log_line": 26,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.OracleStatement",
+      "method": "executeMaybeDescribe",
+      "file": "OracleStatement.java",
+      "line": 984,
+      "origin": "OracleStatement.java:984",
+      "log_line": 27,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.OracleStatement",
+      "method": "doExecuteWithTimeout",
+      "file": "OracleStatement.java",
+      "line": 1168,
+      "origin": "OracleStatement.java:1168",
+      "log_line": 28,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.OraclePreparedStatement",
+      "method": "executeInternal",
+      "file": "OraclePreparedStatement.java",
+      "line": 3666,
+      "origin": "OraclePreparedStatement.java:3666",
+      "log_line": 29,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.OraclePreparedStatement",
+      "method": "execute",
+      "file": "OraclePreparedStatement.java",
+      "line": 3778,
+      "origin": "OraclePreparedStatement.java:3778",
+      "log_line": 30,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "oracle.jdbc.driver.OraclePreparedStatementWrapper",
+      "method": "execute",
+      "file": "OraclePreparedStatementWrapper.java",
+      "line": 1081,
+      "origin": "OraclePreparedStatementWrapper.java:1081",
+      "log_line": 31,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.executor.statement.PreparedStatementHandler",
+      "method": "query",
+      "file": "PreparedStatementHandler.java",
+      "line": 65,
+      "origin": "PreparedStatementHandler.java:65",
+      "log_line": 32,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.executor.statement.RoutingStatementHandler",
+      "method": "query",
+      "file": "RoutingStatementHandler.java",
+      "line": 80,
+      "origin": "RoutingStatementHandler.java:80",
+      "log_line": 33,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.executor.SimpleExecutor",
+      "method": "doQuery",
+      "file": "SimpleExecutor.java",
+      "line": 65,
+      "origin": "SimpleExecutor.java:65",
+      "log_line": 34,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.executor.BaseExecutor",
+      "method": "queryFromDatabase",
+      "file": "BaseExecutor.java",
+      "line": 336,
+      "origin": "BaseExecutor.java:336",
+      "log_line": 35,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.executor.BaseExecutor",
+      "method": "query",
+      "file": "BaseExecutor.java",
+      "line": 158,
+      "origin": "BaseExecutor.java:158",
+      "log_line": 36,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.executor.CachingExecutor",
+      "method": "query",
+      "file": "CachingExecutor.java",
+      "line": 110,
+      "origin": "CachingExecutor.java:110",
+      "log_line": 37,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.executor.CachingExecutor",
+      "method": "query",
+      "file": "CachingExecutor.java",
+      "line": 90,
+      "origin": "CachingExecutor.java:90",
+      "log_line": 38,
+      "project": false
+    },
+    {
+      "exception": 1,
+      "class": "org.apache.ibatis.session.defaults.DefaultSqlSession",
+      "method": "selectList",
+      "file": "DefaultSqlSession.java",
+      "line": 154,
+      "origin": "DefaultSqlSession.java:154",
+      "log_line": 39,
+      "project": false
+    }
+  ],
+  "project_frames": [],
+  "database_codes": [
+    "ORA-00904"
+  ],
+  "unverified": [
+    "예외 체인은 로그 구조이며 원인 확정이 아니다"
+  ],
+  "mapped_frames": []
+}

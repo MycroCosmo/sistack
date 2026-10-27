@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "run_id": "m3-training-v5-04-session-bypass",
+  "applied_to_temporary_copy": true,
+  "comparison": "bug.patch reverse",
+  "normalization": "CRLF→LF only; all other characters and file sets exact",
+  "compared_files": 47,
+  "different_files": [],
+  "project_unchanged": true,
+  "diagnosis_sha256": "e9d678b3b9701fee9f76dff0c5897fe2beaf7e69108b37d2d7bd74da4cace658",
+  "score_sha256": "3598b91ba94258278abb02ebc5811f72a910379cf511ea01add47e074ae80f83",
+  "proposal_sha256": "78f3a5b1e389f97c473f60eac2ad9c684e83ce86655c620294cc9813ac1237a6",
+  "verified_at": "2026-10-27T16:29:05.916Z"
+}

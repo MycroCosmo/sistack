@@ -1,0 +1,38 @@
+[
+  {
+    "case_id": "heldout-01",
+    "locations": [
+      {
+        "file": "src/main/webapp/WEB-INF/templates/board/form.html",
+        "line": 16,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "proposal_consistency": "FAIL"
+  },
+  {
+    "case_id": "heldout-02",
+    "locations": [
+      {
+        "file": "src/main/resources/mapper/BoardMapper.xml",
+        "line": 32,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "proposal_consistency": "FAIL"
+  },
+  {
+    "case_id": "heldout-03",
+    "locations": [
+      {
+        "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+        "line": 30,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "proposal_consistency": "FAIL"
+  }
+]

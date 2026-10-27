@@ -1,0 +1,6 @@
+{
+  "restored_cases": 10,
+  "diagnosis_changed": false,
+  "method": "동일 결함 소스를 재생성해 stage 소스 해시를 검증한 뒤 이미 보존한 실행 산출물을 그대로 복원",
+  "scoring_attempt_before_recovery": "입력 소스 경로 확인 중 중단. 채점 결과·원본 비교 생성 전"
+}

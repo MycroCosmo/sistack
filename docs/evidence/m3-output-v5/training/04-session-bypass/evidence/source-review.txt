@@ -1,0 +1,2 @@
+동일 소스 해시를 재확인하고 모든 인덱싱 소스를 읽었다. 기존 분석을 재사용한 대응 검증이며 블라인드가 아니다.
+인터셉터 매핑은 /code/**와 logout뿐이다. currentUser는 LoginInterceptor:37에서만 넣는데 Controller는 required=false로 받아 :39에서 user.getName()을 실행한다. 익명 요청의 실제 NPE도 그 줄을 가리킨다.

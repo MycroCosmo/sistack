@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "run_id": "m3-training-v5-05-paging",
+  "applied_to_temporary_copy": true,
+  "comparison": "bug.patch reverse",
+  "normalization": "CRLF→LF only; all other characters and file sets exact",
+  "compared_files": 47,
+  "different_files": [],
+  "project_unchanged": true,
+  "diagnosis_sha256": "571acd5e0f0b65cdcfd93c5025d0e69d841495a920a10fa11a6a4bebdb1ab5d9",
+  "score_sha256": "480e6c96c8453f96abdd5f8b81a29e11505665409860e542e280be558c334356",
+  "proposal_sha256": "273a4768287c223ac9e428b23d5b615f929840c816e4dacb1668dc29ecf7644b",
+  "verified_at": "2026-10-27T16:29:08.804Z"
+}

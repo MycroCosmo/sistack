@@ -1,0 +1,30 @@
+{
+  "dataset": "training",
+  "case_id": "04-session-bypass",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+        "start": 9,
+        "end": 13,
+        "hit": true
+      },
+      {
+        "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+        "line": 37,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "6a750e53a575bcf1aa28051b0933030131acdb6b",
+  "tool_fingerprint": "b3471953796e758468c511359ca8ba3d7aade30c141e65acacd3bed33ef13fe4",
+  "phase": "first",
+  "scored_at": "2026-10-27T16:28:46.176Z",
+  "diagnosis_sha256": "e9d678b3b9701fee9f76dff0c5897fe2beaf7e69108b37d2d7bd74da4cace658",
+  "run_id": "m3-training-v5-04-session-bypass",
+  "expected_sha256": "f9a3645589d063c4bd666b9ad61a4f7014d25425ba9cfdbc6476797f5f3a8ea3",
+  "report_sha256": "5d4049e5487c8d55ee75d4b2220f4fbd41d004ad45751f80329708ca47cec489",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

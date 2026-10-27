@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "frozen_files": 190,
+  "previous_training_and_freezes_unchanged": true,
+  "first_heldout_originals_unchanged": true,
+  "examples_unchanged": true,
+  "source_projects_unchanged": true,
+  "diagnoses_scored_before_comparison": true,
+  "new_app_execution": false
+}

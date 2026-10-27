@@ -1,0 +1,34 @@
+{
+  "dataset": "training",
+  "case_id": "07-oracle-log-only",
+  "score": {
+    "locations": [
+      {
+        "file": "src/main/resources/mapper/BoardMapper.xml",
+        "line": 23,
+        "hit": true
+      },
+      {
+        "file": "src/main/resources/mapper/BoardMapper.xml",
+        "line": 26,
+        "hit": true
+      },
+      {
+        "file": "src/main/resources/mapper/BoardMapper.xml",
+        "line": 34,
+        "hit": true
+      }
+    ],
+    "hit": true,
+    "extra_locations": []
+  },
+  "frozen_revision": "6a750e53a575bcf1aa28051b0933030131acdb6b",
+  "tool_fingerprint": "b3471953796e758468c511359ca8ba3d7aade30c141e65acacd3bed33ef13fe4",
+  "phase": "first",
+  "scored_at": "2026-10-27T16:28:47.430Z",
+  "diagnosis_sha256": "ee6642e39378f41796a7e8be16e26e7dd59d87c31bd4992f27583d73d8e30c55",
+  "run_id": "m3-training-v5-07-oracle-log-only",
+  "expected_sha256": "abb7a83499acb2e53d478613651507e31fbf95b1278f79ad117994ae09d513f4",
+  "report_sha256": "484f7b4db22b99a45a761d18865ccf6d3051c087cff9cdef78412cb9bbb3a167",
+  "caveat": "Codex 자기 작성 학습 세트. 일반화 성능이 아니다."
+}

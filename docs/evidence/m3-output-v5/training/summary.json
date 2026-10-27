@@ -1,0 +1,209 @@
+{
+  "dataset": "training",
+  "evaluation": "paired-output-contract-v5",
+  "frozen_revision": "6a750e53a575bcf1aa28051b0933030131acdb6b",
+  "tool_fingerprint": "b3471953796e758468c511359ca8ba3d7aade30c141e65acacd3bed33ef13fe4",
+  "cases": 10,
+  "hit_cases": 10,
+  "location_items": 16,
+  "hit_locations": 16,
+  "proposal_cases": 9,
+  "proposal_pass": 9,
+  "proposal_fail": 0,
+  "proposal_unresolved": 1,
+  "caveat": "자기 작성 학습 10건의 대응 검증. 블라인드/일반화 성능이 아니다. 새 앱 실행 없음.",
+  "rows": [
+    {
+      "case_id": "01-binding",
+      "run_id": "m3-training-v5-01-binding",
+      "dataset": "training",
+      "locations": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/MenuMapper.java",
+          "line": 10,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "evidence_level": 3,
+      "proposal_consistency": "PASS"
+    },
+    {
+      "case_id": "02-js-url",
+      "run_id": "m3-training-v5-02-js-url",
+      "dataset": "training",
+      "locations": [
+        {
+          "file": "src/main/webapp/resources/board.js",
+          "line": 4,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "evidence_level": 3,
+      "proposal_consistency": "PASS"
+    },
+    {
+      "case_id": "03-request-encoding",
+      "run_id": "m3-training-v5-03-request-encoding",
+      "dataset": "training",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/web.xml",
+          "line": 15,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "evidence_level": 3,
+      "proposal_consistency": "PASS"
+    },
+    {
+      "case_id": "04-session-bypass",
+      "run_id": "m3-training-v5-04-session-bypass",
+      "dataset": "training",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "start": 9,
+          "end": 13,
+          "hit": true
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 37,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "evidence_level": 3,
+      "proposal_consistency": "PASS"
+    },
+    {
+      "case_id": "05-paging",
+      "run_id": "m3-training-v5-05-paging",
+      "dataset": "training",
+      "locations": [
+        {
+          "file": "src/main/java/kr/sistack/board/common/Pagination.java",
+          "line": 39,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "evidence_level": 3,
+      "proposal_consistency": "PASS"
+    },
+    {
+      "case_id": "06-sort-sql",
+      "run_id": "m3-training-v5-06-sort-sql",
+      "dataset": "training",
+      "locations": [
+        {
+          "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+          "line": 78,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "evidence_level": 3,
+      "proposal_consistency": "PASS"
+    },
+    {
+      "case_id": "07-oracle-log-only",
+      "run_id": "m3-training-v5-07-oracle-log-only",
+      "dataset": "training",
+      "locations": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 23,
+          "hit": true
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 26,
+          "hit": true
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 34,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "evidence_level": 2,
+      "proposal_consistency": "UNRESOLVED"
+    },
+    {
+      "case_id": "08-thymeleaf-utilities",
+      "run_id": "m3-training-v5-08-thymeleaf-utilities",
+      "dataset": "training",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+          "line": 7,
+          "hit": true
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+          "line": 7,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "evidence_level": 3,
+      "proposal_consistency": "PASS"
+    },
+    {
+      "case_id": "09-view-resolver",
+      "run_id": "m3-training-v5-09-view-resolver",
+      "dataset": "training",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 35,
+          "hit": true
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 40,
+          "hit": true
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 41,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "evidence_level": 3,
+      "proposal_consistency": "PASS"
+    },
+    {
+      "case_id": "10-fragment-encoding",
+      "run_id": "m3-training-v5-10-fragment-encoding",
+      "dataset": "training",
+      "locations": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+          "start": 1,
+          "end": 1,
+          "hit": true
+        }
+      ],
+      "hit": true,
+      "extra_locations": [],
+      "evidence_level": 3,
+      "proposal_consistency": "PASS"
+    }
+  ]
+}

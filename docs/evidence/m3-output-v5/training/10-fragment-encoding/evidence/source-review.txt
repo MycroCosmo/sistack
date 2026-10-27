@@ -1,0 +1,2 @@
+동일 소스 해시를 재확인하고 모든 인덱싱 소스를 읽었다. 기존 분석을 재사용한 대응 검증이며 블라인드가 아니다.
+paging.jspf는 한글을 포함하지만 첫 줄이 div이고 pageEncoding이 없다. header.jspf는 UTF-8을 선언하며 list.jsp:70이 paging.jspf를 정적으로 포함한다. 실제 HTTP 본문은 정상 한글이고 조각만 불일치한다.

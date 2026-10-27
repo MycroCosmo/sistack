@@ -1,0 +1,2 @@
+동일 소스 해시를 재확인하고 모든 인덱싱 소스를 읽었다. 기존 분석을 재사용한 대응 검증이며 블라인드가 아니다.
+MyBatis selectList의 ? 바인딩 SQL은 같은 식별자를 세 번 참조한다. XML filters의 23/26행과 sortColumn이 b.CREATED_AT을 반환해 삽입되는 34행이 대응한다. Oracle 로그는 합성이고 실제 배포 SQL/스키마가 없다.

@@ -1,0 +1,6 @@
+{
+  "status": "UNRESOLVED",
+  "run_id": "m3-training-v5-07-oracle-log-only",
+  "reason": "원인 미확정으로 diff 보류. 정합성 분모에서 제외",
+  "score_sha256": "31d1e1c24de8022387e8ae5afc9db1d981b8aab9a21aabe58b66e277a8011fd4"
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "run_id": "m3-training-v5-03-request-encoding",
+  "applied_to_temporary_copy": true,
+  "comparison": "bug.patch reverse",
+  "normalization": "CRLF→LF only; all other characters and file sets exact",
+  "compared_files": 47,
+  "different_files": [],
+  "project_unchanged": true,
+  "diagnosis_sha256": "237aa141fc547c147c5f9270962b6c7181f62a0a66e9f4cece79f82a3866877d",
+  "score_sha256": "a4dee458c16b903857ec704b3f89b0f599774c75a506af8f55a272d7d1304ddf",
+  "proposal_sha256": "816b72f79d6b1be30d83abab4b92e2d37c0bc977b63b9d8ea623aab0dc02bb5d",
+  "verified_at": "2026-10-27T16:29:02.920Z"
+}
