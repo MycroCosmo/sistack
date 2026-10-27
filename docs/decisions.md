@@ -1,5 +1,12 @@
 # 설계 결정
 
+## 2026-10-27 — Thymeleaf 수집기 구현·합성 검증
+
+- 승인된 학습 3건을 expected 승인본과 training 등록으로 확정했다. `.html` 수집, Thymeleaf URL·fragment·Layout Dialect·inline JS·data URL 소비와 XML 뷰 판정을 공통 인덱서의 별도 모듈로 추가했다. 프로젝트/메서드명을 규칙에 하드코딩하지 않는다.
+- checkExistence=true·viewNames 무제한의 파일 존재/부재 fallback과 동순위·동적 prefix·조건 미확정 경계를 합성 검증했다. Java/Boot의 임의 자동 설정을 실행해 뷰를 추정하지 않는다. Thymeleaf 3.0 #request/#session 식은 실행하지 않고 정적 URL 부분과 동적 베이스를 구분한다. 렌더링 기준은 기존 3.1.5 검증으로 유지한다.
+- fragment 인자를 동적 템플릿명으로 오인한 합성 실패 3건을 재현하고 이름/인자 분리에서 수정했다. fragment 내부 요청의 소속과 동일 파일 fragment 참조도 검사했다. 레이아웃 본문은 화면별 layout_bindings와 decorates 근거로 남겨 여러 화면의 본문이 전역 연결로 섞이지 않게 했다.
+- 새 합성 테스트 15건과 승인 학습 3건을 실제 수집하는 테스트 1건을 추가했다. 기존 단독 설치 테스트도 HTML 요청을 실제 CLI로 확인하도록 확장했다. `npm test`는 **97/97 PASS**, 승인 정답 11건·스킬 형식·공통 모듈 복사본 검사도 통과했다. 아직 held-out 새 2건의 흐름은 탐색하지 않았다.
+
 ## 2026-10-27 — Thymeleaf 그룹별 채점 구조 재검토
 
 - 사용자가 기존 검색 17개·등록 14개 주 연결을 승인하고 보충 항목을 실제 채점에 포함하도록 지시했다. 기존 주 연결 중 화면 출발 requests 1개·2개는 screen으로, 순수 서버 연결 16개·12개는 parity로 분류했다. parity_reference의 승인 JSP 정답 SHA-256과 from/to/kind/status를 check-expected에서 검증하며 parity 삭제·변형도 차단한다.

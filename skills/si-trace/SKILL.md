@@ -1,8 +1,8 @@
 ---
 name: si-trace
-description: "JSP 화면, 버튼, URL, Controller 또는 테이블에서 시작해 Service·Mapper·SQL까지 실행 흐름을 소스 근거로 추적한다. '이 화면 데이터 어디서 조회돼?', '이 버튼 누르면 뭐가 실행돼?', '이 메뉴 코드 흐름 정리해 줘' 같은 한국 SI 레거시 코드 분석 요청에 사용한다."
+description: "JSP·Thymeleaf 화면, 버튼, URL, Controller 또는 테이블에서 시작해 Service·Mapper·SQL까지 실행 흐름을 소스 근거로 추적한다. '이 화면 데이터 어디서 조회돼?', '이 버튼 누르면 뭐가 실행돼?', 'Thymeleaf로 이관한 화면 흐름 정리해 줘' 같은 한국 SI 코드 분석 요청에 사용한다."
 license: MIT
-compatibility: "Node.js 18 이상, 로컬 Java/Spring/JSP/MyBatis 소스. DB 접속 불필요."
+compatibility: "Node.js 18 이상, 로컬 Java/Spring/JSP/Thymeleaf/MyBatis 소스. DB 접속 불필요."
 ---
 
 # SI 코드 흐름 추적
@@ -18,7 +18,7 @@ compatibility: "Node.js 18 이상, 로컬 Java/Spring/JSP/MyBatis 소스. DB 접
    URL·JSP·버튼 handler·전체 클래스#메서드를 `--from`으로, 테이블을 `--to`로 지정한다.
    독립 시작점이 여러 개면 같은 옵션을 반복한다. 끊긴 경로 사이를 임의로 이어 붙이지 않는다.
 2. 빌드 설정에서 Java/Spring/SQL 매퍼 버전을 확인한다. 해당 기술 참고자료만 읽는다.
-   [Spring](references/spring-mvc.md), [매퍼](references/mybatis-ibatis.md), [화면](references/jsp-jquery.md).
+   [Spring](references/spring-mvc.md), [매퍼](references/mybatis-ibatis.md), [JSP](references/jsp-jquery.md), [Thymeleaf](references/thymeleaf.md).
 3. 이 SKILL.md가 있는 실제 설치 폴더의 [실행 도구](scripts/trace.mjs)를 호출한다.
 
    ```sh

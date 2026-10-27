@@ -1,11 +1,14 @@
 # 지원 범위와 한계
 
-## M2.5 진행 중 — 분석 문법과 렌더링 버전
+## M2.5 — Thymeleaf 정적 수집
 
 - 테스트베드 렌더링 검증 기준은 Thymeleaf **3.1.5.RELEASE**다. 수집기 요구 범위에는 Thymeleaf 3.0 문법과 3.1에서 제거된 `#request`·`#response`·`#session`·`#servletContext`를 포함하지만, 해당 식을 실행하거나 3.1에서 렌더링 가능하다고 간주하지 않는다. 정적 부분만 확정하고 런타임 값 의존은 미확정으로 남긴다.
-- 뷰 판정은 viewNames 방식과 `checkExistence=true`·viewNames 무제한일 때의 파일 존재/fallback 방식을 구별한다. 테스트베드는 viewNames를 사용하고 checkExistence 패턴은 수집기 구현 단계의 합성 테스트 대상이다.
-- viewNames 공존 테스트베드는 구축했고 JDK 17의 JUnit·로컬 HTTP·브라우저에서 3.1.5 렌더링을 확인했다. Java 8 런타임은 구성된 환경에 없어 BLOCKED다. 현재 검색·등록·독립 공존 3건의 그룹별 채점 구조 승인 대기이며 위 수집기 지원·합성 테스트의 완료를 주장하지 않는다. 학습 정답 승인 이후 구현한다.
-- `renders`·`decorates`·기존 `requests`/`includes`의 screen 채점 계약과 parity/screen 분리 비교기는 구현했다. 실제 Thymeleaf 수집기는 아직 없으므로 새 학습 사례의 그룹별 일치 점수는 미실행이다. 기존 승인 8건 회귀는 보존 trace에 같은 승인 정답을 입력한 비교기 호환성 검증이다.
+- `.html`의 th:action, th:href/th:src URL 식, 경로 변수·쿼리, 정적 이름의 th:replace/insert/include, layout:decorate/fragment, inline JavaScript URL, data URL의 외부 JS 소비를 수집한다. fragment 내부 요청과 같은 파일의 fragment도 연결한다. 레이아웃 본문은 layout_bindings와 decorates 근거에 남기며 여러 화면의 본문을 전역 includes로 연결하지 않는다.
+- 뷰 판정은 XML bean 참조의 resolver order·viewNames·prefix/suffix와 정적 파일 존재에 한정한다. checkExistence=true·viewNames 무제한일 때의 존재/fallback을 합성 검증했다. 동순위·조건 미확정·동적 prefix는 LIKELY다. 임의 Java 설정·Spring Boot 자동 설정·캐시·커스텀 resolver·다중 templateResolver의 복잡한 선택을 실제 컨테이너처럼 실행하지 않는다.
+- 3.0 유틸 객체가 쿼리 값에 있어도 정적 경로는 읽고, #request.contextPath와 단일 리터럴 루트 경로 조합을 구별한다. #session 등에서 URL 베이스를 얻는 경우는 UNRESOLVED다. 유틸 객체의 임의 메서드 결과나 사용자 값을 실행·추론하지 않는다.
+- data URL은 포함된 JS의 리터럴 ID 선택자(쉼표로 여러 ID 가능), .on 이벤트, this 또는 단일 $(this) 별칭, data/attr/dataset 소비에 한정한다. 복잡한 이벤트 위임·클래스 선택자·함수 간 별칭·동적 속성명·JS 재할당/캐시 상태는 완전 분석하지 않는다. 미사용 data 속성을 요청으로 세지 않는다. fragment에 들어 있는 data 요소의 모든 렌더링 문맥 전파도 보장하지 않는다.
+- inline JavaScript는 자연 템플릿 주석의 URL과 fallback을 분리하고 단일 리터럴 URL 변수만 추적한다. 임의 JS/OGNL/SpEL 파서가 아니며 복잡한 문자열·리터럴 아닌 동적 URL·템플릿 선택자는 미확정이다. HTML 태그/fragment 범위도 제한된 구조 스캐너이므로 깨진 HTML의 브라우저 복구 동작을 재현하지 않는다.
+- viewNames 공존 테스트베드의 JDK 17·3.1.5 렌더링은 앞선 검증 기록을 따른다. Java 8 런타임은 구성된 환경에 없어 BLOCKED다. 이번 수집기 검증을 실제 앱·DB 재실행이나 3.0 렌더링 성공으로 표현하지 않는다. 승인 정답은 학습에 사용한 자기 적용 평가이며 일반화 성능이 아니다.
 
 ## 기존 지원 범위
 

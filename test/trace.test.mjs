@@ -98,4 +98,10 @@ test('si-trace 폴더만 복사해 CLI를 실행해도 상위 저장소 없이 �
   const result = spawnSync(process.execPath, [path.join(installed, 'scripts/trace.mjs'), 'prepare', target, '--to', 'T', '--run-id', 'standalone'], { cwd: root, encoding: 'utf8', windowsHide: true });
   assert.equal(result.status, 0, result.stderr); assert.ok(JSON.parse(result.stdout).edges > 0);
   assert.deepEqual(validateManifest(await json(path.join(target, '.sistack/runs/standalone/manifest.json'))), []);
+  await writeFile(path.join(target, 'page.html'), '<form method="post" th:action="@{/go}"></form>');
+  await writeFile(path.join(target, 'C.java'), '@Controller\npublic class C {\n@PostMapping("/go")\npublic void go() {}\n}');
+  const html = spawnSync(process.execPath, [path.join(installed, 'scripts/trace.mjs'), 'prepare', target, '--from', 'page.html', '--run-id', 'standalone-html'], { cwd: root, encoding: 'utf8', windowsHide: true });
+  assert.equal(html.status, 0, html.stderr);
+  const graph = await json(path.join(target, '.sistack/runs/standalone-html/evidence/index-query.json'));
+  assert.ok(graph.nodes.some(n => n.name === 'POST /go')); assert.ok(graph.edges.some(e => e.kind === 'requests'));
 });

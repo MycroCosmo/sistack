@@ -34,7 +34,7 @@ export function collectJs(file, source, graph, { baseOffset = 0, fullSource = so
   const owner = index => blocks.filter(b => b.start <= index && b.end >= index).at(-1);
   const add = (index, raw, verb, formReceiver = null) => {
     const block = owner(index);
-    requests.push({ from: block?.node || node, selector: block?.selector, functionName: block?.name, formReceiver, raw, verb, at: at(index), page });
+    requests.push({ from: block?.node || node, selector: block?.selector, functionName: block?.name, formReceiver, raw, verb, at: at(index), offset: index, page });
   };
   for (const m of text.matchAll(/\burl\s*:\s*/g)) {
     if (!shape[m.index]?.trim()) continue;
@@ -64,6 +64,7 @@ export function collectJs(file, source, graph, { baseOffset = 0, fullSource = so
 
 export function linkJs(scripts, pages, graph) {
   for (const script of scripts) for (const req of script.requests) {
+    if (req.handled) continue;
     if (req.formReceiver) {
       const pagesWithForm = pages.filter(p => req.page ? p.node.id === req.page.id : p.scripts.some(s => s.node.id === script.node.id));
       const forms = pagesWithForm.flatMap(p => (p.forms || []).filter(f =>
