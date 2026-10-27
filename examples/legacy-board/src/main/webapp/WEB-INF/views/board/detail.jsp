@@ -3,6 +3,9 @@
 <html lang="ko">
     <head>
         <title>게시글 상세</title>
+        <script>
+            var ctx = '${pageContext.request.contextPath}';
+        </script>
         <%@ include file="../common/header.jspf" %>
     </head>
     <body>

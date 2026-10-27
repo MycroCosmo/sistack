@@ -47,7 +47,7 @@ $(function () {
     var button = deleteForm.find('button');
     button.prop('disabled', true);
     $.ajax({
-      url: deleteForm.attr('data-base') + '/delete' + '.do',
+      url: ctx + '/board/delete.do',
       type: 'POST',
       dataType: 'json',
       data: {

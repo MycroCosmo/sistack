@@ -58,3 +58,9 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - 브라우저 확인 중 공통 JSP 조각의 한글이 ISO 기본 인코딩으로 해석되는 기존 문제를 재현했다. 각 jspf에 pageEncoding=UTF-8을 명시하고 smoke에 로그아웃·페이징 한글 확인을 추가했다.
 - Oracle DDL의 물리 컬럼명은 영문을 유지하고 COMMENT에 한글 논리명을 기록한다. H2 schema.sql은 변경하지 않는다. prod datasource는 globals.properties의 자리표시자만 참조한다. Oracle 드라이버·실제 접속·DDL 실행은 추가하지 않았다. Jetty는 local 프로필을 유지한다.
 - modern-board는 v0.2 백로그 한 줄만 추가했다. 구현하지 않았다.
+
+## 2026-10-27 — M0 승인·마무리
+
+- 사용자가 legacy-board 구조를 승인하고 M0 완료를 지시했다. M1에는 착수하지 않는다.
+- 상세 JSP에서 contextPath를 ctx로 선언하고 삭제 AJAX는 ctx + '/board/delete.do'로 호출한다. SI에서 흔한 확정 가능한 연결 패턴을 추가하며 공통코드 AJAX 문자열 조합은 함정으로 유지한다.
+- 함정 목록은 설계 자료이며 구조 승인을 M1 eval 정답 승인으로 확대하지 않는다. 최종 재실행 결과는 m0-final-report.md에 기록한다.

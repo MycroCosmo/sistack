@@ -7,6 +7,7 @@
 | 패턴 | 위치 | 검토할 내용 |
 |---|---|---|
 | JS 문자열 조합 URL | `src/main/webapp/resources/board.js:3` | 화면 data-base와 list + .do 조합; 게시판·공통코드 화면에서 사용 |
+| contextPath 변수 + 리터럴 경로(확정 가능) | `src/main/webapp/WEB-INF/views/board/detail.jsp:7`, `src/main/webapp/resources/board.js:50`, `src/main/java/kr/sistack/board/web/BoardController.java:68` | JSP의 ctx 선언 → ctx + '/board/delete.do' → Controller 클래스·메서드 매핑을 함께 확인하면 연결 확정 가능. 공통코드 AJAX의 문자열 조합 URL과 구분 |
 | 다른 클래스의 동명 메서드 | `src/main/java/kr/sistack/board/web/BoardController.java:37`, `src/main/java/kr/sistack/board/web/CommonCodeController.java:26` | 같은 list 이름을 클래스·매핑·인자로 구분 |
 | 공통 페이징 | `src/main/java/kr/sistack/board/common/Pagination.java:3`, `src/main/webapp/WEB-INF/views/common/paging.jspf:2` | 두 목록 화면에서 공유하는 Java·JSP |
 | 공유 SQL include | `src/main/resources/mapper/BoardMapper.xml:31`, `src/main/resources/mapper/CommonCode.xml:5`, `src/main/resources/mapper/CommonSql.xml:4` | 다른 namespace의 include 및 BoardMapper 내부 filters 구분 |
@@ -17,7 +18,7 @@
 | XML·어노테이션 Mapper 혼용 | `src/main/java/kr/sistack/board/mapper/MenuMapper.java:9`, `src/main/java/kr/sistack/board/mapper/BoardMapper.java:7` | 메뉴 어노테이션 SQL과 게시판 XML SQL 구분 |
 | 서비스 인터페이스→Impl·이름 주입 | `src/main/java/kr/sistack/board/service/BoardService.java:7`, `src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java:13`, `src/main/java/kr/sistack/board/web/BoardController.java:20` | 인터페이스 타입과 @Resource 이름을 @Service 구현에 연결. @Autowired 필드와 LoginInterceptor 생성자 DI가 혼재 |
 | 공통코드 서비스 구현·map 파라미터 | `src/main/java/kr/sistack/board/service/impl/CommonCodeServiceImpl.java:20`, `src/main/java/kr/sistack/board/dao/CommonCodeDao.java:15`, `src/main/resources/mapper/CommonCode.xml:4` | Pagination getter에서 offset/endRow 키로 변환한 값을 공통 SQL의 #{offset}/#{endRow}로 전달 |
-| AJAX GET URL→JSON | `src/main/webapp/resources/board.js:21`, `src/main/java/kr/sistack/board/web/CommonCodeController.java:31` | $.ajax GET → @ResponseBody → 서비스·DAO·map Mapper → codes/page/total JSON → DOM 셀 갱신 |
+| AJAX GET URL→JSON | `src/main/webapp/resources/board.js:21`, `src/main/java/kr/sistack/board/web/CommonCodeController.java:31` | data-base + '/list' + 'Json.do' 문자열 조합을 유지. $.ajax GET → @ResponseBody → 서비스·DAO·map Mapper → codes/page/total JSON → DOM 셀 갱신 |
 | AJAX POST URL·요청 데이터 | `src/main/webapp/resources/board.js:50`, `src/main/java/kr/sistack/board/web/BoardController.java:68` | id/csrf POST → 인터셉터 → 서비스 Impl 삭제 → JSON success → JS의 목록 이동. HTTP redirect 응답과 구분 |
 
 추가 분석 자료: src/main/resources/db/oracle/ddl.sql의 테이블·컬럼 한글 COMMENT와 globals.properties/ prod datasource 정의. local 실행에는 H2 test 설정만 사용한다. 정적 설정이 있다는 사실을 실제 운영 DB 연결의 근거로 사용하지 않는다.
