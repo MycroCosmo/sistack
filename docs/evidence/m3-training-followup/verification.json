@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "command": "git apply --check 06-sort-sql-proposal.diff",
+  "source_unchanged": true,
+  "patch_applied": false,
+  "score_rerun": false
+}
