@@ -1,5 +1,12 @@
 # 설계 결정
 
+## 2026-10-27 — M2.5 의존성 승인·실제 tree 확인
+
+- 사용자가 1번 GATE를 승인했다. 새 테스트베드 pom에 thymeleaf-spring5 3.1.5.RELEASE, thymeleaf-layout-dialect 3.4.0과 thymeleaf exclusion, slf4j-api 2.0.17 dependencyManagement를 적용했다. JSP·Thymeleaf 공존 설정도 승인 범위다.
+- Maven 3.9.10·JDK 17에서 기존/새 pom의 `dependency:tree -Dverbose`를 실행했다. 선택된 jar 의존성은 기존 26개 → 35개이며 추가 9개(직접 2개·전이 7개)가 승인안과 모두 일치했다. 기존 의존성 제거·버전 변경 0개, 예상 밖 추가·누락 0개다. [원본과 비교 결과](evidence/m2.5-dependencies/comparison.json)를 보존했다. 다운로드된 Maven 플러그인 자체의 도구 의존성과 프로젝트 런타임 의존성을 구별한다.
+- Groovy는 **4.0.25**가 선택됐고 extensions의 4.0.21, expression-processor의 4.0.14는 conflict로 제외됐다. SLF4J 2.0.16은 2.0.17로 통일됐다. Thymeleaf는 3.1.5만 선택됐으며 OGNL·Javassist와 제안서에서 제외한 optional 라이브러리는 유입되지 않았다. 예상과 일치하므로 테스트베드 구축을 계속한다.
+- 추가 요청인 checkExistence fallback과 Thymeleaf 3.0 유틸 객체 읽기는 수집기 단계의 합성 검증 요구로 프롬프트에 기록했다. 테스트베드는 승인한 viewNames 방식, 렌더링 기준은 3.1.5다. 이번 정지점은 학습 정답 2건 승인 GATE이며 수집기 구현은 그 이후다.
+
 ## 2026-10-27 — M2.5 검토 반영·의존성 GATE
 
 - 사용자 검토에 따라 Layout Dialect의 레이아웃/본문 연결, data URL의 외부 JS AJAX 소비, JSP 1개 화면과 Thymeleaf의 리졸버 공존·반환 뷰 판정을 범위에 추가했다. 프롬프트의 「기본 ponytail lite로 필요한 부분만 읽는다」 문장은 삭제했다.

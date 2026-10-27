@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "baseline_count": 26,
+  "actual_count": 35,
+  "added": [
+    "org.thymeleaf:thymeleaf-spring5:jar:3.1.5.RELEASE:compile",
+    "org.thymeleaf:thymeleaf:jar:3.1.5.RELEASE:compile",
+    "org.attoparser:attoparser:jar:2.0.7.RELEASE:compile",
+    "org.unbescape:unbescape:jar:1.1.6.RELEASE:compile",
+    "org.slf4j:slf4j-api:jar:2.0.17:compile",
+    "nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:jar:3.4.0:compile",
+    "org.apache.groovy:groovy:jar:4.0.25:compile",
+    "nz.net.ultraq.groovy:groovy-extensions:jar:2.3.3:runtime",
+    "nz.net.ultraq.thymeleaf:thymeleaf-expression-processor:jar:3.2.0:runtime"
+  ],
+  "removed": [],
+  "unexpected": [],
+  "missing": [],
+  "groovy_selected": "4.0.25",
+  "groovy_omitted": [
+    "4.0.21",
+    "4.0.14"
+  ],
+  "scope": "선택된 프로젝트 jar 의존성 전체. Maven 플러그인 실행 도구 의존성은 제외."
+}
