@@ -1,0 +1,12 @@
+{
+  "status": "PREPARE_ONLY_SUPERSEDED_UNSCORED",
+  "reason": "같은 루트 pom/Gradle starter 중복을 상충으로 판단한 일반 결함을 추가 실패 테스트로 보정. 원본 준비 자료는 보존하고 최종 02를 새로 실행.",
+  "final_run_suffix": "20261027-02",
+  "collector_rerun_ids": [
+    "m25-v2-delete-20261027-01",
+    "m25-v2-petclinic-20261027-01",
+    "m25-v2-search-20261027-01",
+    "m25-v2-create-20261027-01",
+    "m25-v2-coexist-20261027-01"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "generalization_performance": false,
+  "meaning": "v2는 결함 수정 확인이며 일반화 성능이 아님",
+  "aggregate_score_generated": false,
+  "comparisons": [
+    {
+      "case_id": "thymeleaf-board-delete-ajax",
+      "first_run_id": "m25-heldout-delete-first-20261027-01",
+      "v2_run_id": "m25-v2-delete-20261027-02",
+      "groups": {
+        "screen": {
+          "first": {
+            "status": "FAIL",
+            "matched": 4,
+            "expected": 4,
+            "false_negatives": 0,
+            "false_positives": 1,
+            "status_mismatches": 0
+          },
+          "v2": {
+            "status": "PASS",
+            "matched": 4,
+            "expected": 4,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "status_mismatches": 0
+          }
+        },
+        "server": {
+          "first": {
+            "status": "PASS",
+            "matched": 9,
+            "expected": 9,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "status_mismatches": 0
+          },
+          "v2": {
+            "status": "PASS",
+            "matched": 9,
+            "expected": 9,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "status_mismatches": 0
+          }
+        }
+      }
+    },
+    {
+      "case_id": "petclinic-owner-find",
+      "first_run_id": "m25-heldout-petclinic-first-20261027-01",
+      "v2_run_id": "m25-v2-petclinic-20261027-02",
+      "groups": {
+        "screen": {
+          "first": {
+            "status": "FAIL",
+            "matched": 2,
+            "expected": 6,
+            "false_negatives": 4,
+            "false_positives": 1,
+            "status_mismatches": 0
+          },
+          "v2": {
+            "status": "PASS",
+            "matched": 6,
+            "expected": 6,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "status_mismatches": 0
+          }
+        },
+        "server": {
+          "first": {
+            "status": "PASS",
+            "matched": 3,
+            "expected": 3,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "status_mismatches": 0
+          },
+          "v2": {
+            "status": "PASS",
+            "matched": 3,
+            "expected": 3,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "status_mismatches": 0
+          }
+        }
+      }
+    }
+  ]
+}

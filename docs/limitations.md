@@ -2,8 +2,8 @@
 
 ## M2.5 — Thymeleaf 정적 수집
 
-- 승인 학습 3건의 결과는 검색 parity 16/16·screen 7/7, 등록 12/12·5/5, 공존 parity 적용 없음·screen 1/1이다. 기존 JSP 승인 8건도 새 인덱싱 회귀로 확인했다. 선언한 scope의 정적 연결 비교이며 합산 일반화 점수가 아니다. 실제 스킬 run 3건은 외부 AOP/서버 설정·이번 앱/DB 재실행 미확인으로 PARTIAL이다. [현재 근거](m2.5-heldout-gate-report.md).
-- 구현 `fd1b93c`의 동결 지문으로 확장 승인 held-out을 첫 실행했다. 삭제 screen 4/4·과탐 1/server 9/9, PetClinic screen 2/6·누락 4·과탐 1/server 3/3이며 두 사례 FAIL·미수정이다. screen/server는 승인 라벨의 scope/edges를 투영해 동일 frozen 비교기로 별도 채점했고 원본 full-index/trace 결과 일치도 검증했다. [첫 점수·원본](m2.5-heldout-first-report.md).
+- 최종 v2는 삭제 screen 4/4·server 9/9, PetClinic screen 6/6·server 3/3이며 오류 0건이다. 학습 검색 parity 16/16·screen 7/7, 등록 12/12·5/5, 공존 적용 없음·1/1, 기존 JSP 8건 새 인덱싱 회귀도 PASS다. 선언 scope의 결함 수정 확인이며 일반화 성능이 아니다. 실제 run 5건은 외부 AOP/서버 설정·범위 경계 때문에 PARTIAL이다. [종료 근거](m2.5-final-report.md).
+- 첫 구현 `fd1b93c`의 동결 실행은 삭제 screen 과탐 1, PetClinic screen 누락 4/과탐 1로 FAIL이었다. 첫 승인 정답·점수·49개 원본은 그대로 보존한다. screen/server는 승인 라벨을 투영해 같은 비교기로 별도 평가하며 raw full-index/trace 결과 일치도 확인했다. [첫 점수·원본](m2.5-heldout-first-report.md).
 - 첫 구현의 submit 중복·Boot 뷰/fragment/private 반환 누락은 사용자 승인 후 일반 규칙으로 수정했다. 수정 전 실패 10건을 먼저 실행·보존했다. 첫 정답·점수·원본은 바꾸지 않는다. v2는 결함 수정 확인이며 일반화 성능이 아니다.
 - 삭제 테스트베드는 이전 전체 인덱싱에 포함돼 외부 블라인드 표본과 같다고 주장하지 않는다. PetClinic은 고정 `500158f`·Java 17/Boot 4.1.0 선언 기준이며 빌드·JPA 분석은 수행하지 않았다. JPA 구간은 구현·평가 모두 범위 밖이다. 첫 score FAIL과 실제 스킬 manifest PARTIAL을 구별하며, 보존한 그래프 재검증은 새 평가 실행으로 보지 않는다.
 - 테스트베드 렌더링 검증 기준은 Thymeleaf **3.1.5.RELEASE**다. 수집기 요구 범위에는 Thymeleaf 3.0 문법과 3.1에서 제거된 `#request`·`#response`·`#session`·`#servletContext`를 포함하지만, 해당 식을 실행하거나 3.1에서 렌더링 가능하다고 간주하지 않는다. 정적 부분만 확정하고 런타임 값 의존은 미확정으로 남긴다.
@@ -15,7 +15,7 @@
 - 3.0 유틸 객체가 쿼리 값에 있어도 정적 경로는 읽고, #request.contextPath와 단일 리터럴 루트 경로 조합을 구별한다. #session 등에서 URL 베이스를 얻는 경우는 UNRESOLVED다. 유틸 객체의 임의 메서드 결과나 사용자 값을 실행·추론하지 않는다.
 - data URL은 포함된 JS의 리터럴 ID 선택자(쉼표로 여러 ID 가능), .on 이벤트, this 또는 단일 $(this) 별칭, data/attr/dataset 소비에 한정한다. 복잡한 이벤트 위임·클래스 선택자·함수 간 별칭·동적 속성명·JS 재할당/캐시 상태는 완전 분석하지 않는다. 미사용 data 속성을 요청으로 세지 않는다. fragment에 들어 있는 data 요소의 모든 렌더링 문맥 전파도 보장하지 않는다.
 - inline JavaScript는 자연 템플릿 주석의 URL과 fallback을 분리하고 단일 리터럴 URL 변수만 추적한다. 임의 JS/OGNL/SpEL 파서가 아니며 복잡한 문자열·리터럴 아닌 동적 URL·템플릿 선택자는 미확정이다. HTML 태그/fragment 범위도 제한된 구조 스캐너이므로 깨진 HTML의 브라우저 복구 동작을 재현하지 않는다.
-- viewNames 공존 테스트베드의 JDK 17·3.1.5 렌더링은 앞선 검증 기록을 따른다. Java 8 런타임은 구성된 환경에 없어 BLOCKED다. 이번 수집기 검증을 실제 앱·DB 재실행이나 3.0 렌더링 성공으로 표현하지 않는다. 승인 정답은 학습에 사용한 자기 적용 평가이며 일반화 성능이 아니다.
+- viewNames 공존 테스트베드는 이번에도 Java 17/3.1.5 JUnit 2건·HTTP·실제 브라우저의 레이아웃/data AJAX/JSP/등록/검색/삭제를 확인했다. Java 8 런타임은 구성된 환경에 없어 BLOCKED다. 외부 PetClinic·JPA 실행이나 Thymeleaf 3.0 렌더링 성공으로 확대하지 않는다. 검증용 localhost 서버·탭은 종료했고 운영 DB는 사용하지 않았다.
 
 ## 기존 지원 범위
 

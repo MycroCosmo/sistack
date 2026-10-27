@@ -1,0 +1,181 @@
+{
+  "phase": "V2_DEFECT_CONFIRMATION",
+  "generalization_performance": false,
+  "implementation_revision": "2ff7c2233fdb1ddb894cd77d4d4a296c49b6f8c7",
+  "tool_fingerprint": "37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827",
+  "aggregate_score_generated": false,
+  "first_results": "docs/evidence/m2.5-heldout-first/results.json",
+  "results": [
+    {
+      "case_id": "thymeleaf-board-delete-ajax",
+      "dataset": "held-out",
+      "run_id": "m25-v2-delete-20261027-02",
+      "analysis_status": "PARTIAL",
+      "expected_sha256": "a78497ae6e41eed0cb441adcff1a17c047411422a5ab2aa9bf844da35321dcc1",
+      "tool_fingerprint": "37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827",
+      "status": "PASS",
+      "groups": {
+        "screen": {
+          "dataset": "held-out",
+          "case_id": "thymeleaf-board-delete-ajax",
+          "status": "PASS",
+          "expected": 4,
+          "matched": 4,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-delete-20261027-02\\v2-screen-eval.json",
+          "expected_projection_sha256": "1aeff98bd21d696ba668b1a98bdeadb86fad9cab26dc8bef3e7b479839b3c3f3",
+          "eval_sha256": "fff128884b75a337e76640b4a1ab8f57ba158312ee108ed4f459e49b226f6089"
+        },
+        "server": {
+          "dataset": "held-out",
+          "case_id": "thymeleaf-board-delete-ajax",
+          "status": "PASS",
+          "expected": 9,
+          "matched": 9,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-delete-20261027-02\\v2-server-eval.json",
+          "expected_projection_sha256": "94b696ea9d3503bb8b095b0e1fcee055a7ae8b99205babe458b2bfc09f15d2aa",
+          "eval_sha256": "9ae6963d95e540ffc3df0d9ea61cd30209fe1c9bdcda2c1b160534b7c4c28db5"
+        }
+      },
+      "manual_edges_added": 0,
+      "actual_edges_removed_within_scope": 0
+    },
+    {
+      "case_id": "petclinic-owner-find",
+      "dataset": "held-out",
+      "run_id": "m25-v2-petclinic-20261027-02",
+      "analysis_status": "PARTIAL",
+      "expected_sha256": "ee6fe2a6db36c2799a34c2de0a202b6c50697c386972777181aabc1c4ac95ee8",
+      "tool_fingerprint": "37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827",
+      "status": "PASS",
+      "groups": {
+        "screen": {
+          "dataset": "held-out",
+          "case_id": "petclinic-owner-find",
+          "status": "PASS",
+          "expected": 6,
+          "matched": 6,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-v2-petclinic-20261027-02\\v2-screen-eval.json",
+          "expected_projection_sha256": "85f5e8cdf43c1d2f408755600cb29b55f1d3f4108c533727e5760ee926abcc75",
+          "eval_sha256": "7c154dd9787d6855e2c78778b8bd1bb754bf70b3541e52feefb9866b0c4c6ede"
+        },
+        "server": {
+          "dataset": "held-out",
+          "case_id": "petclinic-owner-find",
+          "status": "PASS",
+          "expected": 3,
+          "matched": 3,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-v2-petclinic-20261027-02\\v2-server-eval.json",
+          "expected_projection_sha256": "f522c3f93d9ee06ed1aa75cad0f6682e095e86784156c5197fe9b68ccdba804f",
+          "eval_sha256": "ed01a68f731246e40cc014f9917b81a554afbe1a9746d743d3731517601ab5fd"
+        }
+      },
+      "manual_edges_added": 0,
+      "actual_edges_removed_within_scope": 0
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-search",
+      "dataset": "training",
+      "run_id": "m25-v2-search-20261027-02",
+      "analysis_status": "PARTIAL",
+      "expected_sha256": "dfe5adb5f6a31bd977abb951bea72c50ddcf2cdd21ae494d9e2fb64eb9203a0f",
+      "tool_fingerprint": "37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827",
+      "status": "PASS",
+      "groups": {
+        "parity": {
+          "status": "PASS",
+          "expected": 16,
+          "matched": 16,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": true
+        },
+        "screen": {
+          "status": "PASS",
+          "expected": 7,
+          "matched": 7,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": true
+        }
+      },
+      "manual_edges_added": 0,
+      "actual_edges_removed_within_scope": 0
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-create",
+      "dataset": "training",
+      "run_id": "m25-v2-create-20261027-02",
+      "analysis_status": "PARTIAL",
+      "expected_sha256": "222cd2b3c6ec598e9256447fc7ad7e7ba15eabc3337be436bed2dada719c3e65",
+      "tool_fingerprint": "37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827",
+      "status": "PASS",
+      "groups": {
+        "parity": {
+          "status": "PASS",
+          "expected": 12,
+          "matched": 12,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": true
+        },
+        "screen": {
+          "status": "PASS",
+          "expected": 5,
+          "matched": 5,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": true
+        }
+      },
+      "manual_edges_added": 0,
+      "actual_edges_removed_within_scope": 0
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-coexist",
+      "dataset": "training",
+      "run_id": "m25-v2-coexist-20261027-02",
+      "analysis_status": "PARTIAL",
+      "expected_sha256": "6b843e606f6239e661bad7d33a4b448ea5c27ca0a879ab190d7be24dece2f7b6",
+      "tool_fingerprint": "37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827",
+      "status": "PASS",
+      "groups": {
+        "parity": {
+          "status": "PASS",
+          "expected": 0,
+          "matched": 0,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": false
+        },
+        "screen": {
+          "status": "PASS",
+          "expected": 1,
+          "matched": 1,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "status_mismatches": 0,
+          "applicable": true
+        }
+      },
+      "manual_edges_added": 0,
+      "actual_edges_removed_within_scope": 0
+    }
+  ]
+}

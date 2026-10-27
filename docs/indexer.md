@@ -3,6 +3,7 @@
 ## M2.5 채점 계약 확장
 
 - 인덱스에 `template` 노드와 `renders`·`decorates` 연결을 사용한다. `requests`·`includes`는 기존 종류를 재사용한다. `.html` 수집과 XML 뷰 판정은 thymeleaf/thymeleaf-url/views 모듈이 담당한다. [Thymeleaf 판단 규칙](../skills/si-trace/references/thymeleaf.md)과 [지원 한계](limitations.md)를 따른다.
+- v2는 submit 취소·동일 AJAX 병합과 근거 보존, fragment 인자/자기 참조, Boot starter/최소 properties·YAML prefix/suffix, 같은 클래스 상수/private 반환 깊이 2를 추가했다. boot-views는 의존성/일반 YAML 실행기가 아니며 profile 상충·모호성은 LIKELY다. .htm/.yml/.yaml/.gradle/.kts도 필요한 수집 입력으로 읽는다. 첫 FAIL과 v2는 [종료 보고](m2.5-final-report.md)에 분리했다.
 - 새 [정답 스키마](../schemas/expected.schema.json)의 `score_groups: ["parity", "screen"]`과 edges/scope의 group을 사용하면 두 그룹을 각각 채점한다. 합산 expected/matched 필드는 출력하지 않는다. 그룹 없는 기존 정답은 이전 점수 형식을 유지한다.
 - `parity_reference`는 기존 승인 JSP 정답 파일과 SHA-256이다. check-expected는 기준 승인본의 화면 requests를 제외한 서버 from/to/kind/status와 parity가 같은지 검사한다. 파일/라인·소스 해시도 검사한다. JSON Schema만으로 표현하기 어려운 참조·중복·그룹 범위 불변조건은 `lib/indexer/expected.mjs`와 check-expected가 검증한다.
 - screen의 data AJAX 출발은 `list.html#요소ID`, fragment 도착은 `fragment파일#fragment이름`이다. requests의 도착 endpoint만 HTTP 메서드를 보존하고 쿼리·fragment를 제외한 경로로 비교한다. 다른 연결은 선택자를 그대로 비교한다.

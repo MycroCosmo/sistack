@@ -1,0 +1,1023 @@
+{
+  "tool_fingerprint": "37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827",
+  "method": "최종 v2 수집기로 원문을 새로 인덱싱. 기존 8건 점수와 첫 held-out 결과는 덮어쓰지 않음.",
+  "results": [
+    {
+      "case_id": "legacy-board-search",
+      "status": "PASS",
+      "expected": 17,
+      "matched": 17,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "raw_scope": ".sistack/m2.5-v2/regression/legacy-board-search.json",
+      "raw_index": ".sistack/m2.5-v2/legacy-full-index.json",
+      "raw_index_sha256": "d809eccb56b01ce77169405dd6ef0247013834fc8f658bf494241d9868aac8e5",
+      "score": {
+        "case_id": "legacy-board-search",
+        "scoring": true,
+        "source_dirty": false,
+        "revision_changed_sources_match": true,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. requests 도착 endpoint는 HTTP 메서드와 쿼리 제외 경로로 비교. 전체 프로젝트 정확도가 아님.",
+        "status": "PASS",
+        "expected_edges": 17,
+        "matched": 17,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/views/board/list.jsp"
+            },
+            "kinds": [
+              "requests"
+            ],
+            "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+            "line": 14
+          },
+          {
+            "from": {
+              "name": "GET /board/list.do"
+            },
+            "kinds": [
+              "maps_to",
+              "intercepted_by"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.web.BoardController#list"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.service.impl.BoardServiceImpl#list"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper#count"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper#selectList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper.count"
+            },
+            "kinds": [
+              "reads",
+              "includes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper.selectList"
+            },
+            "kinds": [
+              "reads",
+              "includes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+            },
+            "kinds": [
+              "reads"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "legacy-board-create",
+      "status": "PASS",
+      "expected": 14,
+      "matched": 14,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "raw_scope": ".sistack/m2.5-v2/regression/legacy-board-create.json",
+      "raw_index": ".sistack/m2.5-v2/legacy-full-index.json",
+      "raw_index_sha256": "d809eccb56b01ce77169405dd6ef0247013834fc8f658bf494241d9868aac8e5",
+      "score": {
+        "case_id": "legacy-board-create",
+        "scoring": true,
+        "source_dirty": false,
+        "revision_changed_sources_match": true,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. requests 도착 endpoint는 HTTP 메서드와 쿼리 제외 경로로 비교. 전체 프로젝트 정확도가 아님.",
+        "status": "PASS",
+        "expected_edges": 14,
+        "matched": 14,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/views/board/form.jsp"
+            },
+            "kinds": [
+              "requests"
+            ],
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 13
+          },
+          {
+            "from": {
+              "name": "POST /board/create.do"
+            },
+            "kinds": [
+              "maps_to",
+              "intercepted_by"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.web.BoardController#create"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.service.impl.BoardServiceImpl#create"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper#insert"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.BoardMapper.insert"
+            },
+            "kinds": [
+              "reads",
+              "writes"
+            ]
+          },
+          {
+            "from": {
+              "name": "POST /board/update.do"
+            },
+            "kinds": [
+              "intercepted_by"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.web.LoginInterceptor#preHandle"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.MenuMapper#selectList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "kr.sistack.board.mapper.MenuMapper.selectList"
+            },
+            "kinds": [
+              "reads"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "egov-clcode-delete",
+      "status": "PASS",
+      "expected": 7,
+      "matched": 7,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "raw_scope": ".sistack/m2.5-v2/regression/egov-clcode-delete.json",
+      "raw_index": ".sistack/m2.5-v2/egov-full-index.json",
+      "raw_index_sha256": "cb6197a7673d62b30fdc2edc4a9f568e251f647cace32791e31577f54209e781",
+      "score": {
+        "case_id": "egov-clcode-delete",
+        "scoring": true,
+        "source_dirty": true,
+        "revision_changed_sources_match": false,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. requests 도착 endpoint는 HTTP 메서드와 쿼리 제외 경로로 비교. 전체 프로젝트 정확도가 아님.",
+        "status": "PASS",
+        "expected_edges": 7,
+        "matched": 7,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp#fn_egov_delete_code"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "ANY /sym/ccm/ccc/RemoveCcmCmmnClCode.do"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.ccc.web.EgovCcmCmmnClCodeManageController#deleteCmmnClCode"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.ccc.service.impl.EgovCcmCmmnClCodeManageServiceImpl#deleteCmmnClCode"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.ccc.service.impl.CmmnClCodeManageDAO#deleteCmmnClCode"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "CmmnClCodeManage.deleteCmmnClCode",
+              "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_mysql.xml"
+            },
+            "kinds": [
+              "writes"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "egov-detailcode-list",
+      "status": "PASS",
+      "expected": 13,
+      "matched": 13,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "raw_scope": ".sistack/m2.5-v2/regression/egov-detailcode-list.json",
+      "raw_index": ".sistack/m2.5-v2/egov-full-index.json",
+      "raw_index_sha256": "cb6197a7673d62b30fdc2edc4a9f568e251f647cace32791e31577f54209e781",
+      "score": {
+        "case_id": "egov-detailcode-list",
+        "scoring": true,
+        "source_dirty": true,
+        "revision_changed_sources_match": false,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. requests 도착 endpoint는 HTTP 메서드와 쿼리 제외 경로로 비교. 전체 프로젝트 정확도가 아님.",
+        "status": "PASS",
+        "expected_edges": 13,
+        "matched": 13,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp"
+            },
+            "kinds": [
+              "requests"
+            ],
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp",
+            "line": 68
+          },
+          {
+            "from": {
+              "name": "ANY /sym/ccm/cde/SelectCcmCmmnDetailCodeList.do"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeList"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeListTotCnt"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeListTotCnt"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "CmmnDetailCodeManage.selectCmmnDetailCodeList",
+              "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads"
+            ]
+          },
+          {
+            "from": {
+              "name": "CmmnDetailCodeManage.selectCmmnDetailCodeListTotCnt",
+              "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "egov-rss-columns",
+      "status": "PASS",
+      "expected": 5,
+      "matched": 5,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "raw_scope": ".sistack/m2.5-v2/regression/egov-rss-columns.json",
+      "raw_index": ".sistack/m2.5-v2/egov-full-index.json",
+      "raw_index_sha256": "cb6197a7673d62b30fdc2edc4a9f568e251f647cace32791e31577f54209e781",
+      "score": {
+        "case_id": "egov-rss-columns",
+        "scoring": true,
+        "source_dirty": true,
+        "revision_changed_sources_match": false,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. requests 도착 endpoint는 HTTP 메서드와 쿼리 제외 경로로 비교. 전체 프로젝트 정확도가 아님.",
+        "status": "PASS",
+        "expected_edges": 5,
+        "matched": 5,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/ion/rss/EgovRssTagManageRegist.jsp#fn_egov_tableColumn_RssTagManage"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "ANY /uss/ion/rss/listRssTagManageTableColumnList.do"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.ion.rss.web.EgovRssTagManageController#EgovRssTagManageTableColumnList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+            "line": 83
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.ion.rss.service.impl.EgovRssTagManageServiceImpl#selectRssTagManageTableColumnList"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.ion.rss.service.impl.RssTagManageDao#selectRssTagManageTableColumnList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "egov-article-list",
+      "status": "PASS",
+      "expected": 38,
+      "matched": 38,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "raw_scope": ".sistack/m2.5-v2/regression/egov-article-list.json",
+      "raw_index": ".sistack/m2.5-v2/egov-full-index.json",
+      "raw_index_sha256": "cb6197a7673d62b30fdc2edc4a9f568e251f647cace32791e31577f54209e781",
+      "score": {
+        "case_id": "egov-article-list",
+        "scoring": true,
+        "source_dirty": true,
+        "revision_changed_sources_match": false,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. requests 도착 endpoint는 HTTP 메서드와 쿼리 제외 경로로 비교. 전체 프로젝트 정확도가 아님.",
+        "status": "PASS",
+        "expected_edges": 38,
+        "matched": 38,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleList.jsp"
+            },
+            "kinds": [
+              "requests"
+            ],
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/cop/bbs/EgovArticleList.jsp",
+            "line": 108
+          },
+          {
+            "from": {
+              "name": "ANY /cop/bbs/selectArticleList.do"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+            "line": 163
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+            "line": 184
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+            "line": 188
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+            "line": 151
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+            "line": 153
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+            "line": 65
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+            "line": 69
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterServiceImpl#selectBBSMasterInf"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovBBSMasterServiceImpl.java",
+            "line": 70
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectArticleList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+            "line": 39
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectArticleList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+            "line": 42
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.EgovArticleServiceImpl#selectNoticeArticleList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/service/impl/EgovArticleServiceImpl.java",
+            "line": 126
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.EgovBBSMasterDAO#selectBBSMasterDetail"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "BBSMaster.selectBBSMasterDetail",
+              "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads",
+              "writes",
+              "includes"
+            ]
+          },
+          {
+            "from": {
+              "name": "BBSMaster.selectBBSMasterDetail",
+              "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSMaster_SQL_mysql.xml"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.BBSAddedOptionsDAO#selectAddedOptionsInf"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "BBSAddedOptions.selectAddedOptionsInf",
+              "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads",
+              "writes",
+              "includes"
+            ]
+          },
+          {
+            "from": {
+              "name": "BBSAddedOptions.selectAddedOptionsInf",
+              "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovBBSAddedOptions_SQL_mysql.xml"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectArticleList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "BBSArticle.selectArticleList",
+              "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads",
+              "writes",
+              "includes"
+            ]
+          },
+          {
+            "from": {
+              "name": "BBSArticle.selectArticleList",
+              "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectArticleListCnt"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "BBSArticle.selectArticleListCnt",
+              "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads",
+              "writes",
+              "includes"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.service.impl.EgovArticleDAO#selectNoticeArticleList"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "BBSArticle.selectNoticeArticleList",
+              "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads",
+              "writes",
+              "includes"
+            ]
+          },
+          {
+            "from": {
+              "name": "BBSArticle.selectNoticeArticleList",
+              "file": "src/main/resources/egovframework/mapper/com/cop/bbs/EgovArticle_SQL_mysql.xml"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+            "line": 171
+          },
+          {
+            "from": {
+              "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+            "line": 172
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "egov-user-insert",
+      "status": "PASS",
+      "expected": 11,
+      "matched": 11,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "raw_scope": ".sistack/m2.5-v2/regression/egov-user-insert.json",
+      "raw_index": ".sistack/m2.5-v2/egov-full-index.json",
+      "raw_index_sha256": "cb6197a7673d62b30fdc2edc4a9f568e251f647cace32791e31577f54209e781",
+      "score": {
+        "case_id": "egov-user-insert",
+        "scoring": true,
+        "source_dirty": true,
+        "revision_changed_sources_match": false,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. requests 도착 endpoint는 HTTP 메서드와 쿼리 제외 경로로 비교. 전체 프로젝트 정확도가 아님.",
+        "status": "PASS",
+        "expected_edges": 11,
+        "matched": 11,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp"
+            },
+            "kinds": [
+              "requests"
+            ],
+            "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp",
+            "line": 209
+          },
+          {
+            "from": {
+              "name": "ANY /uss/umt/EgovUserInsert.do"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.umt.web.EgovUserManageController#insertUser"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#insertUser"
+            },
+            "kinds": [
+              "calls"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.umt.service.impl.UserManageDAO#insertUser"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "userManageDAO.insertUser_S",
+              "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads",
+              "writes",
+              "includes"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "egov-id-dplct-ajax",
+      "status": "PASS",
+      "expected": 17,
+      "matched": 17,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "status_mismatches": 0,
+      "raw_scope": ".sistack/m2.5-v2/regression/egov-id-dplct-ajax.json",
+      "raw_index": ".sistack/m2.5-v2/egov-full-index.json",
+      "raw_index_sha256": "cb6197a7673d62b30fdc2edc4a9f568e251f647cace32791e31577f54209e781",
+      "score": {
+        "case_id": "egov-id-dplct-ajax",
+        "scoring": true,
+        "source_dirty": true,
+        "revision_changed_sources_match": false,
+        "caveat": "선언한 source/kind/위치 범위의 연결 비교. requests 도착 endpoint는 HTTP 메서드와 쿼리 제외 경로로 비교. 전체 프로젝트 정확도가 아님.",
+        "status": "PASS",
+        "expected_edges": 17,
+        "matched": 17,
+        "false_negatives": [],
+        "false_positives": [],
+        "status_mismatches": [],
+        "scope": [
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp#fn_id_check"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovUserInsert.jsp#fn_id_checkOk"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp#fn_id_check"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberSbscrb.jsp#fn_id_checkOk"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp#fn_id_check"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovMberInsert.jsp#fn_id_checkOk"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp#fn_id_check"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberSbscrb.jsp#fn_id_checkOk"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp#fn_id_check"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/umt/EgovEntrprsMberInsert.jsp#fn_id_checkOk"
+            },
+            "kinds": [
+              "requests"
+            ]
+          },
+          {
+            "from": {
+              "name": "ANY /uss/umt/EgovIdDplctCnfirmAjax.do"
+            },
+            "kinds": [
+              "maps_to"
+            ]
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.umt.web.EgovUserManageController#checkIdDplctAjax"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/uss/umt/web/EgovUserManageController.java",
+            "line": 411
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.umt.service.impl.EgovUserManageServiceImpl#checkIdDplct"
+            },
+            "kinds": [
+              "calls"
+            ],
+            "file": "src/main/java/egovframework/com/uss/umt/service/impl/EgovUserManageServiceImpl.java",
+            "line": 63
+          },
+          {
+            "from": {
+              "name": "egovframework.com.uss.umt.service.impl.UserManageDAO#checkIdDplct"
+            },
+            "kinds": [
+              "executes"
+            ]
+          },
+          {
+            "from": {
+              "name": "userManageDAO.checkIdDplct_S",
+              "file": "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_mysql.xml"
+            },
+            "kinds": [
+              "reads"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

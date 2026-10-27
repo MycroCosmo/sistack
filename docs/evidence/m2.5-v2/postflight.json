@@ -1,0 +1,154 @@
+{
+  "tool_fingerprint": "37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827",
+  "implementation_revision": "2ff7c2233fdb1ddb894cd77d4d4a296c49b6f8c7",
+  "first_archive_sha256_unchanged": "9f860cbac4687e1c7688896d1d5d9750e54ca71fa315c6c13d3a8c9a64bd483f",
+  "first_expected_and_records_and_fixture_unchanged": true,
+  "approved_sources": [
+    {
+      "case_id": "egov-article-list",
+      "status": "PASS",
+      "source_files": 46,
+      "evidence_locations": 190
+    },
+    {
+      "case_id": "egov-clcode-delete",
+      "status": "PASS",
+      "source_files": 16,
+      "evidence_locations": 31
+    },
+    {
+      "case_id": "egov-detailcode-list",
+      "status": "PASS",
+      "source_files": 15,
+      "evidence_locations": 44
+    },
+    {
+      "case_id": "egov-id-dplct-ajax",
+      "status": "PASS",
+      "source_files": 22,
+      "evidence_locations": 141
+    },
+    {
+      "case_id": "egov-rss-columns",
+      "status": "PASS",
+      "source_files": 4,
+      "evidence_locations": 17
+    },
+    {
+      "case_id": "egov-user-insert",
+      "status": "PASS",
+      "source_files": 15,
+      "evidence_locations": 101
+    },
+    {
+      "case_id": "legacy-board-create",
+      "status": "PASS",
+      "source_files": 8,
+      "evidence_locations": 37
+    },
+    {
+      "case_id": "legacy-board-search",
+      "status": "PASS",
+      "source_files": 9,
+      "evidence_locations": 41
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-coexist",
+      "status": "PASS",
+      "source_files": 3,
+      "evidence_locations": 10,
+      "groups": {
+        "parity": {
+          "expected_edges": 0
+        },
+        "screen": {
+          "expected_edges": 1
+        }
+      }
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-create",
+      "status": "PASS",
+      "source_files": 10,
+      "evidence_locations": 54,
+      "groups": {
+        "parity": {
+          "expected_edges": 12
+        },
+        "screen": {
+          "expected_edges": 5
+        }
+      }
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-search",
+      "status": "PASS",
+      "source_files": 13,
+      "evidence_locations": 80,
+      "groups": {
+        "parity": {
+          "expected_edges": 16
+        },
+        "screen": {
+          "expected_edges": 7
+        }
+      }
+    },
+    {
+      "case_id": "petclinic-owner-find",
+      "status": "PASS",
+      "source_files": 10,
+      "evidence_locations": 41
+    },
+    {
+      "case_id": "thymeleaf-board-delete-ajax",
+      "status": "PASS",
+      "source_files": 10,
+      "evidence_locations": 44
+    }
+  ],
+  "raw_index_scope_scores_equal": true,
+  "manual_edges_added": 0,
+  "actual_edges_removed_within_scope": 0,
+  "v2_statuses": [
+    {
+      "case_id": "thymeleaf-board-delete-ajax",
+      "status": "PASS",
+      "manifest": "PARTIAL"
+    },
+    {
+      "case_id": "petclinic-owner-find",
+      "status": "PASS",
+      "manifest": "PARTIAL"
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-search",
+      "status": "PASS",
+      "manifest": "PARTIAL"
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-create",
+      "status": "PASS",
+      "manifest": "PARTIAL"
+    },
+    {
+      "case_id": "legacy-board-thymeleaf-coexist",
+      "status": "PASS",
+      "manifest": "PARTIAL"
+    }
+  ],
+  "legacy_regressions": 8,
+  "same_tool_for_all_final_runs": true,
+  "new_dependencies": 0,
+  "m3_started": false,
+  "archive": {
+    "path": "docs/evidence/m2.5-v2/originals.json.gz",
+    "files": 136,
+    "archive_bytes": 1887389,
+    "sha256": "84ac713f101f91a421c01b96ee9a140719e37fd0500005c6febf63627c769af5",
+    "payload_sha256": "4f2fb11b66f43934a28daff923a839e747b2375cf58b2a3d5ab52129f9c57ccc",
+    "verification": "해제·파일별 해시·로컬 원본 바이트 일치",
+    "attempt01": "미채점 준비 자료도 포함",
+    "source_bodies_archived": false
+  }
+}

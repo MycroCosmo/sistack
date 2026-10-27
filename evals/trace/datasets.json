@@ -39,5 +39,17 @@
     "first_results": "docs/evidence/m2.5-heldout-first/results.json",
     "originals": "docs/evidence/m2.5-heldout-first/archive.json",
     "fixes_performed": false
+  },
+  "thymeleaf_v2": {
+    "status": "CLOSED_WITH_JAVA8_RUNTIME_BLOCKED",
+    "implementation_revision": "2ff7c2233fdb1ddb894cd77d4d4a296c49b6f8c7",
+    "tool_fingerprint": "37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827",
+    "report": "docs/m2.5-final-report.md",
+    "results": "docs/evidence/m2.5-v2/results.json",
+    "comparison": "docs/evidence/m2.5-v2/comparison.json",
+    "originals": "docs/evidence/m2.5-v2/archive.json",
+    "generalization_performance": false,
+    "first_results_preserved": true,
+    "note": "승인된 일반 규칙 수정 확인. 첫 FAIL과 v2·학습/회귀를 합산하지 않는다. M3 미착수."
   }
 }

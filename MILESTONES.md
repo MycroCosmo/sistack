@@ -27,8 +27,8 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 | 이름 | 위치 | 용도 |
 |---|---|---|
 | legacy-board | `examples/legacy-board/` (M0에서 생성) | 빌드·실행 가능한 소형 레거시 프로젝트. Spring MVC + MyBatis + JSP + jQuery, 테스트용 H2. 모든 스킬의 기본 테스트 대상 |
-| legacy-board-thymeleaf | `examples/legacy-board-thymeleaf/` (M2.5 구축 완료) | 같은 서버 코드, Thymeleaf/JSP 공존. 학습 검증 완료, 삭제 AJAX 첫 점수 screen 과탐 1건 FAIL·미수정 |
-| Spring PetClinic | `.testbeds/spring-petclinic/` (고정 SHA 클론 완료, 소스 커밋 금지) | `500158f`의 화면·Controller·기본 뷰·layout 첫 점수 screen 누락 4/과탐 1 FAIL·미수정. JPA 제외 |
+| legacy-board-thymeleaf | `examples/legacy-board-thymeleaf/` (M2.5 종료) | 같은 서버 코드·Thymeleaf/JSP 공존. 학습/삭제 v2 PASS·Java 17 브라우저 삭제 확인. 첫 FAIL 보존, Java 8 런타임 BLOCKED |
+| Spring PetClinic | `.testbeds/spring-petclinic/` (고정 SHA, 소스 커밋 금지) | `500158f` 화면·Controller·기본 뷰·layout v2 PASS. 첫 FAIL 보존, JPA 제외 |
 | 버그 케이스 | `evals/debug/cases/<id>/` | legacy-board에 적용하는 버그 패치 + 증상 로그. 원본 코드는 깨끗하게 유지 |
 | eGovFrame 공통컴포넌트 | 외부 클론 (`scripts/fetch-testbed.mjs`) | 실제 규모의 공개 레거시. 인덱서·si-trace 현실성 검증. 저장소에 커밋하지 않음 |
 | 실제 업무 사례 | `evals/private/` (gitignore) | Ian이 직접 넣는 마스킹된 실제 에러·코드 사례. 자기채점 방지용 |
@@ -109,7 +109,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 
 ## M2.5 — Thymeleaf 수집기
 
-**상태: held-out 수정 전 첫 점수 GATE — 두 사례 FAIL, 구현 미수정.** 학습은 검색 parity 16/16·screen 7/7, 등록 12/12·5/5, 공존 해당 없음·1/1이며 기존 JSP 8건 회귀·npm test 97건을 통과했다. `fd1b93c` 동결 구현으로 확장 승인 정답을 처음 실행했다. 삭제 screen 4/4·과탐 1/server 9/9, PetClinic screen 2/6·누락 4·과탐 1/server 3/3이다. 합산하지 않으며 [첫 점수 보고](docs/m2.5-heldout-first-report.md)에서 후속 지시를 기다린다. Java 8 런타임은 BLOCKED다.
+**상태: 종료 — 승인 범위 구현·정적 검증·Java 17 앱 검증 완료, Java 8 런타임 BLOCKED.** 일반 규칙의 실패 테스트 후 v2를 새 run-id로 실행했다. 삭제 screen 4/4·server 9/9, PetClinic screen 6/6·server 3/3, 학습 3건·기존 JSP 8건 회귀 모두 PASS다. npm test 108/108, Java JUnit 2건·HTTP·실제 브라우저 삭제도 통과했다. 첫 FAIL/원본은 그대로 보존했고 **v2는 결함 수정 확인이며 일반화 성능이 아니다**. [M2.5 종료 보고](docs/m2.5-final-report.md)를 따른다. M3는 시작하지 않았다.
 
 **목표:** Ian의 JSP → Thymeleaf 이관 업무에서 to-be 화면의 이벤트부터 기존 서버 흐름까지 추적한다.
 
@@ -128,9 +128,9 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 - held-out 2건의 흐름 탐색·정답 작성 전 구현 동결, 정답 승인 전 구현 수정 금지. 두 사례 모두 같은 동결 구현으로 첫 점수·원본·해시를 개별 보존·보고한 뒤 지시가 있을 때만 수정 가능
 - 테스트베드 빌드·렌더링·AJAX 동작 확인. 실행 환경이 없으면 BLOCKED와 재실행 명령 기록
 
-**[GATE]** 의존성·공존 설정 승인(완료) → 검색·등록·공존의 그룹별 채점 구조 승인(현재) → held-out 2건 정답 승인 → 수정 전 첫 점수 개별 보고. 각 지점에서 멈춘다.
+**GATE 이력:** 의존성/공존 설정·학습 3건·held-out 2건 승인과 수정 전 첫 점수 보고를 완료했다. 사용자가 일반 규칙 수정·v2·종료 점검을 추가 승인해 모두 수행했다. 첫 결과는 보존한다.
 
-**Ian 할 일:** 학습 3건의 expected.draft JSON/MD에서 parity/screen 구조와 승격한 screen 연결을 검토한다. 그 후 수집기 구현을 진행하며 held-out 2건은 별도 정답 GATE를 거친다.
+**Ian 할 일:** 종료 보고와 Java 8 런타임 제약을 확인한다. Java 8 환경이 준비되면 재실행할 명령을 보고서에 남겼다. M3는 별도 지시 후 진행한다.
 
 ---
 

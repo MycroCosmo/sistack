@@ -1,0 +1,10 @@
+{
+  "path": "docs/evidence/m2.5-v2/originals.json.gz",
+  "files": 136,
+  "archive_bytes": 1887389,
+  "sha256": "84ac713f101f91a421c01b96ee9a140719e37fd0500005c6febf63627c769af5",
+  "payload_sha256": "4f2fb11b66f43934a28daff923a839e747b2375cf58b2a3d5ab52129f9c57ccc",
+  "verification": "해제·파일별 해시·로컬 원본 바이트 일치",
+  "attempt01": "미채점 준비 자료도 포함",
+  "source_bodies_archived": false
+}

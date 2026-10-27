@@ -1,0 +1,69 @@
+{
+  "recorded_at": "2026-10-27T10:37:42.553Z",
+  "java": "Corretto 17.0.14",
+  "maven": "3.9.10",
+  "thymeleaf": "3.1.5.RELEASE",
+  "maven_test": {
+    "command": "mvn -o -B -q -f examples/legacy-board-thymeleaf/pom.xml test",
+    "status": "PASS",
+    "tests": [
+      {
+        "name": "kr.sistack.board.BoardFlowTest",
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "kr.sistack.board.BoardServiceTest",
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      }
+    ]
+  },
+  "http_smoke": {
+    "command": "node examples/legacy-board-thymeleaf/smoke.mjs",
+    "status": "PASS",
+    "scope": "로그인·권한·레이아웃·data URL 2종·JSP 공존·등록·검색·CSRF·이스케이프"
+  },
+  "browser": {
+    "tool": "cua_repl in-app browser",
+    "status": "PASS",
+    "fixture_title": "M2.5 v2 삭제 AJAX 20261027",
+    "fixture_id": "2",
+    "scope": [
+      "관리자 역할 입장",
+      "공통 레이아웃 메뉴/본문",
+      "th:data-url 분류 조회 2건",
+      "새 목록에서 th:attr 분류 새로고침 2건",
+      "공통코드 JSP 2건",
+      "합성 글 등록·검색 1건",
+      "삭제 버튼 AJAX→GET 목록 이동",
+      "같은 제목 재검색 0건·제목 링크 0개"
+    ],
+    "screenshots": {
+      "browser-delete-before.png": "1909e08d7eae7f58a140bc4041d625d371890605a6be897946205b7563c01b26",
+      "browser-delete-after.png": "0a2cc8172d4d5bb8de9fd78498323ce6c549343a9aa124c745093b4f05dba8b4"
+    }
+  },
+  "java8_runtime": {
+    "status": "BLOCKED",
+    "reason": "구성된 .jdks 실행 환경은 11/17/21이며 Java 8 없음. release 8 컴파일을 실행 검증으로 대체하지 않음.",
+    "rerun": "JAVA_HOME=<JDK8 경로> 설정 후 mvn -B -q -f examples/legacy-board-thymeleaf/pom.xml test 및 jetty:run/smoke·삭제 AJAX 브라우저 재검증"
+  },
+  "app_source_changes": false,
+  "new_dependencies": 0,
+  "local_server_stopped": true,
+  "browser_tab_closed": true,
+  "sandbox_retries": [
+    "npm 임시 Git config 쓰기 제한: 코드 변경 없이 권한 있는 같은 명령 PASS",
+    "HTTP localhost EACCES: 코드 변경 없이 권한 있는 같은 명령 PASS"
+  ],
+  "warnings": [
+    "기존 SLF4J provider 부재 경고 유지"
+  ],
+  "operating_db_access": false,
+  "petclinic_runtime_or_jpa_analysis": false
+}

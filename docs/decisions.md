@@ -1,5 +1,13 @@
 # 설계 결정
 
+## 2026-10-27 — M2.5 v2 검증·종료
+
+- 최종 구현 `2ff7c22`, 도구 지문 `37f82c6f7d6e535260f1582c2e8d441f48dd8c9adab32e5eafe3f2e2daa6c827`의 새 run-id `m25-v2-{delete,petclinic,search,create,coexist}-20261027-02`로 검증했다. 삭제 screen 4/4·server 9/9, PetClinic screen 6/6·server 3/3, 학습 검색 16/16·7/7/등록 12/12·5/5/공존 해당 없음·1/1 모두 PASS, 각 그룹 오류 0이다. 기존 JSP 8건도 원문을 다시 인덱싱해 개별 PASS다. v2는 결함 수정 확인이며 일반화 성능이 아니다.
+- v2 준비에서 같은 루트의 pom/Gradle starter 중복을 상충으로 오인했다. 추가 일반 합성 테스트 1건을 먼저 실패시킨 뒤 build 루트별 정규화로 수정했다. 01은 미채점 준비 자료로 보존하고 02를 새로 실행했다. 최초 일반 합성 10건과 합쳐 최종 npm 108/108·승인 근거 13건·스킬/복사본 검사를 통과했다.
+- Java 17/Maven 캐시의 오프라인 JUnit 2건·HTTP smoke·실제 브라우저 레이아웃/data URL 2종/JSP/합성 글 등록·검색·삭제 AJAX 후 재검색 0건을 확인했다. localhost 서버·임시 탭을 종료했다. 샌드박스 임시 Git/localhost 접근 실패는 코드 변경 없이 권한 있는 같은 명령에서 통과했고 실패 로그를 남겼다. SLF4J provider 부재는 승인안대로 유지했다.
+- 첫 승인 정답·FAIL·49개 원본·학습 이전 기록·테스트베드 소스는 변경 0개다. v2 native eval 7개·raw full-index/query/trace·검토·manifest·회귀 8건·미채점 준비까지 136개 파일로 별도 보존했다. 원본 전체 인덱스와 scope trace 점수가 같고 기대 도착 노드 여과·수동 연결 추가는 0개다. [원본 검증](evidence/m2.5-v2/README.md).
+- M2.5 구현/정적 검증/Java 17 앱 검증은 종료한다. Java 8 런타임은 구성된 환경에 없어 BLOCKED로 이관하고 재실행 명령을 [종료 보고](m2.5-final-report.md)에 남겼다. 분석 manifest 5건의 PARTIAL과 eval PASS를 구분한다. PetClinic 빌드/JPA/운영 DB는 범위 밖이며 M3는 시작하지 않았다.
+
 ## 2026-10-27 — M2.5 일반 규칙 v2 수정 승인·실패 테스트 먼저
 
 - 사용자가 첫 FAIL 기준선 보존 후 네 일반 규칙 수정·새 run-id v2·학습/기존 JSP 회귀·M2.5 종료 점검을 승인했다. 첫 승인 정답·도구 지문·점수·49개 원본은 그대로 둔다. v2는 결함 수정 확인이며 일반화 성능이 아니다. M3는 시작하지 않는다.
