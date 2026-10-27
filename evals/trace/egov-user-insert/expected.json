@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "case_id": "egov-user-insert",
-  "review_status": "draft",
+  "review_status": "approved",
   "dataset": "held-out",
   "source_root": ".testbeds/egovframe",
   "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
@@ -31,7 +31,7 @@
     "approval_required": true
   },
   "assumptions_and_questions": [
-    "이 초안은 원문 소스에서 작성했으며 이 사례에 대해 인덱서/si-trace/채점기를 실행하지 않았다. 승인 전 정답 확정 또는 사례 맞춤 구현 수정 금지.",
+    "초안은 인덱서 출력을 보지 않고 원문으로 작성했다. 사용자 검토 조건 2개를 반영해 승인본으로 확정했다. 동결된 구현의 첫 실행·점수·원본을 보존한 뒤 보고하며 보고 전 사례 대응 수정을 하지 않는다.",
     "요청은 form의 POST지만 Controller @RequestMapping은 HTTP method를 제한하지 않아 endpoint 선택자는 ANY다.",
     "scope의 Controller/Service calls는 업무 서비스, 로컬 static 유틸, 주입된 외부 서비스 호출을 포함한다. 단순 VO getter/setter 및 JDK/Servlet/Spring Model/BindingResult의 일반 API 호출은 제외한다.",
     "인증 helper, 암호화/문자열 유틸의 호출까지만 연결 점수 범위이며 유틸 내부 JDK/보안 라이브러리까지 확장하지 않는다. 실제 소스로 확인한 유틸 동작과 한계는 supplemental_assertions에서 따로 검토한다.",
@@ -706,5 +706,15 @@
     "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_oracle.xml",
     "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_postgres.xml",
     "src/main/resources/egovframework/mapper/com/uss/umt/EgovUserManage_SQL_tibero.xml"
-  ]
+  ],
+  "approval": {
+    "status": "APPROVED_BY_USER_WITH_CONDITIONS_APPLIED",
+    "approved_at": "2026-10-27T04:32:03.237Z",
+    "conditions": [
+      "외부 주입 호출은 구현 부재를 이유로 calls unknown UNRESOLVED로 기록",
+      "공통 인증 Helper 진입 호출까지만 연결 점수 범위"
+    ],
+    "first_execution": "NOT_RUN",
+    "implementation_tuning": "PROHIBITED_UNTIL_FIRST_SCORE_REPORT"
+  }
 }

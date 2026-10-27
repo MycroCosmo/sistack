@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "case_id": "egov-id-dplct-ajax",
-  "review_status": "draft",
+  "review_status": "approved",
   "dataset": "held-out",
   "source_root": ".testbeds/egovframe",
   "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
@@ -38,7 +38,7 @@
     "approval_required": true
   },
   "assumptions_and_questions": [
-    "이 초안은 승인 전 정답이 아니며 첫 실행/점수 측정은 사용자 승인 뒤에 한다.",
+    "초안은 인덱서 출력을 보지 않고 원문으로 작성했다. 사용자 검토 조건 2개를 반영해 승인본으로 확정했다. 동결된 구현의 첫 실행·점수·원본을 보존한 뒤 보고하며 보고 전 사례 대응 수정을 하지 않는다.",
     "17개 edge scope: 5개 JSP의 두 AJAX 함수 requests 10개, endpoint maps_to 1개, 업무 Service/DAO calls 2개, mysql executes 1개, 물리 테이블 reads 3개. 나머지 화면 이벤트·외부 프레임워크 호출·공통 보안 경로는 이 연결 점수의 범위 밖이다.",
     "응답 뷰/응답 데이터/역방향 JSP 집합은 supplemental_assertions 및 reverse_expectation으로 별도 판정한다. 스키마에 없는 returns_view/redirect 종류를 만들지 않는다.",
     "mysql 선택은 mapperLocations 및 등록된 properties의 Globals.DbType에 근거한다. 다른 DB 후보는 실행 정답에서 제외한다. 실제 배포 환경의 override는 미검증이다."
@@ -1094,5 +1094,15 @@
       }
     ],
     "required_result": "승인 후 --to URL 역추적에서 다섯 JSP 모두 호출 화면으로 보고한다. 함수 10개 요청 연결 점수와 JSP 집합 일치 여부를 별도로 기록한다. 실제 역방향 질의는 아직 실행하지 않았다."
+  },
+  "approval": {
+    "status": "APPROVED_BY_USER_WITH_CONDITIONS_APPLIED",
+    "approved_at": "2026-10-27T04:32:03.298Z",
+    "conditions": [
+      "외부 주입 호출은 구현 부재를 이유로 calls unknown UNRESOLVED로 기록",
+      "공통 인증 Helper 진입 호출까지만 연결 점수 범위"
+    ],
+    "first_execution": "NOT_RUN",
+    "implementation_tuning": "PROHIBITED_UNTIL_FIRST_SCORE_REPORT"
   }
 }

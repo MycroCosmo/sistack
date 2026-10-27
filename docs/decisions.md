@@ -105,3 +105,9 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - 사용자가 지정한 held-out은 egov-article-list, egov-user-insert, egov-id-dplct-ajax다. 원문 직접 검토로만 expected.draft JSON/MD를 만들었다. 소스 해시/라인 검증은 DRAFT_SOURCES_VALID이며 정답 승인·eval 점수가 아니다.
 - forward/redirect와 응답 view는 현재 그래프 종류로 억지 표현하지 않고 supplemental_assertions로 남긴다. AJAX의 역방향 호출 JSP 집합도 별도 정답이다. 첫 평가에서 연결 누락/과탐/상태와 이 보충 항목의 결과를 분리해 기록한다.
 - 구현 동결 파일 해시는 docs/evidence/m2-baseline.json에 남겼다. 사용자 승인 전 held-out 실행·채점·사례 맞춤 수정은 하지 않는다. 승인 후 첫 원본 점수를 저장한 다음에만 수정한다.
+
+### held-out 승인 — 정답 작성 공통 기준
+
+- 외부 주입 필드의 메서드 호출은 구현 소스가 없어도 호출 자체를 정답에서 누락하지 않는다. `calls → unknown:external-injection`, `UNRESOLVED`로 기록하고 실제 호출 위치와 외부 라이브러리 구현 부재를 근거·이유로 남긴다. 게시물 목록의 propertyService.getInt(pageUnit/pageSize)는 공통상세코드와 같은 기준으로 논리 연결 하나에 두 호출 위치를 기록한다. 라이브러리 내부 동작을 확정한 연결로 확대하지 않는다.
+- 공통 인증 경로의 연결 점수는 EgovUserDetailsHelper#isAuthenticated / #getAuthenticatedUser로 들어가는 호출까지로 통일한다. Helper에서 EgovUserDetailsSecurityServiceImpl 등으로 이어지는 내부 연결은 supplemental_assertions로 기록하고 점수에서 제외한다. 이후 정답 사례에도 같은 깊이를 적용한다.
+- 사용자 조건 2개를 반영해 held-out 3건을 expected.* 승인본으로 확정한다. 동결 구현으로 첫 골격·스킬 결과·역방향 질의와 점수를 보존하고 보고한다. 그 보고 전에는 인덱서나 si-trace의 사례 대응 수정을 하지 않는다.

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "case_id": "egov-article-list",
-  "review_status": "draft",
+  "review_status": "approved",
   "dataset_role": "held-out",
   "source_root": ".testbeds/egovframe",
   "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
@@ -62,12 +62,14 @@
     "controller": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
   },
   "assumptions_and_questions": [
-    "소스만 읽어 작성했다. 이 사례 인덱스·trace 출력 미열람/미실행, 미채점. 사용자 승인 전 구현 변경 금지. 승인 후 최초 실행 원본 점수 보존.",
+    "초안은 인덱서 출력을 보지 않고 원문으로 작성했다. 사용자 검토 조건 2개를 반영해 승인본으로 확정했다. 동결된 구현의 첫 실행·점수·원본을 보존한 뒤 보고하며 보고 전 사례 대응 수정을 하지 않는다.",
     "CONFIRMED는 소스상 연결이다. 조건부 경로의 매 요청 실행을 뜻하지 않는다. 인증 실패·방명록·정상 흐름을 분리한다.",
     "graph 비교는 JSP 목록 form 108행, 명시한 메서드의 calls 호출 위치, DAO executes, mysql SQL reads/writes/includes/resultMap이다. 외부 라이브러리 내부·런타임 조건·forward/view·VIEW 내부 확장은 supplemental_assertions로 별도 보고하고 점수에 합산하지 않는다.",
     "Controller 이전 필터/인터셉터/AOP, DTO getter/setter/컬렉션/표준 라이브러리 내부, 다른 JSP 버튼 상세·등록·수정·삭제, forward/redirect 도착 URL 이후는 제외한다. 목록에 조회수 UPDATE를 섞지 않는다.",
     "mapperLocations + Globals.DbType=mysql, Globals.Auth=security와 listener/profile 설정으로 저장소 기본값을 확인한다. 운영 DB/서버·런타임 override·실제 실행은 미검증.",
-    "COMVNUSERMASTER는 VIEW다. 스키마의 table/view 공통 이름으로 SQL→VIEW를 비교하고 mysql DDL/기반 테이블은 별도 보충한다."
+    "COMVNUSERMASTER는 VIEW다. 스키마의 table/view 공통 이름으로 SQL→VIEW를 비교하고 mysql DDL/기반 테이블은 별도 보충한다.",
+    "외부 주입 메서드 호출 자체는 calls→unknown:external-injection UNRESOLVED로 기록한다. pageUnit/pageSize 호출은 기존 공통상세코드와 같이 논리 연결 하나, 두 호출 위치 근거로 비교한다.",
+    "공통 인증 Helper의 isAuthenticated/getAuthenticatedUser로 들어가는 호출까지만 점수 범위다. Helper→security 구현 연결 2개는 supplemental_assertions이며 점수에서 제외한다."
   ],
   "scope": [
     {
@@ -137,26 +139,6 @@
       ],
       "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
       "line": 153
-    },
-    {
-      "from": {
-        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#getAuthenticatedUser"
-      },
-      "kinds": [
-        "calls"
-      ],
-      "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
-      "line": 42
-    },
-    {
-      "from": {
-        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#isAuthenticated"
-      },
-      "kinds": [
-        "calls"
-      ],
-      "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
-      "line": 59
     },
     {
       "from": {
@@ -348,6 +330,26 @@
       "kinds": [
         "maps_to"
       ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+      "line": 171
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+      "line": 172
     }
   ],
   "edges": [
@@ -527,120 +529,6 @@
           "line": 58
         }
       ]
-    },
-    {
-      "from": {
-        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#getAuthenticatedUser"
-      },
-      "to": {
-        "name": "egovframework.com.sec.ram.service.impl.EgovUserDetailsSecurityServiceImpl#getAuthenticatedUser"
-      },
-      "kind": "calls",
-      "status": "CONFIRMED",
-      "evidence": [
-        {
-          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
-          "line": 42
-        },
-        {
-          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
-          "line": 33
-        },
-        {
-          "file": "src/main/java/egovframework/com/cmm/service/EgovUserDetailsService.java",
-          "line": 11
-        },
-        {
-          "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
-          "line": 34
-        },
-        {
-          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
-          "line": 36
-        },
-        {
-          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
-          "line": 38
-        },
-        {
-          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
-          "line": 41
-        },
-        {
-          "file": "src/main/resources/egovframework/egovProps/globals.properties",
-          "line": 26
-        },
-        {
-          "file": "src/main/java/egovframework/com/cmm/context/EgovWebServletContextListener.java",
-          "line": 58
-        },
-        {
-          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
-          "line": 61
-        },
-        {
-          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
-          "line": 76
-        }
-      ],
-      "note": "기본 security profile. 외부 override는 미검증."
-    },
-    {
-      "from": {
-        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#isAuthenticated"
-      },
-      "to": {
-        "name": "egovframework.com.sec.ram.service.impl.EgovUserDetailsSecurityServiceImpl#isAuthenticated"
-      },
-      "kind": "calls",
-      "status": "CONFIRMED",
-      "evidence": [
-        {
-          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
-          "line": 59
-        },
-        {
-          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
-          "line": 33
-        },
-        {
-          "file": "src/main/java/egovframework/com/cmm/service/EgovUserDetailsService.java",
-          "line": 24
-        },
-        {
-          "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
-          "line": 61
-        },
-        {
-          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
-          "line": 36
-        },
-        {
-          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
-          "line": 38
-        },
-        {
-          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
-          "line": 41
-        },
-        {
-          "file": "src/main/resources/egovframework/egovProps/globals.properties",
-          "line": 26
-        },
-        {
-          "file": "src/main/java/egovframework/com/cmm/context/EgovWebServletContextListener.java",
-          "line": 58
-        },
-        {
-          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
-          "line": 61
-        },
-        {
-          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
-          "line": 76
-        }
-      ],
-      "note": "기본 security profile. 외부 override는 미검증."
     },
     {
       "from": {
@@ -1360,6 +1248,36 @@
           "line": 10
         }
       ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.cop.bbs.web.EgovArticleController#selectArticleList"
+      },
+      "to": {
+        "kind": "unknown",
+        "pattern": "external-injection"
+      },
+      "kind": "calls",
+      "status": "UNRESOLVED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 89
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 90
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 171
+        },
+        {
+          "file": "src/main/java/egovframework/com/cop/bbs/web/EgovArticleController.java",
+          "line": 172
+        }
+      ],
+      "reason": "propertyService.getInt(pageUnit/pageSize)의 구현이 외부 라이브러리에 있음. 호출 위치는 확인했으나 구현 내부는 확정하지 않음"
     }
   ],
   "candidate_files": [
@@ -1699,6 +1617,122 @@
           "line": 404
         }
       ]
+    },
+    {
+      "id": "auth-helper-internal-getAuthenticatedUser",
+      "status": "CONFIRMED",
+      "claim": "egovframework.com.cmm.util.EgovUserDetailsHelper#getAuthenticatedUser → egovframework.com.sec.ram.service.impl.EgovUserDetailsSecurityServiceImpl#getAuthenticatedUser. 공통 인증 Helper 내부 위임은 연결 점수 범위 밖의 보충 근거다.",
+      "relationship": "calls",
+      "from": {
+        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#getAuthenticatedUser"
+      },
+      "to": {
+        "name": "egovframework.com.sec.ram.service.impl.EgovUserDetailsSecurityServiceImpl#getAuthenticatedUser"
+      },
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 42
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 33
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/EgovUserDetailsService.java",
+          "line": 11
+        },
+        {
+          "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 36
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 38
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 41
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 26
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/context/EgovWebServletContextListener.java",
+          "line": 58
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 61
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "id": "auth-helper-internal-isAuthenticated",
+      "status": "CONFIRMED",
+      "claim": "egovframework.com.cmm.util.EgovUserDetailsHelper#isAuthenticated → egovframework.com.sec.ram.service.impl.EgovUserDetailsSecurityServiceImpl#isAuthenticated. 공통 인증 Helper 내부 위임은 연결 점수 범위 밖의 보충 근거다.",
+      "relationship": "calls",
+      "from": {
+        "name": "egovframework.com.cmm.util.EgovUserDetailsHelper#isAuthenticated"
+      },
+      "to": {
+        "name": "egovframework.com.sec.ram.service.impl.EgovUserDetailsSecurityServiceImpl#isAuthenticated"
+      },
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 59
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/util/EgovUserDetailsHelper.java",
+          "line": 33
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/service/EgovUserDetailsService.java",
+          "line": 24
+        },
+        {
+          "file": "src/main/java/egovframework/com/sec/ram/service/impl/EgovUserDetailsSecurityServiceImpl.java",
+          "line": 61
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 36
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 38
+        },
+        {
+          "file": "src/main/resources/egovframework/spring/com/context-egovuserdetailshelper.xml",
+          "line": 41
+        },
+        {
+          "file": "src/main/resources/egovframework/egovProps/globals.properties",
+          "line": 26
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/context/EgovWebServletContextListener.java",
+          "line": 58
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 61
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/config/EgovWebApplicationInitializer.java",
+          "line": 76
+        }
+      ]
     }
   ],
   "excluded_paths": [
@@ -1724,8 +1758,13 @@
     }
   ],
   "approval": {
-    "status": "PENDING_USER_GATE",
+    "status": "APPROVED_BY_USER_WITH_CONDITIONS_APPLIED",
+    "approved_at": "2026-10-27T04:32:03.030Z",
+    "conditions": [
+      "외부 주입 호출은 구현 부재를 이유로 calls unknown UNRESOLVED로 기록",
+      "공통 인증 Helper 진입 호출까지만 연결 점수 범위"
+    ],
     "first_execution": "NOT_RUN",
-    "implementation_tuning": "PROHIBITED_UNTIL_APPROVAL"
+    "implementation_tuning": "PROHIBITED_UNTIL_FIRST_SCORE_REPORT"
   }
 }
