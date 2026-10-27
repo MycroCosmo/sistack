@@ -127,3 +127,4 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - XML 조건부 빈·인터셉터는 profile 상태를 함께 전파한다. 등록된 property-placeholder 위치의 spring.profiles.active/default 및 리터럴 Java System.setProperty를 해석한다. 비활성은 제외하고 미확정 조건은 reason에 적어 LIKELY로 기록한다. 임의 Java 계산과 서버 override를 실행해 추정하지 않는다. eGovFrame의 동적 Java 프로필 계산은 자동 확정 범위 밖이므로 조건부 선언은 LIKELY로 남을 수 있다.
 - 개인정보 마스킹 전에 비밀값·명시적 계좌/카드 라벨을 우선 처리한다. 그 밖의 32/40/64자 16진수와 UUID는 식별자로 보존한다. 구조화된 *_sha256/source_hash/tool_fingerprint 필드는 유효한 식별자일 때 일반 마스킹을 생략한다. 원래 개인정보 회귀 테스트도 유지한다.
 - 5개 결함에 대한 합성 실패 테스트 8개를 수정 전에 실행해 8개 모두 실패함을 확인했다. 조건부 ref 빈과 비밀 라벨 회귀도 추가 재현했다. 첫 held-out 기준선과 승인 정답은 바꾸지 않고 v2에 새 run-id를 사용한다. v2는 결함 수정 확인이며 일반화 성능 평가가 아니다.
+- 첫 v2 시도에서 Object 매개변수의 String 인자 대입 가능성과 HTML 속성명의 대소문자 차이를 추가 발견했다. 두 합성 테스트를 다시 실패시킨 뒤 일반 대입 가능 타입 및 HTML 속성명 정규화로 수정했다. 이 시도 결과는 보존하고 최종 검증에는 v2-final 새 run-id를 사용한다. Java 타입 추론은 전체 컴파일러의 overload/가변인자 분석을 대신하지 않는다.

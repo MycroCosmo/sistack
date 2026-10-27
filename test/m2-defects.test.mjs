@@ -20,7 +20,7 @@ test('static: import·같은 패키지·중첩 반환 타입으로 로컬 static
   const edges=await fixture(t,{
     'Caller.java':'package app;\nimport util.Codec;\npublic class Caller {\npublic void run(Input value) { Codec.encode(value.getText(), Helpers.trim(value.getText())); Helpers.check(); }\n}',
     'Codec.java':java('Codec','public static String encode(String a, String b) { return a; }\npublic static String encode(String a, byte[] b) { return a; }','util'),
-    'Helpers.java':java('Helpers','public static String trim(String x) { return x; }\npublic static void check() {}'),
+    'Helpers.java':java('Helpers','public static String trim(Object x) { return "text"; }\npublic static void check() {}'),
     'Input.java':java('Input','public String getText() { return "text"; }')
   });
   const calls=edges.filter(e=>e.fromNode.name==='app.Caller#run'&&e.kind==='calls');
@@ -39,7 +39,7 @@ test('static: 외부 import 호출은 내부를 만들지 않고 external로 기
 test('JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의 기본 action을 쓴다',async t=>{
   const edges=await fixture(t,{
     'C.java':'@Controller\nclass C {\n@PostMapping("/save.do")\npublic void save() {}\n@PostMapping("/list.do")\npublic void list() {}\n}',
-    'page.jsp':'<form id="main" method="POST" action="/save.do" onsubmit="return save(this)"></form>\n<script>\nfunction list(){ document.forms[0].action="/list.do"; document.forms[0].submit(); }\nfunction save(form){ form.submit(); }\n</script>'
+    'page.jsp':'<form id="main" method="POST" action="/save.do" onSubmit="return save(this)"></form>\n<script>\nfunction list(){ document.forms[0].action="/list.do"; document.forms[0].submit(); }\nfunction save(form){ form.submit(); }\n</script>'
   });
   const requests=edges.filter(e=>e.kind==='requests');
   assert.ok(requests.some(e=>e.fromNode.name==='page.jsp#list'&&e.toNode.name==='POST /list.do'));
