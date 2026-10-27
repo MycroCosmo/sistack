@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { buildIndex } from '../lib/indexer/index.mjs';
 import { queryIndex } from '../lib/indexer/query.mjs';
-import { validateIndex, Graph } from '../lib/indexer/graph.mjs';
+import { validateIndex, Graph, sanitize } from '../lib/indexer/graph.mjs';
 import { collectJava } from '../lib/indexer/java.mjs';
 import { collectJs } from '../lib/indexer/js.mjs';
 import { collectJsp } from '../lib/indexer/jsp.mjs';
@@ -90,4 +90,22 @@ test('파싱 실패·비공개·테스트 제외·마스킹·Git 없는 대상',
 });
 test('contextPath가 선언되지 않은 ctx 조합을 확정하지 않는다', async () => {
   await fixture({ 'a.js': "$.post(ctx + '/delete');", 'C.java': 'package p;\n@Controller\npublic class C {\n@PostMapping("/delete")\npublic void run() {}\n}' }, index => assert.ok(index.unresolved.some(u => u.pattern === 'string-url')));
+});
+test('호출처럼 보이는 Java/JS 문자열을 실행 연결로 오인하지 않는다', async () => {
+  await fixture({ 'C.java': 'package p;\npublic class C {\n@Autowired\nprivate S svc;\npublic void run() { String example = "svc.go()"; }\n}', 'S.java': 'package p;\n@Service\npublic class S {\npublic void go() {}\n}', 'a.js': `const example = "$.post('/fake')"; $.get('/real');` }, index => { assert.ok(!has(index,'p.C#run','p.S#go','calls')); assert.ok(!JSON.stringify(index).includes('/fake')); });
+});
+test('콤마 JOIN 및 MERGE USING 읽기 대상을 구분한다', () => {
+  const g = new Graph(); collectSql('x.sql', 'SELECT * FROM A x, B y, C z WHERE x.ID=y.ID; MERGE INTO D USING E ON (D.ID=E.ID);', g);
+  for (const name of ['A','B','C','E']) assert.ok(g.edges.some(e => e.kind === 'reads' && g.byId.get(e.to).name === name));
+  assert.ok(g.edges.some(e => e.kind === 'writes' && g.byId.get(e.to).name === 'D'));
+});
+test('개인정보는 마스킹하되 불투명 해시는 식별자로 보존한다', () => {
+  const hash = '1234567890123456789012345678901234567890123456789012345678901234';
+  const result = sanitize({ id: hash, name: 'synthetic@example.invalid', reason: 'password=synthetic' });
+  assert.equal(result.id, hash); assert.equal(result.name, '[REDACTED]'); assert.ok(!result.reason.includes('synthetic'));
+  assert.equal(sanitize({ name: 'token=' + hash }).name, 'token=[REDACTED]');
+});
+test('반복 SQL은 연결 하나로 묶고 근거 위치 제한을 표시한다', () => {
+  const g = new Graph(); collectSql('seed.sql', Array.from({length:20}, (_, i) => `INSERT INTO A VALUES (${i});`).join('\n'), g);
+  assert.equal(g.edges.length, 1); assert.equal(g.edges[0].evidence.length, 8); assert.equal(g.edges[0].evidence_truncated, true);
 });

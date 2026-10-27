@@ -14,6 +14,8 @@ if (isMain(import.meta.url)) await cli(async () => {
     else if (key === '--format' && ['text', 'json'].includes(value)) format = value;
     else throw new Error('알 수 없는 옵션');
   }
-  const result = sanitize(queryIndex(JSON.parse(await readFile(file, 'utf8')), options));
+  let index;
+  try { index = JSON.parse(await readFile(file, 'utf8')); } catch { throw new Error('인덱스 JSON을 읽을 수 없습니다'); }
+  const result = sanitize(queryIndex(index, options));
   console.log(format === 'text' ? queryText(result) : JSON.stringify(result, null, 2));
 });
