@@ -9,6 +9,7 @@ import { sanitize } from '../indexer/graph.mjs';
 import { mask } from '../mask/index.mjs';
 import { validateManifest } from '../manifest/index.mjs';
 import { noLinks, inside, json, save, digest, checkSources } from '../trace/io.mjs';
+import { proposalPaths } from './proposal.mjs';
 
 export const disclaimer = '> AI의 PASS는 PL/PM 승인이나 고객 검수 완료가 아닙니다.';
 const runPattern = /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,127}$/;
@@ -65,6 +66,7 @@ export async function finishDebug(target, runId) {
   const points = [];
   for (const c of diagnosis.candidates) {
     if (!['CONFIRMED', 'LIKELY', 'UNRESOLVED'].includes(c.status) || !c.cause?.trim() || !c.reason?.trim() || !Number.isInteger(c.level) || c.level < 1 || c.level > 5 || !Array.isArray(c.locations)) throw new Error('후보 계약 오류');
+    if (!strings(c.identifiers) || c.identifiers.some(id => !c.cause.includes(id))) throw new Error('원인 문장에 불일치하는 실제 식별자·값을 그대로 기록하세요');
     if ((c.level >= 2 && !c.locations.length) || (c.status === 'CONFIRMED' && c.level < 2)) throw new Error('근거 없는 원인 확정 금지');
     if (c.level >= 4 && !diagnosis.reproduction?.executed) throw new Error('실행 없이 증거 단계 상향 금지');
     points.push(...c.locations);
@@ -80,6 +82,11 @@ export async function finishDebug(target, runId) {
     await save(path.join(dir, 'evidence/reproduction.txt'), mask(proof));
   }
   if (!diagnosis.proposal || typeof diagnosis.proposal.diff !== 'string' || !diagnosis.proposal.note?.trim()) throw new Error('diff 또는 제안 보류 이유 필요');
+  if (!diagnosis.proposal.diff.trim() && diagnosis.candidates.some(c => c.status !== 'UNRESOLVED')) throw new Error('UNRESOLVED 외에는 구체적 수정 diff가 필요합니다');
+  if (diagnosis.proposal.diff.trim()) for (const file of proposalPaths(diagnosis.proposal.diff)) {
+    await inside(root, file);
+    if (!Object.hasOwn(stage.source_files, file)) throw new Error('diff 대상은 검토한 소스 파일이어야 합니다');
+  }
   const status = diagnosis.candidates.some(c => c.status === 'CONFIRMED') ? 'PASS' : 'PARTIAL';
   const safe = sanitize(diagnosis);
   // 입력 검토 파일도 마스킹하며 최종 결과는 exclusive 저장한다.

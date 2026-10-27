@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: proposal consistency applies diff only to a copy and compares against reverse bug patch
+ok 1 - proposal consistency applies diff only to a copy and compares against reverse bug patch
+  ---
+  duration_ms: 856.2987
+  type: 'test'
+  ...
+# Subtest: proposal verification requires a matching preserved score before reading a baseline
+ok 2 - proposal verification requires a matching preserved score before reading a baseline
+  ---
+  duration_ms: 55.4522
+  type: 'test'
+  ...
+# Subtest: held-out proposal comparison stays private, checks all files, rejects escaping patches
+ok 3 - held-out proposal comparison stays private, checks all files, rejects escaping patches
+  ---
+  duration_ms: 588.8734
+  type: 'test'
+  ...
+# Subtest: parser: causes, suppressed branches, modules and unknown/native frames remain distinguishable
+ok 4 - parser: causes, suppressed branches, modules and unknown/native frames remain distinguishable
+  ---
+  duration_ms: 3.4373
+  type: 'test'
+  ...
+# Subtest: prepare and finish persist masked evidence, source candidates and valid manifest without modifying source
+ok 5 - prepare and finish persist masked evidence, source candidates and valid manifest without modifying source
+  ---
+  duration_ms: 305.3877
+  type: 'test'
+  ...
+# Subtest: finish rejects nonexistent locations, changed sources and fabricated execution levels
+ok 6 - finish rejects nonexistent locations, changed sources and fabricated execution levels
+  ---
+  duration_ms: 286.665
+  type: 'test'
+  ...
+# Subtest: finish rejects abstract causes and missing diffs except unresolved diagnoses
+ok 7 - finish rejects abstract causes and missing diffs except unresolved diagnoses
+  ---
+  duration_ms: 257.3277
+  type: 'test'
+  ...
+# Subtest: user report preserves concrete field names and proposed diff while masking personal data
+ok 8 - user report preserves concrete field names and proposed diff while masking personal data
+  ---
+  duration_ms: 159.7094
+  type: 'test'
+  ...
+# Subtest: Oracle log-only remains unresolved and needs external evidence
+ok 9 - Oracle log-only remains unresolved and needs external evidence
+  ---
+  duration_ms: 189.7107
+  type: 'test'
+  ...
+# Subtest: standalone skill CLI runs with only copied skill files
+ok 10 - standalone skill CLI runs with only copied skill files
+  ---
+  duration_ms: 694.4289
+  type: 'test'
+  ...
+# Subtest: all ten training patches apply only to isolated copies and draft source locations stay fresh
+ok 11 - all ten training patches apply only to isolated copies and draft source locations stay fresh
+  ---
+  duration_ms: 5432.3226
+  type: 'test'
+  ...
+# Subtest: eval rejects draft answers and keeps held-out first score immutable without exporting content
+ok 12 - eval rejects draft answers and keeps held-out first score immutable without exporting content
+  ---
+  duration_ms: 641.3093
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8113.9998

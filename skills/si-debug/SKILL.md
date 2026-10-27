@@ -21,7 +21,7 @@ Node.js 18 이상이 필요하다. 경로는 설치된 이 스킬 폴더 기준�
 4. `evidence/parsed.json`, `index.json`, `queries.json`을 읽고 실제 소스·설정을 확인한다. [triage](references/triage.md)에 따라 후보마다 확인 위치·반증 조건을 적는다. 근거 파일·라인을 직접 읽어 문자열 검색 결과를 검증한다.
 5. [Spring](references/patterns-spring.md), [MyBatis](references/patterns-mybatis.md), [DB](references/patterns-db.md), [화면](references/patterns-web.md), [WAS 로그](references/was-logs.md) 중 해당 자료만 사용한다. 설정 선택·활성 프로필·코드 분기까지 확인해 가장 이른 잘못된 결정으로 거슬러 간다. 단순 null 검사나 try-catch로 증상을 가리는 수정은 제안하지 않는다.
 6. 가능한 경우 승인된 로컬 테스트 환경에서 재현한다. 테스트 DB도 명시적 사용 승인이 있을 때만 사용한다. 운영·개발 DB와 배포 서버에는 접속하지 않는다. 불가하면 필요한 로그·설정·SELECT를 사용자에게 제시하고 미재현으로 기록한다.
-7. [출력 계약](references/output-format.md)에 따라 마스킹한 `evidence/diagnosis.json`을 작성한다. 재현 스크립트·마스킹한 실행 결과는 evidence/에 둔다. 근거 4~5단계에는 실제 명령·독립 실행 증거가 필요하다. 같은 원인의 다른 위치도 인덱스와 소스로 확인한다.
+7. [출력 계약](references/output-format.md)에 따라 `evidence/diagnosis.json`을 작성한다. 원인 문장에 실제 필드명·별칭·모델 키·값을 그대로 대조하고 identifiers에 기록한다. 소스 식별자는 개인정보가 아니다. 비밀값·개인정보는 마스킹한다. UNRESOLVED가 아니면 적용 가능한 최소 diff를 반드시 제안한다. 재현 스크립트·마스킹한 실행 결과는 evidence/에 둔다. 근거 4~5단계에는 실제 명령·독립 실행 증거가 필요하다. 같은 원인의 다른 위치도 확인한다.
 8. `node scripts/debug.mjs finish <프로젝트> <run-id>`를 실행한다. 소스·도구가 바뀌었으면 새 run으로 시작한다. 최종 report.md와 manifest.json을 링크하고 원인·증거 단계·미재현·남은 후보를 설명한다. PASS는 분석 범위이며 승인·수정 적용·고객 검수 완료가 아니다.
 
 ## 수정 경계
@@ -37,3 +37,5 @@ Node.js 18 이상이 필요하다. 경로는 설치된 이 스킬 폴더 기준�
 
 evals/debug의 자체 10건은 자기 작성 편향이 있는 학습 세트다. 정답 초안은 승인 전 채점하지 않는다.
 Ian의 private 사례는 구현 동결 후 첫 실행을 보존한 뒤에만 수정한다. 공개 보고에는 위치·적중 여부만 쓰고 내용은 인용하지 않는다.
+사용자 프로젝트의 report.md에는 실제 식별자와 수정 diff를 제시한다. private 평가의 비공개 원칙은 docs/ 등 공개 보고에 적용하며 사용자에게 주는 private 진단을 추상화하는 이유로 쓰지 않는다. 비밀값·개인정보 마스킹은 모든 산출물에 유지한다.
+수정안 정합성은 위치 적중과 별도 지표다. 진단·보고서를 보존하고 채점한 뒤에만 제안 diff를 임시 복사본에 적용해 원본과 비교한다. 학습은 bug.patch 역적용 결과, held-out은 출제 원본을 사용한다. 진단을 만들 때 원본 비교로 답을 역산하지 않는다. 비교 PASS는 앱 실행 검증이 아니다.

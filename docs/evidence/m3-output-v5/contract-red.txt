@@ -1,0 +1,33 @@
+TAP version 13
+# Subtest: finish rejects abstract causes and missing diffs except unresolved diagnoses
+not ok 1 - finish rejects abstract causes and missing diffs except unresolved diagnoses
+  ---
+  duration_ms: 162.5631
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug.test.mjs:64:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug.test.mjs:69:3)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: user report preserves concrete field names and proposed diff while masking personal data
+ok 2 - user report preserves concrete field names and proposed diff while masking personal data
+  ---
+  duration_ms: 156.3307
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 1
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 439.2113

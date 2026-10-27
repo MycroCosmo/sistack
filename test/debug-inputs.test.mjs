@@ -140,8 +140,8 @@ test('scoring fails a single SQL candidate or a definitive claim; three unresolv
     const prep = await prepareDebug(repository, { symptom: '날짜 검색 오류', runId });
     await save(path.join(prep.directory, 'evidence/diagnosis.json'), {
       source_reviewed: true, symptom: '날짜 검색 오류',
-      candidates: candidates.map(c => ({ ...c, cause: '식별자 후보', level: 2, reason: '각 SQL 참조 위치 확인' })),
-      eliminated: ['제공된 소스 외의 경로는 확인 불가'], reproduction: { executed: false, note: 'DB 없음' }, proposal: { diff: '', note: '추가 증거 필요' }, same_pattern: ['세 참조 위치 비교'], verification: ['실행 SQL 확인'], unverified: ['DB 메타데이터'], next_actions: ['실행 SQL과 메타데이터 요청']
+      candidates: candidates.map(c => ({ ...c, cause: 'Query의 first reference 식별자 후보', identifiers: ['Query', 'first reference'], level: 2, reason: '각 SQL 참조 위치 확인' })),
+      eliminated: ['제공된 소스 외의 경로는 확인 불가'], reproduction: { executed: false, note: 'DB 없음' }, proposal: { diff: candidates[0].status === 'UNRESOLVED' ? '' : '--- a/Query.java\n+++ b/Query.java\n@@ -2,1 +2,1 @@\n-// first reference\n+// updated reference\n', note: '추가 증거 필요' }, same_pattern: ['세 참조 위치 비교'], verification: ['실행 SQL 확인'], unverified: ['DB 메타데이터'], next_actions: ['실행 SQL과 메타데이터 요청']
     });
     await finishDebug(repository, runId);
     const result = await scoreDebug(prep.directory, expectedFile, { dataset: 'training', output: path.join(repository, `${runId}.json`), freeze, repository });

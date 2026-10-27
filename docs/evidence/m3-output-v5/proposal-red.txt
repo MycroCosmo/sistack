@@ -1,0 +1,73 @@
+TAP version 13
+# Subtest: proposal consistency applies diff only to a copy and compares against reverse bug patch
+not ok 1 - proposal consistency applies diff only to a copy and compares against reverse bug patch
+  ---
+  duration_ms: 1.4594
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs:29:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot find module 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\scripts\\verify-debug-proposal.mjs' imported from C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs"
+  code: 'ERR_MODULE_NOT_FOUND'
+  stack: |-
+    finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    moduleResolve (node:internal/modules/esm/resolve:860:10)
+    defaultResolve (node:internal/modules/esm/resolve:984:11)
+    ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    #cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+  ...
+# Subtest: proposal verification requires a matching preserved score before reading a baseline
+not ok 2 - proposal verification requires a matching preserved score before reading a baseline
+  ---
+  duration_ms: 0.7066
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs:41:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot find module 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\scripts\\verify-debug-proposal.mjs' imported from C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs"
+  code: 'ERR_MODULE_NOT_FOUND'
+  stack: |-
+    finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    moduleResolve (node:internal/modules/esm/resolve:860:10)
+    defaultResolve (node:internal/modules/esm/resolve:984:11)
+    ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    #cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+  ...
+# Subtest: held-out proposal comparison stays private, checks all files, rejects escaping patches
+not ok 3 - held-out proposal comparison stays private, checks all files, rejects escaping patches
+  ---
+  duration_ms: 0.6763
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs:49:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot find module 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\scripts\\verify-debug-proposal.mjs' imported from C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs"
+  code: 'ERR_MODULE_NOT_FOUND'
+  stack: |-
+    finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    moduleResolve (node:internal/modules/esm/resolve:860:10)
+    defaultResolve (node:internal/modules/esm/resolve:984:11)
+    ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    #cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 88.9308

@@ -68,8 +68,9 @@ export async function freezeDebug(output, { repository = root } = {}) {
   await save(output, record); return { revision: record.revision, files: names.length, output };
 }
 
-export async function scoreDebug(runDir, expectedFile, { dataset, output, freeze, repository = root, privateRoot = path.join(root, 'evals/private') } = {}) {
+export async function scoreDebug(runDir, expectedFile, { dataset, output, freeze, phase = 'first', repository = root, privateRoot = path.join(root, 'evals/private') } = {}) {
   if (!['training', 'held-out'].includes(dataset) || !output || !freeze) throw new Error('dataset/output/freeze 필요');
+  if (!['first', 'follow-up'].includes(phase)) throw new Error('평가 phase 오류');
   const frozen = await json(freeze);
   await checkSources(repository, frozen.files);
   if (frozen.tool_fingerprint !== await debugFingerprint()) throw new Error('동결 도구 불일치');
@@ -98,14 +99,21 @@ export async function scoreDebug(runDir, expectedFile, { dataset, output, freeze
   if (dataset === 'held-out') {
     const first = await inside(privateRoot, `${expected.case_id}/first-run.json`);
     await noLinks(first);
-    try { await lstat(first); throw new Error('첫 실행이 이미 보존됐습니다. 후속 평가는 별도 승인 후 진행하세요'); } catch(e) { if (e.code !== 'ENOENT') throw e; }
-    const snapshot = {};
-    for (const file of await inventory(runDir)) snapshot[file] = mask(new TextDecoder('utf-8', { fatal: true }).decode(await readFile(await inside(runDir, file))));
-    await save(first, { frozen, score, snapshot, expected_sha256: digest(await readFile(expectedFile)), recorded_at: new Date().toISOString() });
+    if (phase === 'first') {
+      try { await lstat(first); throw new Error('첫 실행이 이미 보존됐습니다. 후속 평가는 별도 승인 후 진행하세요'); } catch(e) { if (e.code !== 'ENOENT') throw e; }
+      const snapshot = {};
+      for (const file of await inventory(runDir)) snapshot[file] = mask(new TextDecoder('utf-8', { fatal: true }).decode(await readFile(await inside(runDir, file))));
+      await save(first, { frozen, score, snapshot, expected_sha256: digest(await readFile(expectedFile)), recorded_at: new Date().toISOString() });
+    } else {
+      const baseline = await json(first);
+      const firstStage = JSON.parse(baseline.snapshot['evidence/stage.json']);
+      if (firstStage.run_id === manifest.run_id) throw new Error('후속 평가는 새 run-id가 필요합니다');
+    }
   }
   await save(output, { dataset, case_id: expected.case_id, score, frozen_revision: frozen.revision, tool_fingerprint: frozen.tool_fingerprint,
+    phase, scored_at: new Date().toISOString(), diagnosis_sha256: digest(await readFile(path.join(runDir, 'evidence/diagnosis.json'))),
     run_id: manifest.run_id, expected_sha256: digest(await readFile(expectedFile)), report_sha256: digest(report),
-    caveat: dataset === 'training' ? 'Codex 자기 작성 학습 세트. 일반화 성능이 아니다.' : '동결 구현 첫 실행. 실제 내용은 비공개 보존.' });
+    caveat: dataset === 'training' ? 'Codex 자기 작성 학습 세트. 일반화 성능이 아니다.' : phase === 'first' ? '동결 구현 첫 실행. 실제 내용은 비공개 보존.' : '승인된 후속 실행. 첫 점수와 합산하지 않는다. 실제 내용은 비공개 보존.' });
   return dataset === 'held-out' ? { locations: score.locations, hit: score.hit } : { dataset, case_id: expected.case_id, ...score };
 }
 
@@ -114,7 +122,7 @@ if (isMain(import.meta.url)) await cli(async () => {
   let result;
   if (command === 'prepare' && args.length === 1) result = await prepareCase(args[0]);
   else if (command === 'freeze' && args.length === 1) result = await freezeDebug(args[0]);
-  else if (command === 'score' && args.length === 6) result = await scoreDebug(args[0], args[1], { dataset: args[2], output: args[3], freeze: args[4], privateRoot: args[5] });
-  else throw new Error('사용법: eval-debug.mjs prepare <case-id> | freeze <새파일> | score <run-dir> <expected.json> <training|held-out> <새결과> <freeze.json> <private-root>');
+  else if (command === 'score' && [6, 7].includes(args.length)) result = await scoreDebug(args[0], args[1], { dataset: args[2], output: args[3], freeze: args[4], privateRoot: args[5], phase: args[6] ?? 'first' });
+  else throw new Error('사용법: eval-debug.mjs prepare <case-id> | freeze <새파일> | score <run-dir> <expected.json> <training|held-out> <새결과> <freeze.json> <private-root> [first|follow-up]');
   console.log(JSON.stringify(result, null, 2));
 });

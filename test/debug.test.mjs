@@ -19,7 +19,7 @@ async function fixture(t) {
   const prep = await prepareDebug(project, { log: 'java.lang.IllegalStateException: phone=010-0000-0000\n\tat app.C.go(C.java:5)', packagePrefix: 'app', runId: 'run' });
   return { project, dir: prep.directory };
 }
-function review() { return { source_reviewed: true, symptom: 'GET /x 오류 phone=010-0000-0000', candidates: [{ cause: '확인한 조건 불일치', status: 'CONFIRMED', level: 2, locations: [{ file: 'src/app/C.java', line: 5 }], reason: '요청 분기와 반환 값을 직접 확인' }], eliminated: ['오류 전에 URL 매핑 도달 확인'], reproduction: { executed: false, note: 'WAS 미실행' }, proposal: { diff: '', note: '호출 조건 확인 후 제안' }, same_pattern: ['src/app 확인'], verification: ['GET /x 확인'], unverified: ['런타임 미확인'], next_actions: ['로컬 재현'] }; }
+function review() { return { source_reviewed: true, symptom: 'GET /x 오류 phone=010-0000-0000', candidates: [{ cause: 'go의 반환 값 x 확인', identifiers: ['go', 'x'], status: 'CONFIRMED', level: 2, locations: [{ file: 'src/app/C.java', line: 5 }], reason: '요청 분기와 반환 값을 직접 확인' }], eliminated: ['오류 전에 URL 매핑 도달 확인'], reproduction: { executed: false, note: 'WAS 미실행' }, proposal: { diff: '--- a/src/app/C.java\n+++ b/src/app/C.java\n@@ -5,1 +5,1 @@\n-public String go() { return "x"; }\n+public String go() { return "fixed"; }\n', note: '제안만 작성' }, same_pattern: ['src/app 확인'], verification: ['GET /x 확인'], unverified: ['런타임 미확인'], next_actions: ['로컬 재현'] }; }
 
 test('parser: causes, suppressed branches, modules and unknown/native frames remain distinguishable', () => {
   const parsed = parseTrace('java.lang.IllegalStateException: wrapper\n\tat java.base/java.lang.Thread.run(Thread.java:840)\n\tSuppressed: java.io.IOException: close\n\t\tat app.IO.close(Native Method)\nCaused by: app.BusinessException: inner\n\tat app.C.go(C.java:5)\n\tat app.Other.run(Unknown Source)\n\t... 2 more', { packagePrefix: 'app' });
@@ -61,9 +61,42 @@ test('finish rejects nonexistent locations, changed sources and fabricated execu
   await writeFile(path.join(project, 'src/app/C.java'), 'changed'); await assert.rejects(finishDebug(project, 'run'), /변경/);
 });
 
+test('finish rejects abstract causes and missing diffs except unresolved diagnoses', async t => {
+  const { project, dir } = await fixture(t), file = path.join(dir, 'evidence/diagnosis.json');
+  const data = review();
+  data.candidates[0].cause = '확인한 조건 불일치';
+  data.candidates[0].identifiers = ['go', 'x'];
+  data.proposal.diff = '';
+  await save(file, data);
+  await assert.rejects(finishDebug(project, 'run'), /실제 식별자/);
+  data.candidates[0].cause = 'go의 반환 값 x 확인';
+  await save(file, data, { exclusive: false });
+  await assert.rejects(finishDebug(project, 'run'), /diff/);
+  data.candidates[0].status = 'LIKELY';
+  await save(file, data, { exclusive: false });
+  await assert.rejects(finishDebug(project, 'run'), /diff/);
+  data.candidates[0].status = 'UNRESOLVED';
+  await save(file, data, { exclusive: false });
+  assert.equal((await finishDebug(project, 'run')).status, 'PARTIAL');
+});
+
+test('user report preserves concrete field names and proposed diff while masking personal data', async t => {
+  const { project, dir } = await fixture(t), data = review();
+  data.candidates[0].identifiers = ['contents', 'content'];
+  data.candidates[0].cause = 'textarea name="contents" — Board/InitBinder는 content, phone=010-0000-0000';
+  data.proposal = { diff: '--- a/src/app/C.java\n+++ b/src/app/C.java\n@@ -5,1 +5,1 @@\n-public String go() { return "x"; }\n+public String go() { return "fixed"; }\n', note: '제안만 작성' };
+  await save(path.join(dir, 'evidence/diagnosis.json'), data);
+  await finishDebug(project, 'run');
+  const report = await readFile(path.join(dir, 'report.md'), 'utf8');
+  assert.match(report, /name="contents" — Board\/InitBinder는 content/);
+  assert.ok(report.includes(data.proposal.diff));
+  assert.ok(!report.includes('010-0000-0000'));
+});
+
 test('Oracle log-only remains unresolved and needs external evidence', async t => {
   const { project, dir } = await fixture(t), data = review();
   data.candidates[0].status = 'UNRESOLVED'; data.candidates[0].cause = 'ORA-00904: schema/alias 후보';
+  data.candidates[0].identifiers = ['ORA-00904', 'schema/alias']; data.proposal.diff = '';
   data.next_actions = ['사용자에게 실행 SQL 및 컬럼 메타데이터 요청'];
   await save(path.join(dir, 'evidence/diagnosis.json'), data);
   assert.equal((await finishDebug(project, 'run')).status, 'PARTIAL');
@@ -99,6 +132,7 @@ test('eval rejects draft answers and keeps held-out first score immutable withou
   await writeFile(path.join(project, 'C.java'), 'class C {}\n');
   const prep = await prepareDebug(project, { symptom: 'private synthetic sentinel', runId: 'first' });
   const data = review(); data.candidates[0].locations = [{ file: 'C.java', line: 1 }];
+  data.proposal.diff = '--- a/C.java\n+++ b/C.java\n@@ -1,1 +1,1 @@\n-class C {}\n+class C { int x; }\n';
   await save(path.join(prep.directory, 'evidence/diagnosis.json'), data); await finishDebug(project, 'first');
   const expectedFile = path.join(privateRoot, 'synthetic/expected.json');
   const expected = { case_id: 'synthetic', dataset: 'held-out', review_status: 'draft', approved_by: null, locations: [{ file: 'C.java', line: 1, enclosing: { kind: 'java-type', name: 'C' } }], status: 'CONFIRMED', source_files: { 'C.java': digest('class C {}\n') } };
@@ -112,6 +146,12 @@ test('eval rejects draft answers and keeps held-out first score immutable withou
   const baseline = await readFile(path.join(privateRoot, 'synthetic/first-run.json'));
   await assert.rejects(scoreDebug(prep.directory, expectedFile, { ...options, output: path.join(privateRoot, 'synthetic/second.json') }), /이미 보존/);
   assert.deepEqual(await readFile(path.join(privateRoot, 'synthetic/first-run.json')), baseline);
+  const next = await prepareDebug(project, { symptom: '후속 출력 계약 확인', runId: 'followup' });
+  await save(path.join(next.directory, 'evidence/diagnosis.json'), data); await finishDebug(project, 'followup');
+  const followup = await scoreDebug(next.directory, expectedFile, { ...options, phase: 'follow-up', output: path.join(privateRoot, 'synthetic/followup-score.json') });
+  assert.equal(followup.hit, true);
+  assert.deepEqual(await readFile(path.join(privateRoot, 'synthetic/first-run.json')), baseline);
+  await assert.rejects(scoreDebug(prep.directory, expectedFile, { ...options, phase: 'follow-up', output: path.join(privateRoot, 'synthetic/reused.json') }), /새 run-id/);
   expected.case_id = 'synthetic-miss'; expected.status = 'LIKELY'; await save(expectedFile, expected, { exclusive: false });
   const miss = await scoreDebug(prep.directory, expectedFile, { ...options, output: path.join(privateRoot, 'synthetic/miss.json') });
   assert.equal(miss.hit, false); assert.equal(miss.locations[0].hit, false);

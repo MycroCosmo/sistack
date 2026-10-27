@@ -70,9 +70,9 @@ test('deletion ranges match inclusive endpoints but reject outside lines, wrong 
     ['before', [2], 'CONFIRMED', false], ['after', [5], 'CONFIRMED', false], ['status', [3], 'UNRESOLVED', false], ['extra', [3, 6], 'CONFIRMED', false]]) {
     const run = await prepareDebug(repository, { symptom: '누락', runId: id });
     await save(path.join(run.directory, 'evidence/diagnosis.json'), { source_reviewed: true, symptom: '누락',
-      candidates: [{ cause: '원인 위치', status, level: 2, locations: lines.map(line => ({ file: 'C.java', line })), reason: '블록 직접 확인' }],
+      candidates: [{ cause: 'C#run의 x 초기값 확인', identifiers: ['C#run', 'x'], status, level: 2, locations: lines.map(line => ({ file: 'C.java', line })), reason: '블록 직접 확인' }],
       eliminated: ['다른 경로 소거'], same_pattern: ['다른 메서드 확인'], verification: ['실제 요청 확인'], unverified: ['미재현'], next_actions: ['실행 확인'],
-      reproduction: { executed: false, note: '합성 fixture' }, proposal: { diff: '', note: '미적용' } });
+      reproduction: { executed: false, note: '합성 fixture' }, proposal: { diff: status === 'UNRESOLVED' ? '' : '--- a/C.java\n+++ b/C.java\n@@ -3,1 +3,1 @@\n-  int x = 1;\n+  int x = 2;\n', note: '미적용' } });
     await finishDebug(repository, id);
     const score = await scoreDebug(run.directory, expectedFile, { dataset: 'training', output: path.join(repository, id + '.json'), freeze, repository });
     assert.equal(score.hit, hit, id);
