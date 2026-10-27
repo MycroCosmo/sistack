@@ -67,7 +67,7 @@ test('spring 수집: 클래스 경로, 배열, method 속성과 XML handler mapp
   }, index => { assert.equal(index.nodes.filter(n => n.kind === 'endpoint').length, 9); assert.ok(has(index, 'POST /b/y', 'p.C#run', 'maps_to')); assert.ok(has(index, 'ANY /old', 'p.H#handleRequest', 'maps_to')); });
 });
 
-test('함정 01: 목록 문자열 조합은 UNRESOLVED', () => assert.ok(board.edges.some(e => e.status === 'UNRESOLVED' && board.nodes.find(n => n.id === e.to).details.constants?.includes('list')) || board.unresolved.some(u => u.pattern === 'string-url')));
+test('함정 01: 목록 form.submit의 함수 반환 action은 UNRESOLVED', () => assert.ok(board.unresolved.some(u => u.pattern === 'string-url' && u.file === 'src/main/webapp/resources/board.js' && u.line === 15)));
 test('함정 02: JSP contextPath 선언 + 단일 리터럴 삭제 경로는 CONFIRMED', () => assert.ok(namedEdges(board).some(e => e.toName === 'POST /board/delete.do' && e.fromName.includes('#handler:44') && e.status === 'CONFIRMED' && e.evidence.some(p => p.file.endsWith('detail.jsp') && p.line === 7))));
 test('함정 03: 동명 list는 주입 타입으로 구분', () => { assert.ok(has(board, `${controller}#list`, `${impl}#list`, 'calls')); assert.ok(!has(board, `${controller}#list`, 'kr.sistack.board.service.impl.CommonCodeServiceImpl#list', 'calls')); });
 test('함정 04: 공통 paging.jspf는 두 목록에서 공유', () => { const links = namedEdges(board).filter(e => e.kind === 'includes' && e.toName.endsWith('/common/paging.jspf')); assert.ok(links.some(e => e.fromName.endsWith('/board/list.jsp'))); assert.ok(links.some(e => e.fromName.endsWith('/code/list.jsp'))); });

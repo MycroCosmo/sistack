@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.0",
+  "case_id": "legacy-board-create",
+  "review_status": "draft",
+  "source_revision": "fbffe3be67245ae15015af59597dea4ada200c41",
+  "source_files": {
+    "src/main/webapp/WEB-INF/views/board/form.jsp": "8ed0c020451cfa8b84faab83d9c8631360af1eeaa32b07dd254eae7e274f14b9",
+    "src/main/java/kr/sistack/board/web/BoardController.java": "227d0a21ed2932322e94453c3af9c6a6921076936ae759d3d4eed6c863de6e73",
+    "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java": "338abd3aa4a58c89144bfa7f13edd15b36439767a1092a583c65dda9b397b970",
+    "src/main/java/kr/sistack/board/mapper/BoardMapper.java": "7912db189d1060de0e3d4aa7add93f625cb14e446dcb7daa71241d616a88bcfa",
+    "src/main/resources/mapper/BoardMapper.xml": "ad194be2f97e681dea017a28c62b6a1cbd22956ac0c4471c59d1c7963278c4c0"
+  },
+  "title": "게시글 등록",
+  "selection_reason": "조건부 JSP 저장 URL과 쓰기 SQL·selectKey를 확인하는 등록 기준선",
+  "assumptions_and_questions": [
+    "board.id == 0인 신규 등록 분기를 선택한다. JSP EL의 삼항식과 fn:escapeXml(saveUrl)을 따라가면 POST /board/create.do다. 이 조건부 연결을 CONFIRMED로 평가할지 검토가 필요하다.",
+    "validate의 내부 값 검사는 연결 표 밖이지만 호출 자체는 포함한다.",
+    "selectKey의 DUAL 읽기와 BOARD 쓰기를 구분한다. 실제 운영 Oracle 접속은 하지 않는다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/views/board/form.jsp"
+      },
+      "kinds": [
+        "requests"
+      ],
+      "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+      "line": 13
+    },
+    {
+      "from": {
+        "name": "POST /board/create.do"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.BoardController#create"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#create"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper#insert"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.insert"
+      },
+      "kinds": [
+        "reads",
+        "writes"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/views/board/form.jsp"
+      },
+      "to": {
+        "name": "POST /board/create.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 12
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "POST /board/create.do"
+      },
+      "to": {
+        "name": "kr.sistack.board.web.BoardController#create"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 57
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.BoardController#create"
+      },
+      "to": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#create"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 59
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#create"
+      },
+      "to": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#validate"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 40
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 64
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#create"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.BoardMapper#insert"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 15
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 42
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper#insert"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.BoardMapper.insert"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 14
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.insert"
+      },
+      "to": {
+        "name": "DUAL"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.insert"
+      },
+      "to": {
+        "name": "BOARD"
+      },
+      "kind": "writes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 48
+        }
+      ]
+    }
+  ]
+}

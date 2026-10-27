@@ -1,0 +1,173 @@
+{
+  "indexer_revision": "6c415e611bd1515f9f46d1c1f9261fd1a710d19c",
+  "runs": {
+    "legacy": {
+      "target": "examples/legacy-board",
+      "source_revision": "6c415e611bd1515f9f46d1c1f9261fd1a710d19c",
+      "source_dirty": false,
+      "created_at": "2026-10-27T02:56:22.301Z",
+      "indexer_version": "0.1.0",
+      "processed_files": 37,
+      "duration_ms": 169,
+      "nodes": 157,
+      "edges": 104,
+      "status": {
+        "CONFIRMED": 97,
+        "LIKELY": 0,
+        "UNRESOLVED": 7
+      },
+      "unresolved": 8,
+      "skipped": 17,
+      "skipped_patterns": {
+        "external-script": 7,
+        "unsupported-extension": 4,
+        "excluded-directory": 2,
+        "mapping-conditions": 2,
+        "vendor-js": 1,
+        "interceptor-runtime-order": 1
+      },
+      "status_percent": {
+        "CONFIRMED": 93.27,
+        "LIKELY": 0,
+        "UNRESOLVED": 6.73
+      },
+      "timing_scope": "read/collect/link/git metadata; excludes final masking, validation, JSON serialization and output write",
+      "skipped_examples": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/common/header.jspf",
+          "line": 7,
+          "pattern": "external-script",
+          "reason": "외부/벤더/미수집 JS는 실행하거나 다운로드하지 않음"
+        },
+        {
+          "file": "smoke.mjs",
+          "line": 1,
+          "pattern": "unsupported-extension",
+          "reason": "지원 수집기 없음"
+        },
+        {
+          "file": "src/test",
+          "line": 1,
+          "pattern": "excluded-directory",
+          "reason": "생성물·비공개 사례·테스트·도구 폴더는 인덱싱 제외"
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 68,
+          "pattern": "mapping-conditions",
+          "reason": "HTTP method/path 외 params·headers·미디어 타입 조건은 경로 선택에 미반영"
+        },
+        {
+          "file": "src/main/webapp/resources/vendor/jquery-3.7.1.min.js",
+          "line": 1,
+          "pattern": "vendor-js",
+          "reason": "벤더/minified JS는 분석 제외"
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml",
+          "line": 9,
+          "pattern": "interceptor-runtime-order",
+          "reason": "경로 설정과 preHandle만 수집; 런타임 제외 경로·세션 값·실행 순서의 endpoint별 데이터 흐름은 수동 확인"
+        }
+      ]
+    },
+    "egov": {
+      "target": ".testbeds/egovframe",
+      "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
+      "source_dirty": false,
+      "created_at": "2026-10-27T02:51:38.948Z",
+      "indexer_version": "0.1.0",
+      "processed_files": 5488,
+      "duration_ms": 50260,
+      "nodes": 56581,
+      "edges": 56115,
+      "status": {
+        "CONFIRMED": 44401,
+        "LIKELY": 10068,
+        "UNRESOLVED": 1646
+      },
+      "unresolved": 1664,
+      "skipped": 1635,
+      "skipped_patterns": {
+        "unsupported-extension": 757,
+        "jsp-scriptlet": 571,
+        "external-script": 293,
+        "nested-java-type": 4,
+        "vendor-js": 3,
+        "excluded-directory": 2,
+        "java-declaration": 2,
+        "file-read-encoding": 1,
+        "js-braces": 1,
+        "interceptor-runtime-order": 1
+      },
+      "status_percent": {
+        "CONFIRMED": 79.13,
+        "LIKELY": 17.94,
+        "UNRESOLVED": 2.93
+      },
+      "timing_scope": "read/collect/link/git metadata; excludes final masking, validation, JSON serialization and output write",
+      "skipped_examples": [
+        {
+          "file": ".gitattributes",
+          "line": 1,
+          "pattern": "unsupported-extension",
+          "reason": "지원 수집기 없음"
+        },
+        {
+          "file": "src/main/webapp/code500.jsp",
+          "line": 1,
+          "pattern": "jsp-scriptlet",
+          "reason": "JSP scriptlet Java 데이터 흐름 미지원"
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/cop/adb/EgovAddressBookRegist.jsp",
+          "line": 38,
+          "pattern": "external-script",
+          "reason": "외부/벤더/미수집 JS는 실행하거나 다운로드하지 않음"
+        },
+        {
+          "file": "src/main/java/egovframework/com/ext/ldapumt/service/LdapTreeObject.java",
+          "line": 41,
+          "pattern": "nested-java-type",
+          "reason": "내부 클래스의 독립 타입 해석 미지원"
+        },
+        {
+          "file": "src/main/webapp/html/egovframework/com/ext/ldapumt/jstree.min.js",
+          "line": 1,
+          "pattern": "vendor-js",
+          "reason": "벤더/minified JS는 분석 제외"
+        },
+        {
+          "file": ".git",
+          "line": 1,
+          "pattern": "excluded-directory",
+          "reason": "생성물·비공개 사례·테스트·도구 폴더는 인덱싱 제외"
+        },
+        {
+          "file": "src/main/java/egovframework/com/cmm/annotation/IncludedInfo.java",
+          "line": 1,
+          "pattern": "java-declaration",
+          "reason": "지원하는 최상위 클래스 선언 없음"
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/utl/sys/prm/EgovProcessMon.jsp",
+          "line": 1,
+          "pattern": "file-read-encoding",
+          "reason": "파일 읽기 실패 또는 UTF-8 아님"
+        },
+        {
+          "file": "src/main/webapp/html/egovframework/com/cmm/utl/ckeditor/samples/toolbarconfigurator/lib/codemirror/javascript.js",
+          "line": 4,
+          "pattern": "js-braces",
+          "reason": "JS 함수 중괄호를 해석하지 못함"
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/config/egovframework/springmvc/egov-com-interceptor.xml",
+          "line": 25,
+          "pattern": "interceptor-runtime-order",
+          "reason": "경로 설정과 preHandle만 수집; 런타임 제외 경로·세션 값·실행 순서의 endpoint별 데이터 흐름은 수동 확인"
+        }
+      ]
+    }
+  }
+}

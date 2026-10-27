@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0",
+  "case_id": "egov-clcode-delete",
+  "review_status": "draft",
+  "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
+  "source_files": {
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp": "7dfeb221e03db4677d0829a38873f603f50c29a2c4b9227178be53e123c8ad7c",
+    "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java": "4f22f3101f6d406dc4d1913909eb99c4cb37f8110e1042f60318c1f4af06a4a6",
+    "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/EgovCcmCmmnClCodeManageServiceImpl.java": "94744826710efb9ce5b1cde9bba33fd2138ed484ee054e2d892e7a849f6d6aa3",
+    "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/CmmnClCodeManageDAO.java": "42c979341ea2a9d30d743749f14c9d715ceaac83b3f840fbdbc5d682b3d7f58d",
+    "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml": "56f1b439f556684e48a27a3c1da4cd9e92f0435f05e9344bb683f9b36ccff7e9"
+  },
+  "title": "공통분류코드 삭제",
+  "selection_reason": "단순 CRUD 메뉴. delete라는 이름과 실제 UPDATE USE_AT=N SQL의 차이를 확인",
+  "assumptions_and_questions": [
+    "DB별 XML이 공존하므로 활성 Mapper 선택은 LIKELY다. Oracle XML의 실제 쓰기는 DELETE가 아닌 UPDATE다.",
+    "fn_egov_delete_code의 동일 폼 action 할당→submit을 한 흐름으로 본다. 실행 여부는 confirm 입력에 달려 있다.",
+    "삭제 후 forward로 목록을 다시 읽는 후속 흐름은 범위 밖이다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp#fn_egov_delete_code"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "ANY /sym/ccm/ccc/RemoveCcmCmmnClCode.do"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.ccc.web.EgovCcmCmmnClCodeManageController#deleteCmmnClCode"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.ccc.service.impl.EgovCcmCmmnClCodeManageServiceImpl#deleteCmmnClCode"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.ccc.service.impl.CmmnClCodeManageDAO#deleteCmmnClCode"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "CmmnClCodeManage.deleteCmmnClCode"
+      },
+      "kinds": [
+        "writes"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp#fn_egov_delete_code"
+      },
+      "to": {
+        "name": "ANY /sym/ccm/ccc/RemoveCcmCmmnClCode.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp",
+          "line": 39
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp",
+          "line": 40
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+          "line": 180
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "ANY /sym/ccm/ccc/RemoveCcmCmmnClCode.do"
+      },
+      "to": {
+        "name": "egovframework.com.sym.ccm.ccc.web.EgovCcmCmmnClCodeManageController#deleteCmmnClCode"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+          "line": 180
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+          "line": 181
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.ccc.web.EgovCcmCmmnClCodeManageController#deleteCmmnClCode"
+      },
+      "to": {
+        "name": "egovframework.com.sym.ccm.ccc.service.impl.EgovCcmCmmnClCodeManageServiceImpl#deleteCmmnClCode"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+          "line": 48
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+          "line": 187
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/EgovCcmCmmnClCodeManageServiceImpl.java",
+          "line": 35
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/EgovCcmCmmnClCodeManageServiceImpl.java",
+          "line": 81
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.ccc.service.impl.EgovCcmCmmnClCodeManageServiceImpl#deleteCmmnClCode"
+      },
+      "to": {
+        "name": "egovframework.com.sym.ccm.ccc.service.impl.CmmnClCodeManageDAO#deleteCmmnClCode"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/EgovCcmCmmnClCodeManageServiceImpl.java",
+          "line": 38
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/EgovCcmCmmnClCodeManageServiceImpl.java",
+          "line": 82
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/CmmnClCodeManageDAO.java",
+          "line": 30
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/CmmnClCodeManageDAO.java",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.ccc.service.impl.CmmnClCodeManageDAO#deleteCmmnClCode"
+      },
+      "to": {
+        "name": "CmmnClCodeManage.deleteCmmnClCode"
+      },
+      "kind": "executes",
+      "status": "LIKELY",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/CmmnClCodeManageDAO.java",
+          "line": 31
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/CmmnClCodeManageDAO.java",
+          "line": 79
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml",
+          "line": 8
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml",
+          "line": 115
+        }
+      ],
+      "reason": "DB별 동일 namespace.id가 공존하며 런타임 선택은 미확정"
+    },
+    {
+      "from": {
+        "name": "CmmnClCodeManage.deleteCmmnClCode"
+      },
+      "to": {
+        "name": "COMTCCMMNCLCODE"
+      },
+      "kind": "writes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml",
+          "line": 118
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/ccc/EgovCmmnClCodeManage_SQL_oracle.xml",
+          "line": 119
+        }
+      ]
+    }
+  ]
+}

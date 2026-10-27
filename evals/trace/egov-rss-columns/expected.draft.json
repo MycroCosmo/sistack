@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0",
+  "case_id": "egov-rss-columns",
+  "review_status": "draft",
+  "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
+  "source_files": {
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/ion/rss/EgovRssTagManageRegist.jsp": "4655631460a411dcd34855d78fdc5420f7c186bff9c69a2c63671f5e178b119f",
+    "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java": "934b2fd779cf8a88e967549726af2fc3b6f74f2d4fae232c26038eadc55ae3c9",
+    "src/main/java/egovframework/com/uss/ion/rss/service/impl/EgovRssTagManageServiceImpl.java": "2a51e68598c897060d5684d01247486a9363ab8d4cd1d0c8412f7bd11deb4b98",
+    "src/main/java/egovframework/com/uss/ion/rss/service/impl/RssTagManageDao.java": "4d767ee383fe5c837b57beb2217c2198670c667f25e6f85b262a1359e8e3864d"
+  },
+  "title": "RSS 태그 관리 — 테이블 컬럼 조회",
+  "selection_reason": "Mapper XML 대신 JDBC prepareStatement와 런타임 테이블 치환을 쓰는 다른 DAO 구조",
+  "assumptions_and_questions": [
+    "JS의 URL+tableName은 M1 규칙에 따라 문자열 조합 UNRESOLVED다. 따라서 endpoint부터 아래 경로는 별도 선언 근거로 이어 붙인 후보 흐름이며, 화면부터 확정된 경로라고 주장하지 않는다.",
+    "DB 종류·선택 테이블은 입력 및 메시지 설정에 의존한다. whitelist가 있어도 실행 대상 테이블은 확정할 수 없다.",
+    "iBatis 2 실제 메뉴는 이 고정 버전에서 확인하지 못했다. 세 번째 메뉴는 직접 JDBC 대안이며 iBatis 검증은 합성 테스트로 제한한다.",
+    "egovMessageSource.getMessage는 설정값 조회용 보조 호출이므로 이 초안의 controller scope는 service 호출 위치 83행에 한정한다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/ion/rss/EgovRssTagManageRegist.jsp#fn_egov_tableColumn_RssTagManage"
+      },
+      "kinds": [
+        "requests"
+      ]
+    },
+    {
+      "from": {
+        "name": "ANY /uss/ion/rss/listRssTagManageTableColumnList.do"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.ion.rss.web.EgovRssTagManageController#EgovRssTagManageTableColumnList"
+      },
+      "kinds": [
+        "calls"
+      ],
+      "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+      "line": 83
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.ion.rss.service.impl.EgovRssTagManageServiceImpl#selectRssTagManageTableColumnList"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.ion.rss.service.impl.RssTagManageDao#selectRssTagManageTableColumnList"
+      },
+      "kinds": [
+        "executes"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/ion/rss/EgovRssTagManageRegist.jsp#fn_egov_tableColumn_RssTagManage"
+      },
+      "to": {
+        "kind": "unknown",
+        "pattern": "string-url"
+      },
+      "kind": "requests",
+      "status": "UNRESOLVED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/ion/rss/EgovRssTagManageRegist.jsp",
+          "line": 76
+        },
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/ion/rss/EgovRssTagManageRegist.jsp",
+          "line": 81
+        }
+      ],
+      "reason": "URL 리터럴과 런타임 tableName 문자열 조합"
+    },
+    {
+      "from": {
+        "name": "ANY /uss/ion/rss/listRssTagManageTableColumnList.do"
+      },
+      "to": {
+        "name": "egovframework.com.uss.ion.rss.web.EgovRssTagManageController#EgovRssTagManageTableColumnList"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+          "line": 71
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.ion.rss.web.EgovRssTagManageController#EgovRssTagManageTableColumnList"
+      },
+      "to": {
+        "name": "egovframework.com.uss.ion.rss.service.impl.EgovRssTagManageServiceImpl#selectRssTagManageTableColumnList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+          "line": 56
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+          "line": 83
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/EgovRssTagManageServiceImpl.java",
+          "line": 29
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/EgovRssTagManageServiceImpl.java",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.ion.rss.service.impl.EgovRssTagManageServiceImpl#selectRssTagManageTableColumnList"
+      },
+      "to": {
+        "name": "egovframework.com.uss.ion.rss.service.impl.RssTagManageDao#selectRssTagManageTableColumnList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/EgovRssTagManageServiceImpl.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/EgovRssTagManageServiceImpl.java",
+          "line": 59
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/RssTagManageDao.java",
+          "line": 40
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/RssTagManageDao.java",
+          "line": 98
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.uss.ion.rss.service.impl.RssTagManageDao#selectRssTagManageTableColumnList"
+      },
+      "to": {
+        "kind": "unknown",
+        "pattern": "jdbc-runtime-sql"
+      },
+      "kind": "executes",
+      "status": "UNRESOLVED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/RssTagManageDao.java",
+          "line": 100
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/RssTagManageDao.java",
+          "line": 114
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/RssTagManageDao.java",
+          "line": 118
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/RssTagManageDao.java",
+          "line": 126
+        },
+        {
+          "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/RssTagManageDao.java",
+          "line": 128
+        }
+      ],
+      "reason": "동적 sSQL의 대상 테이블은 사용자 입력과 whitelist·DB 분기에 의존"
+    }
+  ]
+}

@@ -1,0 +1,374 @@
+{
+  "schema_version": "1.0",
+  "case_id": "egov-detailcode-list",
+  "review_status": "draft",
+  "source_revision": "2303751d76c119b56dc2e6b6fe1002adafbef938",
+  "source_files": {
+    "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp": "a546ac19821c175986f07444f52c9fac3d88399ab1c00e3bd46d3346e7eb592a",
+    "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java": "07d09d250bd9006de03ac6183b2e85df3336915580e49851f142bbe5cfc004e4",
+    "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java": "96bfd49c748c3abd861bb26a25f8baf474dc2dc950feb2fbe59c2aa1b4f2f59f",
+    "src/main/java/egovframework/com/sym/ccm/cde/service/impl/CmmnDetailCodeManageDAO.java": "667a777a5b55177e53b1c42b637d687986a8da88c3ee5e3667382400ed246732",
+    "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_oracle.xml": "d825d78996efdb6c8d44883616f1cd5bc48c99f4d15af5881279b0313173da0c"
+  },
+  "title": "공통상세코드 목록",
+  "selection_reason": "공통 PaginationInfo로 firstIndex/recordCountPerPage를 계산하고 공통코드 테이블과 JOIN하는 메뉴",
+  "assumptions_and_questions": [
+    "공통 페이징 생성·getter 사용은 Controller 91~104행에서 직접 확인했다. 외부 PaginationInfo 구현 자체는 저장소에 없어 내부 호출을 확정하지 않는다.",
+    "scope는 주 조회·건수 조회와 SQL reads다. 외부 propertiesService.getInt 호출은 별도 미확정 지점으로 포함한다.",
+    "Oracle SQL은 콤마 JOIN이며 COMTCCMMNDETAILCODE와 COMTCCMMNCODE를 모두 읽는다. DB별 활성 파일 선택은 미확정이다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp"
+      },
+      "kinds": [
+        "requests"
+      ],
+      "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp",
+      "line": 68
+    },
+    {
+      "from": {
+        "name": "ANY /sym/ccm/cde/SelectCcmCmmnDetailCodeList.do"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeList"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeListTotCnt"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeList"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeListTotCnt"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "CmmnDetailCodeManage.selectCmmnDetailCodeList"
+      },
+      "kinds": [
+        "reads"
+      ]
+    },
+    {
+      "from": {
+        "name": "CmmnDetailCodeManage.selectCmmnDetailCodeListTotCnt"
+      },
+      "kinds": [
+        "reads"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp"
+      },
+      "to": {
+        "name": "ANY /sym/ccm/cde/SelectCcmCmmnDetailCodeList.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp",
+          "line": 68
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+          "line": 82
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "ANY /sym/ccm/cde/SelectCcmCmmnDetailCodeList.do"
+      },
+      "to": {
+        "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+          "line": 82
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+      },
+      "to": {
+        "kind": "unknown",
+        "pattern": "external-injection"
+      },
+      "kind": "calls",
+      "status": "UNRESOLVED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+          "line": 63
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+          "line": 87
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+          "line": 88
+        }
+      ],
+      "reason": "propertiesService 구현이 외부 라이브러리에 있음"
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+      },
+      "to": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+          "line": 53
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+          "line": 100
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java",
+          "line": 31
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java",
+          "line": 49
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+      },
+      "to": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeListTotCnt"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+          "line": 53
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+          "line": 103
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeList"
+      },
+      "to": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java",
+          "line": 50
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/CmmnDetailCodeManageDAO.java",
+          "line": 47
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeListTotCnt"
+      },
+      "to": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeListTotCnt"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java",
+          "line": 34
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java",
+          "line": 42
+        },
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/CmmnDetailCodeManageDAO.java",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeList"
+      },
+      "to": {
+        "name": "CmmnDetailCodeManage.selectCmmnDetailCodeList"
+      },
+      "kind": "executes",
+      "status": "LIKELY",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/CmmnDetailCodeManageDAO.java",
+          "line": 48
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_oracle.xml",
+          "line": 8
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_oracle.xml",
+          "line": 10
+        }
+      ],
+      "reason": "DB별 동일 sqlId의 활성 설정 미확정"
+    },
+    {
+      "from": {
+        "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeListTotCnt"
+      },
+      "to": {
+        "name": "CmmnDetailCodeManage.selectCmmnDetailCodeListTotCnt"
+      },
+      "kind": "executes",
+      "status": "LIKELY",
+      "evidence": [
+        {
+          "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/CmmnDetailCodeManageDAO.java",
+          "line": 38
+        },
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_oracle.xml",
+          "line": 48
+        }
+      ],
+      "reason": "DB별 동일 sqlId의 활성 설정 미확정"
+    },
+    {
+      "from": {
+        "name": "CmmnDetailCodeManage.selectCmmnDetailCodeList"
+      },
+      "to": {
+        "name": "COMTCCMMNDETAILCODE"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_oracle.xml",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "CmmnDetailCodeManage.selectCmmnDetailCodeList"
+      },
+      "to": {
+        "name": "COMTCCMMNCODE"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_oracle.xml",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "CmmnDetailCodeManage.selectCmmnDetailCodeListTotCnt"
+      },
+      "to": {
+        "name": "COMTCCMMNDETAILCODE"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_oracle.xml",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "CmmnDetailCodeManage.selectCmmnDetailCodeListTotCnt"
+      },
+      "to": {
+        "name": "COMTCCMMNCODE"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/egovframework/mapper/com/sym/ccm/cde/EgovCmmnDetailCodeManage_SQL_oracle.xml",
+          "line": 53
+        }
+      ]
+    }
+  ]
+}

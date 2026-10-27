@@ -1,0 +1,365 @@
+{
+  "schema_version": "1.0",
+  "case_id": "legacy-board-search",
+  "review_status": "draft",
+  "source_revision": "fbffe3be67245ae15015af59597dea4ada200c41",
+  "source_files": {
+    "src/main/webapp/WEB-INF/views/board/list.jsp": "feee1bbf66ab87a91a8920595542f8ce218a300348f9efdfa2bc1f2660d224c0",
+    "src/main/java/kr/sistack/board/web/BoardController.java": "227d0a21ed2932322e94453c3af9c6a6921076936ae759d3d4eed6c863de6e73",
+    "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java": "338abd3aa4a58c89144bfa7f13edd15b36439767a1092a583c65dda9b397b970",
+    "src/main/java/kr/sistack/board/mapper/BoardMapper.java": "7912db189d1060de0e3d4aa7add93f625cb14e446dcb7daa71241d616a88bcfa",
+    "src/main/resources/mapper/BoardMapper.xml": "ad194be2f97e681dea017a28c62b6a1cbd22956ac0c4471c59d1c7963278c4c0",
+    "src/main/resources/mapper/CommonSql.xml": "69553bacb0b00e4fd092fe2131d271914b4703e8f91b5d0737fc9c6d983c21cc"
+  },
+  "title": "게시판 목록 검색",
+  "selection_reason": "화면→이름 주입 Service→Mapper 인터페이스→SQL include·테이블의 정상 기준선",
+  "assumptions_and_questions": [
+    "GET 검색과 count/selectList의 주 경로를 검토한다. 검색어·정렬 값의 전체 안전성 증명은 범위 밖이다.",
+    "JS submit 핸들러의 문자열 재조합은 별도 UNRESOLVED 함정이다. 여기서는 JSP form의 선언된 기본 action을 비교한다.",
+    "인터셉터의 세션→request 전달은 별도 함정 테스트 대상으로, 이 연결 표의 실행 전제다."
+  ],
+  "scope": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/views/board/list.jsp"
+      },
+      "kinds": [
+        "requests"
+      ],
+      "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+      "line": 14
+    },
+    {
+      "from": {
+        "name": "GET /board/list.do"
+      },
+      "kinds": [
+        "maps_to"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.BoardController#list"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#list"
+      },
+      "kinds": [
+        "calls"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper#count"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper#selectList"
+      },
+      "kinds": [
+        "executes"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.count"
+      },
+      "kinds": [
+        "reads",
+        "includes"
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.selectList"
+      },
+      "kinds": [
+        "reads",
+        "includes"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "name": "src/main/webapp/WEB-INF/views/board/list.jsp"
+      },
+      "to": {
+        "name": "GET /board/list.do"
+      },
+      "kind": "requests",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+          "line": 14
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "GET /board/list.do"
+      },
+      "to": {
+        "name": "kr.sistack.board.web.BoardController#list"
+      },
+      "kind": "maps_to",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 18
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 36
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.web.BoardController#list"
+      },
+      "to": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#list"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 20
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+          "line": 38
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 13
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#list"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.BoardMapper#count"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 15
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 24
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.service.impl.BoardServiceImpl#list"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.BoardMapper#selectList"
+      },
+      "kind": "calls",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 15
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+          "line": 25
+        },
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper#count"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.BoardMapper.count"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 10
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper#selectList"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.BoardMapper.selectList"
+      },
+      "kind": "executes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/java/kr/sistack/board/mapper/BoardMapper.java",
+          "line": 8
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.count"
+      },
+      "to": {
+        "name": "BOARD"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.selectList"
+      },
+      "to": {
+        "name": "BOARD"
+      },
+      "kind": "reads",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.count"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.BoardMapper.filters"
+      },
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 39
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.selectList"
+      },
+      "to": {
+        "name": "kr.sistack.board.mapper.BoardMapper.filters"
+      },
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 33
+        },
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.selectList"
+      },
+      "to": {
+        "name": "commonSql.pageStart"
+      },
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 31
+        },
+        {
+          "file": "src/main/resources/mapper/CommonSql.xml",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "from": {
+        "name": "kr.sistack.board.mapper.BoardMapper.selectList"
+      },
+      "to": {
+        "name": "commonSql.pageEnd"
+      },
+      "kind": "includes",
+      "status": "CONFIRMED",
+      "evidence": [
+        {
+          "file": "src/main/resources/mapper/BoardMapper.xml",
+          "line": 35
+        },
+        {
+          "file": "src/main/resources/mapper/CommonSql.xml",
+          "line": 7
+        }
+      ]
+    }
+  ]
+}

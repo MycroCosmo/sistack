@@ -1,0 +1,616 @@
+{
+  "status": "DRAFT_PREVIEW",
+  "scoring": false,
+  "cases": [
+    {
+      "case_id": "legacy-board-search",
+      "status": "DRAFT_PREVIEW",
+      "scoring": false,
+      "scope": [
+        {
+          "from": {
+            "name": "src/main/webapp/WEB-INF/views/board/list.jsp"
+          },
+          "kinds": [
+            "requests"
+          ],
+          "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+          "line": 14
+        },
+        {
+          "from": {
+            "name": "GET /board/list.do"
+          },
+          "kinds": [
+            "maps_to"
+          ]
+        },
+        {
+          "from": {
+            "name": "kr.sistack.board.web.BoardController#list"
+          },
+          "kinds": [
+            "calls"
+          ]
+        },
+        {
+          "from": {
+            "name": "kr.sistack.board.service.impl.BoardServiceImpl#list"
+          },
+          "kinds": [
+            "calls"
+          ]
+        },
+        {
+          "from": {
+            "name": "kr.sistack.board.mapper.BoardMapper#count"
+          },
+          "kinds": [
+            "executes"
+          ]
+        },
+        {
+          "from": {
+            "name": "kr.sistack.board.mapper.BoardMapper#selectList"
+          },
+          "kinds": [
+            "executes"
+          ]
+        },
+        {
+          "from": {
+            "name": "kr.sistack.board.mapper.BoardMapper.count"
+          },
+          "kinds": [
+            "reads",
+            "includes"
+          ]
+        },
+        {
+          "from": {
+            "name": "kr.sistack.board.mapper.BoardMapper.selectList"
+          },
+          "kinds": [
+            "reads",
+            "includes"
+          ]
+        }
+      ],
+      "expected_edges": 13,
+      "matched": 13,
+      "false_negatives": [],
+      "false_positives": [],
+      "status_mismatches": [],
+      "source_dirty": false,
+      "revision_changed_sources_match": true,
+      "caveat": "선언한 source/kind/위치 범위의 연결 비교. 동일 이름 DB 변형은 논리 연결로 묶으며 분기·값 전파·전체 프로젝트 정확도가 아님."
+    },
+    {
+      "case_id": "legacy-board-create",
+      "status": "DRAFT_PREVIEW",
+      "scoring": false,
+      "scope": [
+        {
+          "from": {
+            "name": "src/main/webapp/WEB-INF/views/board/form.jsp"
+          },
+          "kinds": [
+            "requests"
+          ],
+          "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+          "line": 13
+        },
+        {
+          "from": {
+            "name": "POST /board/create.do"
+          },
+          "kinds": [
+            "maps_to"
+          ]
+        },
+        {
+          "from": {
+            "name": "kr.sistack.board.web.BoardController#create"
+          },
+          "kinds": [
+            "calls"
+          ]
+        },
+        {
+          "from": {
+            "name": "kr.sistack.board.service.impl.BoardServiceImpl#create"
+          },
+          "kinds": [
+            "calls"
+          ]
+        },
+        {
+          "from": {
+            "name": "kr.sistack.board.mapper.BoardMapper#insert"
+          },
+          "kinds": [
+            "executes"
+          ]
+        },
+        {
+          "from": {
+            "name": "kr.sistack.board.mapper.BoardMapper.insert"
+          },
+          "kinds": [
+            "reads",
+            "writes"
+          ]
+        }
+      ],
+      "expected_edges": 8,
+      "matched": 7,
+      "false_negatives": [
+        {
+          "from": {
+            "name": "src/main/webapp/WEB-INF/views/board/form.jsp"
+          },
+          "to": {
+            "name": "POST /board/create.do"
+          },
+          "kind": "requests",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+              "line": 12
+            },
+            {
+              "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+              "line": 13
+            },
+            {
+              "file": "src/main/java/kr/sistack/board/web/BoardController.java",
+              "line": 57
+            }
+          ]
+        }
+      ],
+      "false_positives": [
+        {
+          "from": {
+            "name": "src/main/webapp/WEB-INF/views/board/form.jsp"
+          },
+          "to": {
+            "name": "dynamic-url:src/main/webapp/WEB-INF/views/board/form.jsp:13"
+          },
+          "kind": "requests",
+          "status": "UNRESOLVED",
+          "evidence": [
+            {
+              "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+              "line": 13
+            }
+          ]
+        }
+      ],
+      "status_mismatches": [],
+      "source_dirty": false,
+      "revision_changed_sources_match": true,
+      "caveat": "선언한 source/kind/위치 범위의 연결 비교. 동일 이름 DB 변형은 논리 연결로 묶으며 분기·값 전파·전체 프로젝트 정확도가 아님."
+    },
+    {
+      "case_id": "egov-clcode-delete",
+      "status": "DRAFT_PREVIEW",
+      "scoring": false,
+      "scope": [
+        {
+          "from": {
+            "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/ccc/EgovCcmCmmnClCodeDetail.jsp#fn_egov_delete_code"
+          },
+          "kinds": [
+            "requests"
+          ]
+        },
+        {
+          "from": {
+            "name": "ANY /sym/ccm/ccc/RemoveCcmCmmnClCode.do"
+          },
+          "kinds": [
+            "maps_to"
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.ccc.web.EgovCcmCmmnClCodeManageController#deleteCmmnClCode"
+          },
+          "kinds": [
+            "calls"
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.ccc.service.impl.EgovCcmCmmnClCodeManageServiceImpl#deleteCmmnClCode"
+          },
+          "kinds": [
+            "calls"
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.ccc.service.impl.CmmnClCodeManageDAO#deleteCmmnClCode"
+          },
+          "kinds": [
+            "executes"
+          ]
+        },
+        {
+          "from": {
+            "name": "CmmnClCodeManage.deleteCmmnClCode"
+          },
+          "kinds": [
+            "writes"
+          ]
+        }
+      ],
+      "expected_edges": 6,
+      "matched": 5,
+      "false_negatives": [
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.ccc.web.EgovCcmCmmnClCodeManageController#deleteCmmnClCode"
+          },
+          "to": {
+            "name": "egovframework.com.sym.ccm.ccc.service.impl.EgovCcmCmmnClCodeManageServiceImpl#deleteCmmnClCode"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+              "line": 48
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+              "line": 187
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/EgovCcmCmmnClCodeManageServiceImpl.java",
+              "line": 35
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/impl/EgovCcmCmmnClCodeManageServiceImpl.java",
+              "line": 81
+            }
+          ]
+        }
+      ],
+      "false_positives": [
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.ccc.web.EgovCcmCmmnClCodeManageController#deleteCmmnClCode"
+          },
+          "to": {
+            "name": "egovframework.com.sym.ccm.ccc.service.EgovCcmCmmnClCodeManageService#deleteCmmnClCode"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+              "line": 187
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/ccc/service/EgovCcmCmmnClCodeManageService.java",
+              "line": 62
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/ccc/web/EgovCcmCmmnClCodeManageController.java",
+              "line": 49
+            }
+          ]
+        }
+      ],
+      "status_mismatches": [],
+      "source_dirty": false,
+      "revision_changed_sources_match": false,
+      "caveat": "선언한 source/kind/위치 범위의 연결 비교. 동일 이름 DB 변형은 논리 연결로 묶으며 분기·값 전파·전체 프로젝트 정확도가 아님."
+    },
+    {
+      "case_id": "egov-detailcode-list",
+      "status": "DRAFT_PREVIEW",
+      "scoring": false,
+      "scope": [
+        {
+          "from": {
+            "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp"
+          },
+          "kinds": [
+            "requests"
+          ],
+          "file": "src/main/webapp/WEB-INF/jsp/egovframework/com/sym/ccm/cde/EgovCcmCmmnDetailCodeList.jsp",
+          "line": 68
+        },
+        {
+          "from": {
+            "name": "ANY /sym/ccm/cde/SelectCcmCmmnDetailCodeList.do"
+          },
+          "kinds": [
+            "maps_to"
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+          },
+          "kinds": [
+            "calls"
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeList"
+          },
+          "kinds": [
+            "calls"
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeListTotCnt"
+          },
+          "kinds": [
+            "calls"
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeList"
+          },
+          "kinds": [
+            "executes"
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.cde.service.impl.CmmnDetailCodeManageDAO#selectCmmnDetailCodeListTotCnt"
+          },
+          "kinds": [
+            "executes"
+          ]
+        },
+        {
+          "from": {
+            "name": "CmmnDetailCodeManage.selectCmmnDetailCodeList"
+          },
+          "kinds": [
+            "reads"
+          ]
+        },
+        {
+          "from": {
+            "name": "CmmnDetailCodeManage.selectCmmnDetailCodeListTotCnt"
+          },
+          "kinds": [
+            "reads"
+          ]
+        }
+      ],
+      "expected_edges": 13,
+      "matched": 11,
+      "false_negatives": [
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+          },
+          "to": {
+            "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeList"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+              "line": 53
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+              "line": 100
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java",
+              "line": 31
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java",
+              "line": 49
+            }
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+          },
+          "to": {
+            "name": "egovframework.com.sym.ccm.cde.service.impl.EgovCcmCmmnDetailCodeManageServiceImpl#selectCmmnDetailCodeListTotCnt"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+              "line": 53
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+              "line": 103
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/service/impl/EgovCcmCmmnDetailCodeManageServiceImpl.java",
+              "line": 41
+            }
+          ]
+        }
+      ],
+      "false_positives": [
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+          },
+          "to": {
+            "name": "egovframework.com.sym.ccm.cde.service.EgovCcmCmmnDetailCodeManageService#selectCmmnDetailCodeList"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+              "line": 100
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/service/EgovCcmCmmnDetailCodeManageService.java",
+              "line": 39
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+              "line": 54
+            }
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.sym.ccm.cde.web.EgovCcmCmmnDetailCodeManageController#selectCmmnDetailCodeList"
+          },
+          "to": {
+            "name": "egovframework.com.sym.ccm.cde.service.EgovCcmCmmnDetailCodeManageService#selectCmmnDetailCodeListTotCnt"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+              "line": 103
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/service/EgovCcmCmmnDetailCodeManageService.java",
+              "line": 31
+            },
+            {
+              "file": "src/main/java/egovframework/com/sym/ccm/cde/web/EgovCcmCmmnDetailCodeManageController.java",
+              "line": 54
+            }
+          ]
+        }
+      ],
+      "status_mismatches": [],
+      "source_dirty": false,
+      "revision_changed_sources_match": false,
+      "caveat": "선언한 source/kind/위치 범위의 연결 비교. 동일 이름 DB 변형은 논리 연결로 묶으며 분기·값 전파·전체 프로젝트 정확도가 아님."
+    },
+    {
+      "case_id": "egov-rss-columns",
+      "status": "DRAFT_PREVIEW",
+      "scoring": false,
+      "scope": [
+        {
+          "from": {
+            "name": "src/main/webapp/WEB-INF/jsp/egovframework/com/uss/ion/rss/EgovRssTagManageRegist.jsp#fn_egov_tableColumn_RssTagManage"
+          },
+          "kinds": [
+            "requests"
+          ]
+        },
+        {
+          "from": {
+            "name": "ANY /uss/ion/rss/listRssTagManageTableColumnList.do"
+          },
+          "kinds": [
+            "maps_to"
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.uss.ion.rss.web.EgovRssTagManageController#EgovRssTagManageTableColumnList"
+          },
+          "kinds": [
+            "calls"
+          ],
+          "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+          "line": 83
+        },
+        {
+          "from": {
+            "name": "egovframework.com.uss.ion.rss.service.impl.EgovRssTagManageServiceImpl#selectRssTagManageTableColumnList"
+          },
+          "kinds": [
+            "calls"
+          ]
+        },
+        {
+          "from": {
+            "name": "egovframework.com.uss.ion.rss.service.impl.RssTagManageDao#selectRssTagManageTableColumnList"
+          },
+          "kinds": [
+            "executes"
+          ]
+        }
+      ],
+      "expected_edges": 5,
+      "matched": 4,
+      "false_negatives": [
+        {
+          "from": {
+            "name": "egovframework.com.uss.ion.rss.web.EgovRssTagManageController#EgovRssTagManageTableColumnList"
+          },
+          "to": {
+            "name": "egovframework.com.uss.ion.rss.service.impl.EgovRssTagManageServiceImpl#selectRssTagManageTableColumnList"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+              "line": 56
+            },
+            {
+              "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+              "line": 83
+            },
+            {
+              "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/EgovRssTagManageServiceImpl.java",
+              "line": 29
+            },
+            {
+              "file": "src/main/java/egovframework/com/uss/ion/rss/service/impl/EgovRssTagManageServiceImpl.java",
+              "line": 58
+            }
+          ]
+        }
+      ],
+      "false_positives": [
+        {
+          "from": {
+            "name": "egovframework.com.uss.ion.rss.web.EgovRssTagManageController#EgovRssTagManageTableColumnList"
+          },
+          "to": {
+            "name": "egovframework.com.uss.ion.rss.service.EgovRssTagManageService#selectRssTagManageTableColumnList"
+          },
+          "kind": "calls",
+          "status": "CONFIRMED",
+          "evidence": [
+            {
+              "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+              "line": 83
+            },
+            {
+              "file": "src/main/java/egovframework/com/uss/ion/rss/service/EgovRssTagManageService.java",
+              "line": 36
+            },
+            {
+              "file": "src/main/java/egovframework/com/uss/ion/rss/web/EgovRssTagManageController.java",
+              "line": 57
+            }
+          ]
+        }
+      ],
+      "status_mismatches": [],
+      "source_dirty": false,
+      "revision_changed_sources_match": false,
+      "caveat": "선언한 source/kind/위치 범위의 연결 비교. 동일 이름 DB 변형은 논리 연결로 묶으며 분기·값 전파·전체 프로젝트 정확도가 아님."
+    }
+  ]
+}
