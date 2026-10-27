@@ -33,7 +33,8 @@ test('all ten inputs preserve captured lines and mask only the inserted syntheti
   for (const id of Object.keys(descriptions)) {
     const base = path.join(root, 'evals/debug/cases', id);
     const provenance = await json(path.join(base, 'input-provenance.json'));
-    const source = await readFile(path.join(root, provenance.source), 'utf8');
+    const source = (await readFile(path.join(root, provenance.source), 'utf8')).replaceAll('\r\n', '\n');
+    assert.equal(provenance.source_newlines, 'LF');
     assert.equal(digest(source), provenance.source_sha256, id);
     const selected = provenance.selection === 'access-only'
       ? source.split(/\r?\n/).filter(l => /^\S+ ACCESS (GET|POST) \S+ \d{3}$/.test(l)).join('\n') + '\n'

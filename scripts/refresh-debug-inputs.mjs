@@ -33,14 +33,14 @@ export async function refreshInputs(captureDir) {
     const caseDir = path.join(root, 'evals/debug/cases', id);
     const oracle = id === '07-oracle-log-only';
     const source = oracle ? path.join(root, 'evals/debug/repro/oracle-format.log') : path.join(captureDir, `${id}.json.server.txt`);
-    const captured = await readFile(source, 'utf8');
+    const captured = (await readFile(source, 'utf8')).replaceAll('\r\n', '\n');
     const accessOnly = ['05-paging', '10-fragment-encoding'].includes(id);
     const selected = accessOnly ? captured.split(/\r?\n/).filter(l => /^\S+ ACCESS (GET|POST) \S+ \d{3}$/.test(l)).join('\n') + '\n' : captured;
     const mixed = mixPrivacyFixture(selected);
     await writeFile(path.join(caseDir, 'symptom.log'), mixed.text);
     await writeFile(path.join(caseDir, 'symptom.md'), description + '\n');
     const provenance = { kind: oracle ? 'synthetic-oracle-format' : 'captured-runtime', source: path.relative(root, source).replaceAll('\\', '/'),
-      source_sha256: digest(captured), selection: accessOnly ? 'access-only' : 'complete', fixture_line: mixed.fixture_line,
+      source_sha256: digest(captured), source_newlines: 'LF', selection: accessOnly ? 'access-only' : 'complete', fixture_line: mixed.fixture_line,
       selected_sha256: digest(selected.replaceAll('\r\n', '\n')), symptom_sha256: digest(mixed.text),
       note: oracle ? 'Oracle DB 실행 없이 MyBatis 형식을 재구성한 로그. 실제 캡처라고 주장하지 않음.' : '임시 복사본의 로깅 계측만 추가. 예외/SQL/프레임/접근 결과를 수작업으로 작성하지 않음.' };
     await writeFile(path.join(caseDir, 'input-provenance.json'), JSON.stringify(provenance, null, 2) + '\n');

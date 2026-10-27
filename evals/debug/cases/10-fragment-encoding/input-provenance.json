@@ -1,7 +1,8 @@
 {
   "kind": "captured-runtime",
   "source": "docs/evidence/m3-input-v2/runtime/10-fragment-encoding.json.server.txt",
-  "source_sha256": "d373a5d362edc1268a077ea7769d2986348c37b691b2611c51e9918355ad0796",
+  "source_sha256": "fbf41f6a075e95d3b5d11a99802beabfecfb81f5d2ccba6be44b55dd25699549",
+  "source_newlines": "LF",
   "selection": "access-only",
   "fixture_line": 3,
   "selected_sha256": "ebc99179fb8dc7b8613ad978498aa358f856edb5aee167159598afde7d03f58e",

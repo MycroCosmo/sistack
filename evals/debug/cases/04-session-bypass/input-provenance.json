@@ -1,7 +1,8 @@
 {
   "kind": "captured-runtime",
   "source": "docs/evidence/m3-input-v2/runtime/04-session-bypass.json.server.txt",
-  "source_sha256": "d433164013e01c84f3afe8fcdea2ed54cf04103a25e3a272a766f88b4eee65aa",
+  "source_sha256": "8b353167319d7c4e5093e5671e82db1c850ad53d1a919b934a32532f1856d284",
+  "source_newlines": "LF",
   "selection": "complete",
   "fixture_line": 91,
   "selected_sha256": "8b353167319d7c4e5093e5671e82db1c850ad53d1a919b934a32532f1856d284",

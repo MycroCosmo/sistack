@@ -18,6 +18,8 @@ npm.cmd test
 
 각 입력 중간에 합성 개인정보 한 줄을 삽입했다. `runtime/<id>.masked.txt`는 그 입력을 다시 마스킹한 결과다. 회귀 검사는 합성 줄 외의 캡처 전체, SQL·스택 프레임·클래스 해시·트랜잭션 UUID가 그대로인지 바이트 해시로 비교한다. 이메일 패턴은 `email=` 접두사도 함께 가리는 기존 동작을 유지한다. 세션 ID는 해시 모양이어도 가린다.
 
+줄 내용과 순서는 유지하되 CRLF는 저장소 기준 LF로 정규화한다. provenance의 source_sha256도 LF 기준이다. Windows 작업 폴더와 새 Git 체크아웃에서 같은 캡처 해시가 나오도록 한 처리이며, 메시지의 끝 공백과 SQL의 들여쓰기는 제거하지 않는다.
+
 07의 출처는 `evals/debug/repro/oracle-format.log`다. **Oracle DB를 실행한 로그가 아니라** MyBatis 예외 형식을 재구성한 합성 입력이다. 날짜 조건 2개와 ORDER BY의 같은 식별자 참조를 한 SQL에 담았으며 바인딩 값은 `?`로 남긴다.
 
 ## 실행 결과
@@ -42,4 +44,5 @@ npm.cmd test
 - `01-binding.json.server.txt`: 최초 계측의 `Filter.init` 누락으로 AbstractMethodError가 발생했다. Jetty의 Servlet 런타임에 맞춰 init/destroy를 명시한 뒤 `runtime/`에 새 실행을 남겼다. 이 실패 기록은 덮어쓰지 않았다.
 - 새 MyBatis 입력 테스트는 처음에 실패했다. `### Cause:`를 root 예외로 오인하던 파서를 수정해 실제 `PersistenceException → SQLSyntaxErrorException` 체인과 프레임 소속을 보존했다. 실제 Jetty 로그의 줄 분리 `Caused by:`도 실패를 확인한 뒤 지원했다.
 - `npm-test.txt`는 첫 전체 통과 기록, `npm-test-final.txt`는 Jetty 줄 분리 처리까지 포함한 최종 전체 검사 출력이다. Node 123/123, 실패·스킵 0, 스킬 3개 및 공통 코드 복사본 검사 PASS.
+- `npm-test-portable.txt`는 LF 해시 호환 보정 후 전체 검사로 같은 123/123 PASS다. `checkout-check.json`은 Git에 저장된 로그와 provenance 해시 10/10 일치를 확인한다.
 - 추가 5개 테스트는 입력 10건의 출처/마스킹, 실제 예외 4건, 예외 없는 2건, Oracle 초안의 세 후보, 채점기의 누락/확정 거부를 검증한다. 채점기 테스트는 별도 합성 fixture이며 실제 학습 정답을 승인하거나 채점한 것이 아니다.

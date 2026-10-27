@@ -1,7 +1,8 @@
 {
   "kind": "captured-runtime",
   "source": "docs/evidence/m3-input-v2/runtime/09-view-resolver.json.server.txt",
-  "source_sha256": "2d86a92e577da3ebfc0622d893168a1dbc0636cb0425eebbd6df033d3c151ecc",
+  "source_sha256": "980035b3d1459b7b0417513f708d40514355ecab4fce4584687e672d0fa7f1e7",
+  "source_newlines": "LF",
   "selection": "complete",
   "fixture_line": 62,
   "selected_sha256": "980035b3d1459b7b0417513f708d40514355ecab4fce4584687e672d0fa7f1e7",

@@ -1,0 +1,45 @@
+{
+  "scope": "LF-normalized captured sources in Git blobs",
+  "results": [
+    {
+      "id": "01-binding",
+      "status": "PASS"
+    },
+    {
+      "id": "02-js-url",
+      "status": "PASS"
+    },
+    {
+      "id": "03-request-encoding",
+      "status": "PASS"
+    },
+    {
+      "id": "04-session-bypass",
+      "status": "PASS"
+    },
+    {
+      "id": "05-paging",
+      "status": "PASS"
+    },
+    {
+      "id": "06-sort-sql",
+      "status": "PASS"
+    },
+    {
+      "id": "07-oracle-log-only",
+      "status": "PASS"
+    },
+    {
+      "id": "08-thymeleaf-utilities",
+      "status": "PASS"
+    },
+    {
+      "id": "09-view-resolver",
+      "status": "PASS"
+    },
+    {
+      "id": "10-fragment-encoding",
+      "status": "PASS"
+    }
+  ]
+}

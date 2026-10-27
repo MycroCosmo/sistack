@@ -109,7 +109,7 @@ export async function reproduceCase(id, { maven, javaHome, output, baseline = fa
     if (!closed) spawnSync('taskkill.exe', ['/PID', String(child.pid), '/T', '/F'], { windowsHide: true, stdio: 'ignore' });
     if (!closed) await Promise.race([new Promise(resolve => child.once('close', resolve)), pause(3000)]);
     log += outDecoder.end() + errDecoder.end();
-    await save(output + '.server.txt', mask(log));
+    await save(output + '.server.txt', mask(log).replaceAll('\r\n', '\n'));
   }
 }
 

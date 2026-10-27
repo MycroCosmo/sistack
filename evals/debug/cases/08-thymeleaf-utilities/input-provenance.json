@@ -1,7 +1,8 @@
 {
   "kind": "captured-runtime",
   "source": "docs/evidence/m3-input-v2/runtime/08-thymeleaf-utilities.json.server.txt",
-  "source_sha256": "126ecd14bedc6473a36edf3ed03226ac2c87624f6d2a28364907e6c21639c775",
+  "source_sha256": "9951917d228ec10d3d9b78689c23c6f5d1eab14a7d18769ee475dca6e14345c5",
+  "source_newlines": "LF",
   "selection": "complete",
   "fixture_line": 240,
   "selected_sha256": "9951917d228ec10d3d9b78689c23c6f5d1eab14a7d18769ee475dca6e14345c5",

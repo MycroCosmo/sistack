@@ -1,7 +1,8 @@
 {
   "kind": "captured-runtime",
   "source": "docs/evidence/m3-input-v2/runtime/03-request-encoding.json.server.txt",
-  "source_sha256": "6e99cb88ec34a0b7a05cb344ec1f12d348a462f13f0b9ad158c55191fe6fb660",
+  "source_sha256": "8df9871e2a526a59cacd4ec16908347e75ac55ed67a2d85877ff233205043fbd",
+  "source_newlines": "LF",
   "selection": "complete",
   "fixture_line": 62,
   "selected_sha256": "8df9871e2a526a59cacd4ec16908347e75ac55ed67a2d85877ff233205043fbd",

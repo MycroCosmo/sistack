@@ -1,7 +1,8 @@
 {
   "kind": "captured-runtime",
   "source": "docs/evidence/m3-input-v2/runtime/05-paging.json.server.txt",
-  "source_sha256": "6800b0892d9e54c4f25fcb91c34d58f2bb0ff60d6bf26b819ff841cecdc4603f",
+  "source_sha256": "3de22e40965d7e4cd3d5c7d70890f04df6b5011a0ed39f0ea4ea88f84cf351b3",
+  "source_newlines": "LF",
   "selection": "access-only",
   "fixture_line": 14,
   "selected_sha256": "60ab1413b671118ed03ef1f2e72d8044c0f3e40affbed0749d279e52f72fc46b",
