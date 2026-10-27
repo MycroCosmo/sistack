@@ -28,7 +28,67 @@ const controller = 'kr.sistack.board.web.BoardController';
 const impl = 'kr.sistack.board.service.impl.BoardServiceImpl';
 const mapper = 'kr.sistack.board.mapper.BoardMapper';
 
+test('정적 인터셉터 매핑은 요청 URL에서 메뉴 조회 SQL까지 이어진다', () => {
+  const interceptor = 'kr.sistack.board.web.LoginInterceptor#preHandle';
+  for (const url of ['GET /board/list.do', 'POST /board/create.do', 'POST /board/update.do']) assert.ok(has(board, url, interceptor, 'intercepted_by'));
+  assert.ok(has(board, interceptor, 'kr.sistack.board.mapper.MenuMapper#selectList', 'calls'));
+  const result = queryIndex(board, { from: '/board/create.do', depth: 5 });
+  assert.ok(result.nodes.some(n => n.name === 'APP_MENU'));
+});
+
+test('인터셉터 exclude-mapping은 해당 endpoint 연결을 제외한다', async () => {
+  await fixture({
+    'C.java': 'package p;\n@Controller\npublic class C {\n@GetMapping({"/board/a", "/board/public/a"})\npublic void run() {}\n}',
+    'I.java': 'package p;\npublic class I {\npublic boolean preHandle() { return true; }\n}',
+    'spring.xml': '<beans><mvc:interceptors><mvc:interceptor><mvc:mapping path="/board/**"/><mvc:exclude-mapping path="/board/public/**"/><bean class="p.I"/></mvc:interceptor></mvc:interceptors></beans>'
+  }, index => {
+    assert.ok(has(index, 'GET /board/a', 'p.I#preHandle', 'intercepted_by'));
+    assert.ok(!namedEdges(index).some(e => e.fromName === 'GET /board/public/a' && e.kind === 'intercepted_by'));
+  });
+});
+
+test('JSP c:url 리터럴 삼항식은 두 도달 가능 요청과 선언 근거를 남긴다', () => {
+  const form = 'src/main/webapp/WEB-INF/views/board/form.jsp';
+  for (const url of ['POST /board/create.do', 'POST /board/update.do']) {
+    assert.ok(has(board, form, url, 'requests'));
+    assert.ok(namedEdges(board).find(e => e.fromName === form && e.toName === url).evidence.some(p => p.file === form && p.line === 12));
+  }
+});
+
+test('JSP 삼항식의 동적 분기는 임의로 확정하지 않는다', async () => {
+  await fixture({ 'a.jsp': '<c:url var="u" value="${ok ? target : \'/save\'}"/><form action="${fn:escapeXml(u)}" method="post"></form>' }, index => {
+    assert.ok(index.unresolved.some(u => u.pattern === 'dynamic-url'));
+    assert.ok(!index.edges.some(e => e.kind === 'requests' && e.status === 'CONFIRMED'));
+  });
+});
+
+for (const db of ['mysql', 'oracle', 'missing']) test(`mapperLocations 프로퍼티 선택: ${db}`, async () => {
+  const files = {
+    'D.java': 'package p;\npublic class D {\nprivate SqlSessionTemplate sql;\npublic void run() { sql.selectList("p.M.list"); }\n}',
+    'M.java': 'package p;\npublic interface M {\nvoid list();\n}',
+    'spring.xml': '<beans><bean class="org.mybatis.spring.SqlSessionFactoryBean"><property name="mapperLocations"><list><value>classpath:/maps/**/*_${Globals.DbType}.xml</value></list></property></bean><bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"><property name="locations"><list><value>classpath:/globals.properties</value><!-- <value>file:/external.properties</value> --></list></property></bean></beans>',
+    'src/main/resources/globals.properties': db === 'missing' ? '# no DB choice' : `Globals.DbType = ${db}`,
+    'src/main/resources/maps/M_mysql.xml': '<mapper namespace="p.M"><select id="list">SELECT * FROM MYSQL_TABLE</select></mapper>',
+    'src/main/resources/maps/M_oracle.xml': '<mapper namespace="p.M"><select id="list">SELECT * FROM ORACLE_TABLE</select></mapper>'
+  };
+  await fixture(files, index => {
+    for (const from of ['p.D#run', 'p.M#list']) {
+      const edges = namedEdges(index).filter(e => e.fromName === from && e.kind === 'executes');
+      assert.equal(edges.length, db === 'missing' ? 2 : 1);
+      if (db === 'missing') assert.ok(edges.every(e => e.status === 'LIKELY'));
+      else {
+        assert.equal(edges[0].status, 'CONFIRMED');
+        assert.ok(index.nodes.find(n => n.id === edges[0].to).file.endsWith(`_${db}.xml`));
+        assert.equal(edges[0].candidates.length, 1);
+        assert.ok(edges[0].evidence.some(e => e.file.endsWith('globals.properties') && e.line === 1));
+      }
+    }
+  });
+});
+
 test('extends와 implements를 함께 선언한 구현체로 주입 호출을 연결한다', async () => {
+  const cls = collectJava('Generic.java', 'package p; public class Generic extends Base<Map<String, List<Integer>>> implements S, Other {}', new Graph());
+  assert.deepEqual(cls.parents, ['p.Base', 'p.S', 'p.Other']);
   await fixture({
     'C.java': 'package p;\npublic class C {\n@Autowired\nprivate S svc;\npublic void run() { svc.go(); }\n}',
     'S.java': 'package p;\npublic interface S {\nvoid go();\n}',
@@ -36,6 +96,19 @@ test('extends와 implements를 함께 선언한 구현체로 주입 호출을 �
   }, index => {
     assert.ok(has(index, 'p.C#run', 'p.Impl#go', 'calls'));
     assert.ok(!has(index, 'p.C#run', 'p.S#go', 'calls'));
+  });
+});
+
+for (const ambiguity of ['missing-property', 'multiple-factories', 'conflicting-property']) test(`설정 미확정이면 단일 SQL 선언도 LIKELY: ${ambiguity}`, async () => {
+  const factory = '<bean class="org.mybatis.spring.SqlSessionFactoryBean"><property name="mapperLocations" value="classpath:/maps/*_${db}.xml"/></bean>';
+  await fixture({
+    'D.java': 'class D {\nprivate SqlSessionTemplate sql;\npublic void run() { sql.selectList("M.list"); }\n}',
+    'spring.xml': `<beans>${factory}${ambiguity === 'multiple-factories' ? factory : ''}<context:property-placeholder location="classpath:/db.properties"/></beans>`,
+    'src/main/resources/db.properties': ambiguity === 'missing-property' ? '# missing' : ambiguity === 'conflicting-property' ? 'db=mysql\ndb=oracle' : 'db=mysql',
+    'src/main/resources/maps/M_mysql.xml': '<mapper namespace="M"><select id="list">SELECT * FROM T</select></mapper>'
+  }, index => {
+    assert.ok(has(index, 'D#run', 'M.list', 'executes', 'LIKELY'));
+    assert.ok(index.skipped.some(s => s.pattern === 'mapper-selection'));
   });
 });
 

@@ -81,3 +81,10 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 
 ### M1 승인 후 — 구현체 해석
 - extends와 implements 절을 각각 해석하고 제네릭 인자를 제거한 타입으로 상속 관계를 연결한다. 두 키워드를 한 타입으로 읽던 오류를 실제 주입 호출 회귀 테스트로 고정했다.
+
+### M1 승인 조건 — 설정·인터셉터·JSP 도달 경로
+- `SqlSessionFactoryBean.mapperLocations`의 classpath 패턴과 등록된 PropertyPlaceholderConfigurer/property-placeholder의 properties를 따라 활성 XML을 고른다. eGovFrame은 `Globals.DbType=mysql`이므로 mysql executes를 CONFIRMED로 기록한다. 다른 DB XML은 노드/후보로 보존하되 실행 연결에서 제외한다. 설정을 풀지 못하거나 factory가 여러 개면 단일 SQL 선언도 LIKELY다. 외부 런타임 override는 확인하지 않는다.
+- `intercepted_by` 관계를 추가한다. MVC interceptor의 포함·제외 경로를 endpoint에 적용하고 preHandle 선언으로 연결한다. 매핑의 정적 적용과 인증/CSRF 분기에 따른 실제 실행·세션 값 전파는 구별한다.
+- JSP의 단순 리터럴 삼항식은 두 분기 모두 도달 가능한 경로로 본다. c:url 변수와 fn:escapeXml을 거친 create/update 요청을 모두 CONFIRMED로 연결하며 선언 위치도 근거로 남긴다. 조건 평가나 어느 분기가 실제 실행됐는지를 뜻하지 않는다. 동적 분기가 섞이면 UNRESOLVED다.
+- 소스 읽기로 작성한 5개 정답에 사용자 검토 조건을 적용해 승인본으로 확정한다. RSS 직접 JDBC 선정과 기존 scope 제외는 유지한다. 활성 DB SQL에는 file 선택자를 추가해 다른 DB 선언을 정답으로 대체할 수 없게 한다.
+- `check-expected.mjs`는 승인 JSON의 source_root 아래 source_files SHA-256과 모든 중첩 evidence 라인의 존재를 검사한다. npm test에 포함하며, 소스가 없으면 BLOCKED, 변경되면 FAIL이다. 해시를 자동 갱신하지 않는다. eGovFrame 체크아웃은 fetch-testbed로 먼저 준비한다. MD는 승인 JSON의 사람이 읽는 표이며 의미 검수와 PL/PM 승인을 이 검사로 대체하지 않는다.
