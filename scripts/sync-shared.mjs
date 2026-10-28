@@ -18,7 +18,7 @@ export async function syncShared({ base = root, check = false } = {}) {
     }
     if (['si-trace', 'si-debug', 'si-unit-test', 'si-docs'].includes(path.basename(dir))) {
       const source = path.join(base, 'schemas'), destination = path.join(dir, 'scripts/schemas');
-      for (const name of ['manifest.schema.json', ...(path.basename(dir) === 'si-unit-test' ? ['test-results.schema.json'] : []), ...(path.basename(dir) === 'si-docs' ? ['docs/program-list.schema.json', 'docs/table-spec.schema.json'] : [])]) {
+      for (const name of ['manifest.schema.json', ...(path.basename(dir) === 'si-unit-test' ? ['test-results.schema.json'] : []), ...(path.basename(dir) === 'si-docs' ? ['docs/program-list.schema.json', 'docs/table-spec.schema.json', 'docs/functional-results.schema.json'] : [])]) {
       if (!await sameFile(path.join(source, name), path.join(destination, name))) differences.push(`${path.basename(dir)}/${name}`);
       if (!check) await copyFiles(source, destination, [name], true);
       }

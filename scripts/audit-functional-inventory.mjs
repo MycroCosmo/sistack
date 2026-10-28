@@ -1,6 +1,7 @@
 import path from 'node:path';
 import {readdir,readFile} from 'node:fs/promises';
-import {digest,save} from '../lib/trace/io.mjs';
+import {digest,json,checkSources} from '../lib/trace/io.mjs';
+import {fileURLToPath} from 'node:url';
 // 인덱서/인벤토리를 호출하지 않는 별도 소스 선언 census. 초안 기준으로만 사용한다.
 export async function sourceCensus(root) {
   const points=[],source_files={};
@@ -46,3 +47,16 @@ export function compareCensus(census,inventory) {
  const bag=items=>items.reduce((a,p)=>{const k=`${p.file}:${p.line}:${p.kind}`;a[k]=(a[k]??0)+1;return a;},{}),expected=bag(census.points),actual=bag(inventory.items);
  return {review_status:census.review_status,missing:Object.entries(expected).filter(([k,n])=>(actual[k]??0)<n).map(([key,n])=>({key,count:n-(actual[key]??0)})),extra:Object.entries(actual).filter(([k,n])=>(expected[k]??0)<n).map(([key,n])=>({key,count:n-(expected[key]??0)}))};
 }
+export async function checkFunctionalExpected(file='evals/functional/expected.json') {
+  const expected=await json(file);if(expected.review_status!=='approved'||!expected.approved_by?.trim())throw Error('사용자 승인 인벤토리 기준 필요');
+  const {functionalInventory}=await import('../lib/functional/inventory.mjs'),out=[];
+  for(const [name,data]of Object.entries(expected.projects)) {
+    if(!['legacy-board','legacy-board-thymeleaf'].includes(name))throw Error('대조 대상 오류');
+    const root=path.resolve('examples',name);await checkSources(root,data.census.source_files,data.census.points);
+    const actual=await functionalInventory(root),result=compareCensus(data.census,actual);
+    if(result.missing.length||result.extra.length)throw Error('승인 인벤토리 기준과 소스 선언 불일치');
+    out.push({project:name,items:actual.items.length,missing:0,extra:0,approved_by:expected.approved_by});
+  }
+  return out;
+}
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))console.log(JSON.stringify(await checkFunctionalExpected(process.argv[2]),null,2));

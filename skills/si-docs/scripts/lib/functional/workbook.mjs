@@ -9,7 +9,7 @@ function firstCells(sheet,mapping,count) {
   const cols=['first.executed_at','first.tester_id','first.result','first.defect_notes'].map(k=>mapping.columns[k]);
   return Array.from({length:count},(_,i)=>cols.map(col=>{const c=sheet.getCell(`${col}${mapping.start_row+i}`);return {address:c.address,value:c.value,style:structuredClone(c.style),note:c.note??null};}));
 }
-function resultValues(result) {return {executed_at:result.started_at.slice(0,10),tester_id:result.account_id,result:result.status==='BLOCKED'||result.status==='PARTIAL'?null:result.status,defect_notes:mask(`${result.status==='BLOCKED'?'BLOCKED: ':''}${result.reason}`)};}
+function resultValues(result) {return {executed_at:result.status==='SKIP'?null:result.started_at.slice(0,10),tester_id:result.status==='SKIP'?null:result.account_id,result:result.status==='BLOCKED'||result.status==='PARTIAL'?null:result.status,defect_notes:mask(`${result.status==='BLOCKED'?'BLOCKED: ':''}${result.reason}`)};}
 function differences(a,b,p='',out=[]) {if(isDeepStrictEqual(a,b))return out;if(a&&b&&typeof a==='object'&&typeof b==='object'){for(const k of new Set([...Object.keys(a),...Object.keys(b)]))differences(a[k],b[k],`${p}.${k}`,out);}else if(out.length<20)out.push(p);return out;}
 export async function writeFunctionalWorkbook({template,mapping,cases,results,output,m4,round=1,first=null}) {
   if(!mapping.confirmed||![1,2].includes(round))throw Error('승인 매핑/명시한 차수 필요');
@@ -24,6 +24,7 @@ export async function writeFunctionalWorkbook({template,mapping,cases,results,ou
   const outcome=new Map(results.records.map(r=>[r.case_id,r]));
   for(const [i,c]of cases.entries()) {
     const row=mapping.start_row+i,result=outcome.get(c.case_id);if(!result)throw Error('케이스 결과 누락');
+    if(round===2&&sheet.getCell(`${mapping.columns.case_id}${row}`).value!==c.case_id)throw Error('1차 TC와 2차 TC 불일치');
     if(!['admin','viewer'].includes(result.account_id)||result.mode==='수동')throw Error('승인한 계정/실행 방식 필요');
     const values={case_id:c.case_id,screen_or_menu:path.posix.basename(c.file??c.screen_files?.[0]??''),test_item:c.title,steps_and_inputs:c.supplemental?`업무 조건 확인: ${c.operation}`:`${c.kind} 기능 수행. 근거 ${c.file}:${c.line}`,expected_result:[...(c.expected_requests??[]),'기대 응답과 업무 화면/자료 확인'].join('\n'),execution_mode:result.mode,actions:null};
     const prefix=round===1?'first':'second';for(const[k,v]of Object.entries(resultValues(result)))values[`${prefix}.${k}`]=v;

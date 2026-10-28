@@ -1,11 +1,11 @@
 {
-  "review_status": "draft",
-  "approved_by": null,
+  "review_status": "approved",
+  "approved_by": "Ian",
   "projects": {
     "legacy-board": {
       "census": {
-        "review_status": "draft",
-        "approved_by": null,
+        "review_status": "approved",
+        "approved_by": "Ian",
         "source_files": {
           "src/main/webapp/resources/board.js": "6b7d7a88bee42990012ee211c75b0457650d911b34ede84e7bfab0eaf9327709",
           "src/main/webapp/WEB-INF/views/board/detail.jsp": "26103291f0f5df494de12dff45db92007cbaaac2c5152b3e6f75a61b2161e421",
@@ -254,10 +254,11 @@
             "line": 6,
             "kind": "fragment"
           }
-        ]
+        ],
+        "approved_at": "2026-10-28"
       },
       "comparison": {
-        "review_status": "draft",
+        "review_status": "approved",
         "missing": [],
         "extra": []
       },
@@ -272,8 +273,8 @@
     },
     "legacy-board-thymeleaf": {
       "census": {
-        "review_status": "draft",
-        "approved_by": null,
+        "review_status": "approved",
+        "approved_by": "Ian",
         "source_files": {
           "src/main/webapp/resources/board.js": "6b7d7a88bee42990012ee211c75b0457650d911b34ede84e7bfab0eaf9327709",
           "src/main/webapp/resources/thymeleaf-board.js": "dc3de039d48079f2dd5d4a3be6eb9d534a0200cd84a2197ffa9f87d40cebb2ce",
@@ -646,10 +647,11 @@
             "line": 6,
             "kind": "fragment"
           }
-        ]
+        ],
+        "approved_at": "2026-10-28"
       },
       "comparison": {
-        "review_status": "draft",
+        "review_status": "approved",
         "missing": [],
         "extra": []
       },
@@ -662,5 +664,10 @@
         "expected_request_omissions": []
       }
     }
-  }
+  },
+  "approved_at": "2026-10-28",
+  "approval_evidence": "사용자 승인: 종류별 개수를 별도 수동 집계로 대조해 47/71 일치",
+  "unverified": [
+    "두 테스트베드 모두 팝업 0개로 실제 팝업 감지 미검증"
+  ]
 }

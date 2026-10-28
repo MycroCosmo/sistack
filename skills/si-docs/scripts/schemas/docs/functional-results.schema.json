@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["round", "channel", "records", "created", "cleanup_performed"],
+  "properties": {
+    "round": { "enum": [1, 2] },
+    "channel": { "enum": ["chrome", "msedge"] },
+    "cleanup_performed": { "const": false },
+    "created": { "type": "array", "items": { "type": "object", "required": ["table", "key", "expected_title", "operation"], "properties": { "table": { "const": "BOARD" }, "key": { "type": "object", "required": ["ID"], "properties": { "ID": { "type": "integer", "minimum": 1 } } }, "expected_title": { "type": "string" }, "operation": { "enum": ["INSERT", "UPDATE"] } } } },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["case_id", "mode", "account_id", "round", "channel", "started_at", "status", "reason", "request_evidence", "screenshot"],
+        "properties": {
+          "case_id": { "type": "string", "minLength": 1 },
+          "mode": { "enum": ["AUTO-API", "AUTO-UI", "SKIP"] },
+          "account_id": { "type": "string", "minLength": 1 },
+          "round": { "enum": [1, 2] },
+          "channel": { "enum": ["chrome", "msedge"] },
+          "started_at": { "type": "string", "format": "date-time" },
+          "status": { "enum": ["PASS", "FAIL", "PARTIAL", "BLOCKED", "SKIP"] },
+          "reason": { "type": "string" },
+          "request_evidence": { "type": "string", "minLength": 1 },
+          "screenshot": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}
