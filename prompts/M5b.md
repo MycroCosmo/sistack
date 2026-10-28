@@ -59,7 +59,9 @@
 
 ## 5. M4 보조 근거
 
-M4 최종 `test-results.json`과 `schemas/test-results.schema.json`을 읽어 **서버 로직 검증 근거** 보조 열에 run-id·테스트·상태·파일을 연결한다. 화면 TC 자체의 실행 결과로 대체하지 않는다. 입력 위치는 [M4 종료 보고](../docs/m4-final-report.md)를 따른다.
+M4 최종 `test-results.json`과 `schemas/test-results.schema.json`을 읽어 별도 **서버로직검증** 시트에 run-id·테스트·상태·파일을 연결한다. 2026-10-28 사용자 확정: 제공 양식의 기존 시트 구조·수식·드롭다운은 변경하지 않고 열도 추가하지 않는다. 화면 TC 자체의 실행 결과로 대체하지 않는다. 입력 위치는 [M4 종료 보고](../docs/m4-final-report.md)를 따른다.
+
+제공 양식에서 BLOCKED는 결과 칸을 비우고 해당 차수 비고에 사유를 적으며 JSON 상태 BLOCKED를 유지한다. SKIP/PASS로 바꾸지 않는다. 실행 방식의 `수동` 값은 도구가 쓰지 않는다. 이는 M5b 구현 시 적용할 확정 규칙이며 M5a에서 결과서 작성·TC 실행을 시작하는 지시가 아니다.
 
 ## 6. v0.2 범위 밖
 

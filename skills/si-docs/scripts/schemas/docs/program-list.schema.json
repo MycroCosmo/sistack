@@ -12,7 +12,10 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0.0"
+      "enum": [
+        "1.0.0",
+        "1.1.0"
+      ]
     },
     "kind": {
       "const": "program-list"
@@ -113,6 +116,20 @@
                   "string",
                   "null"
                 ]
+              },
+              "program_type": {
+                "enum": [
+                  "화면",
+                  "클래스",
+                  "SQL",
+                  null
+                ]
+              },
+              "related_sources": {
+                "type": [
+                  "string",
+                  "null"
+                ]
               }
             }
           },
@@ -155,6 +172,51 @@
           "reason": {
             "type": "string",
             "minLength": 1
+          },
+          "identity": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "not_applicable": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "field_evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "field",
+                "status",
+                "file",
+                "line",
+                "reason"
+              ],
+              "properties": {
+                "field": {
+                  "const": "program_name"
+                },
+                "status": {
+                  "const": "LIKELY"
+                },
+                "file": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
           }
         }
       }

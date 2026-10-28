@@ -4,7 +4,9 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { inflateRawSync } from 'node:zlib';
 import { isDeepStrictEqual } from 'node:util';
 import { noLinks, digest } from '../trace/io.mjs';
-import { columns, requiredColumns, validateDocument, clean } from './contract.mjs';
+import { columns, validateDocument, clean } from './contract.mjs';
+import { validateSettings, checkMapping, plannedWrites } from './mapping.mjs';
+import { attrs } from '../indexer/source.mjs';
 
 export const limitations = [
   '수식은 식과 캐시를 보존하며 계산하지 않음. Excel/LibreOffice 실제 표시·재계산 검증은 별도',
@@ -12,6 +14,20 @@ export const limitations = [
   '검증 범위: 기본 드롭다운, 기본 조건부 서식, 병합, PNG 이미지, 셀 메모, 수식, 셀 서식, 다른 시트. 모든 OOXML 변형을 보장하지 않음',
   '행 삽입/이동·자동 범위 확장 없음. 사용자 양식은 충분한 빈 입력 행과 end_row를 명시해야 함'
 ];
+
+function defaultFont(xml) {
+  const body=/<fonts\b[^>]*>\s*<font>([\s\S]*?)<\/font>/i.exec(xml)?.[1];
+  if(!body)return null;
+  const font={}, keys={name:'name',sz:'size',family:'family',scheme:'scheme'};
+  let remainder=body;
+  for(const match of body.matchAll(/<(name|sz|family|scheme|color)\b([^>]*?)\/>/g)) {
+    const a=attrs(match[2]);
+    if(match[1]==='color')font.color=Object.fromEntries(Object.entries(a).map(([k,v])=>[k==='rgb'?'argb':k,['theme','indexed','tint'].includes(k)?+v:v]));
+    else font[keys[match[1]]]=['sz','family'].includes(match[1])?+a.val:a.val;
+    remainder=remainder.replace(match[0],'');
+  }
+  return remainder.trim()?null:font;
+}
 
 // 이름/확장 기능 감지용 읽기 전용 ZIP 검사. 압축 해제 크기를 제한하며 디스크에 풀지 않는다.
 export function inspectPackage(bytes) {
@@ -21,7 +37,7 @@ export function inspectPackage(bytes) {
   if (end < 0 || bytes.readUInt32LE(end) !== 0x06054b50) throw new Error('유효하지 않은 xlsx ZIP');
   const count = bytes.readUInt16LE(end + 10), offset = bytes.readUInt32LE(end + 16), names = [], warnings = [];
   if (count === 65535 || offset === 0xffffffff || count > 10000) throw new Error('ZIP64/과다 항목 미지원');
-  let at = offset, total = 0;
+  let at = offset, total = 0, font = null;
   for (let i = 0; i < count; i++) {
     if (at + 46 > bytes.length || bytes.readUInt32LE(at) !== 0x02014b50) throw new Error('잘못된 ZIP 디렉터리');
     const method = bytes.readUInt16LE(at + 10), size = bytes.readUInt32LE(at + 24), packed = bytes.readUInt32LE(at + 20);
@@ -40,6 +56,7 @@ export function inspectPackage(bytes) {
       let xml = (method === 8 ? inflateRawSync(compressed, { maxOutputLength: 30 * 1024 * 1024 }) : compressed).toString('utf8');
       // ExcelJS가 항상 쓰는 미사용 기본 스타일 선언 2개만 허용. 사용자 확장은 남겨 경고한다.
       if (name === 'xl/styles.xml') {
+        font = defaultFont(xml);
         xml = xml.replace('<ext uri="{EB79DEF2-80B8-43e5-95BD-54CBDDF9020C}" xmlns:x14="http://schemas.microsoft.com/office/spreadsheetml/2009/9/main"><x14:slicerStyles defaultSlicerStyle="SlicerStyleLight1"/></ext>', '')
           .replace('<ext uri="{9260A510-F301-46a8-8635-F512D64BE5F5}" xmlns:x15="http://schemas.microsoft.com/office/spreadsheetml/2010/11/main"><x15:timelineStyles defaultTimelineStyle="TimeSlicerStyleLight1"/></ext>', '').replace('<extLst></extLst>', '');
       }
@@ -48,7 +65,7 @@ export function inspectPackage(bytes) {
     }
     at += 46 + length + extra + comment;
   }
-  return { parts: names.length, warnings: [...new Set(warnings)] };
+  return { parts: names.length, warnings: [...new Set(warnings)], default_font: font };
 }
 
 function stable(value) {
@@ -58,15 +75,27 @@ function stable(value) {
   if (value && typeof value === 'object') return Object.fromEntries(Object.keys(value).sort().filter(k => value[k] !== undefined).map(k => [k, stable(value[k])]));
   return value;
 }
-export function snapshot(book) {
+export function snapshot(book, font = null) {
   return stable(book.worksheets.map(sheet => {
     const cells = {}, rows = {};
     sheet.eachRow({ includeEmpty: true }, r => { rows[r.number] = { height: r.height, hidden: r.hidden, outlineLevel: r.outlineLevel, style: r.style }; });
     sheet.eachRow({ includeEmpty: true }, r => r.eachCell({ includeEmpty: true }, c => {
-      if (c.value !== null || Object.keys(c.style).length || c.note) cells[c.address] = { value: c.value, style: c.style, note: c.note ?? null };
+      if (c.value !== null || Object.keys(c.style).length || c.note) {
+        const style=structuredClone(c.style);
+        // 채색 전 암묵적 기본 글꼴/빈 테두리와 저장 후 명시값을 같은 의미로 비교한다.
+        if(font&&isDeepStrictEqual(stable(style.font),stable(font)))delete style.font;
+        if(style.border&&Object.keys(style.border).length===0)delete style.border;
+        cells[c.address] = { value: c.value, style, note: c.note ?? null };
+      }
     }));
     return { name: sheet.name, state: sheet.state, cells, rows, merges: [...sheet.model.merges].sort(), validations: sheet.dataValidations.model, conditional: sheet.conditionalFormattings, images: sheet.getImages().map(i => ({ range: { tl: { col: i.range.tl.col, row: i.range.tl.row }, br: i.range.br ? { col: i.range.br.col, row: i.range.br.row } : null, ext: i.range.ext, editAs: i.range.editAs }, hash: digest(book.getImage(i.imageId).buffer) })), columns: sheet.columns.map(c => ({ width: c.width, hidden: c.hidden, style: c.style })), views: sheet.views, pageSetup: sheet.pageSetup, autoFilter: sheet.autoFilter };
   }));
+}
+function differingPaths(a,b,prefix='',out=[]) {
+  if(isDeepStrictEqual(a,b))return out;
+  if(a&&b&&typeof a==='object'&&typeof b==='object')for(const key of new Set([...Object.keys(a),...Object.keys(b)]))differingPaths(a[key],b[key],`${prefix}.${key}`,out);
+  else if(out.length<50)out.push(prefix);
+  return out;
 }
 export async function readWorkbook(file) {
   await noLinks(file); const bytes = await readFile(file); inspectPackage(bytes);
@@ -81,7 +110,6 @@ export async function writeWorkbook(file, book) {
   try { await writeFile(file, Buffer.from(await book.xlsx.writeBuffer()), { flag: 'wx' }); }
   finally { for (const s of defaults) s.pageSetup.firstPageNumber = 1; }
 }
-const colNumber = text => [...text].reduce((v, c) => v * 26 + c.charCodeAt(0) - 64, 0);
 export function colLetter(n) { let result = ''; do { n--; result = String.fromCharCode(65 + n % 26) + result; n = Math.floor(n / 26); } while (n); return result; }
 
 export async function createDefaultTemplate(kind, output) {
@@ -122,56 +150,42 @@ export async function proposeMapping(kind, template, sheetName, headerRow, start
   return mapping; // 저장 후 사용자 확인; 이 초안으로 채우기 금지
 }
 
-export async function fillTemplate(doc, mapping, output) {
+export async function fillTemplate(doc, mapping, output, settings = {}) {
   await validateDocument(doc);
-  if (mapping.confirmed !== true) throw new Error('양식 매핑 확인 필요');
-  if (Object.keys(mapping).some(k => !['template', 'sheet', 'header_row', 'start_row', 'end_row', 'columns', 'id_rule', 'fixed', 'confirmed'].includes(k))) throw new Error('미지원 매핑 항목');
-  const { header_row: header, start_row: start, end_row: end } = mapping;
-  if (![header, start, end].every(Number.isInteger) || header < 1 || start <= header || end < start || end > 1048576 || start + doc.rows.length - 1 > end) throw new Error('양식 입력 행 범위 오류/부족');
-  if (!mapping.columns || !Object.keys(mapping.columns).length || requiredColumns[doc.kind].some(k => !mapping.columns[k])) throw new Error('필수 열 매핑 누락');
-  const targetCols = Object.values(mapping.columns);
-  if (new Set(targetCols).size !== targetCols.length || targetCols.some(c => !/^[A-Z]{1,3}$/.test(c) || colNumber(c) > 16384) || Object.keys(mapping.columns).some(k => !Object.hasOwn(columns[doc.kind], k))) throw new Error('열 매핑 오류/중복');
-  const fixed = mapping.fixed ?? {};
-  if (Object.keys(fixed).some(k => !['program_id', 'program_name'].includes(k) || doc.kind !== 'program-list' || typeof fixed[k] !== 'string')) throw new Error('fixed는 사용자 프로그램 ID/업무명만 지원');
-  if (mapping.id_rule && (doc.kind !== 'program-list' || Object.keys(mapping.id_rule).some(k => !['prefix', 'start', 'width'].includes(k)) || typeof mapping.id_rule.prefix !== 'string' || !Number.isInteger(mapping.id_rule.start) || mapping.id_rule.start < 0 || !Number.isInteger(mapping.id_rule.width) || mapping.id_rule.width < 1 || mapping.id_rule.width > 12 || Object.hasOwn(fixed, 'program_id'))) throw new Error('ID 규칙 오류');
+  checkMapping(doc, mapping); settings = validateSettings(settings);
   await noLinks(mapping.template); await noLinks(output);
   if (path.resolve(mapping.template).toLowerCase() === path.resolve(output).toLowerCase()) throw new Error('원본 양식 덮어쓰기 금지');
   const bytes = await readFile(mapping.template), originalHash = digest(bytes), info = inspectPackage(bytes);
   const book = new ExcelJS.Workbook(); await book.xlsx.load(bytes);
-  const before = snapshot(book), sheet = book.getWorksheet(mapping.sheet); if (!sheet) throw new Error('양식 시트 없음');
-  const missing = [], expected = [];
-  for (const [i, source] of doc.rows.entries()) {
-    const evidence = source.evidence.slice(0, 2).map(e => `${e.file}:${e.line}`);
-    if (source.evidence.length > 2) evidence.push(`외 ${source.evidence.length - 2}건: evidence/data.json`);
-    const values = { ...source.values, ...fixed, evidence: evidence.join('\n'), status: source.status };
-    if (doc.kind === 'program-list') for (const field of ['controller', 'service', 'mapper']) {
-      if (typeof values[field] !== 'string') continue;
-      values[field] = values[field].split('\n').map(name => {
-        const [owner, method] = name.split('#');
-        return method ? `${owner.split('.').at(-1)}.${method}` : name.split('.').slice(-2).join('.');
-      }).join('\n');
-    }
-    if (mapping.id_rule) values.program_id = mapping.id_rule.prefix + String(mapping.id_rule.start + i).padStart(mapping.id_rule.width, '0');
-    for (const [field, column] of Object.entries(mapping.columns)) {
-      const cell = sheet.getCell(`${column}${start + i}`);
-      if (cell.isMerged || cell.value !== null) throw new Error('입력 영역에 병합/수식/기존 값 존재: 매핑 조정 필요');
-      const rawValue = clean(values[field] ?? null), value = rawValue === '' ? null : rawValue;
-      cell.value = value;
-      if (rawValue === null) {
-        missing.push({ row: start + i, field });
-        // 원본 메모는 유지하며 미확인 강조는 셀 배경+보고서에만 남긴다.
-        cell.style = structuredClone(cell.style);
-        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFE699' } };
+  const before = snapshot(book, info.default_font), sheet = book.getWorksheet(mapping.sheet); if (!sheet) throw new Error('양식 시트 없음');
+  const missing = [], suggested = [], expected = [];
+  const labels=Object.fromEntries(Object.entries(mapping.columns).map(([field,col])=>[field,sheet.getCell(`${col}${mapping.header_row}`).master.text.replace(/\s+/g,' ').trim()||field]));
+  for (const write of plannedWrites(doc, mapping, settings, labels)) {
+    const cell = sheet.getCell(write.address), { field } = write;
+    if ((cell.isMerged && (!write.top || cell.master !== cell)) || cell.value !== null) throw new Error('입력 영역에 병합/수식/기존 값 존재: 매핑 조정 필요');
+    const rawValue = clean(write.value), value = rawValue === '' ? null : rawValue;
+    const validation = cell.dataValidation;
+    if (value !== null && validation?.type === 'list' && /^".*"$/.test(validation.formulae?.[0] ?? '') && !validation.formulae[0].slice(1,-1).split(',').includes(String(value))) throw new Error('양식 드롭다운 허용 값 불일치');
+    cell.value = value;
+    if (write.unknown) missing.push({ address: cell.address, row: cell.row, field });
+    if (write.proposal) suggested.push({ address: cell.address, field, ...write.proposal });
+    if (write.unknown || write.proposal) {
+      cell.style = structuredClone(cell.style);
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFE699' } };
+      if (write.top && cell.isMerged) {
+        const range = sheet.model.merges.find(r => r.split(':')[0] === cell.address);
+        const last = sheet.getCell(range.split(':')[1]);
+        for (let r = cell.row; r <= last.row; r++) for (let c = cell.col; c <= last.col; c++) sheet.getCell(r,c).style = structuredClone(cell.style);
       }
-      expected.push({ address: cell.address, value });
     }
+    expected.push({ address: cell.address, value });
   }
-  const expectedBook = snapshot(book);
+  const expectedBook = snapshot(book, info.default_font);
   await writeWorkbook(output, book);
-  const reopened = await readWorkbook(output), after = snapshot(reopened);
-  const same = isDeepStrictEqual(expectedBook, after);
+  const reopened = await readWorkbook(output), after = snapshot(reopened, info.default_font);
+  const same = isDeepStrictEqual(expectedBook, after) && isDeepStrictEqual(info.default_font,inspectPackage(await readFile(output)).default_font);
   const rowsValid = expected.every(c => isDeepStrictEqual(reopened.getWorksheet(mapping.sheet).getCell(c.address).value, c.value));
   const sourceUnchanged = digest(await readFile(mapping.template)) === originalHash;
   const warnings = [...info.warnings, ...(!same ? ['양식 요소 재읽기 불일치: 보존 검사 FAIL'] : []), ...(!sourceUnchanged ? ['원본 양식 해시 변경'] : [])];
-  return { status: !same || !rowsValid || !sourceUnchanged ? 'FAIL' : missing.length || warnings.length || doc.unverified.length || doc.rows.some(r => r.status !== 'CONFIRMED' || r.unverified.length) ? 'PARTIAL' : 'PASS', rows: doc.rows.length, mapped_columns: Object.keys(mapping.columns).length, missing, warnings, limitations, original_sha256: originalHash, original_unchanged: sourceUnchanged, preserved: same, values_verified: rowsValid, template_features: { sheets: before.length, merges: before.reduce((s, w) => s + w.merges.length, 0), images: before.reduce((s, w) => s + w.images.length, 0), validations: before.reduce((s, w) => s + Object.keys(w.validations).length, 0), conditional_formats: before.reduce((s, w) => s + w.conditional.length, 0), notes: before.reduce((s, w) => s + Object.values(w.cells).filter(c => c.note).length, 0), formulas: before.reduce((s, w) => s + Object.values(w.cells).filter(c => c.value?.formula).length, 0) } };
+  return { status: !same || !rowsValid || !sourceUnchanged ? 'FAIL' : missing.length || suggested.length || warnings.length || doc.unverified.length || doc.rows.some(r => r.status !== 'CONFIRMED' || r.unverified.length) ? 'PARTIAL' : 'PASS', rows: doc.rows.length, mapped_columns: Object.keys(mapping.columns).length, missing, suggested, preservation_differences: differingPaths(expectedBook,after), warnings, limitations, original_sha256: originalHash, original_unchanged: sourceUnchanged, preserved: same, values_verified: rowsValid, template_features: { sheets: before.length, merges: before.reduce((s, w) => s + w.merges.length, 0), images: before.reduce((s, w) => s + w.images.length, 0), validations: before.reduce((s, w) => s + Object.keys(w.validations).length, 0), conditional_formats: before.reduce((s, w) => s + w.conditional.length, 0), notes: before.reduce((s, w) => s + Object.values(w.cells).filter(c => c.note).length, 0), formulas: before.reduce((s, w) => s + Object.values(w.cells).filter(c => c.value?.formula).length, 0) } };
 }

@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
-import { extractPrograms, extractTables, parseDDL, parseCSV } from '../lib/docs/extract.mjs';
+import { extractPrograms as extractProgramsWithMode, extractTables, parseDDL, parseCSV } from '../lib/docs/extract.mjs';
 import { validateDocument } from '../lib/docs/contract.mjs';
 import { fillTemplate, createDefaultTemplate, readWorkbook, writeWorkbook, proposeMapping, inspectPackage } from '../lib/docs/workbook.mjs';
 import { fillRun } from '../lib/docs/run.mjs';
@@ -13,6 +13,7 @@ import { digest } from '../lib/trace/io.mjs';
 import { richTemplate } from './helpers/docs-fixture.mjs';
 
 const project = path.resolve('examples/legacy-board');
+const extractPrograms = root => extractProgramsWithMode(root, { rowMode: 'endpoint' });
 async function temp(t) {
   const dir = await mkdtemp(path.join(os.tmpdir(), 'sistack-docs-'));
   t.after(() => rm(dir, { recursive: true, force: true })); return dir;
@@ -141,7 +142,7 @@ test('원본·기존 출력·수식·병합·기존 데이터 덮어쓰기를 �
 
 test('사용자 ID 규칙만 적용하고 자료형 덮어쓰기·열 중복·부족한 영역을 거부한다', async t => {
   const dir = await temp(t), m = { ...await createDefaultTemplate('program-list', path.join(dir, 't.xlsx')), confirmed: true }, doc = await extractPrograms(project);
-  await fillTemplate(doc, { ...m, id_rule: { prefix: 'PGM-', start: 1, width: 3 } }, path.join(dir, 'out.xlsx'));
+  await fillTemplate(doc, m, path.join(dir, 'out.xlsx'), { id_rule: { prefix: 'PGM-', start: 1, width: 3 } });
   assert.equal((await readWorkbook(path.join(dir, 'out.xlsx'))).getWorksheet(m.sheet).getCell('A5').value, 'PGM-001', '사용자가 지정한 ID 규칙을 적용해야 한다');
   await assert.rejects(fillTemplate(doc, { ...m, fixed: { url: '가짜 경로' } }, path.join(dir, 'bad.xlsx')), /fixed/, '소스 사실을 고정 값으로 바꾸지 않아야 한다');
   await assert.rejects(fillTemplate(doc, { ...m, end_row: 5 }, path.join(dir, 'short.xlsx')), /범위/, '행 용량이 모자라면 멈춰야 한다');
