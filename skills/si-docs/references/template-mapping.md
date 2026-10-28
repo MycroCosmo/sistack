@@ -1,5 +1,7 @@
 # 양식 매핑·보존
 
+새 기본 엑셀에는 AI/자동화 안내 문구를 넣지 않는다. 승인/증거 단계 안내는 별도 report.md에 남긴다. 제공 양식의 원래 문구는 변경하지 않는다.
+
 실행:
 ```
 node <skill>/scripts/si-docs.mjs default-template program-list <new.xlsx> <draft.json>

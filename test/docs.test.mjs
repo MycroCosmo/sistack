@@ -33,6 +33,27 @@ test('프로그램 목록은 요청별 소스 연결을 남기고 업무명·ID�
   assert.ok(list.evidence.every(e => doc.source_files[e.file] && e.line > 0), '근거는 해시가 있는 소스 라인이어야 한다');
 });
 
+test('새 기본 엑셀은 AI 안내를 넣지 않고 프로그램 참조를 클래스명.메서드명으로 표시한다', async t => {
+  const dir = await temp(t);
+  for (const kind of ['program-list', 'table-spec']) {
+    const m = await createDefaultTemplate(kind, path.join(dir, `${kind}.xlsx`));
+    const sheet = (await readWorkbook(m.template)).getWorksheet(m.sheet);
+    const text = [];
+    sheet.eachRow(r => r.eachCell(c => { if (typeof c.value === 'string') text.push(c.value); }));
+    assert.doesNotMatch(text.join('\n'), /AI|자동화/, '기본 엑셀에 AI/자동화 안내 문구를 넣지 않아야 한다');
+    if (kind === 'program-list') {
+      const doc = await extractPrograms(project), i = doc.rows.findIndex(r => r.values.url === '/board/list.do');
+      assert.ok(i >= 0, '게시글 목록 요청이 있어야 한다');
+      await fillTemplate(doc, { ...m, confirmed: true }, path.join(dir, 'program-filled.xlsx'));
+      const filled = (await readWorkbook(path.join(dir, 'program-filled.xlsx'))).getWorksheet(m.sheet);
+      assert.equal(filled.getCell(`F${5 + i}`).value, 'BoardController.list', 'Controller는 클래스명.메서드명으로 표시해야 한다');
+      assert.match(filled.getCell(`G${5 + i}`).value, /^BoardServiceImpl\.list$/m, 'Service는 클래스명.메서드명으로 표시해야 한다');
+      assert.match(filled.getCell(`H${5 + i}`).value, /^BoardMapper\.selectList$/m, 'SQL은 네임스페이스명.SQL ID로 표시해야 한다');
+      assert.match(doc.rows[i].values.controller, /kr\.sistack\.board\.web\.BoardController#list/, '분석 JSON에는 원래 식별자를 남겨야 한다');
+    }
+  }
+});
+
 test('DDL에서 세 테이블 열 12개와 설명·PK·FK·기본값을 도출한다', async () => {
   const doc = await tables();
   assert.equal(doc.rows.length, 12, '12개 열을 빠짐없이 추출해야 한다');

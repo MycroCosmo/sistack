@@ -91,7 +91,7 @@ export async function createDefaultTemplate(kind, output) {
   const fields = Object.keys(columns[kind]);
   sheet.mergeCells(1, 1, 1, fields.length); sheet.getCell('A1').value = sheet.name;
   sheet.getCell('A1').font = { size: 20, bold: true, color: { argb: 'FF17365D' } }; sheet.getRow(1).height = 36;
-  sheet.mergeCells(2, 1, 2, fields.length); sheet.getCell('A2').value = '소스 기준 초안 · 빈 칸은 미확인 · AI의 PASS는 승인/검수 완료가 아닙니다'; sheet.getRow(2).height = 26;
+  sheet.mergeCells(2, 1, 2, fields.length); sheet.getCell('A2').value = '소스 기준 초안 · 빈 칸은 미확인'; sheet.getRow(2).height = 26;
   fields.forEach((f, i) => {
     const c = sheet.getCell(4, i + 1); c.value = columns[kind][f];
     c.font = { bold: true, color: { argb: 'FFFFFFFF' } }; c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF17365D' } };
@@ -144,6 +144,13 @@ export async function fillTemplate(doc, mapping, output) {
     const evidence = source.evidence.slice(0, 2).map(e => `${e.file}:${e.line}`);
     if (source.evidence.length > 2) evidence.push(`외 ${source.evidence.length - 2}건: evidence/data.json`);
     const values = { ...source.values, ...fixed, evidence: evidence.join('\n'), status: source.status };
+    if (doc.kind === 'program-list') for (const field of ['controller', 'service', 'mapper']) {
+      if (typeof values[field] !== 'string') continue;
+      values[field] = values[field].split('\n').map(name => {
+        const [owner, method] = name.split('#');
+        return method ? `${owner.split('.').at(-1)}.${method}` : name.split('.').slice(-2).join('.');
+      }).join('\n');
+    }
     if (mapping.id_rule) values.program_id = mapping.id_rule.prefix + String(mapping.id_rule.start + i).padStart(mapping.id_rule.width, '0');
     for (const [field, column] of Object.entries(mapping.columns)) {
       const cell = sheet.getCell(`${column}${start + i}`);

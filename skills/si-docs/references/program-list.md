@@ -6,4 +6,6 @@
 
 프로그램 ID·업무명은 null이다. 사용자 mapping의 id_rule/fixed로만 채운다. 연결 없는 Service/Mapper/화면은 빈 칸이며 미확인 목록으로 남긴다. 단순 문자열 검색을 연결 확정으로 쓰지 않는다. LIKELY 경로는 제외하고 이유를 행에 기록한다.
 
+엑셀은 Controller/Service를 `클래스명.메서드명`, Mapper/SQL을 `네임스페이스명.SQL ID`로 표시한다. 패키지를 포함한 원래 식별자는 표준 JSON/인덱스에 유지한다. 동일 클래스명은 원래 식별자와 근거 파일로 구별한다.
+
 표준 JSON 스키마는 설치본 scripts/schemas/docs/program-list.schema.json이다. values에는 문서 필드, evidence에는 소스 파일/라인, status/reason에는 관계의 근거 수준을 둔다. source_files 해시가 달라지면 새로 추출해야 한다.
