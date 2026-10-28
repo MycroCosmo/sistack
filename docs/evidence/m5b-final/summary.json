@@ -1,0 +1,587 @@
+{
+  "scope": "M5b 두 로컬 테스트베드 기능 검증. 형식 일반성 검증이며 현장 검증 아님",
+  "status": "PARTIAL",
+  "inventory_approval": {
+    "approved_by": "Ian",
+    "approved_at": "2026-10-28",
+    "evidence": "사용자 승인: 종류별 개수를 별도 수동 집계로 대조해 47/71 일치",
+    "sha256": "09b49f63417dc2e720d18fb088d39c458b632ed43c57408b17cd4f3755fe4b0b"
+  },
+  "popup": {
+    "actual_testbed_samples": 0,
+    "status": "UNVERIFIED",
+    "backlog": "v0.2 검증용 화면 추가"
+  },
+  "inventory": [
+    {
+      "project": "legacy-board",
+      "items": 47,
+      "missing": 0,
+      "extra": 0,
+      "approved_by": "Ian"
+    },
+    {
+      "project": "legacy-board-thymeleaf",
+      "items": 71,
+      "missing": 0,
+      "extra": 0,
+      "approved_by": "Ian"
+    }
+  ],
+  "versions": {
+    "v1": {
+      "projects": {
+        "legacy-board": {
+          "run_id": "m5b-first-v1",
+          "cases": 56,
+          "counts": {
+            "PASS": 26,
+            "BLOCKED": 16,
+            "SKIP": 6,
+            "FAIL": 8
+          },
+          "modes": {
+            "AUTO-API:PASS": 17,
+            "AUTO-UI:BLOCKED": 15,
+            "SKIP:SKIP": 6,
+            "AUTO-UI:PASS": 9,
+            "AUTO-API:FAIL": 6,
+            "AUTO-API:BLOCKED": 1,
+            "AUTO-UI:FAIL": 2
+          },
+          "blocked_reasons": {
+            "실제 id/name 선택자가 없어 UI 동작을 확인할 수 없습니다": 14,
+            "선택자가 화면에서 유일하지 않습니다": 1,
+            "직접 실행할 요청 연결이 없습니다": 1
+          },
+          "edge_counts": {
+            "FAIL": 1,
+            "PASS": 1
+          },
+          "first_frozen": true,
+          "workbook_preserved": true,
+          "m4_server_logic_rows": 48,
+          "created_or_updated_records": 14,
+          "db_preserved": true,
+          "keys_verified": null,
+          "approved_inventory_comparison": {
+            "missing": 0,
+            "extra": 0
+          }
+        },
+        "legacy-board-thymeleaf": {
+          "run_id": "m5b-first-v1",
+          "cases": 80,
+          "counts": {
+            "PASS": 36,
+            "BLOCKED": 26,
+            "SKIP": 8,
+            "FAIL": 10
+          },
+          "modes": {
+            "AUTO-API:PASS": 22,
+            "AUTO-UI:BLOCKED": 23,
+            "SKIP:SKIP": 8,
+            "AUTO-API:FAIL": 7,
+            "AUTO-UI:PASS": 14,
+            "AUTO-API:BLOCKED": 3,
+            "AUTO-UI:FAIL": 3
+          },
+          "blocked_reasons": {
+            "실제 id/name 선택자가 없어 UI 동작을 확인할 수 없습니다": 20,
+            "선택자가 화면에서 유일하지 않습니다": 3,
+            "직접 실행할 요청 연결이 없습니다": 3
+          },
+          "edge_counts": {
+            "FAIL": 1,
+            "BLOCKED": 1
+          },
+          "first_frozen": true,
+          "workbook_preserved": true,
+          "m4_server_logic_rows": 48,
+          "created_or_updated_records": 14,
+          "db_preserved": true,
+          "keys_verified": null,
+          "approved_inventory_comparison": {
+            "missing": 0,
+            "extra": 0
+          }
+        }
+      }
+    },
+    "v2": {
+      "projects": {
+        "legacy-board": {
+          "run_id": "m5b-first-v2",
+          "cases": 56,
+          "counts": {
+            "PASS": 34,
+            "BLOCKED": 16,
+            "SKIP": 6
+          },
+          "modes": {
+            "AUTO-API:PASS": 23,
+            "AUTO-UI:BLOCKED": 15,
+            "SKIP:SKIP": 6,
+            "AUTO-UI:PASS": 11,
+            "AUTO-API:BLOCKED": 1
+          },
+          "blocked_reasons": {
+            "실제 id/name 선택자가 없어 UI 동작을 확인할 수 없습니다": 14,
+            "선택자가 화면에서 유일하지 않습니다": 1,
+            "직접 실행할 요청 연결이 없습니다": 1
+          },
+          "edge_counts": {
+            "PASS": 2
+          },
+          "first_frozen": true,
+          "workbook_preserved": true,
+          "m4_server_logic_rows": 48,
+          "created_or_updated_records": 14,
+          "db_preserved": true,
+          "keys_verified": true,
+          "approved_inventory_comparison": {
+            "missing": 0,
+            "extra": 0
+          }
+        },
+        "legacy-board-thymeleaf": {
+          "run_id": "m5b-first-v2",
+          "cases": 80,
+          "counts": {
+            "PASS": 47,
+            "BLOCKED": 25,
+            "SKIP": 8
+          },
+          "modes": {
+            "AUTO-API:PASS": 29,
+            "AUTO-UI:BLOCKED": 22,
+            "SKIP:SKIP": 8,
+            "AUTO-UI:PASS": 18,
+            "AUTO-API:BLOCKED": 3
+          },
+          "blocked_reasons": {
+            "실제 id/name 선택자가 없어 UI 동작을 확인할 수 없습니다": 20,
+            "선택자가 화면에서 유일하지 않습니다": 2,
+            "직접 실행할 요청 연결이 없습니다": 3
+          },
+          "edge_counts": {
+            "PASS": 2
+          },
+          "first_frozen": true,
+          "workbook_preserved": true,
+          "m4_server_logic_rows": 48,
+          "created_or_updated_records": 14,
+          "db_preserved": true,
+          "keys_verified": true,
+          "approved_inventory_comparison": {
+            "missing": 0,
+            "extra": 0
+          }
+        }
+      }
+    }
+  },
+  "training": {
+    "v1": {
+      "dataset": "승인된 M3 학습 10건",
+      "generalization": false,
+      "detected": 8,
+      "missed": 1,
+      "blocked": 1,
+      "cases": [
+        {
+          "case_id": "01-binding",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-CREATE",
+            "SUP-UPDATE",
+            "TC-007",
+            "TC-008",
+            "TC-009",
+            "TC-010",
+            "TC-016",
+            "TC-017",
+            "TC-021",
+            "TC-022",
+            "TC-023",
+            "TC-024",
+            "TC-025",
+            "TC-026",
+            "TC-032",
+            "TC-044",
+            "TC-046",
+            "SUP-SORT",
+            "SUP-PAGING",
+            "SUP-BOUNDARY",
+            "SUP-CODES",
+            "SUP-ERROR"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "02-js-url",
+          "status": "MISSED",
+          "detected_by": [],
+          "reason": null
+        },
+        {
+          "case_id": "03-request-encoding",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-CREATE",
+            "SUP-UPDATE",
+            "TC-009",
+            "TC-026",
+            "TC-044",
+            "TC-046",
+            "SUP-PAGING",
+            "SUP-CODES"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "04-session-bypass",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-CREATE",
+            "SUP-UPDATE",
+            "TC-009",
+            "TC-016",
+            "TC-017",
+            "TC-021",
+            "TC-022",
+            "TC-023",
+            "SUP-SORT",
+            "SUP-PAGING",
+            "SUP-BOUNDARY",
+            "SUP-ANONYMOUS"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "05-paging",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-PAGING"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "06-sort-sql",
+          "status": "DETECTED",
+          "detected_by": [
+            "TC-016",
+            "TC-017",
+            "TC-021",
+            "TC-022",
+            "TC-023",
+            "SUP-SORT",
+            "SUP-PAGING",
+            "SUP-BOUNDARY"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "07-oracle-log-only",
+          "status": "BLOCKED",
+          "detected_by": [],
+          "reason": "로그 전용 Oracle 사례. 로컬 앱 패치 실행 불가"
+        },
+        {
+          "case_id": "08-thymeleaf-utilities",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-CREATE",
+            "SUP-UPDATE",
+            "TC-001",
+            "TC-002",
+            "TC-011",
+            "TC-012",
+            "TC-016",
+            "TC-017",
+            "TC-018",
+            "TC-019",
+            "TC-022",
+            "TC-024",
+            "TC-025",
+            "TC-026",
+            "TC-027",
+            "TC-031",
+            "TC-034",
+            "TC-036",
+            "TC-039",
+            "TC-040",
+            "TC-041",
+            "TC-042",
+            "TC-043",
+            "TC-068",
+            "TC-069",
+            "SUP-SORT",
+            "SUP-PAGING",
+            "SUP-BOUNDARY",
+            "SUP-ERROR"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "09-view-resolver",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-CREATE",
+            "SUP-UPDATE",
+            "TC-001",
+            "TC-002",
+            "TC-011",
+            "TC-012",
+            "TC-016",
+            "TC-017",
+            "TC-018",
+            "TC-019",
+            "TC-022",
+            "TC-024",
+            "TC-025",
+            "TC-026",
+            "TC-027",
+            "TC-031",
+            "TC-034",
+            "TC-036",
+            "TC-039",
+            "TC-040",
+            "TC-068",
+            "TC-069",
+            "SUP-SORT",
+            "SUP-PAGING",
+            "SUP-BOUNDARY"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "10-fragment-encoding",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-PAGING"
+          ],
+          "reason": null
+        }
+      ]
+    },
+    "v2": {
+      "dataset": "승인된 M3 학습 10건",
+      "generalization": false,
+      "detected": 9,
+      "missed": 0,
+      "blocked": 1,
+      "cases": [
+        {
+          "case_id": "01-binding",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-CREATE",
+            "SUP-UPDATE",
+            "TC-007",
+            "TC-008",
+            "TC-009",
+            "TC-010",
+            "TC-014",
+            "TC-015",
+            "TC-016",
+            "TC-017",
+            "TC-021",
+            "TC-022",
+            "TC-023",
+            "TC-024",
+            "TC-025",
+            "TC-026",
+            "TC-027",
+            "TC-028",
+            "TC-029",
+            "TC-031",
+            "TC-032",
+            "TC-042",
+            "TC-044",
+            "TC-046",
+            "SUP-SORT",
+            "SUP-PAGING",
+            "SUP-BOUNDARY",
+            "SUP-SEARCH",
+            "SUP-CODES",
+            "SUP-ERROR"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "02-js-url",
+          "status": "DETECTED",
+          "detected_by": [
+            "TC-042",
+            "SUP-SEARCH"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "03-request-encoding",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-CREATE",
+            "SUP-UPDATE",
+            "TC-009",
+            "TC-026",
+            "TC-044",
+            "TC-046",
+            "SUP-PAGING",
+            "SUP-CODES"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "04-session-bypass",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-CREATE",
+            "SUP-UPDATE",
+            "TC-009",
+            "TC-016",
+            "TC-017",
+            "TC-021",
+            "TC-022",
+            "TC-023",
+            "TC-031",
+            "SUP-SORT",
+            "SUP-PAGING",
+            "SUP-BOUNDARY",
+            "SUP-ANONYMOUS",
+            "SUP-SEARCH"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "05-paging",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-PAGING"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "06-sort-sql",
+          "status": "DETECTED",
+          "detected_by": [
+            "TC-016",
+            "TC-017",
+            "TC-021",
+            "TC-022",
+            "TC-023",
+            "TC-031",
+            "SUP-SORT",
+            "SUP-PAGING",
+            "SUP-BOUNDARY",
+            "SUP-SEARCH"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "07-oracle-log-only",
+          "status": "BLOCKED",
+          "detected_by": [],
+          "reason": "로그 전용 Oracle 사례. 로컬 앱 패치 실행 불가"
+        },
+        {
+          "case_id": "08-thymeleaf-utilities",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-CREATE",
+            "SUP-UPDATE",
+            "TC-001",
+            "TC-002",
+            "TC-009",
+            "TC-010",
+            "TC-011",
+            "TC-012",
+            "TC-016",
+            "TC-017",
+            "TC-018",
+            "TC-019",
+            "TC-022",
+            "TC-024",
+            "TC-025",
+            "TC-026",
+            "TC-027",
+            "TC-031",
+            "TC-033",
+            "TC-034",
+            "TC-036",
+            "TC-039",
+            "TC-040",
+            "TC-041",
+            "TC-042",
+            "TC-043",
+            "TC-053",
+            "TC-068",
+            "TC-069",
+            "SUP-SORT",
+            "SUP-PAGING",
+            "SUP-BOUNDARY",
+            "SUP-SEARCH",
+            "SUP-CODES",
+            "SUP-ERROR"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "09-view-resolver",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-CREATE",
+            "SUP-UPDATE",
+            "TC-001",
+            "TC-002",
+            "TC-009",
+            "TC-010",
+            "TC-011",
+            "TC-012",
+            "TC-016",
+            "TC-017",
+            "TC-018",
+            "TC-019",
+            "TC-022",
+            "TC-024",
+            "TC-025",
+            "TC-026",
+            "TC-027",
+            "TC-031",
+            "TC-033",
+            "TC-034",
+            "TC-036",
+            "TC-039",
+            "TC-040",
+            "TC-053",
+            "TC-068",
+            "TC-069",
+            "SUP-SORT",
+            "SUP-PAGING",
+            "SUP-BOUNDARY",
+            "SUP-SEARCH",
+            "SUP-CODES"
+          ],
+          "reason": null
+        },
+        {
+          "case_id": "10-fragment-encoding",
+          "status": "DETECTED",
+          "detected_by": [
+            "SUP-PAGING"
+          ],
+          "reason": null
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "first_versions_unchanged": true,
+    "second_workbooks_preserve_first_columns": true,
+    "db_files_and_sql_dumps_retained": true,
+    "v2_created_update_keys_verified": true,
+    "source_examples_unchanged": true
+  }
+}

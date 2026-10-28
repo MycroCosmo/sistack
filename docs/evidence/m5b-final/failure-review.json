@@ -1,0 +1,76 @@
+{
+  "summary": [
+    {
+      "case_id": "01-binding",
+      "product_failure_rows": 30,
+      "unconfirmed_rows": 1,
+      "first_columns_preserved": true,
+      "status_values_changed": false
+    },
+    {
+      "case_id": "02-js-url",
+      "product_failure_rows": 2,
+      "unconfirmed_rows": 0,
+      "first_columns_preserved": true,
+      "status_values_changed": false
+    },
+    {
+      "case_id": "03-request-encoding",
+      "product_failure_rows": 8,
+      "unconfirmed_rows": 0,
+      "first_columns_preserved": true,
+      "status_values_changed": false
+    },
+    {
+      "case_id": "04-session-bypass",
+      "product_failure_rows": 14,
+      "unconfirmed_rows": 0,
+      "first_columns_preserved": true,
+      "status_values_changed": false
+    },
+    {
+      "case_id": "05-paging",
+      "product_failure_rows": 1,
+      "unconfirmed_rows": 0,
+      "first_columns_preserved": true,
+      "status_values_changed": false
+    },
+    {
+      "case_id": "06-sort-sql",
+      "product_failure_rows": 10,
+      "unconfirmed_rows": 0,
+      "first_columns_preserved": true,
+      "status_values_changed": false
+    },
+    {
+      "case_id": "08-thymeleaf-utilities",
+      "product_failure_rows": 35,
+      "unconfirmed_rows": 2,
+      "first_columns_preserved": true,
+      "status_values_changed": false
+    },
+    {
+      "case_id": "09-view-resolver",
+      "product_failure_rows": 31,
+      "unconfirmed_rows": 1,
+      "first_columns_preserved": true,
+      "status_values_changed": false
+    },
+    {
+      "case_id": "10-fragment-encoding",
+      "product_failure_rows": 1,
+      "unconfirmed_rows": 0,
+      "first_columns_preserved": true,
+      "status_values_changed": false
+    }
+  ],
+  "initial_false_failures": {
+    "legacy-board": 8,
+    "legacy-board-thymeleaf": 10
+  },
+  "original_statuses_preserved": true,
+  "initial_edge_false_failures": {
+    "legacy-board": 1,
+    "legacy-board-thymeleaf": 1
+  }
+}
