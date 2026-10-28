@@ -1,3 +1,4 @@
+import {sharedCallers} from './shared.mjs';
 import path from 'node:path';
 import { readFile, mkdir, readdir } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
@@ -87,16 +88,19 @@ export async function finishDebug(target, runId) {
     await inside(root, file);
     if (!Object.hasOwn(stage.source_files, file)) throw new Error('diff 대상은 검토한 소스 파일이어야 합니다');
   }
+  const shared=[];if(diagnosis.proposal.diff.trim()){const index=await json(path.join(dir,'evidence/index.json'));for(const file of proposalPaths(diagnosis.proposal.diff).filter(f=>f.endsWith('.java')))shared.push(...sharedCallers(index,file,await readFile(await inside(root,file),'utf8'),diagnosis.proposal.diff));}
+  if(shared.length){const choices=diagnosis.proposal.alternatives;if(!choices?.local?.diff?.trim()||!choices?.common?.diff?.trim()||!choices.local.note?.trim()||!choices.common.note?.trim())throw Error('공통 함수: 국소/공통 수정 diff와 사유를 함께 작성하세요. 기본 추천은 국소 수정입니다');for(const choice of Object.values(choices))for(const file of proposalPaths(choice.diff))if(!stage.source_files[file])throw Error('대안 diff는 검토한 소스 범위여야 합니다');diagnosis.proposal.recommended='local';await save(path.join(dir,'evidence/shared-callers.json'),shared);}
   const status = diagnosis.candidates.some(c => c.status === 'CONFIRMED') ? 'PASS' : 'PARTIAL';
   const safe = sanitize(diagnosis);
   // 입력 검토 파일도 마스킹하며 최종 결과는 exclusive 저장한다.
   await save(path.join(dir, 'evidence/diagnosis.json'), safe, { exclusive: false });
   const report = `${disclaimer}\n\n# si-debug\n\n상태: ${status} (원인 분석 범위). 수정 적용 없음.\n\n## 증상 요약\n${safe.symptom}\n\n## 원인\n${safe.candidates.map(c => `- ${c.status} · 증거 ${c.level}단계 · ${c.cause}\n  ${c.locations.map(p => `${p.file}:${p.line}`).join(', ') || '위치 미확정'}\n  ${c.reason}`).join('\n')}\n\n재현: ${safe.reproduction.executed ? '실행' : '미재현'} — ${safe.reproduction.note}\n\n## 원인까지의 경로\n${safe.eliminated.join('\n')}\n\n## 수정안\n${safe.proposal.note}\n\n\`\`\`diff\n${safe.proposal.diff}\n\`\`\`\n\n동일 패턴 확인: ${safe.same_pattern.join('; ')}\n\n## 확인 방법\n${safe.verification.join('\n')}\n\n## 확정 못 한 것\n${safe.unverified.join('\n')}\n\n## 다음 작업\n${safe.next_actions.join('\n')}\n`;
+  if(shared.length)await save(path.join(dir,'evidence/alternatives.md'),`${disclaimer}\n\n기본 추천: 국소 수정\n${['local','common'].map(k=>`## ${k}\n${safe.proposal.alternatives[k].note}\n\x60\x60\x60diff\n${safe.proposal.alternatives[k].diff}\n\x60\x60\x60`).join('\n')}\n다른 호출자는 shared-callers.json의 인덱서 --to 결과 참조.\n`);
   const manifest = sanitize({ schema_version: '1.0.0', run_id: runId, skill: 'si-debug', created_at: stage.created_at, source_revision: stage.source_revision,
     status, inputs: stage.inputs, evidence: [{ path: 'evidence/diagnosis.json', level: Math.max(...safe.candidates.map(c => c.level)), description: '소스 검토·후보 소거와 재현 한계' }],
     unverified: [...new Set(safe.unverified)], next_actions: [...new Set(safe.next_actions)] });
   if (validateManifest(manifest).length) throw new Error('manifest 계약 오류');
-  await save(path.join(dir, 'report.md'), mask(report));
+  await save(path.join(dir, 'report.md'), mask(report+(shared.length?'\n\n국소/공통 수정안: evidence/alternatives.md, 다른 호출자: evidence/shared-callers.json. 기본 추천은 국소 수정.\n':'')));
   await save(path.join(dir, 'manifest.json'), manifest, { exclusive: false });
   return { run_id: runId, status, directory: dir };
 }

@@ -1,0 +1,30 @@
+{
+  "auth": {
+    "login_url": "/auth/login.do",
+    "fields": {
+      "csrf": "csrf"
+    },
+    "accounts": {
+      "admin": {
+        "id": "admin",
+        "values": {
+          "role": "ADMIN"
+        }
+      },
+      "viewer": {
+        "id": "viewer",
+        "values": {
+          "role": "READER"
+        }
+      }
+    },
+    "success": {
+      "url": "/board/list.do",
+      "status": 200,
+      "element": {
+        "kind": "id",
+        "value": "searchForm"
+      }
+    }
+  }
+}

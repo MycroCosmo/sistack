@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {validateAuth,authValues,redactAuth,authenticate} from '../lib/functional/auth.mjs';
+const auth={login_url:'/signin',fields:{account:'user',password:'pass'},accounts:{viewer:{id:'reader',password_env:'TEST_PASS'}},success:{url:'/home',status:200}};
+test('인증 설정은 평문 암호를 거부하고 환경 변수 값은 보존 자료에서 제거한다',()=>{assert.equal(validateAuth(auth),auth);assert.throws(()=>validateAuth({...auth,accounts:{viewer:{id:'reader',values:{pass:'금지'}}}}),/환경 변수/);const env={TEST_PASS:'synthetic-secret-42'};assert.equal(authValues(auth,'viewer',env).pass,env.TEST_PASS);assert.equal(JSON.stringify(redactAuth({log:'echo '+env.TEST_PASS},auth,env)).includes(env.TEST_PASS),false);assert.throws(()=>authValues(auth,'viewer',{}),/환경 변수/);});
+test('로그인 오류의 200 응답을 성공 URL 확인 없이 승인하지 않는다',async()=>{const response={status:()=>200,url:()=> 'http://localhost/app/signin',text:async()=>''};const ctx={request:{get:async()=>response,post:async()=>response}};await assert.rejects(authenticate(ctx,'http://localhost/app',auth,'viewer',{TEST_PASS:'synthetic-secret-42'}),/로그인 실패/);});

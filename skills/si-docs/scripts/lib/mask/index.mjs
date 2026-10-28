@@ -5,7 +5,7 @@ export const isIdentifier = value => /^(?:[a-f0-9]{32}|[a-f0-9]{40}|[a-f0-9]{64}
 export function mask(input) {
   if (typeof input !== 'string') throw new TypeError('mask에는 문자열만 전달합니다');
   const text = input
-    .replace(/(?:[a-z]:[\\/]Users[\\/]|\/(?:home|Users)\/)[^\\/\r\n]+[\\/]/gi, '~/')
+    .replace(/(?:[a-z]:[\\/]+Users[\\/]+|\/(?:home|Users)\/)[^\\/\r\n]+[\\/]+/gi, '~/')
     .replace(/(\b(?:jsessionid|session[_-]?id)\b["']?\s*[:=]\s*)(\[REDACTED\]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\s,;&}\]]+)/gi, `$1${REDACTED}`)
     .replace(/(jdbc:oracle:thin:)[^\s/@]+\/[^\s@]+@/gi, `$1${REDACTED}@`)
     .replace(/(\/\/)[^\s/@:]+:[^\s/@]+@/g, `$1${REDACTED}@`)

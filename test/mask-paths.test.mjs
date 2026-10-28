@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {mask} from '../lib/mask/index.mjs';
+test('직렬화된 로그의 중복 역슬래시 홈 경로도 제거하고 JSON 형식을 보존한다',()=>{const text=JSON.stringify({path:String.raw`C:\Users\localProfile\work\A.java`}),out=mask(text);assert.equal(out.includes('localProfile'),false,'로컬 계정명을 남기지 않아야 한다');assert.equal(JSON.parse(out).path,String.raw`~/work\A.java`,'나머지 소스 위치는 유지해야 한다');});

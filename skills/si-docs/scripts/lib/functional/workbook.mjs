@@ -25,7 +25,7 @@ export async function writeFunctionalWorkbook({template,mapping,cases,results,ou
   for(const [i,c]of cases.entries()) {
     const row=mapping.start_row+i,result=outcome.get(c.case_id);if(!result)throw Error('케이스 결과 누락');
     if(round===2&&sheet.getCell(`${mapping.columns.case_id}${row}`).value!==c.case_id)throw Error('1차 TC와 2차 TC 불일치');
-    if(!['admin','viewer'].includes(result.account_id)||result.mode==='수동')throw Error('승인한 계정/실행 방식 필요');
+    if((typeof result.account_id!=='string'||!result.account_id.trim())||result.mode==='수동')throw Error('승인한 계정/실행 방식 필요');
     const values={case_id:c.case_id,screen_or_menu:path.posix.basename(c.file??c.screen_files?.[0]??''),test_item:c.title,steps_and_inputs:c.supplemental?`업무 조건 확인: ${c.operation}`:`${c.kind} 기능 수행. 근거 ${c.file}:${c.line}`,expected_result:[...(c.expected_requests??[]),'기대 응답과 업무 화면/자료 확인'].join('\n'),execution_mode:result.mode,actions:null};
     const prefix=round===1?'first':'second';for(const[k,v]of Object.entries(resultValues(result)))values[`${prefix}.${k}`]=v;
     for(const[field,col]of Object.entries(mapping.columns)) {

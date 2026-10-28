@@ -1,3 +1,4 @@
+import {loadAuth} from '../lib/functional/auth.mjs';
 import path from 'node:path';
 import {mkdir,readFile,readdir} from 'node:fs/promises';
 import {functionalInventory,generateCases,supplementalCases,compareCases} from '../lib/functional/inventory.mjs';
@@ -31,9 +32,9 @@ for(const name of ['legacy-board','legacy-board-thymeleaf']) {
  console.log(`${name}: 1차 시작 (${cases.length} TC)`);
  const server=await startServer(source,run,config);let result,edge;
  try {
-   result=await executeCases({base:server.base,cases,inventory,run,round:1});
+   result=await executeCases({base:server.base,cases,inventory,run,auth:await loadAuth(server.project),round:1});
    const cross=cases.filter(c=>['SEARCH','CODES'].includes(c.operation));
-   edge=await executeCases({base:server.base,cases:cross,inventory,run,channel:'msedge',round:1});
+   edge=await executeCases({base:server.base,cases:cross,inventory,run,auth:await loadAuth(source),channel:'msedge',round:1});
  }finally{await server.stop([...(result?.created??[]),...(edge?.created??[])].map(r=>r.key.ID));}
  const m4=await json(path.resolve('docs/evidence/m4-final',name,'test-results.json'));
  const workbook=path.join(run,'functional-results.xlsx');await writeFunctionalWorkbook({template,mapping,cases,results:result,output:workbook,m4,round:1});
@@ -57,7 +58,7 @@ for(const entry of (await readdir('evals/debug/cases',{withFileTypes:true})).fil
  await save(path.join(run,'first-reference.json'),{parent_run_id:path.basename(baseline.run),...baseline.frozen});
  console.log(`${spec.id}: 2차 시작`);
  const server=await startServer(baseline.source,run,config,project=>applyUnitPatch(project,path.resolve(`evals/debug/cases/${spec.id}/bug.patch`)));
- let result;try{result=await executeCases({base:server.base,cases:baseline.cases,inventory:baseline.inventory,run,round:2});}finally{await server.stop((result?.created??[]).map(r=>r.key.ID));}
+ let result;try{result=await executeCases({base:server.base,cases:baseline.cases,inventory:baseline.inventory,run,auth:await loadAuth(server.project),round:2});}finally{await server.stop((result?.created??[]).map(r=>r.key.ID));}
  await writeFunctionalWorkbook({template,mapping,cases:baseline.cases,results:result,output:path.join(run,'functional-results.xlsx'),m4:baseline.m4,round:2,first:baseline.workbook});
  const failures=result.records.filter(r=>r.status==='FAIL'&&baseline.result.records.some(a=>a.case_id===r.case_id&&a.status==='PASS'));
  await save(path.join(run,'failure-review.json'),{status_values_changed:false,notes:result.records.filter(r=>r.status==='FAIL').map(r=>{const previous=baseline.result.records.find(p=>p.case_id===r.case_id);return {case_id:r.case_id,classification:previous?.status==='PASS'?'제품 결함(학습 패치)':'미확정(기준선 미통과/파생 실패)',baseline_status:previous?.status,request_evidence:r.request_evidence,original_reason:r.reason};})});
