@@ -43,6 +43,7 @@ export function inspectPackage(bytes) {
         xml = xml.replace('<ext uri="{EB79DEF2-80B8-43e5-95BD-54CBDDF9020C}" xmlns:x14="http://schemas.microsoft.com/office/spreadsheetml/2009/9/main"><x14:slicerStyles defaultSlicerStyle="SlicerStyleLight1"/></ext>', '')
           .replace('<ext uri="{9260A510-F301-46a8-8635-F512D64BE5F5}" xmlns:x15="http://schemas.microsoft.com/office/spreadsheetml/2010/11/main"><x15:timelineStyles defaultTimelineStyle="TimeSlicerStyleLight1"/></ext>', '').replace('<extLst></extLst>', '');
       }
+      if (/^xl\/drawings\/drawing\d+\.xml$/.test(name)) xml = xml.replaceAll('<a:extLst><a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}"><a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{00000000-0008-0000-0000-000002000000}"/></a:ext></a:extLst>', '');
       if (/<(?:\w+:)?(?:extLst|oleObjects|controls|sparklineGroups)\b|<(?:xdr:)?(?:sp|graphicFrame|cxnSp)\b/.test(xml)) warnings.push('고급 확장/도형/컨트롤 XML 발견: 보존 보장 불가');
     }
     at += 46 + length + extra + comment;
@@ -100,6 +101,8 @@ export async function createDefaultTemplate(kind, output) {
       cell.border = { bottom: { style: 'hair', color: { argb: 'FFD9E2F3' } } };
     }
   });
+  for (let r = 5; r <= 204; r++) sheet.getRow(r).height = kind === 'program-list' ? 160 : 30;
+  sheet.getRow(4).height = 24;
   sheet.autoFilter = { from: 'A4', to: `${colLetter(fields.length)}204` };
   sheet.pageSetup = { orientation: 'landscape', fitToPage: true, fitToWidth: 1, fitToHeight: 0 };
   await writeWorkbook(output, book);
@@ -138,16 +141,19 @@ export async function fillTemplate(doc, mapping, output) {
   const before = snapshot(book), sheet = book.getWorksheet(mapping.sheet); if (!sheet) throw new Error('양식 시트 없음');
   const missing = [], expected = [];
   for (const [i, source] of doc.rows.entries()) {
-    const values = { ...source.values, ...fixed, evidence: source.evidence.map(e => `${e.file}:${e.line}`).join('\n'), status: source.status };
+    const evidence = source.evidence.slice(0, 2).map(e => `${e.file}:${e.line}`);
+    if (source.evidence.length > 2) evidence.push(`외 ${source.evidence.length - 2}건: evidence/data.json`);
+    const values = { ...source.values, ...fixed, evidence: evidence.join('\n'), status: source.status };
     if (mapping.id_rule) values.program_id = mapping.id_rule.prefix + String(mapping.id_rule.start + i).padStart(mapping.id_rule.width, '0');
     for (const [field, column] of Object.entries(mapping.columns)) {
       const cell = sheet.getCell(`${column}${start + i}`);
       if (cell.isMerged || cell.value !== null) throw new Error('입력 영역에 병합/수식/기존 값 존재: 매핑 조정 필요');
-      const value = clean(values[field] ?? null);
+      const rawValue = clean(values[field] ?? null), value = rawValue === '' ? null : rawValue;
       cell.value = value;
-      if (value === null) {
+      if (rawValue === null) {
         missing.push({ row: start + i, field });
         // 원본 메모는 유지하며 미확인 강조는 셀 배경+보고서에만 남긴다.
+        cell.style = structuredClone(cell.style);
         cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFE699' } };
       }
       expected.push({ address: cell.address, value });

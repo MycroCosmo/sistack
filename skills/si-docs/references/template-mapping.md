@@ -16,6 +16,7 @@ node <skill>/scripts/si-docs.mjs fill-template <project> <data.json> <confirmed-
 - fixed: 사용자 program_id/program_name 문자열만 지원. 자료형·NULL/PK 등 소스 사실을 덮어쓰지 않는다.
 
 필수 열: 프로그램 url/controller/evidence/status, 테이블 table/column/data_type/nullable/evidence/status.
+엑셀의 근거 열은 처음 2개 파일:라인과 추가 건수/JSON 위치를 표시한다. 전체 연결 근거는 evidence/data.json에 유지한다. 알려진 '기본값/참조 없음'은 빈 셀, 값 미확인은 빈 셀+노란색으로 구별한다.
 미매핑 열과 원래 메모는 보존한다. 매핑 대상에 병합·수식·기존 값이 있으면 중단한다. 미확인 값은 빈 칸/노란색과 verification.json의 row/field로 표시한다. 기존 메모를 미확인 메모로 덮어쓰지 않는다.
 
 저장 후 다시 읽어 모든 입력 값, 셀 서식·메모·수식, 다른 시트, 병합, 데이터 유효성, 조건부 서식, 이미지 바이트·배치, 열 너비·시트 설정을 비교한다. 원본 SHA-256도 재확인한다. 불일치면 FAIL이며 결과를 삭제하거나 PASS로 바꾸지 않는다.

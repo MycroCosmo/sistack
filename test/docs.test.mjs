@@ -78,11 +78,14 @@ test('드롭다운·조건부 서식·병합·이미지·메모·수식을 채�
   const result = await fillTemplate(await tables(), mapping, path.join(dir, 'filled.xlsx'));
   assert.equal(result.preserved, true, `모든 양식 요소가 보존돼야 한다: ${result.warnings}`);
   assert.equal(result.values_verified, true, '채운 열의 값을 재확인해야 한다');
+  assert.deepEqual(result.warnings, [], '검증한 기본 6종 요소를 보존 밖 기능으로 오탐하지 않아야 한다');
   for (const feature of ['validations', 'conditional_formats', 'merges', 'images', 'notes', 'formulas']) assert.ok(result.template_features[feature] >= 1, `${feature} 요소가 있는 양식으로 검사해야 한다`);
   assert.equal(result.original_unchanged, true, '원본 양식이 바뀌지 않아야 한다');
   assert.deepEqual(await readFile(mapping.template), original, '원본 바이트가 동일해야 한다');
   const book = await readWorkbook(path.join(dir, 'filled.xlsx')), sheet = book.getWorksheet(mapping.sheet);
   assert.equal(sheet.getCell('A5').value, 'COMMON_CODE', '첫 테이블명이 채워져야 한다');
+  assert.equal(sheet.getCell('I5').value, null, '기본값 없음은 수식/공유문자열 인덱스가 아닌 빈 셀이어야 한다');
+  assert.ok(!result.missing.some(c => c.row === 5 && c.field === 'default_value'), '기본값 없음과 값 미확인을 구별해야 한다');
   assert.equal(sheet.getCell('J5').note, '원래 셀 메모', '입력 칸의 기존 메모가 유지돼야 한다');
   assert.equal(sheet.getCell('E210').value.formula, '1+2', '입력 영역 밖 수식이 유지돼야 한다');
   assert.equal(book.getWorksheet('보존 시트').getCell('B2').value.result, 6, '다른 시트의 수식 캐시를 유지해야 한다');
@@ -99,6 +102,7 @@ test('헤더 매핑 초안은 확인 전 채우지 않고 미확인 칸을 빈 �
   const sheet = (await readWorkbook(path.join(dir, 'filled.xlsx'))).getWorksheet(base.sheet);
   assert.equal(sheet.getCell('A5').value, null, '미확인 ID는 빈 칸이어야 한다');
   assert.equal(sheet.getCell('A5').fill.fgColor.argb, 'FFFFE699', '미확인 칸을 강조해야 한다');
+  assert.notEqual(sheet.getCell('C5').fill.fgColor?.argb, 'FFFFE699', '확인된 요청 URL의 서식에 미확인 강조가 번지지 않아야 한다');
 });
 
 test('원본·기존 출력·수식·병합·기존 데이터 덮어쓰기를 거부한다', async t => {
