@@ -325,6 +325,12 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - 초기 v2 시도와 최종 v2-final의 원본·해시·점수·실제 탐색 기록을 193개 파일의 gzip JSON으로 보존하고 해제·파일별 해시·원본 바이트를 대조했다. 첫 기준선의 59개 파일 보존 기록과 분리한다.
 # M5 의존성 승인 및 유지보수 확인 (2026-10-28)
 
+## M5a 일반 형식 매핑 검토 추가 지시
+
+- 새 엑셀에는 AI/자동화 안내 문구를 기본으로 넣지 않는다. 승인/증거 단계 안내는 별도 report.md에 유지하고 원래 양식의 문구는 바꾸지 않는다. 엑셀은 클래스명.메서드명으로 표시하고 JSON/인덱스의 원래 식별자는 보존한다.
+- 제공 양식은 Claude가 만든 공공 SI 일반 형식이다. 현장 검증이 아닌 형식 일반성 검증으로 기록하며 현재는 매핑 초안 검토까지만 한다. 상세 양식/헤더/매핑은 private에 보관하고 커밋하지 않는다.
+- 프로그램 행 구성은 종류별 분리와 URL 단위 유지 중 사용자 확인을 받는다. 업무구분·개발자·일정·진척률 등은 코드에서 추정하지 않는다. 결과서는 M5b용 열 매핑 초안만 제시하고 TC 생성/실행은 하지 않는다.
+
 - 사용자 승인: ExcelJS **4.4.0**(MIT), playwright-core **1.64.1**(Apache-2.0). 정확한 버전과 전이 의존성을 package-lock.json으로 고정한다. 설치는 `--ignore-scripts`, `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1`로 수행했다. 브라우저 다운로드·M5b 구현/실행은 하지 않는다.
 - 루트/M5a는 Node >=18을 유지한다. playwright-core를 사용하는 M5b만 Node >=20으로 제한하며 M5a 모듈은 이를 import하지 않는다.
 - 공식 GitHub latest API를 2026-10-28 조회한 결과 최신 안정 릴리스는 v4.4.0, **2023-10-19T19:57:46Z**다. 약 3년간 새 안정 릴리스가 없다는 유지보수 한계를 감수하고 승인 버전을 사용한다. 이 사실만으로 프로젝트 중단/안전성을 단정하지 않는다. [공식 릴리스](https://github.com/exceljs/exceljs/releases/tag/v4.4.0), [latest API](https://api.github.com/repos/exceljs/exceljs/releases/latest).
