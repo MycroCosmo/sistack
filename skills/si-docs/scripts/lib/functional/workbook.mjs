@@ -9,7 +9,7 @@ function firstCells(sheet,mapping,count) {
   const cols=['first.executed_at','first.tester_id','first.result','first.defect_notes'].map(k=>mapping.columns[k]);
   return Array.from({length:count},(_,i)=>cols.map(col=>{const c=sheet.getCell(`${col}${mapping.start_row+i}`);return {address:c.address,value:c.value,style:structuredClone(c.style),note:c.note??null};}));
 }
-function resultValues(result) {return {executed_at:result.status==='SKIP'?null:result.started_at.slice(0,10),tester_id:result.status==='SKIP'?null:result.account_id,result:result.status==='BLOCKED'||result.status==='PARTIAL'?null:result.status,defect_notes:mask(`${result.status==='BLOCKED'?'BLOCKED: ':''}${result.reason}`)};}
+function resultValues(result) {return {executed_at:result.status==='SKIP'?null:new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(result.started_at)),tester_id:result.status==='SKIP'?null:result.account_id,result:result.status==='BLOCKED'||result.status==='PARTIAL'?null:result.status,defect_notes:mask(`${result.status==='BLOCKED'?'BLOCKED: ':''}${result.reason}`)};}
 function differences(a,b,p='',out=[]) {if(isDeepStrictEqual(a,b))return out;if(a&&b&&typeof a==='object'&&typeof b==='object'){for(const k of new Set([...Object.keys(a),...Object.keys(b)]))differences(a[k],b[k],`${p}.${k}`,out);}else if(out.length<20)out.push(p);return out;}
 export async function writeFunctionalWorkbook({template,mapping,cases,results,output,m4,round=1,first=null}) {
   if(!mapping.confirmed||![1,2].includes(round))throw Error('승인 매핑/명시한 차수 필요');
