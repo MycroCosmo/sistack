@@ -1,0 +1,18 @@
+package kr.sistack.board;
+import org.junit.Test;
+import static org.mockito.Mockito.*;
+import kr.sistack.board.domain.Board;
+import kr.sistack.board.mapper.BoardMapper;
+import kr.sistack.board.service.impl.BoardServiceImpl;
+import org.springframework.test.util.ReflectionTestUtils;
+
+public class WeakReturnTest {
+    @Test public void 게시글_조회_호출만_확인한다() {
+        BoardMapper mapper = mock(BoardMapper.class);
+        when(mapper.selectOne(41)).thenReturn(new Board());
+        BoardServiceImpl service = new BoardServiceImpl();
+        ReflectionTestUtils.setField(service, "mapper", mapper);
+        service.get(41);
+        verify(mapper).selectOne(41);
+    }
+}

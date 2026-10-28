@@ -1,5 +1,14 @@
 # 설계 결정
 
+## 2026-10-28 — M4 기존 의존성·학습 평가·M5 입력 계약
+
+- 사용자 조건을 `prompts/M4.md`에 반영해 `27f01a8`로 먼저 커밋했다. 두 테스트베드의 JUnit 4.13.2·Mockito 4.11.0·spring-test 5.3.39·H2 2.2.224(test)만 사용하며 pom과 운영 원본은 바꾸지 않는다. 생성 Java 테스트는 `evals/unit/generated/`에 보관하고 임시 사본에만 설치한다.
+- Service/유틸 검사는 목 기반 단위 테스트, 실제 Mapper와 인메모리 H2 검사는 좁은 통합 테스트로 구분한다. M3 기존 13건은 모두 학습이다. 실행 전 분류에서 탐지 가능 4건, 웹·템플릿·설정·JS 범위 밖 8건, 실행 패치 없는 Oracle 1건 BLOCKED로 정했다. 학습을 새 held-out 성능으로 보고하지 않는다.
+- 반환값·저장 상태를 검증하는 한국어 업무 테스트를 만들고, 같은 테스트를 결함 사본과 v5 수정안 적용 사본에서 실행한다. 기존 M3 heldout-02는 사람의 EQUIVALENT 판정과 실행 근거를 분리한다. private 소스·diff·실패 메시지를 공개하지 않는다.
+- Surefire XML을 M5용 `test-results.json`으로 변환한다. 한국어 표시 이름과 대상 메서드는 실행 전 계획에 명시한다. 테스트 누락·중복·집계 불일치·빌드 오류·테스트 0건을 성공이나 탐지로 세지 않는다. 결과는 exclusive run-id로 보존하고 실제 JDK와 POM target을 구분한다. 단일 Maven POM만 자동 실행하며 상속/profile/Gradle/사용자 JVM 설정은 BLOCKED다.
+- 초기 실행에서 SQL fixture의 기본 charset과 Surefire 경로 override가 문제였다. SQL에 UTF-8을 지정하고 매 실행을 새 작업 사본에서 수행해 기본 `target/surefire-reports`를 읽는다. 이전 결과를 삭제하거나 POM을 바꾸지 않는다. Surefire의 reportsDirectory/argLine 계약은 [공식 문서](https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#reportsDirectory)와 실제 3.2.5 실행으로 확인했다.
+- 학습·약한 테스트 검증 후 구현·테스트·평가 도구를 동결하고 GATE에서 멈춘다. 신규 Claude 패치 3건은 동결 후 별도 지시로 원문을 출력하지 않고 실행한다. 첫 결과 경로를 고정하고 재실행으로 덮어쓰지 않는다. 외부 의존성 추가 없음.
+
 ## 2026-10-28 — M3 held-out 정합성 재판정·완료 승인
 
 - Ian의 이번 종료 검토 지시로 정합성 비교 범위를 **제공된 project/에 존재하는 파일 + 제안 대상 파일**로 보정한다. 제공 사본에 없는 출제 원본 파일은 제외 목록에 남긴다. v5의 실행 산출물 디렉터리 제외와 CRLF/LF 정규화는 유지한다. 제공된 파일은 제안 대상이 아니어도 비교하며 원본에 없거나 내용이 다르면 차이로 남긴다.

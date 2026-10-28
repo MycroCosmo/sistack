@@ -6,7 +6,7 @@ export async function syncShared({ base = root, check = false } = {}) {
   const dirs = await validateSkills(path.join(base, 'skills'));
   const differences = [];
   for (const dir of dirs) {
-    const groups = ['mask', ...(['si-trace', 'si-debug'].includes(path.basename(dir)) ? ['indexer', 'trace', 'manifest'] : []), ...(path.basename(dir) === 'si-debug' ? ['debug'] : [])];
+    const groups = ['mask', ...(['si-trace', 'si-debug', 'si-unit-test'].includes(path.basename(dir)) ? ['indexer', 'trace', 'manifest'] : []), ...(path.basename(dir) === 'si-debug' ? ['debug'] : []), ...(path.basename(dir) === 'si-unit-test' ? ['unit'] : [])];
     for (const group of groups) {
       const source = path.join(base, 'lib', group), names = await files(source);
       const destination = path.join(dir, 'scripts/lib', group);
@@ -16,11 +16,12 @@ export async function syncShared({ base = root, check = false } = {}) {
       for (const name of names) if (!await sameFile(path.join(source, name), path.join(destination, name))) differences.push(`${path.basename(dir)}/${group}/${name}`);
       if (!check) await copyFiles(source, destination, names, true);
     }
-    if (['si-trace', 'si-debug'].includes(path.basename(dir))) {
+    if (['si-trace', 'si-debug', 'si-unit-test'].includes(path.basename(dir))) {
       const source = path.join(base, 'schemas'), destination = path.join(dir, 'scripts/schemas');
-      const name = 'manifest.schema.json';
+      for (const name of ['manifest.schema.json', ...(path.basename(dir) === 'si-unit-test' ? ['test-results.schema.json'] : [])]) {
       if (!await sameFile(path.join(source, name), path.join(destination, name))) differences.push(`${path.basename(dir)}/${name}`);
       if (!check) await copyFiles(source, destination, [name], true);
+      }
     }
   }
   if (check && differences.length) throw new Error(`공통 모듈 불일치 ${differences.length}개`);

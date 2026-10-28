@@ -27,6 +27,13 @@ M2 adapted design structure:
   No model-specific role configuration or verbatim prompt text is copied.
 
 Bundled third-party asset:
+M4 adapted design structure:
+- pstack skills/tdd/SKILL.md, skills/principle-test-behavior-not-implementation/SKILL.md,
+  and skills/principle-prove-it-works/SKILL.md, consulted on 2026-10-28 (MIT).
+  si-unit-test adapts failing-before/passing-after checks and behavior mutation
+  review to approved local SI test environments. No source code is copied.
+
+Bundled third-party asset:
 - jQuery 3.7.1, Copyright OpenJS Foundation and other contributors.
   MIT License, preserved at:
   examples/legacy-board/src/main/webapp/resources/vendor/jquery-LICENSE.txt

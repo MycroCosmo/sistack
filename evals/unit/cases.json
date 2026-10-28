@@ -1,0 +1,19 @@
+{
+  "dataset": "training",
+  "note": "M3에서 이미 관찰한 13건. 새 held-out이 아니며 분류는 실행 전에 확정한다.",
+  "cases": [
+    { "id": "01-binding", "testbed": "legacy-board", "eligible": true, "kind": "mapper", "reason": "실제 MyBatis 인터페이스 바인딩을 테스트 H2로 실행 가능" },
+    { "id": "02-js-url", "testbed": "legacy-board", "eligible": false, "kind": "javascript", "reason": "브라우저 요청 URL. 단위 테스트 범위 밖" },
+    { "id": "03-request-encoding", "testbed": "legacy-board", "eligible": false, "kind": "configuration", "reason": "서블릿 필터 설정과 실제 요청 인코딩. 단위 테스트 범위 밖" },
+    { "id": "04-session-bypass", "testbed": "legacy-board", "eligible": false, "kind": "configuration", "reason": "인터셉터 경로 설정과 인증 흐름. Service/Mapper/유틸 단위 범위 밖" },
+    { "id": "05-paging", "testbed": "legacy-board", "eligible": true, "kind": "utility", "reason": "페이징 나머지 경계의 반환값 검증 가능" },
+    { "id": "06-sort-sql", "testbed": "legacy-board", "eligible": true, "kind": "utility-mapper", "reason": "검색 모델과 실제 정렬 SQL 실행 결과 검증 가능" },
+    { "id": "07-oracle-log-only", "testbed": "legacy-board", "eligible": false, "kind": "log-only", "reason": "실행 가능한 패치/Oracle 환경 없음. BLOCKED, 탐지 분모 제외" },
+    { "id": "08-thymeleaf-utilities", "testbed": "legacy-board-thymeleaf", "eligible": false, "kind": "template", "reason": "Thymeleaf 렌더링. 단위 테스트 범위 밖" },
+    { "id": "09-view-resolver", "testbed": "legacy-board-thymeleaf", "eligible": false, "kind": "configuration", "reason": "뷰 리졸버 설정. 단위 테스트 범위 밖" },
+    { "id": "10-fragment-encoding", "testbed": "legacy-board", "eligible": false, "kind": "template", "reason": "JSP 조각 인코딩. 단위 테스트 범위 밖" },
+    { "id": "m3-heldout-01", "testbed": "legacy-board-thymeleaf", "eligible": false, "kind": "template", "reason": "기존 관찰 사례. 화면 렌더링 계층, 단위 범위 밖" },
+    { "id": "m3-heldout-02", "testbed": "legacy-board", "eligible": true, "kind": "mapper", "reason": "기존 관찰 사례. Mapper 결과 필드와 동등 수정 동작 검증 가능" },
+    { "id": "m3-heldout-03", "testbed": "legacy-board-thymeleaf", "eligible": false, "kind": "template", "reason": "기존 관찰 사례. 화면 렌더링 계층, 단위 범위 밖" }
+  ]
+}
