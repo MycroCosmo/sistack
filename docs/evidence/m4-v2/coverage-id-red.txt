@@ -10,7 +10,7 @@ not ok 2 - 실제 인덱스의 SQL과 Service에서 모든 분기·쓰기 컬럼
   ---
   duration_ms: 313.1126
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\unit-coverage.test.mjs:16:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\unit-coverage.test.mjs:16:1'
   failureType: 'testCodeFailure'
   error: '한국어 업무 이름·대상 메서드 계획 누락'
   code: 'ERR_TEST_FAILURE'

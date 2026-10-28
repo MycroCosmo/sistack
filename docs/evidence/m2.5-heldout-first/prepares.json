@@ -35,7 +35,7 @@
       "kr.sistack.board.mapper.MenuMapper.selectList"
     ],
     "run_id": "m25-heldout-delete-first-20261027-01",
-    "directory": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01",
+    "directory": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01",
     "status": "PARTIAL",
     "complexity": {
       "mode": "complex",
@@ -74,7 +74,7 @@
       "org.springframework.samples.petclinic.owner.OwnerController#processFindForm"
     ],
     "run_id": "m25-heldout-petclinic-first-20261027-01",
-    "directory": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01",
+    "directory": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01",
     "status": "PARTIAL",
     "complexity": {
       "mode": "simple",

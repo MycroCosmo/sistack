@@ -2,7 +2,7 @@ TAP version 13
 # node:internal/modules/esm/resolve:275
 #     throw new ERR_MODULE_NOT_FOUND(
 #           ^
-# Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\lib\\unit\\coverage.mjs' imported from C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\unit-coverage.test.mjs
+# Error [ERR_MODULE_NOT_FOUND]: Cannot find module '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\lib\\unit\\coverage.mjs' imported from ~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\unit-coverage.test.mjs
 #     at finalizeResolution (node:internal/modules/esm/resolve:275:11)
 #     at moduleResolve (node:internal/modules/esm/resolve:860:10)
 #     at defaultResolve (node:internal/modules/esm/resolve:984:11)
@@ -20,7 +20,7 @@ not ok 1 - test\\unit-coverage.test.mjs
   ---
   duration_ms: 73.0913
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\unit-coverage.test.mjs:1:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\unit-coverage.test.mjs:1:1'
   failureType: 'testCodeFailure'
   exitCode: 1
   signal: ~

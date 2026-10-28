@@ -4,9 +4,9 @@ not ok 1 - proposal consistency applies diff only to a copy and compares against
   ---
   duration_ms: 1.4594
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs:29:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs:29:1'
   failureType: 'testCodeFailure'
-  error: "Cannot find module 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\scripts\\verify-debug-proposal.mjs' imported from C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs"
+  error: "Cannot find module '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\scripts\\verify-debug-proposal.mjs' imported from ~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs"
   code: 'ERR_MODULE_NOT_FOUND'
   stack: |-
     finalizeResolution (node:internal/modules/esm/resolve:275:11)
@@ -25,9 +25,9 @@ not ok 2 - proposal verification requires a matching preserved score before read
   ---
   duration_ms: 0.7066
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs:41:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs:41:1'
   failureType: 'testCodeFailure'
-  error: "Cannot find module 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\scripts\\verify-debug-proposal.mjs' imported from C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs"
+  error: "Cannot find module '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\scripts\\verify-debug-proposal.mjs' imported from ~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs"
   code: 'ERR_MODULE_NOT_FOUND'
   stack: |-
     finalizeResolution (node:internal/modules/esm/resolve:275:11)
@@ -46,9 +46,9 @@ not ok 3 - held-out proposal comparison stays private, checks all files, rejects
   ---
   duration_ms: 0.6763
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs:49:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs:49:1'
   failureType: 'testCodeFailure'
-  error: "Cannot find module 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\scripts\\verify-debug-proposal.mjs' imported from C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs"
+  error: "Cannot find module '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\scripts\\verify-debug-proposal.mjs' imported from ~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-proposal.test.mjs"
   code: 'ERR_MODULE_NOT_FOUND'
   stack: |-
     finalizeResolution (node:internal/modules/esm/resolve:275:11)

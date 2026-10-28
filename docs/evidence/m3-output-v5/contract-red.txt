@@ -4,7 +4,7 @@ not ok 1 - finish rejects abstract causes and missing diffs except unresolved di
   ---
   duration_ms: 162.5631
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug.test.mjs:64:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug.test.mjs:64:1'
   failureType: 'testCodeFailure'
   error: 'Missing expected rejection.'
   code: 'ERR_ASSERTION'
@@ -12,7 +12,7 @@ not ok 1 - finish rejects abstract causes and missing diffs except unresolved di
   expected:
   operator: 'rejects'
   stack: |-
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug.test.mjs:69:3)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug.test.mjs:69:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
   ...

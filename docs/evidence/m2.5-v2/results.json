@@ -24,7 +24,7 @@
           "false_negatives": 0,
           "false_positives": 0,
           "status_mismatches": 0,
-          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-delete-20261027-02\\v2-screen-eval.json",
+          "output": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-delete-20261027-02\\v2-screen-eval.json",
           "expected_projection_sha256": "1aeff98bd21d696ba668b1a98bdeadb86fad9cab26dc8bef3e7b479839b3c3f3",
           "eval_sha256": "fff128884b75a337e76640b4a1ab8f57ba158312ee108ed4f459e49b226f6089"
         },
@@ -37,7 +37,7 @@
           "false_negatives": 0,
           "false_positives": 0,
           "status_mismatches": 0,
-          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-delete-20261027-02\\v2-server-eval.json",
+          "output": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-delete-20261027-02\\v2-server-eval.json",
           "expected_projection_sha256": "94b696ea9d3503bb8b095b0e1fcee055a7ae8b99205babe458b2bfc09f15d2aa",
           "eval_sha256": "9ae6963d95e540ffc3df0d9ea61cd30209fe1c9bdcda2c1b160534b7c4c28db5"
         }
@@ -63,7 +63,7 @@
           "false_negatives": 0,
           "false_positives": 0,
           "status_mismatches": 0,
-          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-v2-petclinic-20261027-02\\v2-screen-eval.json",
+          "output": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-v2-petclinic-20261027-02\\v2-screen-eval.json",
           "expected_projection_sha256": "85f5e8cdf43c1d2f408755600cb29b55f1d3f4108c533727e5760ee926abcc75",
           "eval_sha256": "7c154dd9787d6855e2c78778b8bd1bb754bf70b3541e52feefb9866b0c4c6ede"
         },
@@ -76,7 +76,7 @@
           "false_negatives": 0,
           "false_positives": 0,
           "status_mismatches": 0,
-          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-v2-petclinic-20261027-02\\v2-server-eval.json",
+          "output": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-v2-petclinic-20261027-02\\v2-server-eval.json",
           "expected_projection_sha256": "f522c3f93d9ee06ed1aa75cad0f6682e095e86784156c5197fe9b68ccdba804f",
           "eval_sha256": "ed01a68f731246e40cc014f9917b81a554afbe1a9746d743d3731517601ab5fd"
         }

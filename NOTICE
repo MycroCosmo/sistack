@@ -43,5 +43,12 @@ M5 approved Node dependencies:
 - playwright-core 1.64.1, Apache-2.0, https://github.com/microsoft/playwright
 Exact transitive versions, license identifiers and distributed license-file
 hashes: docs/dependency-licenses.json. Original license texts remain in the
-installed packages. See docs/decisions.md for unresolved metadata and limits.
+installed packages. See docs/decisions.md for verification details and limits.
+
+M6 transitive license verification:
+- buffers 0.1.1, James Halliday. Upstream package metadata declares MIT/X11.
+  The installed index.js matches upstream commit
+  1b745ee35d33eb166e15ef1866073a07c6d7de87 byte for byte.
+  Source: https://github.com/bitpay/node-buffers/tree/1b745ee35d33eb166e15ef1866073a07c6d7de87
+  Verification and hashes: docs/buffers-license-verification.json.
 

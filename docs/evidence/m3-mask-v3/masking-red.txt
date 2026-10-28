@@ -22,7 +22,7 @@ not ok 4 - thread correlation names survive numeric masking across supported WAS
   ---
   duration_ms: 0.812
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:31:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:31:1'
   failureType: 'testCodeFailure'
   error: |-
     qtp1234567890-12345678901
@@ -54,7 +54,7 @@ not ok 5 - thread exemptions preserve correlation without leaking neighboring pe
   ---
   duration_ms: 0.2352
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:50:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:50:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -82,7 +82,7 @@ not ok 6 - home prefixes are generalized for Windows, Linux and macOS without lo
   ---
   duration_ms: 0.1963
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:56:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:56:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -110,7 +110,7 @@ not ok 7 - home generalization and thread preservation compose with secrets and 
   ---
   duration_ms: 0.3745
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:73:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-mask.test.mjs:73:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:

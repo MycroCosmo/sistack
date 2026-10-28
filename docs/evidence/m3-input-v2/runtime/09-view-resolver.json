@@ -6,8 +6,8 @@
     "list_status": 404
   },
   "reproduction_level": 5,
-  "java_home": "C:/Users/Ian/.jdks/corretto-17.0.14",
-  "project": "C:\\Users\\Ian\\AppData\\Local\\Temp\\sistack-debug-LLgyFV",
+  "java_home": "~/.jdks/corretto-17.0.14",
+  "project": "~/AppData\\Local\\Temp\\sistack-debug-LLgyFV",
   "instrumentation": [
     "src/test/java/kr/sistack/capture/CaptureFilter.java",
     "src/main/webapp/WEB-INF/web.xml",

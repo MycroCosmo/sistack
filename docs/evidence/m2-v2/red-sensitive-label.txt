@@ -4,23 +4,23 @@ not ok 1 - mask: 32/40/64자 16진수·UUID를 보존하면서 실제 개인정�
   ---
   duration_ms: 2.6308
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:82:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:82:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
     + actual - expected
 
-    + '계좌번호: 12345678901234567890123456789012'
+    + '계좌번호: [REDACTED]'
     - '계좌번호: [REDACTED]'
              ^
 
   code: 'ERR_ASSERTION'
   name: 'AssertionError'
   expected: '계좌번호: [REDACTED]'
-  actual: '계좌번호: 12345678901234567890123456789012'
+  actual: '계좌번호: [REDACTED]'
   operator: 'strictEqual'
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:87:9)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:87:9)
     Test.runInAsyncScope (node:async_hooks:214:14)
     Test.run (node:internal/test_runner/test:1047:25)
     Test.start (node:internal/test_runner/test:944:17)

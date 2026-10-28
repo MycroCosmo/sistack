@@ -4,13 +4,13 @@ not ok 1 - eval rejects draft answers and keeps held-out first score immutable w
   ---
   duration_ms: 546.1693
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug.test.mjs:127:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug.test.mjs:127:1'
   failureType: 'testCodeFailure'
   error: '첫 실행이 이미 보존됐습니다. 후속 평가는 별도 승인 후 진행하세요'
   code: 'ERR_TEST_FAILURE'
   stack: |-
-    scoreDebug (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/scripts/eval-debug.mjs:101:37)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug.test.mjs:151:20)
+    scoreDebug (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/scripts/eval-debug.mjs:101:37)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/debug.test.mjs:151:20)
     async Test.run (node:internal/test_runner/test:1054:7)
     async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
   ...

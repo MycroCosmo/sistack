@@ -4,7 +4,7 @@ not ok 1 - static: import·같은 패키지·중첩 반환 타입으로 로컬 s
   ---
   duration_ms: 87.1089
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:19:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:19:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -17,7 +17,7 @@ not ok 1 - static: import·같은 패키지·중첩 반환 타입으로 로컬 s
   actual: false
   operator: '=='
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:27:10)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:27:10)
     async Test.run (node:internal/test_runner/test:1054:7)
     async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
   ...
@@ -26,7 +26,7 @@ not ok 2 - static: 외부 import 호출은 내부를 만들지 않고 external�
   ---
   duration_ms: 76.955
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:33:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:33:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -38,7 +38,7 @@ not ok 2 - static: 외부 import 호출은 내부를 만들지 않고 external�
   expected: true
   operator: '=='
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:36:10)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:36:10)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -47,7 +47,7 @@ not ok 3 - JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의
   ---
   duration_ms: 78.4117
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:39:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:39:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -63,7 +63,7 @@ not ok 3 - JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의
   actual: 'POST /list.do'
   operator: 'strictEqual'
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:47:38)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:47:38)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -72,7 +72,7 @@ not ok 4 - profile: 활성 프로필 미확정이면 빈·인터셉터를 조건
   ---
   duration_ms: 91.5159
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:59:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:59:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -87,7 +87,7 @@ not ok 4 - profile: 활성 프로필 미확정이면 빈·인터셉터를 조건
   actual: 'CONFIRMED'
   operator: 'strictEqual'
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:61:79)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:61:79)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -96,7 +96,7 @@ not ok 5 - profile: 등록된 설정의 활성 프로필로 비활성 빈·인�
   ---
   duration_ms: 78.4535
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:64:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:64:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -109,7 +109,7 @@ not ok 5 - profile: 등록된 설정의 활성 프로필로 비활성 빈·인�
   actual: false
   operator: '=='
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:66:9)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:66:9)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -118,7 +118,7 @@ not ok 6 - fragment: href=\#와 javascript:void(0)는 요청이 아니며 실제
   ---
   duration_ms: 79.6765
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:70:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:70:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -131,7 +131,7 @@ not ok 6 - fragment: href=\#와 javascript:void(0)는 요청이 아니며 실제
   actual: 2
   operator: 'strictEqual'
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:72:61)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:72:61)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -140,7 +140,7 @@ not ok 7 - mask: 32/40/64자 16진수·UUID를 보존하면서 실제 개인정�
   ---
   duration_ms: 0.2949
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:75:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:75:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -155,7 +155,7 @@ not ok 7 - mask: 32/40/64자 16진수·UUID를 보존하면서 실제 개인정�
   actual: 'f5ba71140b5275fb235f[REDACTED]ec03b6cfe453bae4327f936487ff1256c1'
   operator: 'strictEqual'
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:77:10)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:77:10)
     Test.runInAsyncScope (node:async_hooks:214:14)
     Test.run (node:internal/test_runner/test:1047:25)
     Test.processPendingSubtests (node:internal/test_runner/test:744:18)
@@ -168,7 +168,7 @@ not ok 8 - eval 해시 필드는 일반 마스킹과 분리해 유효한 식별�
   ---
   duration_ms: 1.248
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:81:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:81:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly deep-equal:
@@ -177,7 +177,7 @@ not ok 8 - eval 해시 필드는 일반 마스킹과 분리해 유효한 식별�
       {
     +   expected_sha256: 'f5ba71140b5275fb235f[REDACTED]ec03b6cfe453bae4327f936487ff1256c1',
     -   expected_sha256: 'f5ba71140b5275fb235f7686563039ec03b6cfe453bae4327f936487ff1256c1',
-        password: 'phone=[REDACTED]',
+        password: [REDACTED],
     +   report_sha256: 'f5ba71140b5275fb235f[REDACTED]ec03b6cfe453bae4327f936487ff1256c1',
     +   run_id: '[REDACTED]-[REDACTED]',
     +   tool_fingerprint: 'f5ba71140b5275fb235f[REDACTED]ec03b6cfe453bae4327f936487ff1256c1'
@@ -193,16 +193,16 @@ not ok 8 - eval 해시 필드는 일반 마스킹과 분리해 유효한 식별�
     report_sha256: 'f5ba71140b5275fb235f7686563039ec03b6cfe453bae4327f936487ff1256c1'
     tool_fingerprint: 'f5ba71140b5275fb235f7686563039ec03b6cfe453bae4327f936487ff1256c1'
     run_id: '12345678-1234-1234-1234-123456789012'
-    password: 'phone=[REDACTED]'
+    password: [REDACTED]
   actual:
     expected_sha256: 'f5ba71140b5275fb235f[REDACTED]ec03b6cfe453bae4327f936487ff1256c1'
     report_sha256: 'f5ba71140b5275fb235f[REDACTED]ec03b6cfe453bae4327f936487ff1256c1'
     tool_fingerprint: 'f5ba71140b5275fb235f[REDACTED]ec03b6cfe453bae4327f936487ff1256c1'
     run_id: '[REDACTED]-[REDACTED]'
-    password: 'phone=[REDACTED]'
+    password: [REDACTED]
   operator: 'deepStrictEqual'
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:83:9)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:83:9)
     Test.runInAsyncScope (node:async_hooks:214:14)
     Test.run (node:internal/test_runner/test:1047:25)
     Test.processPendingSubtests (node:internal/test_runner/test:744:18)

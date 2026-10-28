@@ -1,0 +1,12 @@
+{
+  "package": "buffers@0.1.1",
+  "declared_license": "MIT/X11",
+  "license": "MIT",
+  "source": "https://raw.githubusercontent.com/bitpay/node-buffers/1b745ee35d33eb166e15ef1866073a07c6d7de87/package.json",
+  "source_commit": "1b745ee35d33eb166e15ef1866073a07c6d7de87",
+  "readme_license_present": false,
+  "index_local_sha256": "97801e296ba5f3c32242f647e1daac5917e300367fed7935ab1e62f40adb1b8a",
+  "index_upstream_sha256": "97801e296ba5f3c32242f647e1daac5917e300367fed7935ab1e62f40adb1b8a",
+  "index_equal": true,
+  "checked_at": "2026-10-29"
+}

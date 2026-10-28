@@ -4,7 +4,7 @@ not ok 1 - v2 Boot: 같은 루트 Maven/Gradle의 동일 starter 선언은 설�
   ---
   duration_ms: 100.5344
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:102:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:102:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -17,9 +17,9 @@ not ok 1 - v2 Boot: 같은 루트 Maven/Gradle의 동일 starter 선언은 설�
   actual: false
   operator: '=='
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:104:36
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:103:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:104:36
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:103:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
   ...

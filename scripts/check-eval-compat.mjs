@@ -1,3 +1,4 @@
+import {readEvidenceBytes} from '../lib/evidence-assets.mjs';
 import path from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
@@ -10,10 +11,10 @@ import { digest, json, save } from '../lib/trace/io.mjs';
 
 export async function checkEvalCompatibility(reference, output) {
   const oldSource = execFileSync('git', ['show', `${reference}:lib/indexer/eval.mjs`], { cwd: root, encoding: 'utf8', windowsHide: true });
-  const moduleSource = oldSource.replace("'./graph.mjs'", JSON.stringify(new URL('../lib/indexer/graph.mjs', import.meta.url).href));
+  const moduleSource = oldSource.replace(/(['"])\.\/([^'"]+)\1/g, (_,quote,name)=>JSON.stringify(new URL('../lib/indexer/'+name,import.meta.url).href));
   const previous = await import('data:text/javascript;base64,' + Buffer.from(moduleSource).toString('base64'));
   const summary = await json(path.join(root, 'docs/evidence/m2-v2/results.json'));
-  const archive = await readFile(path.join(root, summary.archive.path));
+  const archive = await readEvidenceBytes(path.join(root, summary.archive.path));
   if (digest(archive) !== summary.archive.sha256) throw new Error('보존 원본 압축 해시 불일치');
   const snapshot = JSON.parse(gunzipSync(archive));
   const metrics = score => ({ status: score.status, expected: score.expected_edges, matched: score.matched,

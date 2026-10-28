@@ -34,10 +34,10 @@
 서버는 검증 후 종료했다. 실행하려면 [테스트베드 실행 절차](../examples/README.md)를 따른다. 현재 머신의 JDK/Maven은 PATH에 없으므로 아래와 같이 실행할 수 있다.
 
 ```powershell
-$env:JAVA_HOME = 'C:/Users/Ian/.jdks/corretto-17.0.14'
+$env:JAVA_HOME = '~/.jdks/corretto-17.0.14'
 cd examples/legacy-board
-& 'C:/Users/Ian/.m2/wrapper/dists/apache-maven-3.9.10-bin/53h08a94dg6djh6umvruv7q564/apache-maven-3.9.10/bin/mvn.cmd' -q test
-& 'C:/Users/Ian/.m2/wrapper/dists/apache-maven-3.9.10-bin/53h08a94dg6djh6umvruv7q564/apache-maven-3.9.10/bin/mvn.cmd' jetty:run
+& '~/.m2/wrapper/dists/apache-maven-3.9.10-bin/53h08a94dg6djh6umvruv7q564/apache-maven-3.9.10/bin/mvn.cmd' -q test
+& '~/.m2/wrapper/dists/apache-maven-3.9.10-bin/53h08a94dg6djh6umvruv7q564/apache-maven-3.9.10/bin/mvn.cmd' jetty:run
 ```
 
 ### 결정

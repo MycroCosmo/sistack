@@ -4,7 +4,7 @@ not ok 1 - v2 submit: 같은 URL+method AJAX와 차단된 action은 한 requests
   ---
   duration_ms: 90.5484
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:39:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:39:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -17,9 +17,9 @@ not ok 1 - v2 submit: 같은 URL+method AJAX와 차단된 action은 한 requests
   actual: 2
   operator: 'strictEqual'
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:42:12
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:40:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:42:12
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:40:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
   ...
@@ -28,7 +28,7 @@ not ok 2 - v2 submit: 다른 URL이면 기본 action은 차단 이유의 LIKELY
   ---
   duration_ms: 70.1782
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:48:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:48:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -43,9 +43,9 @@ not ok 2 - v2 submit: 다른 URL이면 기본 action은 차단 이유의 LIKELY
   actual: 'CONFIRMED'
   operator: 'strictEqual'
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:51:12
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:49:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:51:12
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:49:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -54,7 +54,7 @@ not ok 3 - v2 submit: HTTP method가 다르면 병합하지 않고 차단 없는
   ---
   duration_ms: 70.0246
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:55:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:55:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -69,9 +69,9 @@ not ok 3 - v2 submit: HTTP method가 다르면 병합하지 않고 차단 없는
   actual: 'CONFIRMED'
   operator: 'strictEqual'
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:57:12
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:56:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:57:12
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:56:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -80,7 +80,7 @@ not ok 4 - v2 fragment: html 루트·따옴표 템플릿·중첩 인자·공백�
   ---
   duration_ms: 66.0943
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:62:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:62:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -93,9 +93,9 @@ not ok 4 - v2 fragment: html 루트·따옴표 템플릿·중첩 인자·공백�
   actual: false
   operator: '=='
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:66:12
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:63:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:66:12
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:63:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -104,7 +104,7 @@ not ok 5 - v2 fragment: 닫히지 않은 인자·동적 이름을 확정하지 �
   ---
   duration_ms: 71.4929
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:70:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:70:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -117,9 +117,9 @@ not ok 5 - v2 fragment: 닫히지 않은 인자·동적 이름을 확정하지 �
   actual: false
   operator: '=='
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:73:12
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:71:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:73:12
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:71:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -128,7 +128,7 @@ not ok 6 - v2 Boot: Maven starter 기본 뷰·fragment, starter 없는 경우는
   ---
   duration_ms: 80.0405
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:77:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:77:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -141,9 +141,9 @@ not ok 6 - v2 Boot: Maven starter 기본 뷰·fragment, starter 없는 경우는
   actual: false
   operator: '=='
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:80:12
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:79:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:80:12
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:79:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -152,7 +152,7 @@ not ok 7 - v2 Boot: Gradle·중첩 YAML prefix/suffix와 profile 별 상충
   ---
   duration_ms: 65.128
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:85:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:85:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -165,9 +165,9 @@ not ok 7 - v2 Boot: Gradle·중첩 YAML prefix/suffix와 profile 별 상충
   actual: false
   operator: '=='
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:88:64
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:86:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:88:64
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:86:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -176,7 +176,7 @@ not ok 8 - v2 Boot: YAML 문서·flow mapping 미지원은 확정하지 않는�
   ---
   duration_ms: 69.3322
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:96:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:96:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -189,9 +189,9 @@ not ok 8 - v2 Boot: YAML 문서·flow mapping 미지원은 확정하지 않는�
   actual: false
   operator: '=='
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:98:12
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:97:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:98:12
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:97:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -200,7 +200,7 @@ not ok 9 - v2 반환 뷰: 같은 클래스 상수·private 반환 깊이 2와 �
   ---
   duration_ms: 70.774
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:102:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:102:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -214,9 +214,9 @@ not ok 9 - v2 반환 뷰: 같은 클래스 상수·private 반환 깊이 2와 �
   expected: 'CONFIRMED'
   operator: 'strictEqual'
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:112:12
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:103:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:112:12
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:103:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
@@ -225,7 +225,7 @@ not ok 10 - v2 반환 뷰: 깊이 초과·순환·비private·동적 반환은 L
   ---
   duration_ms: 65.0132
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:116:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\thymeleaf-v2.test.mjs:116:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -238,9 +238,9 @@ not ok 10 - v2 반환 뷰: 깊이 초과·순환·비private·동적 반환은 L
   actual: false
   operator: '=='
   stack: |-
-    file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:131:41
-    fixture (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
-    async TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:117:3)
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:131:41
+    fixture (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:29:11)
+    async TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/thymeleaf-v2.test.mjs:117:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...

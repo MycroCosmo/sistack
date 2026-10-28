@@ -6,7 +6,7 @@
     "expected_file": "evals/trace/thymeleaf-board-delete-ajax/expected.json",
     "expected_sha256": "a78497ae6e41eed0cb441adcff1a17c047411422a5ab2aa9bf844da35321dcc1",
     "run_id": "m25-v2-delete-20261027-02",
-    "directory": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-delete-20261027-02",
+    "directory": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-delete-20261027-02",
     "status": "PARTIAL",
     "complexity": {
       "mode": "complex",
@@ -24,7 +24,7 @@
     "expected_file": "evals/trace/petclinic-owner-find/expected.json",
     "expected_sha256": "ee6fe2a6db36c2799a34c2de0a202b6c50697c386972777181aabc1c4ac95ee8",
     "run_id": "m25-v2-petclinic-20261027-02",
-    "directory": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-v2-petclinic-20261027-02",
+    "directory": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-v2-petclinic-20261027-02",
     "status": "PARTIAL",
     "complexity": {
       "mode": "complex",
@@ -42,7 +42,7 @@
     "expected_file": "evals/trace/legacy-board-thymeleaf-search/expected.json",
     "expected_sha256": "dfe5adb5f6a31bd977abb951bea72c50ddcf2cdd21ae494d9e2fb64eb9203a0f",
     "run_id": "m25-v2-search-20261027-02",
-    "directory": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-search-20261027-02",
+    "directory": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-search-20261027-02",
     "status": "PARTIAL",
     "complexity": {
       "mode": "complex",
@@ -60,7 +60,7 @@
     "expected_file": "evals/trace/legacy-board-thymeleaf-create/expected.json",
     "expected_sha256": "222cd2b3c6ec598e9256447fc7ad7e7ba15eabc3337be436bed2dada719c3e65",
     "run_id": "m25-v2-create-20261027-02",
-    "directory": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-create-20261027-02",
+    "directory": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-create-20261027-02",
     "status": "PARTIAL",
     "complexity": {
       "mode": "complex",
@@ -78,7 +78,7 @@
     "expected_file": "evals/trace/legacy-board-thymeleaf-coexist/expected.json",
     "expected_sha256": "6b843e606f6239e661bad7d33a4b448ea5c27ca0a879ab190d7be24dece2f7b6",
     "run_id": "m25-v2-coexist-20261027-02",
-    "directory": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-coexist-20261027-02",
+    "directory": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-v2-coexist-20261027-02",
     "status": "PARTIAL",
     "complexity": {
       "mode": "complex",

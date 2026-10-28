@@ -142,10 +142,10 @@ not ok 9 - 외부 테스트베드는 고정 커밋을 재사용하고 변경된 
   ---
   duration_ms: 178.7834
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\core.test.mjs:128:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\core.test.mjs:128:1'
   failureType: 'testCodeFailure'
   error: |-
-    error: could not write config file C:/Users/Ian/AppData/Local/Packages/sandbox.{f918f0f0-ec86-4f6d-9959-634299bf7538}/AC/Temp/sistack-test-jyOISy/source/.git/config: Permission denied
+    error: could not write config file ~/AppData/Local/Packages/sandbox.{f918f0f0-ec86-4f6d-9959-634299bf7538}/AC/Temp/sistack-test-jyOISy/source/.git/config: Permission denied
     fatal: could not set 'core.repositoryformatversion' to '0'
 
 
@@ -157,8 +157,8 @@ not ok 9 - 외부 테스트베드는 고정 커밋을 재사용하고 변경된 
   actual: 128
   operator: 'strictEqual'
   stack: |-
-    git (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/core.test.mjs:133:12)
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/core.test.mjs:135:3)
+    git (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/core.test.mjs:133:12)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/core.test.mjs:135:3)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...

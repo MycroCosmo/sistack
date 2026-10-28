@@ -31,8 +31,8 @@
           "status_mismatches": 0,
           "expected_projection_sha256": "1aeff98bd21d696ba668b1a98bdeadb86fad9cab26dc8bef3e7b479839b3c3f3",
           "eval_sha256": "e24b0ea1c10150f34873810dcdaa225646c3d69460b4627a262dbe6b7111b12c",
-          "expected_projection": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\evidence\\expected-screen.json",
-          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\first-screen-eval.json"
+          "expected_projection": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\evidence\\expected-screen.json",
+          "output": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\first-screen-eval.json"
         },
         "server": {
           "status": "PASS",
@@ -43,8 +43,8 @@
           "status_mismatches": 0,
           "expected_projection_sha256": "94b696ea9d3503bb8b095b0e1fcee055a7ae8b99205babe458b2bfc09f15d2aa",
           "eval_sha256": "65ff6a87e817ce31d997121380533fbc58774d2d168417bb72e502055b4b227a",
-          "expected_projection": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\evidence\\expected-server.json",
-          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\first-server-eval.json"
+          "expected_projection": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\evidence\\expected-server.json",
+          "output": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\examples\\legacy-board-thymeleaf\\.sistack\\runs\\m25-heldout-delete-first-20261027-01\\first-server-eval.json"
         }
       },
       "raw_index_sha256": "3c99d6b9cb768fd99ec0c5071b4dd936afde59756a4cef5834cafe94ba4a675e",
@@ -73,8 +73,8 @@
           "status_mismatches": 0,
           "expected_projection_sha256": "85f5e8cdf43c1d2f408755600cb29b55f1d3f4108c533727e5760ee926abcc75",
           "eval_sha256": "81664ce3a8bb3099524918a759ebc5e93d1ffce21cf0646804758ac9bc59c433",
-          "expected_projection": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\evidence\\expected-screen.json",
-          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\first-screen-eval.json"
+          "expected_projection": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\evidence\\expected-screen.json",
+          "output": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\first-screen-eval.json"
         },
         "server": {
           "status": "PASS",
@@ -85,8 +85,8 @@
           "status_mismatches": 0,
           "expected_projection_sha256": "f522c3f93d9ee06ed1aa75cad0f6682e095e86784156c5197fe9b68ccdba804f",
           "eval_sha256": "ba77d6ffacc19f7ecdfd2e502d0b05dbb1234fb7407a29c95b19734019d5e02f",
-          "expected_projection": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\evidence\\expected-server.json",
-          "output": "C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\first-server-eval.json"
+          "expected_projection": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\evidence\\expected-server.json",
+          "output": "~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\.testbeds\\spring-petclinic\\.sistack\\runs\\m25-heldout-petclinic-first-20261027-01\\first-server-eval.json"
         }
       },
       "raw_index_sha256": "2b68fe21bbdaf216c0333bfc305f85832f908dbb633d09113b5275454c1206a4",

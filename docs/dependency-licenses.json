@@ -304,10 +304,11 @@
       ]
     },
     {
+      "license_evidence": "https://raw.githubusercontent.com/bitpay/node-buffers/1b745ee35d33eb166e15ef1866073a07c6d7de87/package.json",
       "location": "node_modules/buffers",
       "name": "buffers",
       "version": "0.1.1",
-      "license": "UNRESOLVED",
+      "license": "MIT",
       "integrity": "sha512-9q/rDEGSb/Qsvv2qvzIzdluL5k7AaJOTrw23z9reQthrbF7is4CtlT0DXyO1oei2DCp4uojjzQ7igaSHp1kAEQ==",
       "licenses": []
     },

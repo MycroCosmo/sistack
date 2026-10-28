@@ -4,7 +4,7 @@ not ok 1 - MyBatis repeated message exceptions stay inside the wrapper and retai
   ---
   duration_ms: 16.3915
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-inputs.test.mjs:32:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-inputs.test.mjs:32:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly deep-equal:
@@ -64,7 +64,7 @@ not ok 2 - message Cause and nested exception mentions do not create roots; a se
   ---
   duration_ms: 0.7585
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-inputs.test.mjs:44:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\debug-inputs.test.mjs:44:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly deep-equal:

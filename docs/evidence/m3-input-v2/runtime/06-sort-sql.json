@@ -7,8 +7,8 @@
     "date_status": 500
   },
   "reproduction_level": 5,
-  "java_home": "C:/Users/Ian/.jdks/corretto-17.0.14",
-  "project": "C:\\Users\\Ian\\AppData\\Local\\Temp\\sistack-debug-0xrX1u",
+  "java_home": "~/.jdks/corretto-17.0.14",
+  "project": "~/AppData\\Local\\Temp\\sistack-debug-0xrX1u",
   "instrumentation": [
     "src/test/java/kr/sistack/capture/CaptureFilter.java",
     "src/main/webapp/WEB-INF/web.xml",

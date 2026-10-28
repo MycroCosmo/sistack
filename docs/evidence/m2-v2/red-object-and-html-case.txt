@@ -4,7 +4,7 @@ not ok 1 - static: import·같은 패키지·중첩 반환 타입으로 로컬 s
   ---
   duration_ms: 118.6824
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:19:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:19:1'
   failureType: 'testCodeFailure'
   error: |-
     The expression evaluated to a falsy value:
@@ -17,7 +17,7 @@ not ok 1 - static: import·같은 패키지·중첩 반환 타입으로 로컬 s
   actual: false
   operator: '=='
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:28:10)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:28:10)
     async Test.run (node:internal/test_runner/test:1054:7)
     async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
   ...
@@ -26,7 +26,7 @@ not ok 2 - JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의
   ---
   duration_ms: 84.2157
   type: 'test'
-  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:39:1'
+  location: '~/Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\m2-defects.test.mjs:39:1'
   failureType: 'testCodeFailure'
   error: |-
     Expected values to be strictly equal:
@@ -41,7 +41,7 @@ not ok 2 - JSP: 다른 함수 action을 가져오지 않고 submit 수신 폼의
   actual: 'string-url:page.jsp:4'
   operator: 'strictEqual'
   stack: |-
-    TestContext.<anonymous> (file:///C:/Users/Ian/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:47:38)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/m2-defects.test.mjs:47:38)
     async Test.run (node:internal/test_runner/test:1054:7)
     async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
   ...
