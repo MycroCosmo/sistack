@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "m4-final-legacy-board",
+  "skill": "si-unit-test",
+  "created_at": "2026-10-28T03:45:09.107Z",
+  "source_revision": "2d1c4df3acce02055120e9e7001840e7d26cb68a",
+  "status": "PASS",
+  "inputs": {
+    "target": "M4*Test"
+  },
+  "evidence": [
+    {
+      "path": "test-results.json",
+      "level": 4,
+      "description": "생성 테스트 실행 결과. 앱/운영 환경 검증 아님"
+    },
+    {
+      "path": "coverage-results.json",
+      "level": 4,
+      "description": "정상 소스에서 도출한 계획 대비 실제 테스트 실행·통과 충족률"
+    }
+  ],
+  "unverified": [],
+  "next_actions": []
+}

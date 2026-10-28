@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "rows": [
+    {
+      "testbed": "legacy-board",
+      "run_id": "m4-final-legacy-board",
+      "status": "PASS",
+      "tests": 48,
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      },
+      "assertion_sites": 105,
+      "all_assertions_have_korean_business_messages": true,
+      "checked_indexed_collection_accesses": 10,
+      "all_indexed_accesses_have_count_assertions": true,
+      "test_results": "docs/evidence/m4-final/legacy-board/test-results.json"
+    },
+    {
+      "testbed": "legacy-board-thymeleaf",
+      "run_id": "m4-final-legacy-board-thymeleaf",
+      "status": "PASS",
+      "tests": 48,
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      },
+      "assertion_sites": 105,
+      "all_assertions_have_korean_business_messages": true,
+      "checked_indexed_collection_accesses": 10,
+      "all_indexed_accesses_have_count_assertions": true,
+      "test_results": "docs/evidence/m4-final/legacy-board-thymeleaf/test-results.json"
+    }
+  ],
+  "preserved_files": 1654,
+  "old_freezes_and_heldout_results_unchanged": true,
+  "v2_generated_artifacts_unchanged": true,
+  "original_pom_and_sources_unchanged": true,
+  "evaluation_scope": "정상 기준선만 새 run으로 실행",
+  "heldout_rerun": false,
+  "test_results_schema": "schemas/test-results.schema.json",
+  "schema_version": "1.0.0",
+  "node_tests": {
+    "total": 160,
+    "passed": 160,
+    "failed": 0,
+    "skipped": 0
+  },
+  "audit_scope": "한국어 메서드명을 포함한 생성 Java의 모든 assert와 목록 정수 인덱스 접근"
+}
