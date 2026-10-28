@@ -34,7 +34,7 @@ export async function startServer(source,run,{java_home,maven},applyPatch=null) 
   let log='',closed=false;
   const child=spawn('powershell.exe',['-NoProfile','-NonInteractive','-Command',"& $env:SISTACK_MAVEN -o -q '-Dfile.encoding=UTF-8' jetty:run"],{cwd:project,env:{...process.env,JAVA_HOME:java_home,SISTACK_MAVEN:maven},windowsHide:true,stdio:['ignore','pipe','pipe']});
   child.stdout.on('data',b=>{log+=b.toString('utf8');});child.stderr.on('data',b=>{log+=b.toString('utf8');});child.once('close',()=>{closed=true;});
-  async function stop() {
+  async function stop(expectedKeys=[]) {
     if(!closed)spawnSync('taskkill.exe',['/PID',String(child.pid),'/T','/F'],{windowsHide:true,stdio:'ignore'});
     for(let n=0;n<30&&!closed;n++)await pause(100);
     await save(path.join(run,'evidence/server.log'),mask(log).replaceAll('\r\n','\n'));
@@ -43,10 +43,11 @@ export async function startServer(source,run,{java_home,maven},applyPatch=null) 
     if(!version)throw Error('H2 버전 확인 필요');
     const actualJar=path.join(process.env.USERPROFILE,'.m2/repository/com/h2database/h2',version,`h2-${version}.jar`);
     const dump=path.join(run,'evidence/db/snapshot.sql').replaceAll('\\','/');
-    const result=spawnSync(path.join(java_home,'bin/java.exe'),['-cp',actualJar,'org.h2.tools.Shell','-url',`jdbc:h2:file:${db};MODE=Oracle`,'-user','sa','-sql',`SCRIPT NOPASSWORDS TO '${dump.replaceAll("'","''")}';`],{encoding:'utf8',windowsHide:true,timeout:30000});
+    const result=spawnSync(path.join(java_home,'bin/java.exe'),['-cp',actualJar,'org.h2.tools.Shell','-url',`jdbc:h2:file:${db};MODE=Oracle`,'-user','sa','-sql',`SCRIPT NOPASSWORDS TO '${dump.replaceAll("'","''")}'; SELECT ID FROM BOARD ORDER BY ID;`],{encoding:'utf8',windowsHide:true,timeout:30000});
     const preserved=await stat(`${db}.mv.db`).then(s=>s.size>0).catch(()=>false),dumped=await stat(dump).then(s=>s.size>0).catch(()=>false);
-    await save(path.join(run,'evidence/db-preservation.json'),{file_database:preserved,script_dump:dumped,command:'SCRIPT NOPASSWORDS TO <evidence SQL>',exit_code:result.status,source_unchanged:await unchanged(source,sourceHashes)});
-    if(result.status!==0||!preserved||!dumped)throw Error('파일 DB 또는 SQL 덤프 보존 실패');
+    const stored=[...result.stdout.matchAll(/^\s*(\d+)\s*$/gm)].map(m=>+m[1]),keysVerified=expectedKeys.every(id=>stored.includes(id));
+    await save(path.join(run,'evidence/db-preservation.json'),{file_database:preserved,script_dump:dumped,command:'SCRIPT NOPASSWORDS TO <evidence SQL>; SELECT ID FROM BOARD',exit_code:result.status,expected_board_keys:[...new Set(expectedKeys)],stored_board_keys:stored,keys_verified:keysVerified,source_unchanged:await unchanged(source,sourceHashes)});
+    if(result.status!==0||!preserved||!dumped||!keysVerified)throw Error('파일 DB/SQL 덤프/생성·수정 키 보존 실패');
     return {preserved,dumped};
   }
   try {

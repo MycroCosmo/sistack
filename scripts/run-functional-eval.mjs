@@ -14,6 +14,8 @@ const mapping=await json(config.mapping),template=path.resolve(config.template),
 const summarize=records=>records.reduce((a,r)=>(a[r.status]=(a[r.status]??0)+1,a),{});
 async function manifest(run,id,status,revision,round) {
  const m={schema_version:'1.0.0',run_id:id,skill:'si-docs',created_at:new Date().toISOString(),source_revision:revision,status,inputs:{phase:'M5b 화면 기능 테스트',round:String(round)},evidence:[{path:'results-chrome.json',level:5,description:'실제 로컬 앱의 API/UI 결과와 요청·화면 증거'},{path:'evidence/db-preservation.json',level:4,description:'파일 H2와 비밀번호 제외 SQL 덤프 보존'}],unverified:['실제 id/name 없는 UI는 BLOCKED','정적 인벤토리의 독립 대조 초안은 승인 전'],next_actions:[]};
+ if(round===2)m.parent_run_ids=[`m5b-first-${config.version??'v1'}`];
+ m.inputs.cases_sha256=digest(await readFile(path.join(run,'cases.json')));
  if(validateManifest(m).length)throw Error('manifest 오류');await save(path.join(run,'manifest.json'),m);
  await save(path.join(run,'report.md'),`> AI의 PASS는 PL/PM 승인이나 고객 검수 완료가 아닙니다.\n\n# M5b ${round}차\n\n상태: ${status}. results-chrome.json 및 evidence의 화면/요청/DB 보존 기록 참조. 실제 id/name이 없는 UI는 BLOCKED이며 SKIP은 삭제/다운로드만이다.\n`);
 }
@@ -29,7 +31,7 @@ for(const name of ['legacy-board','legacy-board-thymeleaf']) {
    result=await executeCases({base:server.base,cases,inventory,run,round:1});
    const cross=cases.filter(c=>['SEARCH','CODES'].includes(c.operation));
    edge=await executeCases({base:server.base,cases:cross,inventory,run,channel:'msedge',round:1});
- }finally{await server.stop();}
+ }finally{await server.stop([...(result?.created??[]),...(edge?.created??[])].map(r=>r.key.ID));}
  const m4=await json(path.resolve('docs/evidence/m4-final',name,'test-results.json'));
  const workbook=path.join(run,'functional-results.xlsx');await writeFunctionalWorkbook({template,mapping,cases,results:result,output:workbook,m4,round:1});
  const counts=summarize(result.records),status=counts.FAIL?'FAIL':counts.BLOCKED?'PARTIAL':'PASS';
@@ -47,13 +49,16 @@ for(const entry of (await readdir('evals/debug/cases',{withFileTypes:true})).fil
  if(spec.mode==='log-only'){evaluation.push({case_id:spec.id,status:'BLOCKED',reason:'로그 전용 Oracle 사례. 로컬 앱 패치 실행 불가'});continue;}
  const id=`m5b-second-${spec.id}-${config.version??'v1'}`,run=path.join(baseline.source,'.sistack/runs',id);await mkdir(run);
  await assertFrozen(baseline);
+ await save(path.join(run,'cases.json'),baseline.cases);
+ if(digest(await readFile(path.join(run,'cases.json')))!==baseline.frozen.case_sha256)throw Error('2차 TC 변경');
+ await save(path.join(run,'first-reference.json'),{parent_run_id:path.basename(baseline.run),...baseline.frozen});
  console.log(`${spec.id}: 2차 시작`);
  const server=await startServer(baseline.source,run,config,project=>applyUnitPatch(project,path.resolve(`evals/debug/cases/${spec.id}/bug.patch`)));
- let result;try{result=await executeCases({base:server.base,cases:baseline.cases,inventory:baseline.inventory,run,round:2});}finally{await server.stop();}
+ let result;try{result=await executeCases({base:server.base,cases:baseline.cases,inventory:baseline.inventory,run,round:2});}finally{await server.stop((result?.created??[]).map(r=>r.key.ID));}
  await writeFunctionalWorkbook({template,mapping,cases:baseline.cases,results:result,output:path.join(run,'functional-results.xlsx'),m4:baseline.m4,round:2,first:baseline.workbook});
  const failures=result.records.filter(r=>r.status==='FAIL'&&baseline.result.records.some(a=>a.case_id===r.case_id&&a.status==='PASS'));
  evaluation.push({case_id:spec.id,status:failures.length?'DETECTED':'MISSED',baseline_pass_cases:baseline.result.records.filter(r=>r.status==='PASS').length,detected_by:failures.map(r=>r.case_id),counts:summarize(result.records),run});
- await save(path.join(run,'evaluation.json'),evaluation.at(-1));await manifest(run,id,'PARTIAL',baseline.inventory.source_revision,2);
+ await save(path.join(run,'evaluation.json'),evaluation.at(-1));await manifest(run,id,result.records.some(r=>r.status==='FAIL')?'FAIL':'PARTIAL',baseline.inventory.source_revision,2);
  await assertFrozen(baseline);console.log(`${spec.id}: ${evaluation.at(-1).status} ${JSON.stringify(summarize(result.records))}`);
 }
 async function assertFrozen(b) {
