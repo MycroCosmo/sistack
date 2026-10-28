@@ -7,13 +7,15 @@ import {writeFunctionalWorkbook} from '../lib/functional/workbook.mjs';
 import {json,save,digest} from '../lib/trace/io.mjs';
 import {applyUnitPatch} from './eval-unit-test.mjs';
 import {validateManifest} from '../lib/manifest/index.mjs';
+import {checkFunctionalExpected} from './audit-functional-inventory.mjs';
 
 const [configFile]=process.argv.slice(2),config=await json(configFile);
 if(config.allow_execution!==true||config.round!==1||config.tester_ids?.admin!=='admin'||config.tester_ids?.viewer!=='viewer')throw Error('명시된 1차/승인 계정 설정 필요');
+await checkFunctionalExpected();
 const mapping=await json(config.mapping),template=path.resolve(config.template),output=path.resolve(config.output);await mkdir(output);
 const summarize=records=>records.reduce((a,r)=>(a[r.status]=(a[r.status]??0)+1,a),{});
 async function manifest(run,id,status,revision,round) {
- const m={schema_version:'1.0.0',run_id:id,skill:'si-docs',created_at:new Date().toISOString(),source_revision:revision,status,inputs:{phase:'M5b 화면 기능 테스트',round:String(round)},evidence:[{path:'results-chrome.json',level:5,description:'실제 로컬 앱의 API/UI 결과와 요청·화면 증거'},{path:'evidence/db-preservation.json',level:4,description:'파일 H2와 비밀번호 제외 SQL 덤프 보존'}],unverified:['실제 id/name 없는 UI는 BLOCKED','정적 인벤토리의 독립 대조 초안은 승인 전'],next_actions:[]};
+ const m={schema_version:'1.0.0',run_id:id,skill:'si-docs',created_at:new Date().toISOString(),source_revision:revision,status,inputs:{phase:'M5b 화면 기능 테스트',round:String(round)},evidence:[{path:'results-chrome.json',level:5,description:'실제 로컬 앱의 API/UI 결과와 요청·화면 증거'},{path:'evidence/db-preservation.json',level:4,description:'파일 H2와 비밀번호 제외 SQL 덤프 보존'}],unverified:['소스 선택자/기대 요청이 미확정인 UI는 BLOCKED','팝업 실제 표본 0개로 감지/실행 미검증'],next_actions:[]};
  if(round===2)m.parent_run_ids=[`m5b-first-${config.version??'v1'}`];
  m.inputs.cases_sha256=digest(await readFile(path.join(run,'cases.json')));
  if(validateManifest(m).length)throw Error('manifest 오류');await save(path.join(run,'manifest.json'),m);
@@ -25,6 +27,7 @@ for(const name of ['legacy-board','legacy-board-thymeleaf']) {
  const inventory=await functionalInventory(source),cases=[...generateCases(inventory),...supplementalCases(inventory)];
  const coverage=compareCases(inventory,cases);if(Object.values(coverage).some(v=>v.length))throw Error('인벤토리/TC 대조 실패');
  await save(path.join(run,'inventory.json'),inventory);await save(path.join(run,'cases.json'),cases);await save(path.join(run,'coverage.json'),coverage);
+ await save(path.join(run,'coverage-map.json'),inventory.items.filter(i=>i.covered_by).map(i=>({inventory_item_id:i.inventory_item_id,kind:i.kind,file:i.file,line:i.line,covered_by:i.covered_by})));
  console.log(`${name}: 1차 시작 (${cases.length} TC)`);
  const server=await startServer(source,run,config);let result,edge;
  try {
@@ -57,6 +60,7 @@ for(const entry of (await readdir('evals/debug/cases',{withFileTypes:true})).fil
  let result;try{result=await executeCases({base:server.base,cases:baseline.cases,inventory:baseline.inventory,run,round:2});}finally{await server.stop((result?.created??[]).map(r=>r.key.ID));}
  await writeFunctionalWorkbook({template,mapping,cases:baseline.cases,results:result,output:path.join(run,'functional-results.xlsx'),m4:baseline.m4,round:2,first:baseline.workbook});
  const failures=result.records.filter(r=>r.status==='FAIL'&&baseline.result.records.some(a=>a.case_id===r.case_id&&a.status==='PASS'));
+ await save(path.join(run,'failure-review.json'),{status_values_changed:false,notes:result.records.filter(r=>r.status==='FAIL').map(r=>{const previous=baseline.result.records.find(p=>p.case_id===r.case_id);return {case_id:r.case_id,classification:previous?.status==='PASS'?'제품 결함(학습 패치)':'미확정(기준선 미통과/파생 실패)',baseline_status:previous?.status,request_evidence:r.request_evidence,original_reason:r.reason};})});
  evaluation.push({case_id:spec.id,status:failures.length?'DETECTED':'MISSED',baseline_pass_cases:baseline.result.records.filter(r=>r.status==='PASS').length,detected_by:failures.map(r=>r.case_id),counts:summarize(result.records),run});
  await save(path.join(run,'evaluation.json'),evaluation.at(-1));await manifest(run,id,result.records.some(r=>r.status==='FAIL')?'FAIL':'PARTIAL',baseline.inventory.source_revision,2);
  await assertFrozen(baseline);console.log(`${spec.id}: ${evaluation.at(-1).status} ${JSON.stringify(summarize(result.records))}`);

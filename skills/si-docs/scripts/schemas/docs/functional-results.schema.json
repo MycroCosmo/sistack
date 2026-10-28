@@ -23,7 +23,8 @@
           "status": { "enum": ["PASS", "FAIL", "PARTIAL", "BLOCKED", "SKIP"] },
           "reason": { "type": "string" },
           "request_evidence": { "type": "string", "minLength": 1 },
-          "screenshot": { "type": ["string", "null"] }
+          "screenshot": { "type": ["string", "null"] },
+          "selection_evidence": { "type": "array", "items": { "type": "object", "required": ["page", "selected", "attempts"], "properties": { "page": { "type": "string" }, "selected": { "type": ["object", "null"] }, "attempts": { "type": "array" } } } }
         }
       }
     }

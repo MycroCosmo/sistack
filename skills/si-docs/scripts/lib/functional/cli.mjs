@@ -11,6 +11,8 @@ export async function main(args) {
     await checkSources(_project,plan.inventory.source_files);
     const [{startServer},{executeCases},{writeFunctionalWorkbook}]=await Promise.all([import('./server.mjs'),import('./execute.mjs'),import('./workbook.mjs')]);
     const run=path.resolve(_project,'.sistack/runs',runId);await mkdir(path.dirname(run),{recursive:true});await mkdir(run);
+    if(Object.values(compareCases(plan.inventory,plan.cases)).some(v=>v.length))throw Error('인벤토리/화면 TC 연결 실패');
+    await save(path.join(run,'inventory.json'),plan.inventory);await save(path.join(run,'coverage-map.json'),plan.inventory.items.filter(i=>i.covered_by).map(i=>({inventory_item_id:i.inventory_item_id,kind:i.kind,file:i.file,line:i.line,covered_by:i.covered_by})));
     const server=await startServer(path.resolve(_project),run,config);let results;
     try{results=await executeCases({base:server.base,cases:plan.cases,inventory:plan.inventory,run,round:config.round,channel:config.channel??'chrome'});}finally{await server.stop();}
     await writeFunctionalWorkbook({template:config.template,mapping:await json(config.mapping),cases:plan.cases,results,output:path.join(run,'functional-results.xlsx'),m4:await json(config.m4),round:config.round,first:config.first_workbook??null});

@@ -24,8 +24,9 @@ test('삭제만 SKIP으로 분류하고 알려진 요청 메서드와 URL을 기
  const c=generateCases(i);assert.equal(c[0].mode,'SKIP','삭제 요청을 호출하지 않아야 한다');assert.equal(c[1].mode,'AUTO-API','일반 조회를 SKIP으로 숨기지 않아야 한다');assert.deepEqual(c[1].expected_requests,['GET /board/list.do'],'기대 요청은 메서드까지 남겨야 한다');
 });
 test('권한이 필요한 화면의 구조 항목도 관리자 세션으로 확인한다',()=>{
- const i={items:[{inventory_item_id:'a',kind:'fragment',file:'part',line:1,screens:['form'],requests:[]}],pages:[{file:'form',routes:[{url:'/board/form.do',method:'GET'}],markers:['등록']}]};
- assert.equal(generateCases(i)[0].account_id,'admin','등록 화면에 포함된 구조 항목을 조회자로 실행하지 않아야 한다');
+ const i={items:[{inventory_item_id:'a',kind:'fragment',file:'part',line:1,screens:['form'],requests:[]},{inventory_item_id:'b',kind:'form',file:'form',line:2,screens:['form'],requests:[]}],pages:[{file:'form',routes:[{url:'/board/form.do',method:'GET'}],markers:['등록']}]};
+ const cases=generateCases(i);assert.equal(cases[0].account_id,'admin','등록 화면에 포함된 구조 항목을 조회자로 실행하지 않아야 한다');assert.equal(i.items[0].covered_by,cases[0].case_id,'공통 조각은 관리자 화면 TC에 연결해야 한다');
+ const cancel={items:[{inventory_item_id:'cancel',kind:'link',file:'form',line:3,screens:['form'],requests:[{method:'GET',url:'/board/list.do'}]}],pages:i.pages};assert.equal(generateCases(cancel)[0].account_id,'admin','조회 링크라도 진입할 등록 화면의 관리자 권한이 필요하다');
 });
 test('결과서 2차는 1차·원본·요약 수식을 보존하고 BLOCKED를 빈 결과+비고로 기록한다',async t=>{
  const dir=await temp(t),book=new ExcelJS.Workbook(),s=book.addWorksheet('사례');s.mergeCells('A1:O1');s.getCell('A1').value='기능 확인';
@@ -42,4 +43,23 @@ test('결과서 2차는 1차·원본·요약 수식을 보존하고 BLOCKED를 �
   await assert.rejects(writeFunctionalWorkbook({template,mapping,cases:[{...cases[0],case_id:'TC-OTHER'}],results:{records:[{...record,case_id:'TC-OTHER'}]},output:path.join(dir,'mismatch.xlsx'),m4,round:2,first}),/1차 TC와 2차 TC 불일치/,'2차 케이스를 다른 1차 행에 기록하지 않아야 한다');
  assert.equal(check.first_columns_preserved,true,'1차 열을 유지해야 한다');assert.equal(digest(await readFile(first)),firstHash,'1차 파일을 바꾸지 않아야 한다');assert.equal(digest(await readFile(template)),hash,'원본을 바꾸지 않아야 한다');
  const result=await readWorkbook(output),sheet=result.getWorksheet('사례');assert.equal(sheet.getCell('H3').value,'PASS','1차 PASS를 유지해야 한다');assert.equal(sheet.getCell('L3').value,null,'BLOCKED를 PASS/SKIP으로 바꾸지 않아야 한다');assert.match(sheet.getCell('M3').value,/BLOCKED: 식별자 없음/,'차단 사유를 비고에 남겨야 한다');assert.equal(result.getWorksheet('서버로직검증').rowCount,2,'M4 근거는 별도 시트여야 한다');assert.equal(result.getWorksheet('합계').getCell('A1').value.formula,'COUNTIF(사례!H3:H20,"PASS")','기존 요약 수식을 유지해야 한다');
+});
+
+test('소스 선택자는 id·name·해석 href·텍스트·폼 범위 텍스트 순서와 위치를 보존한다',async t=>{
+ const root=await temp(t),dir=path.join(root,'src/main/webapp');await mkdir(dir,{recursive:true});
+ await writeFile(path.join(dir,'screen.html'),'<html><title>조회</title><form id="find" action="/list.do"><button id="query" name="queryName">조회</button><input type="hidden" name="csrf"></form><a th:href="@{/list.do(page=1)}">목록</a><div th:fragment="area"></div></html>');
+ const inventory=await functionalInventory(root),button=inventory.items.find(i=>i.kind==='button'),link=inventory.items.find(i=>i.kind==='link');
+ assert.deepEqual(button.selection_candidates.map(s=>s.kind),['id','name','text','form-text'],'선언된 선택자만 승인 우선순위로 제안해야 한다');
+ assert.equal(link.selection_candidates.find(s=>s.kind==='href').value,'/list.do?page=1','정적 Thymeleaf href를 해석해야 한다');
+ assert.ok(button.selection_candidates.every(s=>s.file.endsWith('screen.html')&&s.line===1),'선택자마다 실제 선언 위치를 남겨야 한다');
+ const cases=generateCases(inventory);assert.ok(cases.every(c=>!['hidden','fragment'].includes(c.kind)),'구조 선언은 결과서 행을 만들지 않아야 한다');
+ for(const item of inventory.items.filter(i=>['hidden','fragment'].includes(i.kind)))assert.ok(cases.some(c=>c.case_id===item.covered_by),'구조 선언마다 실제 화면 TC를 연결해야 한다');
+ assert.deepEqual(compareCases(inventory,cases).missing,[],'연결된 구조 선언을 누락으로 세지 않아야 한다');
+ inventory.items.find(i=>i.kind==='hidden').covered_by='없는-TC';assert.ok(compareCases(inventory,cases).missing.length,'없는 TC로 덮은 구조 항목은 누락으로 검출해야 한다');
+});
+
+test('같은 id나 문구가 다른 화면에 있어도 핸들러 근거를 다른 소스로 바꾸지 않는다',async t=>{
+ const root=await temp(t),dir=path.join(root,'src/main/webapp');await mkdir(dir,{recursive:true});
+ await writeFile(path.join(dir,'one.html'),'<html><button id="send">조회</button><script>$("#send").on("click",function(){});</script></html>');await writeFile(path.join(dir,'two.html'),'<html><button id="send">조회</button></html>');
+ const inventory=await functionalInventory(root),handler=inventory.items.find(i=>i.kind==='handler');assert.deepEqual(handler.screens,['src/main/webapp/one.html'],'이벤트를 포함한 화면에만 연결해야 한다');assert.ok(handler.selection_candidates.every(s=>s.file.endsWith('one.html')),'다른 화면의 같은 id를 근거로 삼지 않아야 한다');
 });

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdir} from 'node:fs/promises';
 import {chromium} from 'playwright-core';
 import {save,digest} from '../trace/io.mjs';
+import {chooseSourceSelection,sourceLocator} from './selectors.mjs';
 
 const role={admin:'ADMIN',viewer:'READER'};
 class Blocked extends Error {}
@@ -24,9 +25,10 @@ export async function executeCases({base,cases,inventory,run,channel='chrome',ro
   function route(url) {return url+(url.includes('?')?'&':'?')+(url.endsWith('/board/detail.do')?`id=${state.id??1}`:url.endsWith('/board/form.do')?'':'page=1');}
   function entryFor(c) {
     const candidates=c.entries??[];
+    if(c.inventory?.data_page)return candidates.find(e=>e.url==='/board/list.do')??candidates[0];
     return candidates.find(e=>c.account_id==='admin'&&e.url.startsWith('/code/'))??candidates.find(e=>e.url==='/board/list.do')??candidates[0];
   }
-  async function perform(c,ctx,trace) {
+  async function perform(c,ctx,trace,selectionEvidence) {
     async function request(url,method='GET',form=null,expected=200) {
       const res=await ctx.request.fetch(base+url,{method,...(form?{form}:{}),maxRedirects:0,timeout:20000});
       const text=await res.text();trace.push({url:new URL(base+url).pathname+new URL(base+url).search,method,status:res.status(),expected_status:expected});
@@ -69,22 +71,32 @@ export async function executeCases({base,cases,inventory,run,channel='chrome',ro
         selectors=inventory.items.filter(i=>i.kind==='button'&&i.selector&&['loadCodes','loadCategories','refreshCategories'].includes(i.selector.value)).map(i=>i.selector);
         entry={url:selectors.some(s=>s.value==='loadCodes')?'/code/list.do':'/board/list.do'};
       }
-      requireCheck(selectors.length&&selectors.every(s=>allowed.has(`${s.kind}:${s.value}`)),'실제 id/name 선택자가 없어 UI 동작을 확인할 수 없습니다');
+      let groups=c.selection_candidates?.length?[c.selection_candidates]:selectors.map(s=>{
+        const declared=inventory.items.find(i=>i.selection_candidates?.some(a=>a.kind===s.kind&&a.value===s.value));
+        return declared?.selection_candidates??[];
+      });
+      if(c.operation==='CODES')groups=selectors.map(s=>inventory.items.find(i=>i.kind==='button'&&i.selector?.value===s.value)?.selection_candidates??[]);
+      requireCheck(groups.length&&groups.every(g=>g.length),'소스 근거가 있는 선택자가 없습니다');
       requireCheck(entry,'화면 진입 요청이 미확정입니다');
       const page=await ctx.newPage(),network=[];
       page.on('response',r=>{if(r.url().startsWith(base))network.push({url:new URL(r.url()).pathname+new URL(r.url()).search,method:r.request().method(),status:r.status()});});
       try {
-        const response=await page.goto(base+route(entry.url),{waitUntil:'networkidle',timeout:20000});
+        if(c.inventory?.data_page&&/-\s*1/.test(c.inventory.data_page))entry={...entry,url:entry.url+'?page=2'};
+        const response=await page.goto(base+(entry.url.includes('?')?entry.url:route(entry.url)),{waitUntil:'networkidle',timeout:20000});
         assert.equal(response.status(),200,'UI 진입 화면이 정상 응답해야 합니다');
         const actionStart=network.length;
-        for(const s of selectors) {
-          if(c.operation==='CODES'&&await page.locator(locator(s)).count()!==1) {
-            const declaration=inventory.items.find(i=>i.kind==='button'&&i.selector?.value===s.value);
+        for(const choices of groups) {
+          const s=choices[0];
+          if(c.operation==='CODES'&&await sourceLocator(page,s,base).count()!==1) {
+            const declaration=inventory.items.find(i=>i.kind==='button'&&i.selection_candidates?.some(a=>a.kind===s.kind&&a.value===s.value));
             const destination=inventory.pages.filter(p=>declaration?.screens.includes(p.file)).flatMap(p=>p.routes).find(r=>r.method==='GET');
             requireCheck(destination,'분류 버튼의 실제 소속 화면 진입 경로가 없습니다');
             const moved=await page.goto(base+route(destination.url),{waitUntil:'networkidle'});assert.equal(moved.status(),200,'버튼 소속 화면이 정상이어야 합니다');
           }
-          const target=page.locator(locator(s));requireCheck(await target.count()===1,'선택자가 화면에서 유일하지 않습니다');
+          const activePages=inventory.pages.filter(p=>p.routes.some(r=>r.url===new URL(page.url()).pathname.slice(new URL(base).pathname.length))).map(p=>p.file);
+          const chosen=await chooseSourceSelection(page,choices.filter(s=>!s.screens?.length||s.screens.some(f=>activePages.includes(f))),base);selectionEvidence.push({page:new URL(page.url()).pathname,selected:chosen.selection,attempts:chosen.attempts});
+          requireCheck(chosen.target,chosen.attempts.some(a=>a.count>1)?'소스 선택자가 화면/폼 범위에서 유일하지 않습니다':'소스 선택자가 현재 화면 조건에서 나타나지 않습니다');
+          const target=chosen.target;
           const tag=await target.evaluate(e=>e.tagName.toLowerCase());
           if(c.kind==='hidden') {
             assert.equal(await target.getAttribute('type'),'hidden','숨김 입력 속성이어야 합니다');
@@ -95,9 +107,27 @@ export async function executeCases({base,cases,inventory,run,channel='chrome',ro
             assert.ok((await page.evaluate(()=>document.body.innerText)).includes('게시'),'검색 결과 화면을 확인해야 합니다');
           }else {
             requireCheck(c.requests?.length,'동작의 기대 요청이 미확정입니다');
-            const [actionResponse]=await Promise.all([page.waitForResponse(r=>c.requests.some(q=>r.url().split('?')[0]===base+q.url&&r.request().method()===q.method),{timeout:10000}),target.click({timeout:7000})]);
-            assert.equal(actionResponse.status(),200,'버튼 동작의 응답이 정상이어야 합니다');
-            await page.waitForTimeout(350);
+            const ajax=c.requests.some(r=>r.url.endsWith('listJson.do'));
+            let pendingTitle=null;
+            const parent=inventory.items.find(i=>i.inventory_item_id===c.inventory?.form_id);
+            if(tag==='button'&&parent?.fields?.some(f=>f.name==='title'))for(const field of parent.fields.filter(f=>['title','content','category'].includes(f.name))){const input=page.locator(locator({kind:'name',value:field.name}));requireCheck(await input.count()===1,'등록 입력의 소스 name이 유일하지 않습니다');if(field.name==='category')await input.selectOption('FREE');else{const value=field.name==='title'?`화면${marker}${created.length}`:`화면 등록 내용 ${marker}`;await input.fill(value);if(field.name==='title')pendingTitle=value;}}
+            if(tag==='button'&&parent?.fields?.some(f=>f.name==='role'))await page.locator(locator({kind:'name',value:'role'})).selectOption(role[c.account_id]);
+            const requestsAfter=[page.waitForResponse(r=>c.requests.some(q=>r.url().split('?')[0]===base+q.url&&r.request().method()===q.method),{timeout:10000})];
+            if(!ajax)requestsAfter.push(page.waitForNavigation({waitUntil:'networkidle',timeout:15000}));
+            requestsAfter.push(target.click({timeout:7000}));
+            const [actionResponse,arrived]=await Promise.all(requestsAfter);
+            if(pendingTitle&&actionResponse.status()===302){const id=/[?&]id=(\d+)/.exec(actionResponse.headers().location??'')?.[1];if(id)created.push({table:'BOARD',key:{ID:+id},expected_title:pendingTitle,operation:actionResponse.url().split('?')[0].endsWith('/update.do')?'UPDATE':'INSERT'});}
+            const expectedCode=actionResponse.request().method()==='POST'&&!ajax?302:200;
+            assert.equal(actionResponse.status(),expectedCode,'화면 동작의 응답이 정상이어야 합니다');
+            if(!ajax){
+              assert.equal(arrived.status(),200,'이동한 업무 화면이 정상 응답해야 합니다');
+              const destination=new URL(page.url()).pathname.slice(new URL(base).pathname.length),pageInfo=inventory.pages.find(p=>p.routes.some(r=>r.url===destination));
+              requireCheck(pageInfo?.markers.length,'이동한 업무 화면의 소스 기대값이 미확정입니다');
+              const text=await page.evaluate(()=>document.body.innerText),title=await page.title();assert.ok(text.trim().length&&pageInfo.markers.some(m=>text.includes(m)||title.includes(m)),'이동한 화면의 업무 제목/내용이 일치해야 합니다');
+              if(pendingTitle){requireCheck(new URL(page.url()).searchParams.get('id'),'화면 등록 결과 키가 없습니다');assert.ok(text.includes(pendingTitle),'화면에서 저장한 제목을 재조회해야 합니다');}
+              if(c.requests.some(r=>r.url==='/auth/logout.do'))delete contexts[c.account_id];
+              continue;
+            }
             const statusIds=['codeStatus','categoryStatus'].filter(id=>allowed.has(`id:${id}`));
             let status='';for(const id of statusIds){const loc=page.locator(`[id="${id}"]`);if(await loc.count()===1)status+=await loc.innerText();}
             requireCheck(statusIds.length,'화면 결과를 확인할 실제 id가 없습니다');
@@ -107,7 +137,7 @@ export async function executeCases({base,cases,inventory,run,channel='chrome',ro
         }
         requireCheck(network.length>0,'네트워크 증거가 없습니다');
         const expected=c.requests??[];
-        if(c.kind!=='hidden')assert.ok(expected.length&&expected.some(r=>network.slice(actionStart).some(n=>n.method===r.method&&new URL(base+r.url).pathname===n.url.split('?')[0]&&n.status===200)),'동작 이후의 기대 요청 URL·메서드·응답을 확인해야 합니다');
+        if(c.kind!=='hidden')assert.ok(expected.length&&expected.some(r=>network.slice(actionStart).some(n=>n.method===r.method&&new URL(base+r.url).pathname===n.url.split('?')[0]&&n.status===(r.method==='POST'&&!r.url.endsWith('listJson.do')?302:200))),'동작 이후의 기대 요청 URL·메서드·응답을 확인해야 합니다');
         await mkdir(path.join(run,'evidence/screenshots'),{recursive:true});
         await page.screenshot({path:path.join(run,'evidence/screenshots',`${c.case_id}-${channel}.png`),fullPage:true});
         trace.push(...network);return '화면 결과와 네트워크 요청을 함께 확인';
@@ -135,12 +165,13 @@ export async function executeCases({base,cases,inventory,run,channel='chrome',ro
   try {
     const ordered=[...cases.filter(c=>['CREATE','UPDATE'].includes(c.operation)),...cases.filter(c=>!['CREATE','UPDATE'].includes(c.operation))];
     for(const c of ordered) {
-      const trace=[],start=new Date().toISOString(),createdBefore=created.length;let result;
+      const trace=[],selectionEvidence=[],start=new Date().toISOString(),createdBefore=created.length;let result;
       if(c.mode==='SKIP')result=c.inventory?.download||c.requests?.some(r=>/\/(?:delete|remove|download)\.do$/.test(r.url))?{status:'SKIP',reason:'삭제/다운로드는 호출하지 않음'}:{status:'BLOCKED',reason:'삭제/다운로드 외 항목은 SKIP으로 처리할 수 없습니다'};
-      else try{const ctx=await context(c.account_id);result={status:'PASS',reason:await perform(c,ctx,trace)};}catch(e){result={status:e instanceof Blocked?'BLOCKED':'FAIL',classification:e instanceof Blocked?'미확정':'제품 결함 또는 자동화 오탐 검토 필요',reason:e.message.split('\n')[0].slice(0,400)};}
+      else try{const ctx=await context(c.account_id);result={status:'PASS',reason:await perform(c,ctx,trace,selectionEvidence)};}catch(e){result={status:e instanceof Blocked?'BLOCKED':'FAIL',classification:e instanceof Blocked?'미확정':'제품 결함 또는 자동화 오탐 검토 필요',reason:e.message.split('\n')[0].slice(0,400)};}
+      if(selectionEvidence.length)result.reason+='; 선택 근거: '+selectionEvidence.map(e=>e.selected?`${e.selected.kind}=${e.selected.value} (${e.selected.file}:${e.selected.line}, 일치 ${e.selected.count}개)`:e.attempts.map(a=>`${a.kind}=${a.value} (${a.file}:${a.line}, 일치 ${a.count??'미확정'}개)`).join(', ')).join(' / ');
       const touched=created.slice(createdBefore);if(touched.length)result.reason+=`; 확인 테이블 BOARD, ID=${[...new Set(touched.map(r=>r.key.ID))].join(',')}`;
       await save(path.join(run,'evidence/requests',`${c.case_id}-${channel}.json`),{case_id:c.case_id,channel,round,expected:c.expected_requests??[],actual:trace});
-      records.push({case_id:c.case_id,inventory_item_id:c.inventory_item_id,mode:c.mode,account_id:c.account_id,round,channel,started_at:start,...result,request_evidence:`evidence/requests/${c.case_id}-${channel}.json`,screenshot:c.mode==='AUTO-UI'?`evidence/screenshots/${c.case_id}-${channel}-final.png`:null});
+      records.push({case_id:c.case_id,inventory_item_id:c.inventory_item_id,mode:c.mode,account_id:c.account_id,round,channel,started_at:start,...result,selection_evidence:selectionEvidence,request_evidence:`evidence/requests/${c.case_id}-${channel}.json`,screenshot:c.mode==='AUTO-UI'?`evidence/screenshots/${c.case_id}-${channel}-final.png`:null});
     }
   }finally{for(const c of Object.values(contexts))await c.close();await browser.close();}
   await save(path.join(run,`results-${channel}.json`),{round,channel,records,created,cleanup_performed:false});
