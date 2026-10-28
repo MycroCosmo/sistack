@@ -1,0 +1,277 @@
+{
+  "scope": "프로그램 행 선정 보정. Claude 일반 양식의 형식 일반성 검증이며 현장 검증 아님",
+  "source_revision": "265f5adc4c0d1cd1aa997d527c65d146c4bdde33",
+  "projects": {
+    "legacy-board": {
+      "run_id": "m5a-approved-program-list-v2",
+      "previous_rows": 34,
+      "rows": 25,
+      "delta": -9,
+      "by_type": {
+        "화면": 6,
+        "클래스": 8,
+        "공통": 2,
+        "SQL": 9
+      },
+      "excluded": [
+        {
+          "identity": "ef3e0f1e2a4ef5cff66bc52903172ce8927e71d1c9d47533b0eeba13ebf8e6aa",
+          "name": "kr.sistack.board.common.Pagination",
+          "file": "src/main/java/kr/sistack/board/common/Pagination.java",
+          "line": 3,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(8/8); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "82ec6ac5364e94a5a2dd6ea365aa9da00b2862b2768d454b42dde77fbfda300b",
+          "name": "kr.sistack.board.domain.Board",
+          "file": "src/main/java/kr/sistack/board/domain/Board.java",
+          "line": 5,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(12/12); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "3c8b4fc5197869ffd232af0aaeb0db8daa4009ba402143340e2d75e709a5e951",
+          "name": "kr.sistack.board.domain.BoardSearch",
+          "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+          "line": 7,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(13/13); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "0e9a47725ffa3c377859196594ca27267af0f9c9ad005240b29b4989c6d6e2b8",
+          "name": "kr.sistack.board.domain.CommonCode",
+          "file": "src/main/java/kr/sistack/board/domain/CommonCode.java",
+          "line": 3,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(4/4); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "328d895ad316464e18b64736ff292136e20172fd47c1d8db02a7f0a5acf1b674",
+          "name": "kr.sistack.board.domain.Menu",
+          "file": "src/main/java/kr/sistack/board/domain/Menu.java",
+          "line": 3,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(4/4); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "714c8697c51cb0a46ce946161dc6d53037fc999050a65235ef310ef5755efd03",
+          "name": "kr.sistack.board.service.NotFoundException",
+          "file": "src/main/java/kr/sistack/board/service/NotFoundException.java",
+          "line": 3,
+          "kind": "exception",
+          "action": "exclude",
+          "reason": "예외 기반 타입의 상속 관계",
+          "status": "CONFIRMED",
+          "into": []
+        },
+        {
+          "identity": "dd6c95199c269ef65b44505ae88f2f99b5aa5f3bc70bac1f3d331e1005c9c38d",
+          "name": "kr.sistack.board.web.UserSession",
+          "file": "src/main/java/kr/sistack/board/web/UserSession.java",
+          "line": 5,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(2/2); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "b69787c464496235f06540293fc55f3580f546ad225958fc502527824959d432",
+          "name": "kr.sistack.board.service.BoardService",
+          "file": "src/main/java/kr/sistack/board/service/BoardService.java",
+          "line": 7,
+          "kind": "service_interface",
+          "action": "merge",
+          "reason": "Service 구현체의 실제 상속/implements 관계로 구현체 행에 병합",
+          "status": "CONFIRMED",
+          "into": [
+            "bd627e8b1afd9bd2a29acd1a360020f2116a920665af85d6d53b3778bc3e25d8"
+          ]
+        },
+        {
+          "identity": "6dce63581259dbffb950cc3db8bd7ecfe1d7ea949c6909a7c75081462ba748f1",
+          "name": "kr.sistack.board.service.CommonCodeService",
+          "file": "src/main/java/kr/sistack/board/service/CommonCodeService.java",
+          "line": 7,
+          "kind": "service_interface",
+          "action": "merge",
+          "reason": "Service 구현체의 실제 상속/implements 관계로 구현체 행에 병합",
+          "status": "CONFIRMED",
+          "into": [
+            "ea9676a89dd3f3266e1afbf31c62cafe132a00f2fc5fe26fb334950297937d75"
+          ]
+        }
+      ],
+      "unknown_cells": 226,
+      "proposed_names": 6,
+      "status": "PARTIAL",
+      "preserved": true,
+      "values_verified": true,
+      "original_unchanged": true,
+      "v1_hashes_unchanged": true,
+      "interface_names_visible": true,
+      "template_features": {
+        "sheets": 1,
+        "merges": 7,
+        "images": 0,
+        "validations": 200,
+        "conditional_formats": 0,
+        "notes": 1,
+        "formulas": 0
+      },
+      "warnings": []
+    },
+    "legacy-board-thymeleaf": {
+      "run_id": "m5a-approved-program-list-v2",
+      "previous_rows": 35,
+      "rows": 26,
+      "delta": -9,
+      "by_type": {
+        "화면": 7,
+        "클래스": 8,
+        "공통": 2,
+        "SQL": 9
+      },
+      "excluded": [
+        {
+          "identity": "ef3e0f1e2a4ef5cff66bc52903172ce8927e71d1c9d47533b0eeba13ebf8e6aa",
+          "name": "kr.sistack.board.common.Pagination",
+          "file": "src/main/java/kr/sistack/board/common/Pagination.java",
+          "line": 3,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(8/8); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "82ec6ac5364e94a5a2dd6ea365aa9da00b2862b2768d454b42dde77fbfda300b",
+          "name": "kr.sistack.board.domain.Board",
+          "file": "src/main/java/kr/sistack/board/domain/Board.java",
+          "line": 5,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(12/12); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "3c8b4fc5197869ffd232af0aaeb0db8daa4009ba402143340e2d75e709a5e951",
+          "name": "kr.sistack.board.domain.BoardSearch",
+          "file": "src/main/java/kr/sistack/board/domain/BoardSearch.java",
+          "line": 7,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(13/13); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "0e9a47725ffa3c377859196594ca27267af0f9c9ad005240b29b4989c6d6e2b8",
+          "name": "kr.sistack.board.domain.CommonCode",
+          "file": "src/main/java/kr/sistack/board/domain/CommonCode.java",
+          "line": 3,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(4/4); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "328d895ad316464e18b64736ff292136e20172fd47c1d8db02a7f0a5acf1b674",
+          "name": "kr.sistack.board.domain.Menu",
+          "file": "src/main/java/kr/sistack/board/domain/Menu.java",
+          "line": 3,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(4/4); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "714c8697c51cb0a46ce946161dc6d53037fc999050a65235ef310ef5755efd03",
+          "name": "kr.sistack.board.service.NotFoundException",
+          "file": "src/main/java/kr/sistack/board/service/NotFoundException.java",
+          "line": 3,
+          "kind": "exception",
+          "action": "exclude",
+          "reason": "예외 기반 타입의 상속 관계",
+          "status": "CONFIRMED",
+          "into": []
+        },
+        {
+          "identity": "dd6c95199c269ef65b44505ae88f2f99b5aa5f3bc70bac1f3d331e1005c9c38d",
+          "name": "kr.sistack.board.web.UserSession",
+          "file": "src/main/java/kr/sistack/board/web/UserSession.java",
+          "line": 5,
+          "kind": "dto",
+          "action": "exclude",
+          "reason": "자료 필드와 getter/setter 중심(2/2); 생성자를 제외한 데이터 전달/보조 타입으로 분류",
+          "status": "LIKELY",
+          "into": []
+        },
+        {
+          "identity": "b69787c464496235f06540293fc55f3580f546ad225958fc502527824959d432",
+          "name": "kr.sistack.board.service.BoardService",
+          "file": "src/main/java/kr/sistack/board/service/BoardService.java",
+          "line": 7,
+          "kind": "service_interface",
+          "action": "merge",
+          "reason": "Service 구현체의 실제 상속/implements 관계로 구현체 행에 병합",
+          "status": "CONFIRMED",
+          "into": [
+            "bd627e8b1afd9bd2a29acd1a360020f2116a920665af85d6d53b3778bc3e25d8"
+          ]
+        },
+        {
+          "identity": "6dce63581259dbffb950cc3db8bd7ecfe1d7ea949c6909a7c75081462ba748f1",
+          "name": "kr.sistack.board.service.CommonCodeService",
+          "file": "src/main/java/kr/sistack/board/service/CommonCodeService.java",
+          "line": 7,
+          "kind": "service_interface",
+          "action": "merge",
+          "reason": "Service 구현체의 실제 상속/implements 관계로 구현체 행에 병합",
+          "status": "CONFIRMED",
+          "into": [
+            "ea9676a89dd3f3266e1afbf31c62cafe132a00f2fc5fe26fb334950297937d75"
+          ]
+        }
+      ],
+      "unknown_cells": 235,
+      "proposed_names": 7,
+      "status": "PARTIAL",
+      "preserved": true,
+      "values_verified": true,
+      "original_unchanged": true,
+      "v1_hashes_unchanged": true,
+      "interface_names_visible": true,
+      "template_features": {
+        "sheets": 1,
+        "merges": 7,
+        "images": 0,
+        "validations": 200,
+        "conditional_formats": 0,
+        "notes": 1,
+        "formulas": 0
+      },
+      "warnings": []
+    }
+  },
+  "template_sha256": "b8bf4c745e6f867bbba90fc652eb3113bd033686f77a6295d230ca16ff40f861"
+}

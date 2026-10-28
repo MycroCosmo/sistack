@@ -1,0 +1,52 @@
+{
+  "node": "v22.17.0",
+  "dependencies": [
+    {
+      "name": "exceljs",
+      "version": "4.4.0",
+      "license": "MIT",
+      "approval": "기존 승인"
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.64.1",
+      "license": "Apache-2.0",
+      "approval": "기존 승인"
+    }
+  ],
+  "java": {
+    "version": "17.0.14",
+    "vendor": "Corretto",
+    "version_command": "PASS"
+  },
+  "maven": {
+    "version": "3.9.10",
+    "version_command_exit": 0
+  },
+  "browsers": [
+    {
+      "name": "Chrome",
+      "installed_version": "156.0.8078.48",
+      "inspection": "file metadata",
+      "launch_tested": false
+    },
+    {
+      "name": "Edge",
+      "installed_version": "156.0.4314.50",
+      "inspection": "file metadata",
+      "launch_tested": false
+    }
+  ],
+  "local_database": {
+    "scope": "test",
+    "engine": "H2",
+    "mode": "memory",
+    "durable_data_retention": "실행 전 준비 필요"
+  },
+  "tester_id": null,
+  "round": null,
+  "server_started": false,
+  "browser_started": false,
+  "tc_executed": false,
+  "browser_downloaded": false
+}
