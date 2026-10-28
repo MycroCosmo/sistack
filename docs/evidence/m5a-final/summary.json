@@ -1,0 +1,37 @@
+{
+  "source_revision": "8b9d05f2416ca883025fea87d1e49f34b0f05479",
+  "documents": {
+    "program-list": {
+      "rows": 11,
+      "status": "PARTIAL",
+      "preserved": true,
+      "values_verified": true,
+      "original_unchanged": true,
+      "missing": 34
+    },
+    "table-spec": {
+      "rows": 12,
+      "status": "PARTIAL",
+      "preserved": true,
+      "values_verified": true,
+      "original_unchanged": true,
+      "missing": 0
+    }
+  },
+  "scope": "공개 합성 테스트베드. 사용자 실제 양식 미검증; 실제 Excel 표시/재계산 미검증",
+  "roundtrip": {
+    "preserved": true,
+    "values_verified": true,
+    "original_unchanged": true,
+    "features": {
+      "sheets": 2,
+      "merges": 3,
+      "images": 1,
+      "validations": 1,
+      "conditional_formats": 1,
+      "notes": 1,
+      "formulas": 2
+    },
+    "warnings": []
+  }
+}

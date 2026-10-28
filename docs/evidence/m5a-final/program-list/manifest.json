@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "m5a-final-program-list",
+  "skill": "si-docs",
+  "created_at": "2026-10-28T05:20:25.587Z",
+  "source_revision": "8b9d05f2416ca883025fea87d1e49f34b0f05479",
+  "status": "PARTIAL",
+  "inputs": {
+    "document_kind": "program-list",
+    "template_sha256": "d8f5d6c217de483277759b8ce0b8a2eb5eb7ec05fcf5c262f567c084afa31805"
+  },
+  "evidence": [
+    {
+      "path": "evidence/data.json",
+      "level": 2,
+      "description": "소스 파일/라인과 표준 JSON"
+    },
+    {
+      "path": "evidence/verification.json",
+      "level": 4,
+      "description": "xlsx 저장·재읽기 값/양식/원본 해시 검사"
+    }
+  ],
+  "unverified": [
+    "범위: endpoint당 1행. 런타임 도달·프로그램 ID·업무명 미확인; Service 표시는 클래스명 관례",
+    "인덱서가 해석하지 못한 동적 연결은 포함하지 않음",
+    "미확인 빈 칸 34개 (verification.json 참조)"
+  ],
+  "next_actions": [
+    "프로그램 ID·업무명·사용자 양식과 미확인 값을 사람이 검토"
+  ]
+}

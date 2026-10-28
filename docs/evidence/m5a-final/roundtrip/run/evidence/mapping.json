@@ -1,0 +1,23 @@
+{
+  "template": "<사용자 원본 양식>",
+  "sheet": "테이블 정의서",
+  "header_row": 4,
+  "start_row": 5,
+  "end_row": 204,
+  "columns": {
+    "table": "A",
+    "table_name": "B",
+    "column": "C",
+    "column_name": "D",
+    "data_type": "E",
+    "nullable": "F",
+    "primary_key": "G",
+    "foreign_key": "H",
+    "default_value": "I",
+    "evidence": "J",
+    "status": "K"
+  },
+  "id_rule": null,
+  "fixed": {},
+  "confirmed": true
+}

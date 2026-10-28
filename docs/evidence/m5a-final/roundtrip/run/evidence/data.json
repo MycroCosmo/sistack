@@ -1,0 +1,277 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "table-spec",
+  "source_revision": "8b9d05f2416ca883025fea87d1e49f34b0f05479",
+  "source_files": {
+    "src/main/resources/db/oracle/ddl.sql": "2335077f19afe3f217e81e8abeb7d975e828e75441fafa01d8508febbac3f31a"
+  },
+  "rows": [
+    {
+      "values": {
+        "table": "COMMON_CODE",
+        "table_name": "게시판 분류 공통코드",
+        "column": "CODE",
+        "column_name": "분류 코드",
+        "data_type": "VARCHAR2(20)",
+        "nullable": "N",
+        "primary_key": "Y",
+        "foreign_key": "",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 2
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "COMMON_CODE",
+        "table_name": "게시판 분류 공통코드",
+        "column": "LABEL",
+        "column_name": "분류명",
+        "data_type": "VARCHAR2(100)",
+        "nullable": "N",
+        "primary_key": "N",
+        "foreign_key": "",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 3
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "APP_MENU",
+        "table_name": "권한별 메뉴",
+        "column": "ROLE_KEY",
+        "column_name": "권한 코드",
+        "data_type": "VARCHAR2(20)",
+        "nullable": "N",
+        "primary_key": "N",
+        "foreign_key": "",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 7
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "APP_MENU",
+        "table_name": "권한별 메뉴",
+        "column": "MENU_ORDER",
+        "column_name": "메뉴 순서",
+        "data_type": "NUMBER(5)",
+        "nullable": "N",
+        "primary_key": "N",
+        "foreign_key": "",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 8
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "APP_MENU",
+        "table_name": "권한별 메뉴",
+        "column": "LABEL",
+        "column_name": "메뉴명",
+        "data_type": "VARCHAR2(100)",
+        "nullable": "N",
+        "primary_key": "N",
+        "foreign_key": "",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 9
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "APP_MENU",
+        "table_name": "권한별 메뉴",
+        "column": "URL",
+        "column_name": "메뉴 주소",
+        "data_type": "VARCHAR2(200)",
+        "nullable": "N",
+        "primary_key": "N",
+        "foreign_key": "",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 10
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "BOARD",
+        "table_name": "게시판",
+        "column": "ID",
+        "column_name": "게시글 번호",
+        "data_type": "NUMBER(19)",
+        "nullable": "N",
+        "primary_key": "Y",
+        "foreign_key": "",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 16
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "BOARD",
+        "table_name": "게시판",
+        "column": "TITLE",
+        "column_name": "제목",
+        "data_type": "VARCHAR2(200)",
+        "nullable": "N",
+        "primary_key": "N",
+        "foreign_key": "",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 17
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "BOARD",
+        "table_name": "게시판",
+        "column": "CONTENT",
+        "column_name": "내용",
+        "data_type": "VARCHAR2(4000)",
+        "nullable": "N",
+        "primary_key": "N",
+        "foreign_key": "",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 18
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "BOARD",
+        "table_name": "게시판",
+        "column": "AUTHOR",
+        "column_name": "작성자명",
+        "data_type": "VARCHAR2(100)",
+        "nullable": "N",
+        "primary_key": "N",
+        "foreign_key": "",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 19
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "BOARD",
+        "table_name": "게시판",
+        "column": "CATEGORY",
+        "column_name": "게시판 분류 코드",
+        "data_type": "VARCHAR2(20)",
+        "nullable": "N",
+        "primary_key": "N",
+        "foreign_key": "COMMON_CODE(CODE)",
+        "default_value": ""
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 20
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    },
+    {
+      "values": {
+        "table": "BOARD",
+        "table_name": "게시판",
+        "column": "CREATED_AT",
+        "column_name": "등록 일시",
+        "data_type": "TIMESTAMP",
+        "nullable": "N",
+        "primary_key": "N",
+        "foreign_key": "",
+        "default_value": "CURRENT_TIMESTAMP"
+      },
+      "evidence": [
+        {
+          "file": "src/main/resources/db/oracle/ddl.sql",
+          "line": 21
+        }
+      ],
+      "unverified": [],
+      "status": "CONFIRMED",
+      "reason": "선언 및 인덱스 연결 근거"
+    }
+  ],
+  "unverified": [
+    "저장소 DDL/제공 CSV만 분석; 실제 DB·ALTER 이력·운영 스키마 미확인"
+  ]
+}

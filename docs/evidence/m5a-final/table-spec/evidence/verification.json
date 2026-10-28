@@ -1,0 +1,26 @@
+{
+  "status": "PARTIAL",
+  "rows": 12,
+  "mapped_columns": 11,
+  "missing": [],
+  "warnings": [],
+  "limitations": [
+    "수식은 식과 캐시를 보존하며 계산하지 않음. Excel/LibreOffice 실제 표시·재계산 검증은 별도",
+    "피벗·차트·매크로·전자서명·외부 연결·도형·스레드 댓글·고급 확장은 보존 보장 안 함. 발견 시 PARTIAL 경고",
+    "검증 범위: 기본 드롭다운, 기본 조건부 서식, 병합, PNG 이미지, 셀 메모, 수식, 셀 서식, 다른 시트. 모든 OOXML 변형을 보장하지 않음",
+    "행 삽입/이동·자동 범위 확장 없음. 사용자 양식은 충분한 빈 입력 행과 end_row를 명시해야 함"
+  ],
+  "original_sha256": "4f1796852a8c2ba5cb5eb8447f0bf1584c67be99b0453601b2340f493eb3d282",
+  "original_unchanged": true,
+  "preserved": true,
+  "values_verified": true,
+  "template_features": {
+    "sheets": 1,
+    "merges": 2,
+    "images": 0,
+    "validations": 0,
+    "conditional_formats": 0,
+    "notes": 0,
+    "formulas": 0
+  }
+}

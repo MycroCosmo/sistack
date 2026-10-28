@@ -1,0 +1,25 @@
+{
+  "scope": "M5a 기본 문서 2종·합성 왕복 양식·독립 설치. 실제 사용자 양식은 GATE 대기",
+  "source_revision": "8b9d05f2416ca883025fea87d1e49f34b0f05479",
+  "command": "npm.cmd test",
+  "tests": 173,
+  "passed": 173,
+  "failed": 0,
+  "new_m5a_tests": 13,
+  "skills_validated": 5,
+  "shared_copies": "PASS",
+  "expected_source_checks": "PASS",
+  "standalone_offline_install_and_cli": "PASS",
+  "preservation_fixture_workbooks": 1,
+  "preservation_fixture_sheets": 2,
+  "highlight_regression_before": "FAIL 1/1",
+  "highlight_and_roundtrip_after": "PASS 2/2",
+  "m4_tracked_results_changed": 0,
+  "unverified": [
+    "실제 사용자 양식",
+    "Excel 앱의 표시와 수식 재계산",
+    "임의 고급 OOXML 기능 전체의 보존",
+    "buffers@0.1.1 배포본의 라이선스 표시",
+    "M5b (미시작)"
+  ]
+}

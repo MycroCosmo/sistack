@@ -1,0 +1,22 @@
+{
+  "template": "<사용자 원본 양식>",
+  "sheet": "프로그램 목록",
+  "header_row": 4,
+  "start_row": 5,
+  "end_row": 204,
+  "columns": {
+    "program_id": "A",
+    "program_name": "B",
+    "url": "C",
+    "http_method": "D",
+    "screen": "E",
+    "controller": "F",
+    "service": "G",
+    "mapper": "H",
+    "evidence": "I",
+    "status": "J"
+  },
+  "id_rule": null,
+  "fixed": {},
+  "confirmed": true
+}

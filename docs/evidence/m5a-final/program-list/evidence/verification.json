@@ -1,0 +1,163 @@
+{
+  "status": "PARTIAL",
+  "rows": 11,
+  "mapped_columns": 10,
+  "missing": [
+    {
+      "row": 5,
+      "field": "program_id"
+    },
+    {
+      "row": 5,
+      "field": "program_name"
+    },
+    {
+      "row": 5,
+      "field": "service"
+    },
+    {
+      "row": 5,
+      "field": "mapper"
+    },
+    {
+      "row": 6,
+      "field": "program_id"
+    },
+    {
+      "row": 6,
+      "field": "program_name"
+    },
+    {
+      "row": 6,
+      "field": "screen"
+    },
+    {
+      "row": 6,
+      "field": "service"
+    },
+    {
+      "row": 6,
+      "field": "mapper"
+    },
+    {
+      "row": 7,
+      "field": "program_id"
+    },
+    {
+      "row": 7,
+      "field": "program_name"
+    },
+    {
+      "row": 7,
+      "field": "screen"
+    },
+    {
+      "row": 7,
+      "field": "service"
+    },
+    {
+      "row": 7,
+      "field": "mapper"
+    },
+    {
+      "row": 8,
+      "field": "program_id"
+    },
+    {
+      "row": 8,
+      "field": "program_name"
+    },
+    {
+      "row": 9,
+      "field": "program_id"
+    },
+    {
+      "row": 9,
+      "field": "program_name"
+    },
+    {
+      "row": 10,
+      "field": "program_id"
+    },
+    {
+      "row": 10,
+      "field": "program_name"
+    },
+    {
+      "row": 11,
+      "field": "program_id"
+    },
+    {
+      "row": 11,
+      "field": "program_name"
+    },
+    {
+      "row": 11,
+      "field": "screen"
+    },
+    {
+      "row": 12,
+      "field": "program_id"
+    },
+    {
+      "row": 12,
+      "field": "program_name"
+    },
+    {
+      "row": 12,
+      "field": "screen"
+    },
+    {
+      "row": 13,
+      "field": "program_id"
+    },
+    {
+      "row": 13,
+      "field": "program_name"
+    },
+    {
+      "row": 13,
+      "field": "screen"
+    },
+    {
+      "row": 14,
+      "field": "program_id"
+    },
+    {
+      "row": 14,
+      "field": "program_name"
+    },
+    {
+      "row": 15,
+      "field": "program_id"
+    },
+    {
+      "row": 15,
+      "field": "program_name"
+    },
+    {
+      "row": 15,
+      "field": "screen"
+    }
+  ],
+  "warnings": [],
+  "limitations": [
+    "수식은 식과 캐시를 보존하며 계산하지 않음. Excel/LibreOffice 실제 표시·재계산 검증은 별도",
+    "피벗·차트·매크로·전자서명·외부 연결·도형·스레드 댓글·고급 확장은 보존 보장 안 함. 발견 시 PARTIAL 경고",
+    "검증 범위: 기본 드롭다운, 기본 조건부 서식, 병합, PNG 이미지, 셀 메모, 수식, 셀 서식, 다른 시트. 모든 OOXML 변형을 보장하지 않음",
+    "행 삽입/이동·자동 범위 확장 없음. 사용자 양식은 충분한 빈 입력 행과 end_row를 명시해야 함"
+  ],
+  "original_sha256": "d8f5d6c217de483277759b8ce0b8a2eb5eb7ec05fcf5c262f567c084afa31805",
+  "original_unchanged": true,
+  "preserved": true,
+  "values_verified": true,
+  "template_features": {
+    "sheets": 1,
+    "merges": 2,
+    "images": 0,
+    "validations": 0,
+    "conditional_formats": 0,
+    "notes": 0,
+    "formulas": 0
+  }
+}
