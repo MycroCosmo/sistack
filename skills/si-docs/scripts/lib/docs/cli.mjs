@@ -6,8 +6,8 @@ import { fillRun } from './run.mjs';
 
 export async function main(args = process.argv.slice(2)) {
   const [command, ...rest] = args;
-  if (command === 'extract-program-list' && [2,3].includes(rest.length)) {
-    const doc = await extractPrograms(rest[0], {rowMode:rest[2]??'separate'}); await save(rest[1], doc); return `${doc.rows.length}행 추출`;
+  if (command === 'extract-program-list' && [2,3,4].includes(rest.length)) {
+    const doc = await extractPrograms(rest[0], {rowMode:rest[2]??'separate',settingsFile:rest[3]??'sistack-docs.json'}); await save(rest[1], doc); return `${doc.rows.length}행 추출`;
   }
   if (command === 'extract-table-spec' && rest.length === 3) {
     const index = await buildIndex(rest[0]);
@@ -23,5 +23,5 @@ export async function main(args = process.argv.slice(2)) {
   if (command === 'fill-template' && [4,5].includes(rest.length)) {
     const result = await fillRun(rest[0], await json(rest[1]), await json(rest[2]), rest[3], rest[4]?{settingsFile:rest[4]}:{}); return `${result.status}: ${result.rows}행 (${result.run})`;
   }
-  throw new Error('사용법: si-docs.mjs extract-program-list project output.json [separate|endpoint] | extract-table-spec project sources.json output.json | default-template kind output.xlsx mapping.json | propose-mapping kind template sheet header start end mapping.json | fill-template project data.json mapping.json run-id [settings-relative-path]');
+  throw new Error('사용법: si-docs.mjs extract-program-list project output.json [separate|endpoint] [settings-relative-path] | extract-table-spec project sources.json output.json | default-template kind output.xlsx mapping.json | propose-mapping kind template sheet header start end mapping.json | fill-template project data.json mapping.json run-id [settings-relative-path]');
 }

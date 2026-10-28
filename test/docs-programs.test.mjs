@@ -17,7 +17,7 @@ async function template(dir) {
   sheet.getCell('E1').value = {formula:'1+2',result:3};
   for(let c=1;c<=7;c++)sheet.getCell(3,c).value=`항목 ${c}`;
   for(let r=4;r<=90;r++) {
-    sheet.getCell(`B${r}`).dataValidation={type:'list',allowBlank:true,formulae:['"화면,클래스,SQL"']};
+    sheet.getCell(`B${r}`).dataValidation={type:'list',allowBlank:true,formulae:['"화면,클래스,SQL,공통"']};
     for(let c=1;c<=7;c++)sheet.getCell(r,c).alignment={wrapText:true};
   }
   const file=path.join(dir,'template.xlsx'); await writeWorkbook(file,book);
@@ -27,10 +27,10 @@ async function template(dir) {
 test('프로그램을 화면 파일·클래스·SQL별 한 행으로 나누고 공유 항목과 선택자 노드를 중복 생성하지 않는다', async () => {
   for(const project of ['legacy-board','legacy-board-thymeleaf']) {
     const doc=await extractPrograms(`examples/${project}`);
-    assert.equal(doc.schema_version,'1.1.0','분리 행 스키마를 표시해야 한다');
+    assert.equal(doc.schema_version,'1.2.0','행 선정 규칙을 포함한 분리 행 스키마를 표시해야 한다');
     assert.equal(new Set(doc.rows.map(r=>r.identity)).size,doc.rows.length,'공유 프로그램은 한 행이어야 한다');
     const classes=doc.rows.filter(r=>r.values.program_type==='클래스'), sql=doc.rows.filter(r=>r.values.program_type==='SQL');
-    assert.equal(classes.length,19,'클래스/인터페이스 소스 19개를 각각 한 행으로 남겨야 한다');
+    assert.equal(classes.length,8,'기본 제외·Service 병합·공통 재분류 후 클래스 8개를 남겨야 한다');
     assert.equal(sql.length,9,'SQL 선언 9개가 요청 수와 무관하게 한 행씩 있어야 한다');
     assert.equal(classes.filter(r=>r.values.related_sources.includes('BoardController#')).length,1,'공유 Controller는 한 행이어야 한다');
     assert.equal(sql.filter(r=>r.values.mapper?.endsWith('.selectList')).length,3,'서로 다른 네임스페이스의 동명 SQL은 합치지 않아야 한다');
@@ -73,6 +73,9 @@ test('복합 열·상단 병합 입력을 채우고 미확인 및 LIKELY 셀만 
   assert.notEqual(sheet.getCell(`E${4+cls}`).fill.fgColor?.argb,'FFFFE699','클래스의 URL 해당 없음은 미확인과 구별해야 한다');
   assert.ok(result.missing.some(m=>m.address==='B1'),'상단 미확인 셀 주소를 보고해야 한다');
   assert.ok(result.suggested.length>0,'LIKELY 제안 셀을 별도로 보고해야 한다');
+  const service=doc.rows.findIndex(r=>r.interface_sources?.some(s=>s.name.endsWith('.BoardService')));
+  assert.ok(service>=0,'Service 구현체 병합 행이 있어야 한다');
+  assert.match(sheet.getCell(`F${4+service}`).value,/인터페이스: BoardService/,'엑셀 관련 소스에 인터페이스를 숨기지 않아야 한다');
 });
 
 test('메타데이터·작성일·프로그램 ID는 설정 파일 값만 사용하고 없으면 비운다', async t => {
@@ -81,9 +84,11 @@ test('메타데이터·작성일·프로그램 ID는 설정 파일 값만 사용
   // 실행 가능한 소스 사본을 만들어 fillRun의 설정 파일 경계를 검증한다.
   await mkdir(path.join(project,'src/main/webapp'),{recursive:true});
   await writeFile(path.join(project,'src/main/webapp/page.jsp'),'<title>설정 검증</title>');
-  const local=await extractPrograms(project);
+  let local=await extractPrograms(project);
   await writeFile(path.join(project,'sistack-docs.json'),JSON.stringify({meta:{business_name:'합성 입력',created_date:'2026-01-02'},id_rule:{prefix:'P-',start:7,width:3}}));
   map.cells['meta.created_date']='F1';
+  await assert.rejects(fillRun(project,local,map,'stale-config'),/설정 변경/,'선정 뒤 설정이 바뀌면 재추출을 요구해야 한다');
+  local=await extractPrograms(project);
   const run=await fillRun(project,local,map,'config-check');
   const sheet=(await readWorkbook(path.join(run.run,'program-list.xlsx'))).getWorksheet(map.sheet);
   assert.equal(sheet.getCell('B1').value,'합성 입력','설정 파일 사업명만 사용해야 한다');

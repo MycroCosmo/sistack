@@ -1,4 +1,9 @@
 {
   "meta": {},
-  "id_rule": null
+  "id_rule": null,
+  "program_kinds": {
+    "dto": false,
+    "exception": false,
+    "utility": false
+  }
 }

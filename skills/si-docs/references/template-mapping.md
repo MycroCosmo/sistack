@@ -32,6 +32,8 @@ node <skill>/scripts/si-docs.mjs fill-template <project> <data.json> <confirmed-
 
 meta의 허용 문자열 키: business_name(사업명), system_name, document_number, version, author, created_date. 작성일도 이 설정값만 사용한다. id_rule은 사용자 지정 prefix/start(0 이상 정수)/width(1~12)다. 임의 상수·기본 접두사를 넣지 않는다. 설정 파일의 내용은 공개 보고에 복사하지 않고 해시만 남긴다.
 
+기본 제외 종류를 포함하려면 `program_kinds` 객체에 dto/exception/utility의 boolean을 지정한다. 예: `{ "program_kinds": { "dto": true, "exception": true, "utility": true } }`. 생략 시 세 종류는 false(기본 제외)다. 공통 진입점과 Mapper는 항상 유지하고 Service 인터페이스는 포함 설정과 별개로 구현체에 병합한다. 추출 뒤 설정이 바뀌면 다시 추출한다. 별도 설정 상대 경로는 추출 명령의 row mode 다음 인자와 fill-template의 마지막 인자로 같은 파일을 지정한다.
+
 fill-template의 마지막 선택 인자로 프로젝트 내부의 다른 설정 상대 경로를 지정할 수 있다. 업무구분·개발자·일정·진척률은 소스에서 추정하지 않으며 unknown 필드로 남긴다.
 
 저장 후 다시 읽어 모든 입력 값, 셀 서식·메모·수식, 다른 시트, 병합, 데이터 유효성, 조건부 서식, 이미지 바이트·배치, 열 너비·시트 설정을 비교한다. 원본 SHA-256도 재확인한다. 불일치면 FAIL이며 결과를 삭제하거나 PASS로 바꾸지 않는다.

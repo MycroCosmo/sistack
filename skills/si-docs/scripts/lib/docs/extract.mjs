@@ -5,8 +5,8 @@ import { inside, digest } from '../trace/io.mjs';
 import { document, row, validateDocument } from './contract.mjs';
 import { separatedPrograms } from './programs.mjs';
 
-export async function extractPrograms(root, { rowMode = 'separate' } = {}) {
-  if (rowMode === 'separate') return separatedPrograms(root);
+export async function extractPrograms(root, { rowMode = 'separate', settingsFile = 'sistack-docs.json' } = {}) {
+  if (rowMode === 'separate') return separatedPrograms(root,{settingsFile});
   if (rowMode !== 'endpoint') throw new Error('프로그램 행 구성 오류');
   const index = await buildIndex(root), byId = new Map(index.nodes.map(n => [n.id, n]));
   const rows = index.nodes.filter(n => n.kind === 'endpoint').map(endpoint => {

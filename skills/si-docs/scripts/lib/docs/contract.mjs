@@ -27,6 +27,7 @@ export async function validateDocument(doc) {
     if (r.not_applicable?.some(k => r.values[k] !== null || r.unverified.includes(k))) throw new Error('해당 없음 분류 오류');
     if (r.field_evidence?.some(e => !r.evidence.some(p => p.file === e.file && p.line === e.line) || r.values[e.field] === null || r.status === 'CONFIRMED')) throw new Error('제안 필드 근거 오류');
   }
-  if (doc.schema_version === '1.1.0' && (doc.rows.some(r => !r.identity || !['화면', '클래스', 'SQL'].includes(r.values.program_type) || !r.values.related_sources) || new Set(doc.rows.map(r => r.identity)).size !== doc.rows.length)) throw new Error('분리 행 종류/식별자 오류');
+  if (['1.1.0','1.2.0'].includes(doc.schema_version) && (doc.rows.some(r => !r.identity || !['화면', '클래스', 'SQL','공통'].includes(r.values.program_type) || !r.values.related_sources) || new Set(doc.rows.map(r => r.identity)).size !== doc.rows.length)) throw new Error('분리 행 종류/식별자 오류');
+  if(doc.excluded?.some(e=>!doc.source_files[e.file]||(e.action==='merge'&&e.into.some(id=>!doc.rows.some(r=>r.identity===id)))))throw new Error('제외/병합 근거 오류');
   return doc;
 }

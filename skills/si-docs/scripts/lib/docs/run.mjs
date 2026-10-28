@@ -12,6 +12,7 @@ export async function fillRun(project, doc, mapping, runId, { settingsFile = 'si
   await validateDocument(doc);
   await checkSources(project, doc.source_files, doc.rows.flatMap(r => r.evidence));
   const config = await loadSettings(project, settingsFile);
+  if(doc.schema_version==='1.2.0'&&doc.selection_settings_sha256!==config.sha256)throw new Error('추출 후 문서 설정 변경: 다시 추출하세요');
   const run = await inside(project, `.sistack/runs/${runId}`);
   await mkdir(path.dirname(run), { recursive: true }); await mkdir(run);
   const result = await fillTemplate(doc, mapping, path.join(run, `${doc.kind}.xlsx`), config.settings);
