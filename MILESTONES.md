@@ -239,10 +239,12 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 
 ## M6 — 통합과 v0.1.0
 
+**상태: 구현·로컬 검증 완료 — 2026-10-29.** REQ-001 manifest 8개 연결, JUnit 수정 전 SQL 오류 2건→수정 후 48/48 PASS, 화면 TC 37건의 작성자 검색 Chrome/Edge FAIL→PASS 및 1차 보존을 확인했다. 단일 npx CLI 6명령·설정 인증·공통 함수 수정안·공개 전 증거 분리를 완료했다. npm test 195/195 PASS. 실제 로딩/자동 활성화는 BLOCKED+수동 절차, 화면 3건은 BLOCKED로 남아 통합 실행 상태 PARTIAL이다. 과거 Git 이력의 원본 blob/식별자 경로는 남겼으며 공개 전 별도 정리가 필요하다. 로컬 태그 v0.1.0만 생성하고 push/공개는 하지 않는다. [종료 보고](docs/m6-final-report.md).
+
 **목표:** 요구사항 하나를 기준으로 네 스킬을 잇고, 공개 가능한 상태로 정리한다.
 
 **시나리오:** "게시판 목록에서 작성자로 검색하면 오류가 난다"
-→ `si-trace`로 흐름 파악 → `si-debug`로 원인 분석 → 수정 → `si-unit-test`로 서버 로직 회귀 테스트 → `si-docs`로 화면 TC 실행·결과서(서버 근거는 보조 열)
+→ `si-trace`로 흐름 파악 → `si-debug`로 원인 분석 → 수정 → `si-unit-test`로 서버 로직 회귀 테스트 → `si-docs`로 프로그램 목록·화면 TC 1차/2차(서버 근거는 별도 시트)
 
 **완료 기준**
 - 시나리오 전 과정의 manifest가 `parent_run_ids`로 연결되고 스키마 검증 통과
@@ -260,6 +262,8 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 - JPA 수집기: Repository 메서드명, `@Query`, `@Entity`/`@Table`
 - Vue3+REST 수집기: `.vue`, axios, router, `application.yml`
 - Service↔Mapper map 파라미터 키 정적 대조(Java put 키 vs XML `#{}` / `parameterType=map`)
+- M6 우선순위: map 키 대조를 우선 유지하고 SQL 참조 컬럼↔제공 DDL 대조를 다음 후보로 검토한다. REQ-001의 없는 컬럼 참조가 근거이며 런타임 스키마의 전수 검증으로 가정하지 않는다.
+- M6 화면 검증 우선순위: 새 기술 확대 전에 팝업 실제 표본과 동적 진입/선택자 근거를 보강한다. 현재 합성 파서 테스트와 BLOCKED를 현장 검증으로 승격하지 않는다.
 
 - `si-impact` (← `blast-radius`): 안전 근거 1개 증명 + SI에서 grep이 멈추는 곳 점검
 - `si-migrate`: 기준선 고정 → 이관 → 비교 (si-trace + si-unit-test + si-impact 조합)

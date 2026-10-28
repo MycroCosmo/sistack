@@ -1,42 +1,27 @@
-# si-trace 활성화 수동 확인
+# M6 스킬 로딩·자동 활성화 수동 확인
 
-현재 상태: **명시 호출 PASS, 자동 활성화 1/3 PASS·2/3 미실행.** 아래 결과는 2026-10-27 사용자가 직접 확인해 알려준 실행 기록이다. 이 작업에서 같은 호출을 재실행했다고 주장하지 않는다.
+> AI의 PASS는 PL/PM 승인이나 고객 검수 완료가 아닙니다.
 
-| 확인 | 상태 | 실행 기록 |
+2026-10-29. 설치 파일/CLI 검증과 실제 새 세션의 스킬 선택은 다르다. 다음 실제 세션 항목은 이 작업에서 관측하지 못해 BLOCKED로 남긴다.
+
+| 확인 | 상태 | 근거/멈춘 지점 |
 |---|---|---|
-| `$si-trace` 명시 호출 | PASS | `trace-list-explicit-20261027-01` |
-| 자동 질문 1 | PASS | 새 세션 질문 “examples/legacy-board의 게시판 목록 화면 데이터는 어디서 조회돼?” → `trace-board-list-20261027`, manifest PASS |
-| 자동 질문 2 | 미실행 | 상세 화면 삭제 버튼 질문 |
-| 자동 질문 3 | 미실행 | 게시판 메뉴 전체 흐름 질문 |
+| 과거 Codex si-trace 명시 호출 | PASS(이력) | 2026-10-27 사용자가 보고한 trace-list-explicit-20261027-01. 현재 버전 재호출로 주장하지 않음 |
+| 과거 Codex 자동 질문 1 | PASS(이력) | 사용자 기록 trace-board-list-20261027. 기존 증거 유지 |
+| Codex 자동 질문 2 | BLOCKED | 새 독립 세션에서 실제 선택/스크립트 실행을 관측하지 못함 |
+| Codex 자동 질문 3 | BLOCKED | 새 독립 세션에서 실제 선택/복잡 분기를 관측하지 못함 |
+| Codex 신규 나머지 스킬 실제 로딩/호출 | BLOCKED | 파일 설치만으로 로딩/활성화를 대신하지 않음 |
+| Claude Code 실제 4개 스킬 로딩/호출 | BLOCKED | Claude Code 실제 세션 관측·호출을 수행하지 않음 |
 
-남은 두 문항은 아래 수동 절차로 확인한다. 자동 활성화 전체를 PASS로 보고하지 않는다.
+## 설치와 실제 확인
 
-## 준비
+1. npm ci --ignore-scripts 후 node scripts/install.mjs --target codex --scope repo를 실행한다. Claude는 --target claude다. 갱신은 충돌 목록을 확인한 뒤 --force를 지정한다. 실제 기능 4개와 설치 확인 si-example을 구별한다.
+2. 해당 저장소에서 새 Codex/Claude Code 로컬 세션을 연다. Codex는 스킬 목록에서 네 이름/한국어 설명을 확인하고, Claude는 / 메뉴와 /si-trace 등 직접 호출을 확인한다. 모델의 설명만으로 성공 처리하지 않는다.
+3. 각각 새 Codex 세션에서 아래 두 문항을 스킬 이름 없이 입력한다.
+   - examples/legacy-board의 상세 화면에서 삭제 버튼을 누르면 뭐가 실행돼?
+   - examples/legacy-board의 게시판 메뉴 전체 코드 흐름을 정리해 줘.
+4. 사용한 SKILL.md 경로, 선택 여부, 실제 설치본 스크립트 호출, 분기, run-id, report/manifest 경로를 기록한다. 단순 CLI 실행이나 설명만은 활성화 PASS가 아니다. 삭제 기능 실행 자체를 요구하지 않는다.
+5. 나머지 스킬은 README의 예시를 사용하되 실제 코드 변경/테스트/TC 실행은 승인된 로컬 사본·계정·차수를 지정한다. Claude Code에서 네 스킬이 로딩되고 지시가 적용되는지 직접 확인한다.
+6. PASS는 실제 선택·소스 확인·산출물 생성을 관측했을 때만 기록한다. 미관측/정책/환경 부족은 BLOCKED, 선택했으나 필수 절차 누락은 FAIL이다. 원래 기록을 덮어쓰지 않고 새 실행으로 남긴다.
 
-1. 저장소 루트에서 `node scripts/install.mjs --target codex --scope repo`를 실행한다. 이번 작업에서는 `.agents/skills/si-trace/`에 설치했다. 이미 설치된 경우 경로를 검토한 후 `--force`로 갱신한다.
-2. 이 저장소를 여는 **새 Codex 세션**을 시작한다. 스킬 목록에서 `si-trace`와 한국어 설명이 보이는지 확인한다.
-3. 아래 질문은 각각 새 세션에서 실행한다. held-out 3건은 승인 전 이 확인에 사용하지 않는다.
-
-## 명시 호출 1건
-
-`$si-trace examples/legacy-board에서 /board/list.do부터 SQL·테이블까지 추적해 줘.`
-
-스킬 사용 안내, 설치본 `scripts/trace.mjs` 호출, 대상 프로젝트 `.sistack/runs/<새 run-id>/report.md`와 manifest 생성을 확인한다. 단순한 텍스트 답변이나 인덱서만 실행한 결과는 명시 호출 성공으로 세지 않는다.
-
-## 자동 활성화 3건
-
-스킬 이름을 쓰지 않고 다음 질문을 각각 입력한다.
-
-1. `examples/legacy-board의 게시판 목록 화면 데이터는 어디서 조회돼?`
-2. `examples/legacy-board의 상세 화면에서 삭제 버튼을 누르면 뭐가 실행돼?`
-3. `examples/legacy-board의 게시판 메뉴 전체 코드 흐름을 정리해 줘.`
-
-각 질문에 대해 스킬 선택 여부, 실제 사용한 SKILL.md 위치, 실행 분기, run-id, 보고서 위치를 기록한다. 세 번째는 복잡 분기와 세 역할 탐색 기록을 확인한다. 도구 정책상 병렬 실행이 불가능하면 순차 수행 이유가 기록돼야 한다.
-
-## 결과 판정
-
-- **PASS:** 실제 세션에서 해당 스킬을 선택하고 소스 확인을 거쳐 산출물을 생성했다.
-- **FAIL:** 설치본을 인식했지만 다른 도구로 처리하거나 스킬의 필수 절차를 빠뜨렸다.
-- **BLOCKED:** 스킬 목록·호출 추적을 관찰할 수 없거나 세션/도구가 실행을 허용하지 않았다. 멈춘 단계와 이유를 적는다.
-
-CLI 단독 설치 검증, 에이전트 자기 적용 평가, 하네스 활성화 확인은 서로 다른 검증이다. 사용자 보고에 더해 위 두 run의 로컬 manifest가 si-trace/PASS이고 계약 검증에 통과함을 확인했다. [기록과 해시](evidence/m2-v2/activation.json)를 보존했다. 자동 활성화 나머지 두 문항은 미실행이며 새 세션 관찰을 대신할 수 없어 미검증으로 남긴다. 실제 앱·DB 요청은 이 절차의 필수 조건이 아니다.
+공식 경로 확인(2026-10-29): [Codex](https://learn.chatgpt.com/docs/build-skills), [Claude Code](https://code.claude.com/docs/en/skills). 저장소/사용자 디렉터리 경로는 설치기와 README를 따른다. 외부 서비스 연결·계정 로그인·다른 모델 실행을 자동으로 추가하지 않는다.

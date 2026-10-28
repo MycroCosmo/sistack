@@ -385,3 +385,21 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - 선택/TC 구현 5c156ab에서 v3 정상 1차를 보존한 뒤 같은 TC로 2차를 실행했다. 학습 9/9 탐지, Oracle 1 BLOCKED이며 일반화 평가가 아니다. 1차 TC/결과/엑셀 해시 및 2차 열 분리를 확인했고, 기존 주요 v1/v2 결과/승인 기준 101개 해시도 같다. 원래 없던 옛 v1 파일은 소급 생성하지 않았다.
 - 수행일 표시 보정 fd4ef8d: 저장된 UTC 시각을 한국 수행일(Asia/Seoul)로 변환한다. 자정 경계 실패 후 회귀를 확인했으며 원시 v1/v2/v3 파일은 보존하고 최종 배포본 11개에만 적용했다. 상태·TC·점수는 바꾸지 않았다.
 - 정상 v3는 PASS 69·BLOCKED 9·SKIP 10·FAIL 0, Edge 4/4 PASS다. BLOCKED는 동적 링크/문구 값 미확정 5·진입 경로 3·버튼 미표시 1로 남긴다. 팝업 실제 표본 0개 미검증·v0.2 검증 화면 백로그와 제공 양식의 형식 일반성 한계를 유지한다. M5b는 완료하고 실행 결과는 PARTIAL로 구별하며 M6는 시작하지 않는다.
+
+## 2026-10-29 — M6 통합·인증·단일 CLI·로컬 릴리스
+
+- 시작 전 사용자 조건을 prompts/M6.md에 먼저 확정하고 d96e9b4로 커밋했다. AGENTS.md의 전역 스타일 충돌 우선순위 한 줄도 포함했다. 기존 M5b 완료/중단 문구는 당시 이력이며 이번 M6 지시로 재개했다.
+- 인증은 sistack-docs.json의 auth(login_url, fields, success URL/요소, accounts)로 분리했다. 실제 테스터 ID와 TC의 admin/viewer 역할을 구별한다. 암호는 password_env만 허용하고 평문 설정/로그/결과서 저장을 거부한다. 환경 비밀값은 원문·URL/JSON 인코딩 표현을 제거하며 화면 증거의 텍스트/속성/입력값도 지운다. 본문/쿠키/헤더 자체를 증거로 남기지 않는다. 인증 실패 폼의 HTTP 200을 성공으로 세지 않는다. 동일 출처와 성공 URL/실제 id·name을 검증한다.
+- 기존 테스트베드의 원본/동결 해시 보존을 위해 로그인 설정 샘플은 examples/configs에 두고 실행 사본으로만 복사한다. 원본 examples에 설정을 추가하면 평가 prepareCase의 소스 지문이 바뀌는 문제를 확인해 원본에 넣지 않았다. 기존 역할 선택 로그인은 values.role 설정으로 재현한다. 임의 필드·CSRF·암호 ENV·루트/컨텍스트 경로를 Chrome 합성 서버에서 확인했고 두 실제 테스트베드 설정도 실행했다.
+- npx 단일 진입점의 6개 명령과 full/structure-only/no-ai를 제공한다. 세 모드 모두 외부 AI를 사용하지 않는다. full의 설명은 결정적 요약이다. 구조 모드는 xlsx 채우기를 거부하며 파싱·계획을 분석 확정/실행 증거로 오인하지 않게 PARTIAL/검토 필요를 남긴다. JSON은 재귀 문자열 마스킹 후 직렬화해 역슬래시 경로가 JSON 구문을 깨지 않게 한다. 프로젝트 프레임이 없어도 structure-only에서 원래 예외 프레임을 유지한다.
+- 공통 Java 메서드 수정안은 인덱서 --to의 직접 호출자 두 개 이상일 때 국소/공통 diff와 이유를 함께 요구한다. 기본 추천은 local이다. 파일별 diff hunk와 선언 범위를 대조하고 검토 소스 밖 수정은 거부한다. 두 호출자 회귀로 누락 대안 거부 및 두 대안/기본 추천/목록 산출을 확인했다. 동적 호출의 전수 분석으로 주장하지 않는다.
+- REQ-001 버그는 제공 DDL에 없는 AUTHOR_NM 컬럼 참조다. 로그/화면의 실제 HTTP 500·SQL 위치·DDL과 si-debug 근거를 연결해 AUTHOR로 복원했다. 정상 소스에서 생성한 동일 JUnit 48건은 수정 전 SQL 오류 2건, 수정 후 48/48 PASS다. 같은 화면 TC 37건에서 작성자 검색 Chrome/Edge FAIL→PASS, 1차 파일 해시/2차의 1차 열/서버로직검증 48건 대조를 확인했다. 시나리오 수정은 사용자가 승인한 M6 범위다. 단일 합성 사례라 일반화 성능으로 보고하지 않는다.
+- 초기에 context 0 diff가 git apply에서 거부된 v1은 보존하고 표준 context 3으로 보정한 v2를 새 경로에서 실행했다. 통합 trace의 일부 숨은 경로는 UNRESOLVED이며 단일 에이전트의 순차 검토를 다중 독립 검토라고 주장하지 않는다. 파일 H2/보존 SQL 덤프/데이터 키/원본 무변경 규칙은 M5b 승인을 유지했다. 생성 JUnit 클래스는 별도 unit 사본에 두어 프로그램 목록 행을 오염시키지 않는다.
+- 대용량/압축 원본 12개 19,883,596바이트를 무시된 .release-assets로 이동하고, 식별자 포함 증거 73개의 원본도 먼저 해시 보관한 뒤 공개 사본만 마스킹했다. 총 85개 21,305,153바이트 SHA-256 일치를 확인했다. 기존 점수/첫 결과/승인 정답은 바꾸지 않았다. 과거 비교기는 원본 해시를 검증하는 보관소 reader를 사용하며 보존 trace 8건의 비교 결과가 같다. 재배포 시 보관소 백업/별도 첨부가 필요하다.
+- 과거 Git 이력에 원래 프로필 경로와 큰 blob이 남아 있음을 확인했다. 원본 결과·이력을 재작성하지 않았고 push도 하지 않는다. 현재 공개 tree/패키지의 정리와 이력 전체의 공개 적합성을 구별해 보고한다. 공개 전 이력 정리 또는 별도 정제 snapshot 방식은 후속 사용자 결정이다. evals/private 및 .sistack이 추적된 이력은 없었다. 회사별 키워드는 미제공이므로 일반 패턴 검사 한계를 명시하며 사용자 키워드 파일 검사도 지원한다.
+- buffers@0.1.1 README에는 라이선스가 없다. 고정 upstream commit 1b745ee35d33eb166e15ef1866073a07c6d7de87의 package.json이 MIT/X11을 선언하며 설치 index.js SHA-256도 같다. [원출처](https://raw.githubusercontent.com/bitpay/node-buffers/1b745ee35d33eb166e15ef1866073a07c6d7de87/package.json)와 docs/buffers-license-verification.json에 근거를 남겨 M5의 UNRESOLVED를 MIT로 해소했다. 공용 저작자 표시는 NOTICE에 유지한다.
+- 승인된 두 직접 의존성 버전은 바꾸지 않는다. npx 배포본의 버전 재해석을 막기 위해 package-lock과 같은 npm-shrinkwrap을 포함했다. [npm 공식 계약](https://docs.npmjs.com/cli/v11/configuring-npm/npm-shrinkwrap-json/)에 따라 게시 가능한 lock을 사용한다. 공개 허용 목록 tarball에는 private/run/원본 evidence를 포함하지 않고 빈 디렉터리에서 offline/ignore-scripts npx를 실행했다. 브라우저 다운로드나 레지스트리 배포는 하지 않았다. 전이 패키지의 deprecation 경고는 기록하고 승인 없는 갱신은 하지 않는다.
+- 설치 경로는 [Codex 공식 문서](https://learn.chatgpt.com/docs/build-skills)와 [Claude Code 공식 문서](https://code.claude.com/docs/en/skills)로 확인했다. 파일 설치 5개 통과를 실제 4개 스킬의 새 세션 로딩으로 세지 않는다. Claude 로딩과 Codex 남은 자동 활성화 2문항은 BLOCKED/수동 절차를 유지한다. Windows Node22/JDK17의 실측과 Java target8을 구별한다.
+- v0.2는 구현하지 않는다. map 파라미터 키 대조 우선순위는 유지하고 SQL 컬럼↔제공 DDL 대조·팝업 실제 표본 검증을 후속 후보로 기록했다. 로컬 v0.1.0 태그만 생성하며 종료 보고에서 멈춘다.
+
+- 최종 대조에서 structure-only가 TC run으로 진행하는 경로를 실패 회귀(2/3)로 확인했다. 실행 설정을 읽기 전에 거부하고 full TC 요약 설명을 구별하도록 보정했다. 회귀 3/3 및 전체 195/195 PASS, 최종 tarball v4의 offline npx full 추적/구조 전용 거부도 PASS다. 격리 환경의 임시 Git 쓰기·npm 캐시 실패 2건은 원시 로그에 보존하고 동일 로컬 권한에서 전체 검사를 다시 수행했다. 이전 194건/통합 앱 실행 결과는 덮어쓰지 않았다.

@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "name": "sistack",
+  "version": "0.1.0",
+  "files": 257,
+  "bytes": 247865,
+  "sha256": "b361ef1c984f481388757ea7ff085edbf1c8732aea45b2856e6843cff35849d8",
+  "integrity": "sha512-UF5CqII0j4D8+D58p6r5J9PrnRvWx4z7EhWKGkAHq/lSNdg2zTRcsMnxzv6eN/HJGysNLyKnZix6riT0jy/+MQ==",
+  "shrinkwrap_included": true,
+  "private_files_included": false,
+  "browser_download": false,
+  "npx": {
+    "status": "PASS",
+    "exit_code": 0,
+    "mode": "offline / ignore-scripts / empty directory",
+    "version": "0.1.0"
+  },
+  "transitive_deprecation_warnings": true,
+  "verification_run": "v4",
+  "output_modes": {
+    "status": "PASS",
+    "package": "v4",
+    "full": {
+      "ai_used": false,
+      "nodes": 58,
+      "report": true
+    },
+    "structure_only_tc_run": "REJECTED_BEFORE_EXECUTION",
+    "offline": true
+  }
+}

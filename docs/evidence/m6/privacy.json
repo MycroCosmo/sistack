@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "scanned_text_files": 1419,
+  "findings": [],
+  "private_paths_in_history": false,
+  "company_specific_keywords": "미제공: 특정 회사 식별자는 일반 패턴 검사로 확정할 수 없음",
+  "exclusions": [
+    "공개 예제 도메인·명시적 합성 fixture·테스트 식별자·git SSH 전송 계정",
+    "원본은 로컬 릴리스 보관 폴더에 해시 보존",
+    "과거 Git 이력 재작성 없음"
+  ],
+  "history_content_inspection": "비공개 run 경로 추적 이력만 검사. 마스킹 전 경로와 원본 blob은 과거 커밋에 잔존하며 이력 재작성 없음"
+}

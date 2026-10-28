@@ -23,9 +23,21 @@
     "lib",
     "schemas",
     "skills",
-    "scripts",
+    "scripts/install.mjs",
+    "scripts/common.mjs",
+    "scripts/sync-shared.mjs",
+    "scripts/validate-skills.mjs",
     "README.md",
     "LICENSE",
-    "NOTICE"
+    "NOTICE",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md",
+    "docs/pstack-mapping.md",
+    "docs/cli.md",
+    "docs/auth.md",
+    "docs/buffers-license-verification.json",
+    "docs/dependency-licenses.json",
+    "examples/configs",
+    "npm-shrinkwrap.json"
   ]
 }

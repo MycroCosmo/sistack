@@ -1,0 +1,115 @@
+{
+  "request_id": "REQ-001",
+  "status": "PASS",
+  "scope": "보존 산출물의 스키마·연결·수정 전후 결과·양식 검증·DB 파일 존재 대조; 앱 재실행 아님",
+  "manifests": [
+    {
+      "run_id": "req001-trace",
+      "status": "PARTIAL",
+      "parent_run_ids": []
+    },
+    {
+      "run_id": "req001-debug",
+      "status": "PASS",
+      "parent_run_ids": [
+        "req001-trace"
+      ]
+    },
+    {
+      "run_id": "req001-fix",
+      "status": "PASS",
+      "parent_run_ids": [
+        "req001-debug"
+      ]
+    },
+    {
+      "run_id": "req001-unit-red",
+      "status": "FAIL",
+      "parent_run_ids": [
+        "req001-fix"
+      ]
+    },
+    {
+      "run_id": "req001-unit-green",
+      "status": "PASS",
+      "parent_run_ids": [
+        "req001-unit-red"
+      ]
+    },
+    {
+      "run_id": "req001-program",
+      "status": "PARTIAL",
+      "parent_run_ids": [
+        "req001-unit-green"
+      ]
+    },
+    {
+      "run_id": "req001-tc-1",
+      "status": "FAIL",
+      "parent_run_ids": [
+        "req001-program"
+      ]
+    },
+    {
+      "run_id": "req001-tc-2",
+      "status": "PARTIAL",
+      "parent_run_ids": [
+        "req001-tc-1"
+      ]
+    }
+  ],
+  "units": [
+    {
+      "phase": "red",
+      "status": "FAIL",
+      "summary": {
+        "total": 48,
+        "passed": 46,
+        "failed": 0,
+        "errors": 2,
+        "skipped": 0
+      }
+    },
+    {
+      "phase": "green",
+      "status": "PASS",
+      "summary": {
+        "total": 48,
+        "passed": 48,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "tc": [
+    {
+      "round": 1,
+      "cases": 37,
+      "author": "FAIL",
+      "edge_author": "FAIL",
+      "counts": {
+        "PASS": 29,
+        "SKIP": 4,
+        "BLOCKED": 3,
+        "FAIL": 1
+      },
+      "workbook_sha256": "db2b92a2c2e0593d7931bb809b6f4023915667c58d4a370e6723bb660fb947a7",
+      "first_columns_preserved": null
+    },
+    {
+      "round": 2,
+      "cases": 37,
+      "author": "PASS",
+      "edge_author": "PASS",
+      "counts": {
+        "PASS": 30,
+        "SKIP": 4,
+        "BLOCKED": 3
+      },
+      "workbook_sha256": "f326923f00ad0da2f0b4c80538029d99a4d3eb433a9180a4343728bb35cca611",
+      "first_columns_preserved": true
+    }
+  ],
+  "same_cases": true
+}
