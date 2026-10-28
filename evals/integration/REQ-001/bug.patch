@@ -1,0 +1,11 @@
+--- a/src/main/resources/mapper/BoardMapper.xml
++++ b/src/main/resources/mapper/BoardMapper.xml
+@@ -14,7 +14,7 @@
+             <if test="keyword != null and keyword != ''">
+                 <choose>
+                     <when test="searchType == 'author'">
+-                        AND b.AUTHOR LIKE '%' || #{keyword} || '%'
++                        AND b.AUTHOR_NM LIKE '%' || #{keyword} || '%'
+                     </when>
+                     <otherwise>AND b.TITLE LIKE '%' || #{keyword} || '%'</otherwise>
+                 </choose>

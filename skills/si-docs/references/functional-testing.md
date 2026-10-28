@@ -21,3 +21,5 @@ run의 config는 allow_execution=true, round=1 또는 2, java_home/maven, templa
 실행은 원본을 복사한 새 evidence/project에서만 한다. 해당 사본의 local datasource만 파일 H2로 바꾼다. 생성/수정 데이터를 삭제하지 않고 DB 파일·SCRIPT NOPASSWORDS TO SQL 덤프·확인 테이블/키·실행 사본을 보존한다. 다시 서버를 띄워 초기화 스크립트를 중복 실행하지 않는다. 서버 종료 뒤 저장된 키를 조회해 실제 보존을 확인한다.
 
 현재 실행 어댑터의 업무 요청/검증 계약은 두 legacy-board 테스트베드에 한정된다. 임의 SI 프로젝트의 인증/CRUD를 범용 실행한다고 표현하지 않는다. 정적 스캐너의 지원 문법 밖 동적 DOM/스크립트는 추가 근거가 필요하다. 단일 팝업은 수집하지만 두 테스트베드에는 실행 검증 표본이 없다. 그리드 편집/파일 업로드/드래그/다단계 팝업은 v0.2 범위다.
+
+M6 인증: 대상 sistack-docs.json의 auth에 login_url·fields(account/password/csrf)·accounts(역할별 id/values/password_env)·success(url/status/element)를 설정한다. 암호는 환경 변수 참조만 허용한다. 실행 사본에만 설정할 때는 실행 config의 auth_settings_file을 사용한다. 계정/암호 필드 없는 legacy 역할 로그인도 이 설정으로 재현한다.
