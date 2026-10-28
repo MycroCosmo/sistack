@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "node_tests": {
+    "total": 152,
+    "passed": 152,
+    "failed": 0,
+    "skipped": 0
+  },
+  "validate_skills": 4,
+  "shared_copy_skills": 4,
+  "independent_install": "PASS",
+  "approved_expected_freshness": "PASS",
+  "final_manifests": 18,
+  "final_test_results": 18,
+  "identical_test_and_plan_pairs": 4,
+  "preserved_private_and_example_files": 404,
+  "m3_public_artifacts_unchanged": true,
+  "java_runtime": "Amazon Corretto 17.0.14",
+  "maven_runtime": "Apache Maven 3.9.10",
+  "pom_target": "8",
+  "new_heldout_executed": false,
+  "new_heldout_patches_read": false
+}

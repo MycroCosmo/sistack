@@ -1,0 +1,7 @@
+--- a/src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java
++++ b/src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java
+@@ -33,3 +33,3 @@
+         }
+-        return board;
++        return null;
+     }

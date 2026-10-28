@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, mkdtemp, cp, rm } from 'node:fs/promises';
+import { readFile, mkdtemp, cp, rm, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import { pathToFileURL } from 'node:url';
@@ -9,6 +9,7 @@ import { parseSurefire, summarize, validateTestResults } from '../lib/unit/resul
 import { runTests } from '../lib/unit/run.mjs';
 import { save, json } from '../lib/trace/io.mjs';
 import { detection, applyUnitPatch, runBlindUnit } from '../scripts/eval-unit-test.mjs';
+import { root } from '../scripts/common.mjs';
 
 const plan = { 'OrderTest#등록': { display_name: '주문 등록 결과를 전달한다', target_class: 'Order', target_method: 'create' } };
 const xml = (outcome = '', attrs = '') => `<testsuite tests="1" failures="${outcome.startsWith('<failure') ? 1 : 0}" errors="0" skipped="${outcome.startsWith('<skipped') ? 1 : 0}"><testcase classname="OrderTest" name="등록" time="0.012" ${attrs}>${outcome}</testcase></testsuite>`;
@@ -84,4 +85,22 @@ test('평가 패치의 테스트/빌드 변경과 private 외부 held-out 출력
   await save(patch, '--- a/pom.xml\n+++ b/pom.xml\n@@ -1 +1 @@\n-old\n+new\n');
   await assert.rejects(applyUnitPatch(p, patch), /src\/main/);
   await assert.rejects(runBlindUnit({ output: p, freeze: 'must-not-read' }, {}), /범위/);
+});
+
+test('저장소 내부 임시 사본에서도 Git 성공 코드뿐 아니라 실제 패치 적용을 확인한다', async t => {
+  await mkdir(path.join(root, '.tmp'), { recursive: true });
+  const p = await mkdtemp(path.join(root, '.tmp/unit-patch-'));
+  t.after(() => rm(p, { recursive: true, force: true }));
+  await save(path.join(p, 'src/main/C.java'), 'old\n');
+  await save(path.join(p, 'patch.diff'), 'diff --git a/src/main/C.java b/src/main/C.java\n--- a/src/main/C.java\n+++ b/src/main/C.java\n@@ -1 +1 @@\n-old\n+new\n');
+  await applyUnitPatch(p, path.join(p, 'patch.diff'));
+  assert.equal(await readFile(path.join(p, 'src/main/C.java'), 'utf8'), 'new\n');
+});
+
+test('신규 held-out은 패치에 접근하기 전에 동결 구현의 변화를 거부한다', async t => {
+  const p = await temp(t), freeze = path.join(p, 'freeze.json');
+  await save(freeze, { files: { 'package.json': 'stale-hash' } });
+  await assert.rejects(runBlindUnit({ output: path.join(root, 'evals/private/m4-heldout-first'), freeze }, {
+    test_pattern: 'M4*Test', plan_file: path.join(root, 'evals/unit/test-plan.json')
+  }), /변경/);
 });

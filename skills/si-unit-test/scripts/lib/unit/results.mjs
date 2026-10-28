@@ -45,7 +45,12 @@ export function validateTestResults(value) {
   const errors = validateManifest(value, resultSchema);
   if (errors.length) return errors;
   if (new Set(value.tests.map(t => `${t.class_name}#${t.method_name}`)).size !== value.tests.length) errors.push('중복 테스트');
-  if (JSON.stringify(summarize(value.tests)) !== JSON.stringify(value.summary)) errors.push('집계 불일치');
+  const counts = summarize(value.tests);
+  if (Object.keys(counts).some(k => counts[k] !== value.summary[k])) errors.push('집계 불일치');
+  const expected = ['BUILD_FAILURE', 'BLOCKED'].includes(value.execution_status) ? 'BLOCKED'
+    : counts.failed || counts.errors ? 'FAIL' : counts.skipped ? 'PARTIAL' : counts.total ? 'PASS' : 'BLOCKED';
+  if (expected !== value.status || value.execution_status === 'TEST_FAILURE' && !counts.failed && !counts.errors) errors.push('실행 상태 불일치');
+  if (value.tests.some(t => mask(t.failure_message) !== t.failure_message)) errors.push('실패 메시지 마스킹 누락');
   if (value.status === 'PASS' && (!value.tests.length || value.execution_status !== 'SUCCESS' || value.summary.failed || value.summary.errors || value.summary.skipped)) errors.push('PASS 범위 불일치');
   return errors;
 }

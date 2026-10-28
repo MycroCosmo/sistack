@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "weak_normal": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "weak_mutant": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "strong_mutant": {
+    "total": 16,
+    "passed": 15,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "correction": "목 호출만 검사하는 fixture는 최종 생성 테스트에서 제외. 실제 반환 객체와 본문을 단언하는 M4ServiceTest로 보강.",
+  "normal_strong": "두 테스트베드 정상 기준선 16/16 PASS",
+  "original_source_unchanged": true
+}

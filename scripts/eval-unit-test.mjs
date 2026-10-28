@@ -1,5 +1,6 @@
 import path from 'node:path';
-import { readFile, mkdir, copyFile } from 'node:fs/promises';
+import { readFile, mkdir, copyFile, mkdtemp, rm } from 'node:fs/promises';
+import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { root, isMain, cli, files } from './common.mjs';
 import { save, json, digest, inside, checkSources } from '../lib/trace/io.mjs';
@@ -28,13 +29,30 @@ export async function installUnitTests(project, generated = path.join(root, 'eva
 
 export async function applyUnitPatch(project, patchFile) {
   const diff = await readFile(patchFile, 'utf8'), targets = proposalPaths(diff);
+  const before = {};
   for (const file of targets) {
     if (!file.startsWith('src/main/')) throw new Error('평가 패치는 src/main의 기존 파일만 수정할 수 있습니다');
     await inside(project, file);
+    before[file] = digest(await readFile(path.join(project, file)));
   }
-  for (const check of [true, false]) {
-    const p = spawnSync('git', ['-c', 'core.autocrlf=false', 'apply', ...(check ? ['--check'] : []), '--ignore-space-change', path.resolve(patchFile)], { cwd: project, windowsHide: true, encoding: 'utf8', timeout: 15000 });
-    if (p.status !== 0) throw new Error('패치 적용 실패. 탐지 점수로 세지 않습니다');
+  const scratch = await mkdtemp(path.join(os.tmpdir(), 'sistack-unit-patch-'));
+  try {
+    for (const file of targets) {
+      const dest = await inside(scratch, file); await mkdir(path.dirname(dest), { recursive: true });
+      await copyFile(path.join(project, file), dest);
+    }
+    for (const check of [true, false]) {
+      const p = spawnSync('git', ['-c', 'core.autocrlf=false', 'apply', ...(check ? ['--check'] : []), '--ignore-space-change', path.resolve(patchFile)], {
+        cwd: scratch, windowsHide: true, encoding: 'utf8', timeout: 15000 });
+      if (p.status !== 0) throw new Error('패치 적용 실패. 탐지 점수로 세지 않습니다');
+    }
+    for (const file of targets) {
+      if (digest(await readFile(path.join(scratch, file))) === before[file]) throw new Error('패치 성공 코드가 나왔지만 대상 파일이 변경되지 않았습니다');
+    }
+    for (const file of targets) await copyFile(path.join(scratch, file), path.join(project, file));
+  } finally {
+    if (path.dirname(scratch) !== path.resolve(os.tmpdir()) || !path.basename(scratch).startsWith('sistack-unit-patch-')) throw new Error('임시 경로 범위 오류');
+    await rm(scratch, { recursive: true, force: true });
   }
   return digest(diff);
 }

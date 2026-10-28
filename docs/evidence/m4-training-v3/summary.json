@@ -1,0 +1,273 @@
+{
+  "dataset": "training",
+  "cases": 13,
+  "eligible": 4,
+  "detected": 4,
+  "repaired": 4,
+  "excluded": 8,
+  "blocked_log_only": 1,
+  "rows": [
+    {
+      "id": "01-binding",
+      "testbed": "legacy-board",
+      "eligible": true,
+      "kind": "mapper",
+      "reason": "실제 MyBatis 인터페이스 바인딩을 테스트 H2로 실행 가능",
+      "detection": "DETECTED",
+      "buggy_status": "FAIL",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 15,
+        "failed": 0,
+        "errors": 1,
+        "skipped": 0
+      },
+      "repair_status": "PASS",
+      "repair_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source_unchanged": true
+    },
+    {
+      "id": "02-js-url",
+      "testbed": "legacy-board",
+      "eligible": false,
+      "kind": "javascript",
+      "reason": "브라우저 요청 URL. 단위 테스트 범위 밖",
+      "detection": "MISSED",
+      "buggy_status": "PASS",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "repair_status": "NOT_RUN",
+      "repair_summary": null,
+      "source_unchanged": true
+    },
+    {
+      "id": "03-request-encoding",
+      "testbed": "legacy-board",
+      "eligible": false,
+      "kind": "configuration",
+      "reason": "서블릿 필터 설정과 실제 요청 인코딩. 단위 테스트 범위 밖",
+      "detection": "MISSED",
+      "buggy_status": "PASS",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "repair_status": "NOT_RUN",
+      "repair_summary": null,
+      "source_unchanged": true
+    },
+    {
+      "id": "04-session-bypass",
+      "testbed": "legacy-board",
+      "eligible": false,
+      "kind": "configuration",
+      "reason": "인터셉터 경로 설정과 인증 흐름. Service/Mapper/유틸 단위 범위 밖",
+      "detection": "MISSED",
+      "buggy_status": "PASS",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "repair_status": "NOT_RUN",
+      "repair_summary": null,
+      "source_unchanged": true
+    },
+    {
+      "id": "05-paging",
+      "testbed": "legacy-board",
+      "eligible": true,
+      "kind": "utility",
+      "reason": "페이징 나머지 경계의 반환값 검증 가능",
+      "detection": "DETECTED",
+      "buggy_status": "FAIL",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 14,
+        "failed": 2,
+        "errors": 0,
+        "skipped": 0
+      },
+      "repair_status": "PASS",
+      "repair_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source_unchanged": true
+    },
+    {
+      "id": "06-sort-sql",
+      "testbed": "legacy-board",
+      "eligible": true,
+      "kind": "utility-mapper",
+      "reason": "검색 모델과 실제 정렬 SQL 실행 결과 검증 가능",
+      "detection": "DETECTED",
+      "buggy_status": "FAIL",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 14,
+        "failed": 0,
+        "errors": 2,
+        "skipped": 0
+      },
+      "repair_status": "PASS",
+      "repair_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source_unchanged": true
+    },
+    {
+      "id": "07-oracle-log-only",
+      "testbed": "legacy-board",
+      "eligible": false,
+      "kind": "log-only",
+      "reason": "실행 가능한 패치/Oracle 환경 없음. BLOCKED, 탐지 분모 제외",
+      "detection": "BLOCKED",
+      "buggy_status": "NOT_RUN",
+      "repair_status": "NOT_RUN"
+    },
+    {
+      "id": "08-thymeleaf-utilities",
+      "testbed": "legacy-board-thymeleaf",
+      "eligible": false,
+      "kind": "template",
+      "reason": "Thymeleaf 렌더링. 단위 테스트 범위 밖",
+      "detection": "MISSED",
+      "buggy_status": "PASS",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "repair_status": "NOT_RUN",
+      "repair_summary": null,
+      "source_unchanged": true
+    },
+    {
+      "id": "09-view-resolver",
+      "testbed": "legacy-board-thymeleaf",
+      "eligible": false,
+      "kind": "configuration",
+      "reason": "뷰 리졸버 설정. 단위 테스트 범위 밖",
+      "detection": "MISSED",
+      "buggy_status": "PASS",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "repair_status": "NOT_RUN",
+      "repair_summary": null,
+      "source_unchanged": true
+    },
+    {
+      "id": "10-fragment-encoding",
+      "testbed": "legacy-board",
+      "eligible": false,
+      "kind": "template",
+      "reason": "JSP 조각 인코딩. 단위 테스트 범위 밖",
+      "detection": "MISSED",
+      "buggy_status": "PASS",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "repair_status": "NOT_RUN",
+      "repair_summary": null,
+      "source_unchanged": true
+    },
+    {
+      "id": "m3-heldout-01",
+      "testbed": "legacy-board-thymeleaf",
+      "eligible": false,
+      "kind": "template",
+      "reason": "기존 관찰 사례. 화면 렌더링 계층, 단위 범위 밖",
+      "detection": "MISSED",
+      "buggy_status": "PASS",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "repair_status": "NOT_RUN",
+      "repair_summary": null,
+      "source_unchanged": true
+    },
+    {
+      "id": "m3-heldout-02",
+      "testbed": "legacy-board",
+      "eligible": true,
+      "kind": "mapper",
+      "reason": "기존 관찰 사례. Mapper 결과 필드와 동등 수정 동작 검증 가능",
+      "detection": "DETECTED",
+      "buggy_status": "FAIL",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 15,
+        "failed": 1,
+        "errors": 0,
+        "skipped": 0
+      },
+      "repair_status": "PASS",
+      "repair_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source_unchanged": true
+    },
+    {
+      "id": "m3-heldout-03",
+      "testbed": "legacy-board-thymeleaf",
+      "eligible": false,
+      "kind": "template",
+      "reason": "기존 관찰 사례. 화면 렌더링 계층, 단위 범위 밖",
+      "detection": "MISSED",
+      "buggy_status": "PASS",
+      "buggy_summary": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "repair_status": "NOT_RUN",
+      "repair_summary": null,
+      "source_unchanged": true
+    }
+  ]
+}

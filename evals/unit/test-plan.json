@@ -64,8 +64,8 @@
     "target_class": "kr.sistack.board.mapper.MenuMapper",
     "target_method": "selectList"
   },
-  "kr.sistack.board.M4MapperTest#게시글_목록의_작성일과_본문을_정확히_매핑한다": {
-    "display_name": "게시글 목록의 작성일과 본문을 정확히 매핑한다",
+  "kr.sistack.board.M4MapperTest#게시글_목록의_작성일과_상세본문을_정확히_매핑한다": {
+    "display_name": "게시글 목록의 작성일과 상세본문을 정확히 매핑한다",
     "target_class": "kr.sistack.board.mapper.BoardMapper",
     "target_method": "selectList/selectOne"
   },

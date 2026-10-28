@@ -68,6 +68,10 @@ export async function runTests(project, config) {
       await save(path.join(run, 'evidence/maven.txt'), executed.log);
       const freshReports = path.join(workspace, 'target/surefire-reports');
       const reportNames = await readdir(freshReports).catch(e => { if (e.code === 'ENOENT') return []; throw e; });
+      for (const file of reportNames.filter(n => /\.(?:txt|dump|dumpstream)$/.test(n))) {
+        const filename = path.join(freshReports, file); await noLinks(filename);
+        await writeFile(filename, mask(await readFile(filename, 'utf8')));
+      }
       for (const file of reportNames.filter(n => /^TEST-.*\.xml$/.test(n)).sort()) {
         const filename = path.join(freshReports, file), xml = await readFile(filename, 'utf8');
         // 마스킹된 XML만 보존하며 system-out/properties도 원문으로 남기지 않는다.

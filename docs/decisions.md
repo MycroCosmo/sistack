@@ -8,6 +8,9 @@
 - Surefire XML을 M5용 `test-results.json`으로 변환한다. 한국어 표시 이름과 대상 메서드는 실행 전 계획에 명시한다. 테스트 누락·중복·집계 불일치·빌드 오류·테스트 0건을 성공이나 탐지로 세지 않는다. 결과는 exclusive run-id로 보존하고 실제 JDK와 POM target을 구분한다. 단일 Maven POM만 자동 실행하며 상속/profile/Gradle/사용자 JVM 설정은 BLOCKED다.
 - 초기 실행에서 SQL fixture의 기본 charset과 Surefire 경로 override가 문제였다. SQL에 UTF-8을 지정하고 매 실행을 새 작업 사본에서 수행해 기본 `target/surefire-reports`를 읽는다. 이전 결과를 삭제하거나 POM을 바꾸지 않는다. Surefire의 reportsDirectory/argLine 계약은 [공식 문서](https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#reportsDirectory)와 실제 3.2.5 실행으로 확인했다.
 - 학습·약한 테스트 검증 후 구현·테스트·평가 도구를 동결하고 GATE에서 멈춘다. 신규 Claude 패치 3건은 동결 후 별도 지시로 원문을 출력하지 않고 실행한다. 첫 결과 경로를 고정하고 재실행으로 덮어쓰지 않는다. 외부 의존성 추가 없음.
+- 학습 초기 실행에서 저장소 내부 사본의 Git 확장 diff가 적용되지 않아도 exit 0을 반환했다. 해당 시도를 보존하고 무효로 표시했다. 저장소 밖 OS 임시 경로에 대상 파일만 복사해 패치를 적용하고, 모든 대상 파일 해시가 바뀐 뒤에만 평가 사본으로 가져오도록 보정했다. 동일 형식의 확장 diff 회귀 검사를 통과했다.
+- 최초 Mapper 테스트는 목록 반환에 본문까지 요구해 M3 heldout-02의 승인된 명시 투영 수정을 거부했다. 실제 목록 JSP는 id/title/author/createdAt, 상세 JSP는 content를 사용한다. 목록 작성일과 상세 본문을 각각 단언하도록 잘못된 테스트를 정정했다. 이전 4건 탐지·3건 수정 통과 기록을 보존하고 새 v3에서 정상→결함→수정 후 모두 동일한 최종 테스트를 실행했다. 4/4 탐지·4/4 수정 후 통과는 학습 결과다.
+- `node --test`가 요구된 CLI 이름 `eval-unit-test.mjs`도 테스트로 수집하므로 `scripts/run-tests.mjs`가 test/ 아래 실제 `.test.mjs` 파일만 명시적으로 전달한다. 최종 `npm test`는 152/152이고 Node 18 이상에서 shell glob에 의존하지 않는다.
 
 ## 2026-10-28 — M3 held-out 정합성 재판정·완료 승인
 

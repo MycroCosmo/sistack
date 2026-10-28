@@ -45,13 +45,15 @@ public class M4MapperTest {
         assertTrue(mapper.selectList("UNKNOWN").isEmpty());
     }
 
-    @Test public void 게시글_목록의_작성일과_본문을_정확히_매핑한다() {
+    @Test public void 게시글_목록의_작성일과_상세본문을_정확히_매핑한다() {
         List<Board> rows = board.selectList(new BoardSearch()); assertEquals(1, rows.size());
         Board result = rows.get(0); assertEquals("게시판 안내", result.getTitle());
-        assertEquals("로컬 테스트용 합성 데이터입니다.", result.getContent()); assertEquals("테스트관리자", result.getAuthor());
+        assertEquals("테스트관리자", result.getAuthor());
         assertEquals("NOTICE", result.getCategory()); assertTrue(result.getId() > 0);
         assertNotNull("목록에 작성일이 있어야 한다", result.getCreatedAt());
-        assertEquals(board.selectOne(result.getId()).getCreatedAt(), result.getCreatedAt());
+        Board detail = board.selectOne(result.getId());
+        assertEquals("로컬 테스트용 합성 데이터입니다.", detail.getContent());
+        assertEquals(detail.getCreatedAt(), result.getCreatedAt());
     }
 
     @Test public void 작성일과_제목순으로_게시글을_정렬한다() {

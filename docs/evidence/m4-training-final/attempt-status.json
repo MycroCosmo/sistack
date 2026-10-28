@@ -1,0 +1,5 @@
+{
+  "status": "SUPERSEDED_TEST_CONTRACT",
+  "reason": "실제 패치 적용 후 4건 탐지·3건 수정 후 통과. Mapper 테스트가 목록의 본문 투영까지 요구해 승인된 02 동등 수정을 거부했다. 목록/상세 업무 계약에 맞춰 테스트를 정정하고 정상·결함·수정 후를 모두 새 실행으로 기록했다.",
+  "superseded_by": "../m4-training-v3/summary.json"
+}

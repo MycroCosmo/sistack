@@ -1,0 +1,5 @@
+{
+  "status": "INVALID_HARNESS",
+  "reason": "저장소 내부 임시 사본에서 Git 확장 diff가 적용되지 않았으나 성공 코드가 반환됨. 초기 테스트 출력은 보존하되 버그 탐지 점수로 사용하지 않는다.",
+  "superseded_by": "../m4-training-v3/summary.json"
+}

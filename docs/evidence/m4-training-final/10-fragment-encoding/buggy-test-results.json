@@ -1,0 +1,203 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "10-fragment-encoding-buggy",
+  "created_at": "2026-10-28T00:21:37.558Z",
+  "source_revision": "e7c3e88575eb4470dfc3838bfceb6a3cdb5c8fa3",
+  "status": "PASS",
+  "execution_status": "SUCCESS",
+  "environment": {
+    "java_runtime": "openjdk version \"17.0.14\" 2025-01-21 LTS",
+    "java_target": "8",
+    "build_tool": "Maven",
+    "junit": "4.13.2",
+    "mockito": "4.11.0",
+    "spring_test": "5.3.39",
+    "h2": "2.2.224"
+  },
+  "summary": {
+    "total": 16,
+    "passed": 16,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "tests": [
+    {
+      "class_name": "kr.sistack.board.M4MapperTest",
+      "method_name": "게시글_등록수정삭제가_저장상태에_반영된다",
+      "display_name": "게시글 등록수정삭제가 저장상태에 반영된다",
+      "target_class": "kr.sistack.board.mapper.BoardMapper",
+      "target_method": "insert/update/delete",
+      "status": "PASS",
+      "duration_ms": 687,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4MapperTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4MapperTest",
+      "method_name": "작성일과_제목순으로_게시글을_정렬한다",
+      "display_name": "작성일과 제목순으로 게시글을 정렬한다",
+      "target_class": "kr.sistack.board.mapper.BoardMapper",
+      "target_method": "selectList/count",
+      "status": "PASS",
+      "duration_ms": 99,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4MapperTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4MapperTest",
+      "method_name": "게시글_목록의_작성일과_본문을_정확히_매핑한다",
+      "display_name": "게시글 목록의 작성일과 본문을 정확히 매핑한다",
+      "target_class": "kr.sistack.board.mapper.BoardMapper",
+      "target_method": "selectList/selectOne",
+      "status": "PASS",
+      "duration_ms": 41,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4MapperTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4MapperTest",
+      "method_name": "권한별_메뉴의_이름과_주소를_조회한다",
+      "display_name": "권한별 메뉴의 이름과 주소를 조회한다",
+      "target_class": "kr.sistack.board.mapper.MenuMapper",
+      "target_method": "selectList",
+      "status": "PASS",
+      "duration_ms": 48,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4MapperTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4PaginationTest",
+      "method_name": "허용되지_않는_페이지와_검색조건은_거부한다",
+      "display_name": "허용되지 않는 페이지와 검색조건은 거부한다",
+      "target_class": "kr.sistack.board.domain.BoardSearch",
+      "target_method": "setPage/setSort/setSearchType/setKeyword",
+      "status": "PASS",
+      "duration_ms": 0,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4PaginationTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4PaginationTest",
+      "method_name": "마지막_페이지의_나머지_한건도_포함한다",
+      "display_name": "마지막 페이지의 나머지 한건도 포함한다",
+      "target_class": "kr.sistack.board.common.Pagination",
+      "target_method": "getLastPage",
+      "status": "PASS",
+      "duration_ms": 0,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4PaginationTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4PaginationTest",
+      "method_name": "조회_종료일의_하루전체를_포함한다",
+      "display_name": "조회 종료일의 하루전체를 포함한다",
+      "target_class": "kr.sistack.board.domain.BoardSearch",
+      "target_method": "getFromDate/getUntilDate",
+      "status": "PASS",
+      "duration_ms": 0,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4PaginationTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4ServiceTest",
+      "method_name": "게시글_삭제후_대상이_없으면_실패한다",
+      "display_name": "게시글 삭제후 대상이 없으면 실패한다",
+      "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "target_method": "delete",
+      "status": "PASS",
+      "duration_ms": 625,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4ServiceTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4ServiceTest",
+      "method_name": "검색결과가_없으면_빈목록과_영건을_전달한다",
+      "display_name": "검색결과가 없으면 빈목록과 영건을 전달한다",
+      "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "target_method": "list",
+      "status": "PASS",
+      "duration_ms": 7,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4ServiceTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4ServiceTest",
+      "method_name": "잘못된_조회기간은_거부한다",
+      "display_name": "잘못된 조회기간은 거부한다",
+      "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "target_method": "list",
+      "status": "PASS",
+      "duration_ms": 3,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4ServiceTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4ServiceTest",
+      "method_name": "필수입력이_없거나_길이를_넘으면_등록을_거부한다",
+      "display_name": "필수입력이 없거나 길이를 넘으면 등록을 거부한다",
+      "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "target_method": "create",
+      "status": "PASS",
+      "duration_ms": 1,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4ServiceTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4ServiceTest",
+      "method_name": "게시글_목록과_전체건수를_전달한다",
+      "display_name": "게시글 목록과 전체건수를 전달한다",
+      "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "target_method": "list",
+      "status": "PASS",
+      "duration_ms": 1,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4ServiceTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4ServiceTest",
+      "method_name": "게시글_등록시_작성자와_생성번호를_반영한다",
+      "display_name": "게시글 등록시 작성자와 생성번호를 반영한다",
+      "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "target_method": "create",
+      "status": "PASS",
+      "duration_ms": 1,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4ServiceTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4ServiceTest",
+      "method_name": "게시글_수정은_요청한_번호의_내용을_저장한다",
+      "display_name": "게시글 수정은 요청한 번호의 내용을 저장한다",
+      "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "target_method": "update",
+      "status": "PASS",
+      "duration_ms": 1,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4ServiceTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4ServiceTest",
+      "method_name": "공통코드_목록은_페이지범위와_전체건수를_반영한다",
+      "display_name": "공통코드 목록은 페이지범위와 전체건수를 반영한다",
+      "target_class": "kr.sistack.board.service.impl.CommonCodeServiceImpl",
+      "target_method": "list",
+      "status": "PASS",
+      "duration_ms": 20,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4ServiceTest.xml"
+    },
+    {
+      "class_name": "kr.sistack.board.M4ServiceTest",
+      "method_name": "게시글_조회시_저장된_내용을_전달한다",
+      "display_name": "게시글 조회시 저장된 내용을 전달한다",
+      "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "target_method": "get",
+      "status": "PASS",
+      "duration_ms": 2,
+      "failure_message": "",
+      "report_file": "evidence/surefire/TEST-kr.sistack.board.M4ServiceTest.xml"
+    }
+  ],
+  "unverified": []
+}
