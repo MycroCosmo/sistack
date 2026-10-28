@@ -1,0 +1,338 @@
+{
+  "kr.sistack.board.M4ServiceTest#게시글_목록과_전체건수를_전달한다": {
+    "display_name": "게시글 목록과 전체건수를 전달한다",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "list"
+  },
+  "kr.sistack.board.M4ServiceTest#검색결과가_없으면_빈목록과_영건을_전달한다": {
+    "display_name": "검색결과가 없으면 빈목록과 영건을 전달한다",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "list"
+  },
+  "kr.sistack.board.M4ServiceTest#잘못된_조회기간은_거부한다": {
+    "display_name": "잘못된 조회기간은 거부한다",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "list"
+  },
+  "kr.sistack.board.M4ServiceTest#게시글_조회시_저장된_내용을_전달한다": {
+    "display_name": "게시글 조회시 저장된 내용을 전달한다",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "get"
+  },
+  "kr.sistack.board.M4ServiceTest#게시글_등록시_작성자와_생성번호를_반영한다": {
+    "display_name": "게시글 등록시 작성자와 생성번호를 반영한다",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "create"
+  },
+  "kr.sistack.board.M4ServiceTest#필수입력이_없거나_길이를_넘으면_등록을_거부한다": {
+    "display_name": "필수입력이 없거나 길이를 넘으면 등록을 거부한다",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "create"
+  },
+  "kr.sistack.board.M4ServiceTest#게시글_수정은_요청한_번호의_내용을_저장한다": {
+    "display_name": "게시글 수정은 요청한 번호의 내용을 저장한다",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "update"
+  },
+  "kr.sistack.board.M4ServiceTest#게시글_삭제후_대상이_없으면_실패한다": {
+    "display_name": "게시글 삭제후 대상이 없으면 실패한다",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "delete"
+  },
+  "kr.sistack.board.M4ServiceTest#공통코드_목록은_페이지범위와_전체건수를_반영한다": {
+    "display_name": "공통코드 목록은 페이지범위와 전체건수를 반영한다",
+    "target_class": "kr.sistack.board.service.impl.CommonCodeServiceImpl",
+    "target_method": "list"
+  },
+  "kr.sistack.board.M4PaginationTest#마지막_페이지의_나머지_한건도_포함한다": {
+    "display_name": "마지막 페이지의 나머지 한건도 포함한다",
+    "target_class": "kr.sistack.board.common.Pagination",
+    "target_method": "getLastPage"
+  },
+  "kr.sistack.board.M4PaginationTest#허용되지_않는_페이지와_검색조건은_거부한다": {
+    "display_name": "허용되지 않는 페이지와 검색조건은 거부한다",
+    "target_class": "kr.sistack.board.domain.BoardSearch",
+    "target_method": "setPage/setSort/setSearchType/setKeyword"
+  },
+  "kr.sistack.board.M4PaginationTest#조회_종료일의_하루전체를_포함한다": {
+    "display_name": "조회 종료일의 하루전체를 포함한다",
+    "target_class": "kr.sistack.board.domain.BoardSearch",
+    "target_method": "getFromDate/getUntilDate"
+  },
+  "kr.sistack.board.M4MapperTest#권한별_메뉴의_이름과_주소를_조회한다": {
+    "display_name": "권한별 메뉴의 이름과 주소를 조회한다",
+    "target_class": "kr.sistack.board.mapper.MenuMapper",
+    "target_method": "selectList"
+  },
+  "kr.sistack.board.M4MapperTest#게시글_목록의_작성일과_상세본문을_정확히_매핑한다": {
+    "display_name": "게시글 목록의 작성일과 상세본문을 정확히 매핑한다",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "selectList/selectOne"
+  },
+  "kr.sistack.board.M4MapperTest#작성일과_제목순으로_게시글을_정렬한다": {
+    "display_name": "작성일과 제목순으로 게시글을 정렬한다",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "selectList/count"
+  },
+  "kr.sistack.board.M4MapperTest#게시글_등록수정삭제가_저장상태에_반영된다": {
+    "display_name": "게시글 등록수정삭제가 저장상태에 반영된다",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "insert/update/delete"
+  },
+  "kr.sistack.board.M4CoverageTest#계획_kclpbohecdchjcka_분기결과": {
+    "display_name": "selectList if 진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "selectList",
+    "coverage_ids": [
+      "kclpbohecdchjcka"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_hmjbjbabahdpkegk_분기결과": {
+    "display_name": "selectList if 비진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "selectList",
+    "coverage_ids": [
+      "hmjbjbabahdpkegk"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_haamlcadjpdooicc_분기결과": {
+    "display_name": "selectList when 진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "selectList",
+    "coverage_ids": [
+      "haamlcadjpdooicc"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_iggdglffbojnmpoh_분기결과": {
+    "display_name": "selectList otherwise 진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "selectList",
+    "coverage_ids": [
+      "iggdglffbojnmpoh"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_hkginblchkljkbfc_분기결과": {
+    "display_name": "selectList if 진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "selectList",
+    "coverage_ids": [
+      "hkginblchkljkbfc"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_maijnicmidbhklji_분기결과": {
+    "display_name": "selectList if 비진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "selectList",
+    "coverage_ids": [
+      "maijnicmidbhklji"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_pgjhhfejlfiljkid_분기결과": {
+    "display_name": "selectList if 진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "selectList",
+    "coverage_ids": [
+      "pgjhhfejlfiljkid"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_fkgdjmhgpidcmjao_분기결과": {
+    "display_name": "selectList if 비진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "selectList",
+    "coverage_ids": [
+      "fkgdjmhgpidcmjao"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_jpapmcjdphbilljk_분기결과": {
+    "display_name": "count if 진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "count",
+    "coverage_ids": [
+      "jpapmcjdphbilljk"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_aklmkdeodmobidgh_분기결과": {
+    "display_name": "count if 비진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "count",
+    "coverage_ids": [
+      "aklmkdeodmobidgh"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_dallllmojlcaapii_분기결과": {
+    "display_name": "count when 진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "count",
+    "coverage_ids": [
+      "dallllmojlcaapii"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_jfngcilomcndgpdj_분기결과": {
+    "display_name": "count otherwise 진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "count",
+    "coverage_ids": [
+      "jfngcilomcndgpdj"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_hiekokechikjejih_분기결과": {
+    "display_name": "count if 진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "count",
+    "coverage_ids": [
+      "hiekokechikjejih"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_mfjabmfnilejaolo_분기결과": {
+    "display_name": "count if 비진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "count",
+    "coverage_ids": [
+      "mfjabmfnilejaolo"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_jpfjglfpmglffikj_분기결과": {
+    "display_name": "count if 진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "count",
+    "coverage_ids": [
+      "jpfjglfpmglffikj"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_lmgofoglengoafcp_분기결과": {
+    "display_name": "count if 비진입 분기 결과",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "count",
+    "coverage_ids": [
+      "lmgofoglengoafcp"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_epmhhfgmkkfodhln_재조회": {
+    "display_name": "insert ID 저장 후 재조회",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "insert",
+    "coverage_ids": [
+      "epmhhfgmkkfodhln"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_nmchinbgkphfggnm_재조회": {
+    "display_name": "insert TITLE 저장 후 재조회",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "insert",
+    "coverage_ids": [
+      "nmchinbgkphfggnm"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_jafhidflnfbecipl_재조회": {
+    "display_name": "insert CONTENT 저장 후 재조회",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "insert",
+    "coverage_ids": [
+      "jafhidflnfbecipl"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_ikpgbkmeonbkgegn_재조회": {
+    "display_name": "insert AUTHOR 저장 후 재조회",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "insert",
+    "coverage_ids": [
+      "ikpgbkmeonbkgegn"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_pckicejalolnedag_재조회": {
+    "display_name": "insert CATEGORY 저장 후 재조회",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "insert",
+    "coverage_ids": [
+      "pckicejalolnedag"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_pkfhcfjdpdiljkbl_재조회": {
+    "display_name": "update TITLE 저장 후 재조회",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "update",
+    "coverage_ids": [
+      "pkfhcfjdpdiljkbl"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_nkihnknpkgamjhcb_재조회": {
+    "display_name": "update CONTENT 저장 후 재조회",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "update",
+    "coverage_ids": [
+      "nkihnknpkgamjhcb"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_kdfjjbhgohoknjjf_재조회": {
+    "display_name": "update CATEGORY 저장 후 재조회",
+    "target_class": "kr.sistack.board.mapper.BoardMapper",
+    "target_method": "update",
+    "coverage_ids": [
+      "kdfjjbhgohoknjjf"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_hcjmnklpkhghmkpi_허용경계": {
+    "display_name": "create title 허용 경계 200",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "create",
+    "coverage_ids": [
+      "hcjmnklpkhghmkpi"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_hcjmnklpkhghmkpi_거부경계": {
+    "display_name": "create title 거부 경계 201",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "create",
+    "coverage_ids": [
+      "hcjmnklpkhghmkpi"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_ednlhaibogehpnej_허용경계": {
+    "display_name": "update title 허용 경계 200",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "update",
+    "coverage_ids": [
+      "ednlhaibogehpnej"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_ednlhaibogehpnej_거부경계": {
+    "display_name": "update title 거부 경계 201",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "update",
+    "coverage_ids": [
+      "ednlhaibogehpnej"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_gpagdgpdgogjhgje_허용경계": {
+    "display_name": "create content 허용 경계 4000",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "create",
+    "coverage_ids": [
+      "gpagdgpdgogjhgje"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_gpagdgpdgogjhgje_거부경계": {
+    "display_name": "create content 거부 경계 4001",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "create",
+    "coverage_ids": [
+      "gpagdgpdgogjhgje"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_jelgakdofkgjfgla_허용경계": {
+    "display_name": "update content 허용 경계 4000",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "update",
+    "coverage_ids": [
+      "jelgakdofkgjfgla"
+    ]
+  },
+  "kr.sistack.board.M4CoverageTest#계획_jelgakdofkgjfgla_거부경계": {
+    "display_name": "update content 거부 경계 4001",
+    "target_class": "kr.sistack.board.service.impl.BoardServiceImpl",
+    "target_method": "update",
+    "coverage_ids": [
+      "jelgakdofkgjfgla"
+    ]
+  }
+}

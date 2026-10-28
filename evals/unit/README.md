@@ -1,5 +1,13 @@
 # M4 평가 절차
 
+## v2 일반 규칙 보정
+
+첫 held-out 0/3은 `evals/private/m4-heldout-first/`에 그대로 둔다. `skills/si-unit-test/scripts/generate-tests.mjs`로 두 정상 examples 프로젝트에서 `v2/<testbed>/coverage-plan.json`, `test-plan.json`, `generated/`를 만든다. 생성 설정은 `fixtures.json`과 기존 회귀 테스트 경로만 지정하고 패치·해설·사례 ID를 입력하지 않는다. 자동 도출 32개 + 기존 회귀 16개를 함께 실행한다.
+
+실행 설정에 각 프로젝트의 `coverage_plan`과 `plan_file`을 지정하고, evaluation spec의 `generated`를 해당 생성 폴더로 지정한다. `run_prefix: "m4-v2-<case-id>"`로 새 run-id를 사용한다. 기존 학습 13건과 이미 관찰한 held-out 3건의 v2는 결함 수정 확인이고 일반화 성능이 아니다.
+
+후속 신규 3건용 동결은 `node scripts/eval-unit-test.mjs freeze docs/evidence/m4-freeze-v2.json <protocol-config.json>`으로 수행한다. config의 protocol은 `v2/registry.json`의 generations/first_output을 사용한다. 새 첫 결과는 `evals/private/m4-next-heldout-first/`에 생성하며 이전 첫 결과와 v2 재검증을 덮어쓰지 않는다. 도구는 새 동결에 결합된 프로젝트별 생성 테스트·계획을 사용한다. 패치가 제공되고 별도 실행 지시를 받기 전까지 멈춘다.
+
 `cases.json`은 실행 전 분류이고 정답 점수 파일이 아니다. M3 기존 13건은 모두 학습이다. 생성 테스트 16개는 `generated/`의 Java 3개와 `test-plan.json`으로 고정한다. 원본 테스트베드에 복사하지 않고 임시 사본에 설치한다. 목록 조회는 화면이 사용하는 목록 필드, 본문은 상세 조회에서 검증한다.
 
 ## 실행 환경

@@ -1,0 +1,51 @@
+TAP version 13
+# Subtest: 비교 연산자와 상수에서 허용/거부 양쪽 경계를 만든다
+ok 1 - 비교 연산자와 상수에서 허용/거부 양쪽 경계를 만든다
+  ---
+  duration_ms: 0.8411
+  type: 'test'
+  ...
+# Subtest: 실제 인덱스의 SQL과 Service에서 모든 분기·쓰기 컬럼·경계를 도출한다
+not ok 2 - 실제 인덱스의 SQL과 Service에서 모든 분기·쓰기 컬럼·경계를 도출한다
+  ---
+  duration_ms: 313.1126
+  type: 'test'
+  location: 'C:\\Users\\Ian\\Downloads\\sistack-kickoff_1\\sistack-kickoff\\test\\unit-coverage.test.mjs:16:1'
+  failureType: 'testCodeFailure'
+  error: '한국어 업무 이름·대상 메서드 계획 누락'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/lib/unit/results.mjs:19:105
+    Array.map (<anonymous>)
+    parseSurefire (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/lib/unit/results.mjs:16:30)
+    TestContext.<anonymous> (file:///~/Downloads/sistack-kickoff_1/sistack-kickoff/test/unit-coverage.test.mjs:29:18)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: 이름이 다른 합성 Mapper도 동일 규칙으로 수집하고 SQL 주석을 무시한다
+ok 3 - 이름이 다른 합성 Mapper도 동일 규칙으로 수집하고 SQL 주석을 무시한다
+  ---
+  duration_ms: 1.1758
+  type: 'test'
+  ...
+# Subtest: 경계 상수를 해석하되 해석 못 한 비교식을 성공 범위로 숨기지 않는다
+ok 4 - 경계 상수를 해석하되 해석 못 한 비교식을 성공 범위로 숨기지 않는다
+  ---
+  duration_ms: 0.4196
+  type: 'test'
+  ...
+# Subtest: 계획 충족률은 실제 실행 결과와 연결하고 누락·스킵·실패를 구분한다
+ok 5 - 계획 충족률은 실제 실행 결과와 연결하고 누락·스킵·실패를 구분한다
+  ---
+  duration_ms: 0.2546
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 4
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 425.3478

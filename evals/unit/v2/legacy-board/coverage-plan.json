@@ -1,0 +1,1054 @@
+{
+  "schema_version": "1.0.0",
+  "source_revision": "518bb445ba3f4e47810cdf500c18ec8dccc09690",
+  "source_files": {
+    "pom.xml": "1daf24d610aef638e73d6942da56f251d5f00f88ec803d51329de46291c60573",
+    "src/main/java/kr/sistack/board/common/Pagination.java": "484a19e438becd6e61a51bbc1740854dbe5b9f8fa4293e8d75ec7bc8d5e1f060",
+    "src/main/java/kr/sistack/board/dao/CommonCodeDao.java": "bf17d511c55527f8169dec393d32c6b5366fb6468d9a0e9c477a89e38136d7cb",
+    "src/main/java/kr/sistack/board/domain/Board.java": "f9b4b7b8f311ded09d10a36faae74b05079c30544c9643bfedb19e1b5f464b25",
+    "src/main/java/kr/sistack/board/domain/BoardSearch.java": "7dcc4fa6feff06daac074e3c2f337310f0831b4d0cf0c2a050562e663c1f5b65",
+    "src/main/java/kr/sistack/board/domain/CommonCode.java": "0dd95b9d8a38eee6440db4275e3029f1dc37a4ae21c05ae2809226c08abd43ea",
+    "src/main/java/kr/sistack/board/domain/Menu.java": "4d3e73ac4f5494d8056d715c809bc1ae83053c2d1462dd879b251316c48e9ba2",
+    "src/main/java/kr/sistack/board/mapper/BoardMapper.java": "7912db189d1060de0e3d4aa7add93f625cb14e446dcb7daa71241d616a88bcfa",
+    "src/main/java/kr/sistack/board/mapper/MenuMapper.java": "cb950f3cb91faa8ca712669245e72bdc700ba03dd740f07f27cdc2668c282c2d",
+    "src/main/java/kr/sistack/board/service/BoardService.java": "896a3dc32285cec3671382ce969adc1a2943a920852e5a696bcbd794e50ab10c",
+    "src/main/java/kr/sistack/board/service/CommonCodeService.java": "0d6fb300d45ae00d5118fcf67d92401ce9943de8e5ff42a6e54de35ebb3d78fb",
+    "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java": "338abd3aa4a58c89144bfa7f13edd15b36439767a1092a583c65dda9b397b970",
+    "src/main/java/kr/sistack/board/service/impl/CommonCodeServiceImpl.java": "898a9ee4acff5b5f53070f9ff89570355caa27ffc88a6b23905e11f82058d666",
+    "src/main/java/kr/sistack/board/service/NotFoundException.java": "e8a5793405fd835c0160fe92f007e054bb0bb3801d74e558d2e782e6de11ef4e",
+    "src/main/java/kr/sistack/board/web/AuthController.java": "99ce3a31f3e2cf37a3d5ccbf84f51480681326790daa5a890047f5834d67b908",
+    "src/main/java/kr/sistack/board/web/BoardController.java": "227d0a21ed2932322e94453c3af9c6a6921076936ae759d3d4eed6c863de6e73",
+    "src/main/java/kr/sistack/board/web/CommonCodeController.java": "ca74a2e20ad4210a950b5cee7ac3f05809552e4f497a37acada4d0e22b127a90",
+    "src/main/java/kr/sistack/board/web/CommonExceptionHandler.java": "840c8a58e7cb490dc7bc1b5f00db2b7b6219329fb60f7a453822d33aeb55eb85",
+    "src/main/java/kr/sistack/board/web/LoginInterceptor.java": "ffdc90cb080d3303862c8d9d1a53efbb50cb9437000311d2e409620f17ba3b1c",
+    "src/main/java/kr/sistack/board/web/UserSession.java": "f30cf08b464a57b453a954aa2248825c13a21a113d840f88f7f58b1b58c557b1",
+    "src/main/resources/db/oracle/ddl.sql": "2335077f19afe3f217e81e8abeb7d975e828e75441fafa01d8508febbac3f31a",
+    "src/main/resources/globals.properties": "d7711f3c96e1f24042efd71f9d6ab71cec8f6a753f54f447a583954e9474bf08",
+    "src/main/resources/mapper/BoardMapper.xml": "ad194be2f97e681dea017a28c62b6a1cbd22956ac0c4471c59d1c7963278c4c0",
+    "src/main/resources/mapper/CommonCode.xml": "7d71ac52705051551532ce4f79b82c855f1b25b3abb255aaf4687e618786b388",
+    "src/main/resources/mapper/CommonSql.xml": "69553bacb0b00e4fd092fe2131d271914b4703e8f91b5d0737fc9c6d983c21cc",
+    "src/main/resources/spring/root-context.xml": "696a11db923fb70687a863faa44321f462b6f9a1969869b252bd46c711d5627c",
+    "src/main/webapp/resources/board.js": "6b7d7a88bee42990012ee211c75b0457650d911b34ede84e7bfab0eaf9327709",
+    "src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml": "1e1a10e0ea9704c9cdf5fbede8668991194a9446128c0117c9db9e0d22c5296a",
+    "src/main/webapp/WEB-INF/views/board/detail.jsp": "26103291f0f5df494de12dff45db92007cbaaac2c5152b3e6f75a61b2161e421",
+    "src/main/webapp/WEB-INF/views/board/form.jsp": "8ed0c020451cfa8b84faab83d9c8631360af1eeaa32b07dd254eae7e274f14b9",
+    "src/main/webapp/WEB-INF/views/board/list.jsp": "feee1bbf66ab87a91a8920595542f8ce218a300348f9efdfa2bc1f2660d224c0",
+    "src/main/webapp/WEB-INF/views/code/list.jsp": "1e14d74bc30469867916e1ab8dfa45698925a640b6ac94e0cbdbbc540928eff4",
+    "src/main/webapp/WEB-INF/views/common/header.jspf": "e8a7827af18324bc3939bbb85a881f8547d6456532902ff1351657f390bea1a1",
+    "src/main/webapp/WEB-INF/views/common/menu.jspf": "2293c5b0676b6fd61cb382306cd103606a2c89979c77ab9afa86ad516417f8b5",
+    "src/main/webapp/WEB-INF/views/common/paging.jspf": "9c8557458ed1b63afcb97ce3edfd10050403ec2dfc1db4bc26024d02e8982cfb",
+    "src/main/webapp/WEB-INF/views/error.jsp": "9db004c8d2a00449cf3f8f124ee3d884318082b9945e40531a6887ed61bbc8ce",
+    "src/main/webapp/WEB-INF/views/login.jsp": "0bdc3edbe5df9471c4bdb7182278070d64986ab3a0656bcb3e71f588446f8b16",
+    "src/main/webapp/WEB-INF/web.xml": "d01994c45686c2d855a2ed3c887440c7ed3fe213eb1277b5e5e07cb00aa528e0"
+  },
+  "items": [
+    {
+      "id": "kclpbohecdchjcka",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "selectList",
+      "statement": "kr.sistack.board.mapper.BoardMapper.selectList",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 14,
+      "branch_tag": "if",
+      "branch_offset": 162,
+      "outcome": true,
+      "conditions": [
+        {
+          "expression": "keyword != null and keyword != ''",
+          "truth": true
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_kclpbohecdchjcka_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "분기표본",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "hmjbjbabahdpkegk",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "selectList",
+      "statement": "kr.sistack.board.mapper.BoardMapper.selectList",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 14,
+      "branch_tag": "if",
+      "branch_offset": 162,
+      "outcome": false,
+      "conditions": [
+        {
+          "expression": "keyword != null and keyword != ''",
+          "truth": false
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_hmjbjbabahdpkegk_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "haamlcadjpdooicc",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "selectList",
+      "statement": "kr.sistack.board.mapper.BoardMapper.selectList",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 16,
+      "branch_tag": "when",
+      "branch_offset": 336,
+      "outcome": true,
+      "conditions": [
+        {
+          "expression": "keyword != null and keyword != ''",
+          "truth": true
+        },
+        {
+          "expression": "searchType == 'author'",
+          "truth": true
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_haamlcadjpdooicc_분기결과"
+      ],
+      "witness": {
+        "searchType": "author",
+        "keyword": "분기표본",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "iggdglffbojnmpoh",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "selectList",
+      "statement": "kr.sistack.board.mapper.BoardMapper.selectList",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 19,
+      "branch_tag": "otherwise",
+      "branch_offset": 571,
+      "outcome": true,
+      "conditions": [
+        {
+          "expression": "keyword != null and keyword != ''",
+          "truth": true
+        },
+        {
+          "expression": "searchType == 'author'",
+          "truth": false
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_iggdglffbojnmpoh_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "분기표본",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "hkginblchkljkbfc",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "selectList",
+      "statement": "kr.sistack.board.mapper.BoardMapper.selectList",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 22,
+      "branch_tag": "if",
+      "branch_offset": 775,
+      "outcome": true,
+      "conditions": [
+        {
+          "expression": "fromDate != null",
+          "truth": true
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_hkginblchkljkbfc_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "",
+        "startDate": "2026-01-02",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "maijnicmidbhklji",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "selectList",
+      "statement": "kr.sistack.board.mapper.BoardMapper.selectList",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 22,
+      "branch_tag": "if",
+      "branch_offset": 775,
+      "outcome": false,
+      "conditions": [
+        {
+          "expression": "fromDate != null",
+          "truth": false
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_maijnicmidbhklji_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "pgjhhfejlfiljkid",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "selectList",
+      "statement": "kr.sistack.board.mapper.BoardMapper.selectList",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 25,
+      "branch_tag": "if",
+      "branch_offset": 968,
+      "outcome": true,
+      "conditions": [
+        {
+          "expression": "untilDate != null",
+          "truth": true
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_pgjhhfejlfiljkid_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "",
+        "startDate": "",
+        "endDate": "2026-01-02",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "fkgdjmhgpidcmjao",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "selectList",
+      "statement": "kr.sistack.board.mapper.BoardMapper.selectList",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 25,
+      "branch_tag": "if",
+      "branch_offset": 968,
+      "outcome": false,
+      "conditions": [
+        {
+          "expression": "untilDate != null",
+          "truth": false
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_fkgdjmhgpidcmjao_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "jpapmcjdphbilljk",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "count",
+      "statement": "kr.sistack.board.mapper.BoardMapper.count",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 14,
+      "branch_tag": "if",
+      "branch_offset": 86,
+      "outcome": true,
+      "conditions": [
+        {
+          "expression": "keyword != null and keyword != ''",
+          "truth": true
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_jpapmcjdphbilljk_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "분기표본",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "aklmkdeodmobidgh",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "count",
+      "statement": "kr.sistack.board.mapper.BoardMapper.count",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 14,
+      "branch_tag": "if",
+      "branch_offset": 86,
+      "outcome": false,
+      "conditions": [
+        {
+          "expression": "keyword != null and keyword != ''",
+          "truth": false
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_aklmkdeodmobidgh_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "dallllmojlcaapii",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "count",
+      "statement": "kr.sistack.board.mapper.BoardMapper.count",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 16,
+      "branch_tag": "when",
+      "branch_offset": 260,
+      "outcome": true,
+      "conditions": [
+        {
+          "expression": "keyword != null and keyword != ''",
+          "truth": true
+        },
+        {
+          "expression": "searchType == 'author'",
+          "truth": true
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_dallllmojlcaapii_분기결과"
+      ],
+      "witness": {
+        "searchType": "author",
+        "keyword": "분기표본",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "jfngcilomcndgpdj",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "count",
+      "statement": "kr.sistack.board.mapper.BoardMapper.count",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 19,
+      "branch_tag": "otherwise",
+      "branch_offset": 495,
+      "outcome": true,
+      "conditions": [
+        {
+          "expression": "keyword != null and keyword != ''",
+          "truth": true
+        },
+        {
+          "expression": "searchType == 'author'",
+          "truth": false
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_jfngcilomcndgpdj_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "분기표본",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "hiekokechikjejih",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "count",
+      "statement": "kr.sistack.board.mapper.BoardMapper.count",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 22,
+      "branch_tag": "if",
+      "branch_offset": 699,
+      "outcome": true,
+      "conditions": [
+        {
+          "expression": "fromDate != null",
+          "truth": true
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_hiekokechikjejih_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "",
+        "startDate": "2026-01-02",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "mfjabmfnilejaolo",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "count",
+      "statement": "kr.sistack.board.mapper.BoardMapper.count",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 22,
+      "branch_tag": "if",
+      "branch_offset": 699,
+      "outcome": false,
+      "conditions": [
+        {
+          "expression": "fromDate != null",
+          "truth": false
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_mfjabmfnilejaolo_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "jpfjglfpmglffikj",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "count",
+      "statement": "kr.sistack.board.mapper.BoardMapper.count",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 25,
+      "branch_tag": "if",
+      "branch_offset": 892,
+      "outcome": true,
+      "conditions": [
+        {
+          "expression": "untilDate != null",
+          "truth": true
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_jpfjglfpmglffikj_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "",
+        "startDate": "",
+        "endDate": "2026-01-02",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "lmgofoglengoafcp",
+      "kind": "sql-branch",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "count",
+      "statement": "kr.sistack.board.mapper.BoardMapper.count",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 25,
+      "branch_tag": "if",
+      "branch_offset": 892,
+      "outcome": false,
+      "conditions": [
+        {
+          "expression": "untilDate != null",
+          "truth": false
+        }
+      ],
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_lmgofoglengoafcp_분기결과"
+      ],
+      "witness": {
+        "searchType": "title",
+        "keyword": "",
+        "startDate": "",
+        "endDate": "",
+        "sort": "createdAt"
+      }
+    },
+    {
+      "id": "epmhhfgmkkfodhln",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "insert",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 44,
+      "statement": "kr.sistack.board.mapper.BoardMapper.insert",
+      "tag": "insert",
+      "input_type": "kr.sistack.board.domain.Board",
+      "table": "BOARD",
+      "predicates": [],
+      "kind": "insert-column",
+      "column": "ID",
+      "property": "id",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_epmhhfgmkkfodhln_재조회"
+      ]
+    },
+    {
+      "id": "nmchinbgkphfggnm",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "insert",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 44,
+      "statement": "kr.sistack.board.mapper.BoardMapper.insert",
+      "tag": "insert",
+      "input_type": "kr.sistack.board.domain.Board",
+      "table": "BOARD",
+      "predicates": [],
+      "kind": "insert-column",
+      "column": "TITLE",
+      "property": "title",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_nmchinbgkphfggnm_재조회"
+      ]
+    },
+    {
+      "id": "jafhidflnfbecipl",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "insert",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 44,
+      "statement": "kr.sistack.board.mapper.BoardMapper.insert",
+      "tag": "insert",
+      "input_type": "kr.sistack.board.domain.Board",
+      "table": "BOARD",
+      "predicates": [],
+      "kind": "insert-column",
+      "column": "CONTENT",
+      "property": "content",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_jafhidflnfbecipl_재조회"
+      ]
+    },
+    {
+      "id": "ikpgbkmeonbkgegn",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "insert",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 44,
+      "statement": "kr.sistack.board.mapper.BoardMapper.insert",
+      "tag": "insert",
+      "input_type": "kr.sistack.board.domain.Board",
+      "table": "BOARD",
+      "predicates": [],
+      "kind": "insert-column",
+      "column": "AUTHOR",
+      "property": "author",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_ikpgbkmeonbkgegn_재조회"
+      ]
+    },
+    {
+      "id": "pckicejalolnedag",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "insert",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 44,
+      "statement": "kr.sistack.board.mapper.BoardMapper.insert",
+      "tag": "insert",
+      "input_type": "kr.sistack.board.domain.Board",
+      "table": "BOARD",
+      "predicates": [],
+      "kind": "insert-column",
+      "column": "CATEGORY",
+      "property": "category",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_pckicejalolnedag_재조회"
+      ]
+    },
+    {
+      "id": "pkfhcfjdpdiljkbl",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "update",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 50,
+      "statement": "kr.sistack.board.mapper.BoardMapper.update",
+      "tag": "update",
+      "input_type": "kr.sistack.board.domain.Board",
+      "table": "BOARD",
+      "predicates": [
+        {
+          "column": "ID",
+          "operator": "=",
+          "property": "id",
+          "role": "filter",
+          "conditions": []
+        }
+      ],
+      "kind": "update-column",
+      "column": "TITLE",
+      "property": "title",
+      "key_column": "ID",
+      "key_property": "id",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_pkfhcfjdpdiljkbl_재조회"
+      ]
+    },
+    {
+      "id": "nkihnknpkgamjhcb",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "update",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 50,
+      "statement": "kr.sistack.board.mapper.BoardMapper.update",
+      "tag": "update",
+      "input_type": "kr.sistack.board.domain.Board",
+      "table": "BOARD",
+      "predicates": [
+        {
+          "column": "ID",
+          "operator": "=",
+          "property": "id",
+          "role": "filter",
+          "conditions": []
+        }
+      ],
+      "kind": "update-column",
+      "column": "CONTENT",
+      "property": "content",
+      "key_column": "ID",
+      "key_property": "id",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_nkihnknpkgamjhcb_재조회"
+      ]
+    },
+    {
+      "id": "kdfjjbhgohoknjjf",
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "update",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 50,
+      "statement": "kr.sistack.board.mapper.BoardMapper.update",
+      "tag": "update",
+      "input_type": "kr.sistack.board.domain.Board",
+      "table": "BOARD",
+      "predicates": [
+        {
+          "column": "ID",
+          "operator": "=",
+          "property": "id",
+          "role": "filter",
+          "conditions": []
+        }
+      ],
+      "kind": "update-column",
+      "column": "CATEGORY",
+      "property": "category",
+      "key_column": "ID",
+      "key_property": "id",
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_kdfjjbhgohoknjjf_재조회"
+      ]
+    },
+    {
+      "id": "hcjmnklpkhghmkpi",
+      "kind": "service-boundary",
+      "owner": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "method": "create",
+      "validator": "validate",
+      "input_type": "kr.sistack.board.domain.Board",
+      "property": "title",
+      "measure": "length",
+      "operator": ">",
+      "constant": "200",
+      "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+      "line": 65,
+      "pair": {
+        "allowed": 200,
+        "rejected": 201
+      },
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_hcjmnklpkhghmkpi_허용경계",
+        "kr.sistack.board.M4CoverageTest#계획_hcjmnklpkhghmkpi_거부경계"
+      ]
+    },
+    {
+      "id": "ednlhaibogehpnej",
+      "kind": "service-boundary",
+      "owner": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "method": "update",
+      "validator": "validate",
+      "input_type": "kr.sistack.board.domain.Board",
+      "property": "title",
+      "measure": "length",
+      "operator": ">",
+      "constant": "200",
+      "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+      "line": 65,
+      "pair": {
+        "allowed": 200,
+        "rejected": 201
+      },
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_ednlhaibogehpnej_허용경계",
+        "kr.sistack.board.M4CoverageTest#계획_ednlhaibogehpnej_거부경계"
+      ]
+    },
+    {
+      "id": "gpagdgpdgogjhgje",
+      "kind": "service-boundary",
+      "owner": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "method": "create",
+      "validator": "validate",
+      "input_type": "kr.sistack.board.domain.Board",
+      "property": "content",
+      "measure": "length",
+      "operator": ">",
+      "constant": "4000",
+      "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+      "line": 66,
+      "pair": {
+        "allowed": 4000,
+        "rejected": 4001
+      },
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_gpagdgpdgogjhgje_허용경계",
+        "kr.sistack.board.M4CoverageTest#계획_gpagdgpdgogjhgje_거부경계"
+      ]
+    },
+    {
+      "id": "jelgakdofkgjfgla",
+      "kind": "service-boundary",
+      "owner": "kr.sistack.board.service.impl.BoardServiceImpl",
+      "method": "update",
+      "validator": "validate",
+      "input_type": "kr.sistack.board.domain.Board",
+      "property": "content",
+      "measure": "length",
+      "operator": ">",
+      "constant": "4000",
+      "file": "src/main/java/kr/sistack/board/service/impl/BoardServiceImpl.java",
+      "line": 66,
+      "pair": {
+        "allowed": 4000,
+        "rejected": 4001
+      },
+      "tests": [
+        "kr.sistack.board.M4CoverageTest#계획_jelgakdofkgjfgla_허용경계",
+        "kr.sistack.board.M4CoverageTest#계획_jelgakdofkgjfgla_거부경계"
+      ]
+    }
+  ],
+  "statements": [
+    {
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "selectList",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 30,
+      "statement": "kr.sistack.board.mapper.BoardMapper.selectList",
+      "tag": "select",
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "table": "BOARD",
+      "predicates": [
+        {
+          "column": "AUTHOR",
+          "operator": "LIKE",
+          "property": "keyword",
+          "role": "filter",
+          "conditions": [
+            {
+              "expression": "keyword != null and keyword != ''",
+              "truth": true
+            },
+            {
+              "expression": "searchType == 'author'",
+              "truth": true
+            }
+          ]
+        },
+        {
+          "column": "TITLE",
+          "operator": "LIKE",
+          "property": "keyword",
+          "role": "filter",
+          "conditions": [
+            {
+              "expression": "keyword != null and keyword != ''",
+              "truth": true
+            },
+            {
+              "expression": "searchType == 'author'",
+              "truth": false
+            }
+          ]
+        },
+        {
+          "column": "CREATED_AT",
+          "operator": ">=",
+          "property": "fromDate",
+          "role": "filter",
+          "conditions": [
+            {
+              "expression": "fromDate != null",
+              "truth": true
+            }
+          ]
+        },
+        {
+          "column": "CREATED_AT",
+          "operator": "<",
+          "property": "untilDate",
+          "role": "filter",
+          "conditions": [
+            {
+              "expression": "untilDate != null",
+              "truth": true
+            }
+          ]
+        },
+        {
+          "column": "ROWNUM",
+          "operator": "<=",
+          "property": "endRow",
+          "role": "pagination",
+          "conditions": []
+        },
+        {
+          "column": "ROW_NO",
+          "operator": ">",
+          "property": "offset",
+          "role": "pagination",
+          "conditions": []
+        }
+      ]
+    },
+    {
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "count",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 37,
+      "statement": "kr.sistack.board.mapper.BoardMapper.count",
+      "tag": "select",
+      "input_type": "kr.sistack.board.domain.BoardSearch",
+      "table": "BOARD",
+      "predicates": [
+        {
+          "column": "AUTHOR",
+          "operator": "LIKE",
+          "property": "keyword",
+          "role": "filter",
+          "conditions": [
+            {
+              "expression": "keyword != null and keyword != ''",
+              "truth": true
+            },
+            {
+              "expression": "searchType == 'author'",
+              "truth": true
+            }
+          ]
+        },
+        {
+          "column": "TITLE",
+          "operator": "LIKE",
+          "property": "keyword",
+          "role": "filter",
+          "conditions": [
+            {
+              "expression": "keyword != null and keyword != ''",
+              "truth": true
+            },
+            {
+              "expression": "searchType == 'author'",
+              "truth": false
+            }
+          ]
+        },
+        {
+          "column": "CREATED_AT",
+          "operator": ">=",
+          "property": "fromDate",
+          "role": "filter",
+          "conditions": [
+            {
+              "expression": "fromDate != null",
+              "truth": true
+            }
+          ]
+        },
+        {
+          "column": "CREATED_AT",
+          "operator": "<",
+          "property": "untilDate",
+          "role": "filter",
+          "conditions": [
+            {
+              "expression": "untilDate != null",
+              "truth": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "selectOne",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 41,
+      "statement": "kr.sistack.board.mapper.BoardMapper.selectOne",
+      "tag": "select",
+      "input_type": "kr.sistack.board.mapper.long",
+      "table": "BOARD",
+      "predicates": [
+        {
+          "column": "ID",
+          "operator": "=",
+          "property": "id",
+          "role": "filter",
+          "conditions": []
+        }
+      ]
+    },
+    {
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "insert",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 44,
+      "statement": "kr.sistack.board.mapper.BoardMapper.insert",
+      "tag": "insert",
+      "input_type": "kr.sistack.board.domain.Board",
+      "table": "BOARD",
+      "predicates": []
+    },
+    {
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "update",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 50,
+      "statement": "kr.sistack.board.mapper.BoardMapper.update",
+      "tag": "update",
+      "input_type": "kr.sistack.board.domain.Board",
+      "table": "BOARD",
+      "predicates": [
+        {
+          "column": "ID",
+          "operator": "=",
+          "property": "id",
+          "role": "filter",
+          "conditions": []
+        }
+      ]
+    },
+    {
+      "owner": "kr.sistack.board.mapper.BoardMapper",
+      "method": "delete",
+      "file": "src/main/resources/mapper/BoardMapper.xml",
+      "line": 53,
+      "statement": "kr.sistack.board.mapper.BoardMapper.delete",
+      "tag": "delete",
+      "input_type": "kr.sistack.board.mapper.long",
+      "table": "BOARD",
+      "predicates": [
+        {
+          "column": "ID",
+          "operator": "=",
+          "property": "id",
+          "role": "filter",
+          "conditions": []
+        }
+      ]
+    },
+    {
+      "owner": "commonCode",
+      "method": "selectList",
+      "file": "src/main/resources/mapper/CommonCode.xml",
+      "line": 4,
+      "statement": "commonCode.selectList",
+      "tag": "select",
+      "input_type": "map",
+      "table": "COMMON_CODE",
+      "predicates": [
+        {
+          "column": "ROWNUM",
+          "operator": "<=",
+          "property": "endRow",
+          "role": "pagination",
+          "conditions": []
+        },
+        {
+          "column": "ROW_NO",
+          "operator": ">",
+          "property": "offset",
+          "role": "pagination",
+          "conditions": []
+        }
+      ]
+    },
+    {
+      "owner": "commonCode",
+      "method": "count",
+      "file": "src/main/resources/mapper/CommonCode.xml",
+      "line": 9,
+      "statement": "commonCode.count",
+      "tag": "select",
+      "input_type": null,
+      "table": "COMMON_CODE",
+      "predicates": []
+    }
+  ],
+  "generator_version": "2.0.0",
+  "generated_files": {
+    "src/test/java/kr/sistack/board/M4CoverageSupport.java": "c4cce512e284ad441ee66e23245496b9aa4fe89a9ab8979a88b0b4d122c0c3a2",
+    "src/test/java/kr/sistack/board/M4CoverageTest.java": "fe5046b8d0e02f25e3ab03c387b0437e8a32744d10f463eb06deaba85f8e1ef9",
+    "src/test/java/kr/sistack/board/M4MapperTest.java": "beb2a5fb329f94f1b5c4ae4bdd54effa0ae34746e36d2e522f47f4544484a281",
+    "src/test/java/kr/sistack/board/M4PaginationTest.java": "2f785678012a20fece88018d3abd847ea38be0b2cc100c31c51001487d531e66",
+    "src/test/java/kr/sistack/board/M4ServiceTest.java": "e4c14f30e845842a5e092fd2f5bc083dcdf12b67601d14e88e9263f6d8925d1a"
+  },
+  "fixture_source": "fixtures.json"
+}

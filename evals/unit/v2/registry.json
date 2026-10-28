@@ -1,0 +1,7 @@
+{
+  "generations": {
+    "legacy-board": "evals/unit/v2/legacy-board",
+    "legacy-board-thymeleaf": "evals/unit/v2/legacy-board-thymeleaf"
+  },
+  "first_output": "evals/private/m4-next-heldout-first"
+}

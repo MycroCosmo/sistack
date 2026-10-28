@@ -14,10 +14,10 @@ license: MIT
 2. 프로젝트 소스와 기존 테스트를 읽고 대상 메서드→Mapper/DAO 호출을 확인한다. 필요하면 내장 인덱서 `scripts/lib/indexer/index.mjs`의 `buildIndex`로 골격을 얻고 실제 소스로 확정한다. 인덱스만으로 원인을 확정하지 않는다.
 3. [자동 도출 규칙](references/coverage-rules.md)에 따라 인덱스의 Mapper XML/include와 Service 검증 비교식을 읽고 `generate-tests.mjs`로 `coverage-plan.json`과 테스트를 생성한다. `<if>/<when>/<otherwise>`별 입력, UPDATE SET 컬럼별 변경·재조회, INSERT 전체 컬럼 재조회, 비교 상수의 허용/거부 쌍을 포함한다. 생성은 정상 소스와 합성 fixture만 입력으로 받는다. 패치·정답으로 테스트를 도출하지 않는다. 해석 못 한 항목은 분모에서 지우지 않고 UNRESOLVED로 남긴다.
 4. [케이스 설계](references/test-case-design.md)에 따라 업무 동작·경계·예외를 보충하고 한국어 업무 이름을 붙인다. Service는 DAO를 목으로 격리하고 Mapper는 이미 승인된 테스트 DB 설정이 있을 때만 로컬 H2로 실행한다. Mapper 검사는 좁은 통합 테스트라고 구분한다. 템플릿·JS·웹 설정의 결함을 소스 문자열 검사로 잡지 않는다.
-4. [JUnit 4/Mockito](references/junit4-mockito.md), [레거시 Spring](references/spring-legacy.md)을 따라 테스트와 `test-plan.json`을 작성한다. 운영 코드를 테스트 편의 목적으로 고치지 않는다. 기존 테스트와 이름을 충돌시키지 않는다.
-5. [실행 계약](references/result-contract.md)의 설정 JSON으로 `node <skill>/scripts/run-tests.mjs <project> <config.json>`을 실행한다. 사용자가 승인한 실행만 수행한다. 실행 전에 계획된 테스트 목록을 확정하고 결과에 없는 테스트를 성공으로 세지 않는다. 원인 코드가 틀렸으면 결함으로 보고하며 임의 수정하지 않는다.
-6. 반환값을 바꾸거나 핵심 호출을 누락한 임시 사본에서도 통과하는 약한 테스트를 검토한다. 결과와 부작용을 검증하도록 고치고, 동일 변이에서 실패함을 실행해 증명한다. 목 호출 검증만으로 반환값을 검증했다고 주장하지 않는다.
-7. `.sistack/runs/<run-id>/`에 `manifest.json`, `report.md`, `test-results.json`, `evidence/`를 보존한다. 같은 run-id를 재사용하지 않는다. 실패 메시지·XML·로그는 마스킹한다. M5는 스키마와 실행 범위까지 확인해 읽는다.
+5. [JUnit 4/Mockito](references/junit4-mockito.md), [레거시 Spring](references/spring-legacy.md)을 따라 테스트와 `test-plan.json`을 작성한다. 운영 코드를 테스트 편의 목적으로 고치지 않는다. 기존 테스트와 이름을 충돌시키지 않는다.
+6. [실행 계약](references/result-contract.md)의 설정 JSON으로 `node <skill>/scripts/run-tests.mjs <project> <config.json>`을 실행한다. 사용자가 승인한 실행만 수행한다. 실행 전에 계획된 테스트 목록을 확정하고 결과에 없는 테스트를 성공으로 세지 않는다. 원인 코드가 틀렸으면 결함으로 보고하며 임의 수정하지 않는다.
+7. 반환값을 바꾸거나 핵심 호출을 누락한 임시 사본에서도 통과하는 약한 테스트를 검토한다. 결과와 부작용을 검증하도록 고치고, 동일 변이에서 실패함을 실행해 증명한다. 목 호출 검증만으로 반환값을 검증했다고 주장하지 않는다.
+8. `.sistack/runs/<run-id>/`에 `manifest.json`, `report.md`, `test-results.json`, `evidence/`를 보존한다. 같은 run-id를 재사용하지 않는다. 실패 메시지·XML·로그는 마스킹한다. M5는 스키마와 실행 범위까지 확인해 읽는다.
 
 ## si-debug 연결
 

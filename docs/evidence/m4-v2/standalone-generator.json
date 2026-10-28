@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "output": {
+    "planned": 28,
+    "generated": 28,
+    "unresolved": 0
+  },
+  "source": "저장소 밖 스킬 폴더와 동일한 독립 복사본 CLI"
+}

@@ -1,0 +1,169 @@
+{
+  "phase": "v2",
+  "dataset": "training",
+  "generalization": false,
+  "results": [
+    {
+      "case_id": "01-binding",
+      "eligible": true,
+      "detection": "DETECTED",
+      "repair_status": "PASS",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "02-js-url",
+      "eligible": false,
+      "detection": "MISSED",
+      "repair_status": "NOT_RUN",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "03-request-encoding",
+      "eligible": false,
+      "detection": "MISSED",
+      "repair_status": "NOT_RUN",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "04-session-bypass",
+      "eligible": false,
+      "detection": "MISSED",
+      "repair_status": "NOT_RUN",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "05-paging",
+      "eligible": true,
+      "detection": "DETECTED",
+      "repair_status": "PASS",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "06-sort-sql",
+      "eligible": true,
+      "detection": "DETECTED",
+      "repair_status": "PASS",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 20,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "07-oracle-log-only",
+      "eligible": false,
+      "detection": "BLOCKED",
+      "repair_status": "NOT_RUN"
+    },
+    {
+      "case_id": "08-thymeleaf-utilities",
+      "eligible": false,
+      "detection": "MISSED",
+      "repair_status": "NOT_RUN",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "09-view-resolver",
+      "eligible": false,
+      "detection": "MISSED",
+      "repair_status": "NOT_RUN",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "10-fragment-encoding",
+      "eligible": false,
+      "detection": "MISSED",
+      "repair_status": "NOT_RUN",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "m3-heldout-01",
+      "eligible": false,
+      "detection": "MISSED",
+      "repair_status": "NOT_RUN",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "m3-heldout-02",
+      "eligible": true,
+      "detection": "DETECTED",
+      "repair_status": "PASS",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    },
+    {
+      "case_id": "m3-heldout-03",
+      "eligible": false,
+      "detection": "MISSED",
+      "repair_status": "NOT_RUN",
+      "coverage": {
+        "planned": 28,
+        "generated": 28,
+        "executed": 28,
+        "passed": 28,
+        "unresolved": 0
+      }
+    }
+  ]
+}
