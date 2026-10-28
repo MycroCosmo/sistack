@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "source_revision",
+    "source_files",
+    "rows",
+    "unverified"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "kind": {
+      "const": "table-spec"
+    },
+    "source_revision": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "source_files": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "unverified": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "values",
+          "evidence",
+          "unverified",
+          "status",
+          "reason"
+        ],
+        "properties": {
+          "values": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "table",
+              "table_name",
+              "column",
+              "column_name",
+              "data_type",
+              "nullable",
+              "primary_key",
+              "foreign_key",
+              "default_value"
+            ],
+            "properties": {
+              "table": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "table_name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "column": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "column_name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "data_type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "nullable": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "primary_key": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "foreign_key": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "default_value": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "file",
+                "line"
+              ],
+              "properties": {
+                "file": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "unverified": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "status": {
+            "enum": [
+              "CONFIRMED",
+              "LIKELY",
+              "UNRESOLVED"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

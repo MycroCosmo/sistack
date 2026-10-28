@@ -94,7 +94,7 @@ function likelyView(graph, from, evidence, pattern, reason) {
 }
 
 export function linkViews(classes, config, graph) {
-  if (!config.resolvers.some(r => r.thymeleaf)) return;
+  if (!config.resolvers.some(r => r.thymeleaf || r.jsp)) return;
   for (const cls of classes.filter(c => c.annotations.some(a => a.name === 'Controller') && !c.annotations.some(a => a.name === 'ResponseBody'))) {
     for (const method of cls.methods) {
       if (!/(?:^|\.)String$/.test(method.node.details.return_type) || method.annotations.some(a => a.name === 'ResponseBody')) continue;

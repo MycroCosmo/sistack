@@ -330,4 +330,8 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - 공식 GitHub latest API를 2026-10-28 조회한 결과 최신 안정 릴리스는 v4.4.0, **2023-10-19T19:57:46Z**다. 약 3년간 새 안정 릴리스가 없다는 유지보수 한계를 감수하고 승인 버전을 사용한다. 이 사실만으로 프로젝트 중단/안전성을 단정하지 않는다. [공식 릴리스](https://github.com/exceljs/exceljs/releases/tag/v4.4.0), [latest API](https://api.github.com/repos/exceljs/exceljs/releases/latest).
 - 전이 패키지의 버전·라이선스·배포 라이선스 파일 해시는 `docs/dependency-licenses.json`에 기록한다. `node scripts/dependency-licenses.mjs`로 설치된 lock에서 재생성한다. 각 패키지 배포본의 라이선스 원문은 node_modules에 유지된다.
 - 양식 보존은 실제 파일을 채우고 재읽어 확인한다. 수식은 보존하되 계산하지 않는다. 피벗·차트·매크로·전자서명·외부 연결 등은 보존 보장 대상이 아니며 해당 OOXML 요소를 발견하면 경고와 PARTIAL을 남긴다. 원본 양식은 변경하지 않는다.
+- 설치된 전이 패키지 194개 중 buffers@0.1.1은 배포 package.json/라이선스 파일에 라이선스 표시가 없다. 기록은 UNRESOLVED로 유지한다. 직접 승인한 두 패키지는 각각 MIT/Apache-2.0으로 확인했다. 출처 없이 MIT로 추정하지 않는다.
+- M5a 표준 JSON은 문서 종류별 schemas/docs 스키마로 분리한다. 프로그램 목록은 endpoint당 1행, 프로그램 ID/업무명은 null(사용자 규칙만 허용), 테이블은 선택한 DDL/CSV만 사용한다. 매핑 초안은 confirmed=false이며 사용자 확인 없이는 채우지 않는다.
+- 정상 프로그램 목록 회귀에서 JSP 반환 화면이 빠짐을 확인했다. 기존 인덱서의 Thymeleaf 전용 진입 조건을 JSP 리졸버에도 적용하도록 확장했다. 기존 M4 동결 기록/held-out 결과는 바꾸지 않는다.
+- 왕복 실패를 통해 ExcelJS가 비활성 인쇄 시작 번호의 기본값 1을 명시값으로 다시 쓰는 문제를 확인했다. 비활성 기본값만 직렬화 중 제외해 보정하며 사용자 설정은 유지한다. ExcelJS가 항상 쓰는 미사용 기본 slicer/timeline 스타일 두 선언만 경고에서 제외하고 실제 확장/부품은 경고한다.
 

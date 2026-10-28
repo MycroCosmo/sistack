@@ -38,3 +38,10 @@ Bundled third-party asset:
   examples/legacy-board/src/main/webapp/resources/vendor/jquery-LICENSE.txt
   Source: https://code.jquery.com/jquery-3.7.1.min.js
   SHA-256: fc9a93dd241f6b045cbff0481cf4e1901becd0e12fb45166a8f17f95823f0b1a
+M5 approved Node dependencies:
+- ExcelJS 4.4.0, MIT, https://github.com/exceljs/exceljs
+- playwright-core 1.64.1, Apache-2.0, https://github.com/microsoft/playwright
+Exact transitive versions, license identifiers and distributed license-file
+hashes: docs/dependency-licenses.json. Original license texts remain in the
+installed packages. See docs/decisions.md for unresolved metadata and limits.
+
