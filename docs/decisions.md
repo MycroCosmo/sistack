@@ -323,3 +323,11 @@ Java 의존성은 `examples/legacy-board/pom.xml`에 한정한다. 루트 packag
 - 학습의 기존 55개 연결은 모두 일치했다. static 일반 규칙이 clcode Controller:184 → EgovUserDetailsHelper#getAuthenticatedUser:41의 유효한 호출도 찾아 기존 정답 비교가 과탐 1건/FAIL이다. 호출을 숨기거나 승인 정답을 바꾸지 않고 차이를 설명한다. 정답 추가는 별도 사용자 검토 대상이다.
 - M2 완료 기준은 학습 5건의 모든 비교 차이 설명을 허용한다. 74개 테스트, manifest 8개, 단순 3건/복잡 5건 실행, 명시 호출 PASS를 확인해 M2를 종료한다. 자동 활성화는 사용자 확인 1/3 PASS와 나머지 두 문항 미실행을 구분한다. M3는 시작하지 않는다.
 - 초기 v2 시도와 최종 v2-final의 원본·해시·점수·실제 탐색 기록을 193개 파일의 gzip JSON으로 보존하고 해제·파일별 해시·원본 바이트를 대조했다. 첫 기준선의 59개 파일 보존 기록과 분리한다.
+# M5 의존성 승인 및 유지보수 확인 (2026-10-28)
+
+- 사용자 승인: ExcelJS **4.4.0**(MIT), playwright-core **1.64.1**(Apache-2.0). 정확한 버전과 전이 의존성을 package-lock.json으로 고정한다. 설치는 `--ignore-scripts`, `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1`로 수행했다. 브라우저 다운로드·M5b 구현/실행은 하지 않는다.
+- 루트/M5a는 Node >=18을 유지한다. playwright-core를 사용하는 M5b만 Node >=20으로 제한하며 M5a 모듈은 이를 import하지 않는다.
+- 공식 GitHub latest API를 2026-10-28 조회한 결과 최신 안정 릴리스는 v4.4.0, **2023-10-19T19:57:46Z**다. 약 3년간 새 안정 릴리스가 없다는 유지보수 한계를 감수하고 승인 버전을 사용한다. 이 사실만으로 프로젝트 중단/안전성을 단정하지 않는다. [공식 릴리스](https://github.com/exceljs/exceljs/releases/tag/v4.4.0), [latest API](https://api.github.com/repos/exceljs/exceljs/releases/latest).
+- 전이 패키지의 버전·라이선스·배포 라이선스 파일 해시는 `docs/dependency-licenses.json`에 기록한다. `node scripts/dependency-licenses.mjs`로 설치된 lock에서 재생성한다. 각 패키지 배포본의 라이선스 원문은 node_modules에 유지된다.
+- 양식 보존은 실제 파일을 채우고 재읽어 확인한다. 수식은 보존하되 계산하지 않는다. 피벗·차트·매크로·전자서명·외부 연결 등은 보존 보장 대상이 아니며 해당 OOXML 요소를 발견하면 경고와 PARTIAL을 남긴다. 원본 양식은 변경하지 않는다.
+
