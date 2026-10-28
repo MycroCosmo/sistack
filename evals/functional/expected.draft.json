@@ -1,0 +1,666 @@
+{
+  "review_status": "draft",
+  "approved_by": null,
+  "projects": {
+    "legacy-board": {
+      "census": {
+        "review_status": "draft",
+        "approved_by": null,
+        "source_files": {
+          "src/main/webapp/resources/board.js": "6b7d7a88bee42990012ee211c75b0457650d911b34ede84e7bfab0eaf9327709",
+          "src/main/webapp/WEB-INF/views/board/detail.jsp": "26103291f0f5df494de12dff45db92007cbaaac2c5152b3e6f75a61b2161e421",
+          "src/main/webapp/WEB-INF/views/board/form.jsp": "8ed0c020451cfa8b84faab83d9c8631360af1eeaa32b07dd254eae7e274f14b9",
+          "src/main/webapp/WEB-INF/views/board/list.jsp": "feee1bbf66ab87a91a8920595542f8ce218a300348f9efdfa2bc1f2660d224c0",
+          "src/main/webapp/WEB-INF/views/code/list.jsp": "1e14d74bc30469867916e1ab8dfa45698925a640b6ac94e0cbdbbc540928eff4",
+          "src/main/webapp/WEB-INF/views/common/header.jspf": "e8a7827af18324bc3939bbb85a881f8547d6456532902ff1351657f390bea1a1",
+          "src/main/webapp/WEB-INF/views/common/menu.jspf": "2293c5b0676b6fd61cb382306cd103606a2c89979c77ab9afa86ad516417f8b5",
+          "src/main/webapp/WEB-INF/views/common/paging.jspf": "9c8557458ed1b63afcb97ce3edfd10050403ec2dfc1db4bc26024d02e8982cfb",
+          "src/main/webapp/WEB-INF/views/error.jsp": "9db004c8d2a00449cf3f8f124ee3d884318082b9945e40531a6887ed61bbc8ce",
+          "src/main/webapp/WEB-INF/views/login.jsp": "0bdc3edbe5df9471c4bdb7182278070d64986ab3a0656bcb3e71f588446f8b16"
+        },
+        "points": [
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 7,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 12,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 18,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 44,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 20,
+            "kind": "ajax"
+          },
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 49,
+            "kind": "ajax"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/detail.jsp",
+            "line": 20,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/detail.jsp",
+            "line": 25,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/detail.jsp",
+            "line": 26,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/detail.jsp",
+            "line": 27,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/detail.jsp",
+            "line": 28,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/detail.jsp",
+            "line": 29,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/detail.jsp",
+            "line": 9,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/detail.jsp",
+            "line": 13,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 13,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 14,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 15,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 29,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 30,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 6,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/form.jsp",
+            "line": 10,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+            "line": 14,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+            "line": 15,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+            "line": 32,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+            "line": 51,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+            "line": 72,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+            "line": 6,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+            "line": 10,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/board/list.jsp",
+            "line": 70,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 12,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 13,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 15,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 6,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 10,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 38,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+            "line": 5,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+            "line": 9,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+            "line": 10,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+            "line": 11,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+            "line": 4,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+            "line": 9,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/error.jsp",
+            "line": 12,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/error.jsp",
+            "line": 6,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/login.jsp",
+            "line": 12,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/login.jsp",
+            "line": 13,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/login.jsp",
+            "line": 19,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/login.jsp",
+            "line": 6,
+            "kind": "fragment"
+          }
+        ]
+      },
+      "comparison": {
+        "review_status": "draft",
+        "missing": [],
+        "extra": []
+      },
+      "inventory_count": 47,
+      "case_count": 56,
+      "coverage": {
+        "missing": [],
+        "duplicate": [],
+        "orphan": [],
+        "expected_request_omissions": []
+      }
+    },
+    "legacy-board-thymeleaf": {
+      "census": {
+        "review_status": "draft",
+        "approved_by": null,
+        "source_files": {
+          "src/main/webapp/resources/board.js": "6b7d7a88bee42990012ee211c75b0457650d911b34ede84e7bfab0eaf9327709",
+          "src/main/webapp/resources/thymeleaf-board.js": "dc3de039d48079f2dd5d4a3be6eb9d534a0200cd84a2197ffa9f87d40cebb2ce",
+          "src/main/webapp/WEB-INF/templates/board/detail.html": "758a017baff5cac16df0c83f4aae49abbf27a2680038d98de657f42ea005ff3d",
+          "src/main/webapp/WEB-INF/templates/board/form.html": "ffb7fbf45362d7d2932f97b31e5b9443c16fc3b9e60dc2586f8fb81516ce638d",
+          "src/main/webapp/WEB-INF/templates/board/list.html": "000b783cbc8a9a24346ff21468d1aeb2cbc88a8ba6a35190a1d1bf7d7a2f2f23",
+          "src/main/webapp/WEB-INF/templates/error.html": "18b8c278761b55ff0badb535b58d3f08eab3eeffc8ed33d03e0dd7a9db0d8c12",
+          "src/main/webapp/WEB-INF/templates/fragments/common.html": "df652139c093ccd52d6bb9c8983c8a5da5abd41d7bda7b8579f71c8badd7e67d",
+          "src/main/webapp/WEB-INF/templates/layouts/default.html": "735dca0392526c9b70af8a0e2cd20c4f973ad88f66b5f526daabbbb4d1456f37",
+          "src/main/webapp/WEB-INF/templates/login.html": "a8826ce39f1db5b49108d6e35c2646ccafd78f1a71c854060b377242d228c9af",
+          "src/main/webapp/WEB-INF/views/code/list.jsp": "1e14d74bc30469867916e1ab8dfa45698925a640b6ac94e0cbdbbc540928eff4",
+          "src/main/webapp/WEB-INF/views/common/header.jspf": "e8a7827af18324bc3939bbb85a881f8547d6456532902ff1351657f390bea1a1",
+          "src/main/webapp/WEB-INF/views/common/menu.jspf": "2293c5b0676b6fd61cb382306cd103606a2c89979c77ab9afa86ad516417f8b5",
+          "src/main/webapp/WEB-INF/views/common/paging.jspf": "9c8557458ed1b63afcb97ce3edfd10050403ec2dfc1db4bc26024d02e8982cfb",
+          "src/main/webapp/WEB-INF/views/error.jsp": "9db004c8d2a00449cf3f8f124ee3d884318082b9945e40531a6887ed61bbc8ce"
+        },
+        "points": [
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 7,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 12,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 18,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 44,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 20,
+            "kind": "ajax"
+          },
+          {
+            "file": "src/main/webapp/resources/board.js",
+            "line": 49,
+            "kind": "ajax"
+          },
+          {
+            "file": "src/main/webapp/resources/thymeleaf-board.js",
+            "line": 3,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/thymeleaf-board.js",
+            "line": 6,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/thymeleaf-board.js",
+            "line": 11,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/resources/thymeleaf-board.js",
+            "line": 13,
+            "kind": "ajax"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+            "line": 2,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+            "line": 32,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+            "line": 36,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+            "line": 38,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+            "line": 39,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+            "line": 40,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+            "line": 41,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+            "line": 42,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+            "line": 7,
+            "kind": "handler"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/detail.html",
+            "line": 11,
+            "kind": "ajax"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/form.html",
+            "line": 2,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/form.html",
+            "line": 5,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/form.html",
+            "line": 7,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/form.html",
+            "line": 8,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/form.html",
+            "line": 9,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/form.html",
+            "line": 17,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/form.html",
+            "line": 18,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 2,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 5,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 8,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 9,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 25,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 32,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 39,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 41,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 42,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 42,
+            "kind": "data-url"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 43,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/board/list.html",
+            "line": 43,
+            "kind": "data-url"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/error.html",
+            "line": 2,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/error.html",
+            "line": 5,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/error.html",
+            "line": 8,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+            "line": 4,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+            "line": 5,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+            "line": 6,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+            "line": 7,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+            "line": 8,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+            "line": 11,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+            "line": 12,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/fragments/common.html",
+            "line": 14,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/layouts/default.html",
+            "line": 13,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/layouts/default.html",
+            "line": 14,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/login.html",
+            "line": 2,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/login.html",
+            "line": 5,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/login.html",
+            "line": 8,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/login.html",
+            "line": 9,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/templates/login.html",
+            "line": 16,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 12,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 13,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 15,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 6,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 10,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/code/list.jsp",
+            "line": 38,
+            "kind": "fragment"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+            "line": 5,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+            "line": 9,
+            "kind": "form"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+            "line": 10,
+            "kind": "hidden"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/menu.jspf",
+            "line": 11,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+            "line": 4,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/common/paging.jspf",
+            "line": 9,
+            "kind": "button"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/error.jsp",
+            "line": 12,
+            "kind": "link"
+          },
+          {
+            "file": "src/main/webapp/WEB-INF/views/error.jsp",
+            "line": 6,
+            "kind": "fragment"
+          }
+        ]
+      },
+      "comparison": {
+        "review_status": "draft",
+        "missing": [],
+        "extra": []
+      },
+      "inventory_count": 71,
+      "case_count": 80,
+      "coverage": {
+        "missing": [],
+        "duplicate": [],
+        "orphan": [],
+        "expected_request_omissions": []
+      }
+    }
+  }
+}

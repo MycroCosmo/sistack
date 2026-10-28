@@ -6,7 +6,7 @@ export async function syncShared({ base = root, check = false } = {}) {
   const dirs = await validateSkills(path.join(base, 'skills'));
   const differences = [];
   for (const dir of dirs) {
-    const groups = ['mask', ...(['si-trace', 'si-debug', 'si-unit-test', 'si-docs'].includes(path.basename(dir)) ? ['indexer', 'trace', 'manifest'] : []), ...(path.basename(dir) === 'si-debug' ? ['debug'] : []), ...(path.basename(dir) === 'si-unit-test' ? ['unit'] : []), ...(path.basename(dir) === 'si-docs' ? ['docs'] : [])];
+    const groups = ['mask', ...(['si-trace', 'si-debug', 'si-unit-test', 'si-docs'].includes(path.basename(dir)) ? ['indexer', 'trace', 'manifest'] : []), ...(path.basename(dir) === 'si-debug' ? ['debug'] : []), ...(path.basename(dir) === 'si-unit-test' ? ['unit'] : []), ...(path.basename(dir) === 'si-docs' ? ['docs','functional'] : [])];
     for (const group of groups) {
       const source = path.join(base, 'lib', group), names = await files(source);
       const destination = path.join(dir, 'scripts/lib', group);
