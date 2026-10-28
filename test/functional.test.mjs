@@ -23,6 +23,10 @@ test('삭제만 SKIP으로 분류하고 알려진 요청 메서드와 URL을 기
  const i={items:[{inventory_item_id:'a',kind:'form',file:'a',line:1,screens:[],requests:[{url:'/board/delete.do',method:'POST'}]},{inventory_item_id:'b',kind:'form',file:'a',line:2,screens:[],requests:[{url:'/board/list.do',method:'GET'}]}],pages:[]};
  const c=generateCases(i);assert.equal(c[0].mode,'SKIP','삭제 요청을 호출하지 않아야 한다');assert.equal(c[1].mode,'AUTO-API','일반 조회를 SKIP으로 숨기지 않아야 한다');assert.deepEqual(c[1].expected_requests,['GET /board/list.do'],'기대 요청은 메서드까지 남겨야 한다');
 });
+test('권한이 필요한 화면의 구조 항목도 관리자 세션으로 확인한다',()=>{
+ const i={items:[{inventory_item_id:'a',kind:'fragment',file:'part',line:1,screens:['form'],requests:[]}],pages:[{file:'form',routes:[{url:'/board/form.do',method:'GET'}],markers:['등록']}]};
+ assert.equal(generateCases(i)[0].account_id,'admin','등록 화면에 포함된 구조 항목을 조회자로 실행하지 않아야 한다');
+});
 test('결과서 2차는 1차·원본·요약 수식을 보존하고 BLOCKED를 빈 결과+비고로 기록한다',async t=>{
  const dir=await temp(t),book=new ExcelJS.Workbook(),s=book.addWorksheet('사례');s.mergeCells('A1:O1');s.getCell('A1').value='기능 확인';
  for(let c=1;c<=15;c++)s.getCell(2,c).value=`항목${c}`;

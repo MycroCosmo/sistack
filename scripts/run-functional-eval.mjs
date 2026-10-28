@@ -19,7 +19,7 @@ async function manifest(run,id,status,revision,round) {
 }
 const baselines={},evaluation=[];
 for(const name of ['legacy-board','legacy-board-thymeleaf']) {
- const source=path.resolve('examples',name),id='m5b-first-v1',run=path.join(source,'.sistack/runs',id);await mkdir(run);
+ const source=path.resolve('examples',name),id=`m5b-first-${config.version??'v1'}`,run=path.join(source,'.sistack/runs',id);await mkdir(run);
  const inventory=await functionalInventory(source),cases=[...generateCases(inventory),...supplementalCases(inventory)];
  const coverage=compareCases(inventory,cases);if(Object.values(coverage).some(v=>v.length))throw Error('인벤토리/TC 대조 실패');
  await save(path.join(run,'inventory.json'),inventory);await save(path.join(run,'cases.json'),cases);await save(path.join(run,'coverage.json'),coverage);
@@ -45,7 +45,7 @@ for(const entry of (await readdir('evals/debug/cases',{withFileTypes:true})).fil
  const spec=await json(`evals/debug/cases/${entry.name}/case.json`),baseline=baselines[spec.testbed];
  if(!baseline)throw Error('정상 기준선 없음');
  if(spec.mode==='log-only'){evaluation.push({case_id:spec.id,status:'BLOCKED',reason:'로그 전용 Oracle 사례. 로컬 앱 패치 실행 불가'});continue;}
- const id=`m5b-second-${spec.id}-v1`,run=path.join(baseline.source,'.sistack/runs',id);await mkdir(run);
+ const id=`m5b-second-${spec.id}-${config.version??'v1'}`,run=path.join(baseline.source,'.sistack/runs',id);await mkdir(run);
  await assertFrozen(baseline);
  console.log(`${spec.id}: 2차 시작`);
  const server=await startServer(baseline.source,run,config,project=>applyUnitPatch(project,path.resolve(`evals/debug/cases/${spec.id}/bug.patch`)));
