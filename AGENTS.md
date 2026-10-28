@@ -2,6 +2,8 @@
 
 이 파일은 이 저장소에서 작업하는 모든 코딩 에이전트(Codex, Claude Code 등)가 매 세션 따라야 하는 공통 규칙이다. 마일스톤별 작업 지시는 `prompts/Mx.md`에 있다.
 
+전역 스타일 규칙과 충돌할 때는 이 문서의 규칙을 우선한다.
+
 ## 1. 프로젝트 정의
 
 SIStack은 **한국 SI(System Integration) 현장의 개발자가 AI 코딩 도구로 반복 업무를 처리하도록 돕는 Agent Skills 모음**이다.
