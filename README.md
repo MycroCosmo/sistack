@@ -2,14 +2,14 @@
 
 한국 SI 개발자의 코드 흐름 파악·에러 분석·테스트·산출물 작성을 돕는 Agent Skills 모음입니다.
 
-**개발 상태: M0~M4 완료, M5a 사용자 양식 GATE 준비.** 프로그램 목록·테이블 정의서만 구현하며 M5b는 시작하지 않습니다. 학습·held-out의 첫 점수는 보존합니다. [M4 종료 보고](docs/m4-final-report.md) · [M5a 범위](prompts/M5a.md) · [인덱서 사용법](docs/indexer.md)
+**개발 상태: M0~M5a 완료, M5b 미시작.** 프로그램 목록·테이블 정의서 및 제공 일반 양식의 형식 일반성 검증을 완료했습니다. 현장 검증을 뜻하지 않습니다. 학습·held-out의 첫 점수는 보존합니다. [M5a 종료 보고](docs/m5a-final-report.md) · [M5a 범위](prompts/M5a.md) · [인덱서 사용법](docs/indexer.md)
 
 | v0.1 예정 스킬 | 역할 | 구현 시점 |
 |---|---|---|
 | si-trace | 화면 이벤트부터 SQL·테이블까지 흐름 파악 | M2 완료, 활성화 2문항 미실행 |
 | si-debug | 로그·증상에서 원인과 수정안 도출 | M3 완료 |
 | si-unit-test | 레거시 Java 단위 테스트 작성·실행 | M4 완료 |
-| si-docs | 코드 근거로 프로그램 목록·테이블 정의서 xlsx 작성 | M5a 사용자 양식 GATE, M5b 미시작 |
+| si-docs | 코드 근거로 프로그램 목록·테이블 정의서 xlsx 작성 | M5a 완료, M5b 미시작 |
 
 [pstack](https://github.com/backnotprop/pstack)의 원칙·스킬 구조를 한국 SI 현장에 맞게 재해석합니다. 단일 모델, 기존 동작 보존, PL 승인 지점, 코드 기반 문서 산출물과 재현하지 못한 단계의 기록을 우선합니다.
 

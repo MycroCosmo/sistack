@@ -1,0 +1,112 @@
+{
+  "scope": "Claude 작성 일반 양식의 형식 일반성 검증. 현장 검증 아님",
+  "source_revision": "9885f39af32ae63fb2617f7935983ec0f38886cd",
+  "template_sha256": "b8bf4c745e6f867bbba90fc652eb3113bd033686f77a6295d230ca16ff40f861",
+  "mapping": {
+    "body": 14,
+    "metadata": 6,
+    "automatic": 2,
+    "manual": 18
+  },
+  "projects": {
+    "legacy-board": {
+      "run_id": "m5a-approved-program-list-v1",
+      "rows": 34,
+      "by_type": {
+        "화면": 6,
+        "클래스": 19,
+        "SQL": 9
+      },
+      "proposed_names": 6,
+      "unknown_cells": 307,
+      "status": "PARTIAL",
+      "preserved": true,
+      "values_verified": true,
+      "original_unchanged": true,
+      "template_features": {
+        "sheets": 1,
+        "merges": 7,
+        "images": 0,
+        "validations": 200,
+        "conditional_formats": 0,
+        "notes": 1,
+        "formulas": 0
+      },
+      "settings_present": false,
+      "warnings": []
+    },
+    "legacy-board-thymeleaf": {
+      "run_id": "m5a-approved-program-list-v1",
+      "rows": 35,
+      "by_type": {
+        "화면": 7,
+        "클래스": 19,
+        "SQL": 9
+      },
+      "proposed_names": 7,
+      "unknown_cells": 316,
+      "status": "PARTIAL",
+      "preserved": true,
+      "values_verified": true,
+      "original_unchanged": true,
+      "template_features": {
+        "sheets": 1,
+        "merges": 7,
+        "images": 0,
+        "validations": 200,
+        "conditional_formats": 0,
+        "notes": 1,
+        "formulas": 0
+      },
+      "settings_present": false,
+      "warnings": []
+    }
+  },
+  "result_template_unchanged": true,
+  "m5b_executed": false,
+  "independent_audit": {
+    "checks": [
+      {
+        "project": "legacy-board",
+        "rows": 34,
+        "proposed": 6,
+        "externally_unknown_body_cells_checked": 272,
+        "metadata_blank": true,
+        "original_row_heights_and_column_widths": true,
+        "merged_ranges_equal": true,
+        "validation_models_equal": true,
+        "all_values_verified": true
+      },
+      {
+        "project": "legacy-board-thymeleaf",
+        "rows": 35,
+        "proposed": 7,
+        "externally_unknown_body_cells_checked": 280,
+        "metadata_blank": true,
+        "original_row_heights_and_column_widths": true,
+        "merged_ranges_equal": true,
+        "validation_models_equal": true,
+        "all_values_verified": true
+      }
+    ],
+    "result_template_unchanged": true,
+    "scope": "생성 결과의 별도 재읽기 검사"
+  },
+  "tests": {
+    "command": "npm.cmd test",
+    "total": 178,
+    "pass": 178,
+    "fail": 0,
+    "new_separated_program_tests": 4,
+    "before_implementation": "FAIL 4/4",
+    "after_implementation": "PASS 4/4",
+    "skills": 5,
+    "shared_copies": "PASS",
+    "source_checks": "PASS"
+  },
+  "schemas": {
+    "program_list": "1.1.0 (기존 endpoint 1.0.0 호환)",
+    "table_spec": "1.0.0"
+  },
+  "result_content_is_not_approval": true
+}
