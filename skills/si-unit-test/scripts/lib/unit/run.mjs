@@ -7,6 +7,7 @@ import { parseSurefire, summarize, validateTestResults } from './results.mjs';
 import { save, json, digest, inside, noLinks } from '../trace/io.mjs';
 import { mask } from '../mask/index.mjs';
 import { validateManifest } from '../manifest/index.mjs';
+import { coverageSummary } from './coverage.mjs';
 
 export async function sourceHashes(project, prefix = '') {
   await noLinks(path.join(project, prefix));
@@ -49,6 +50,10 @@ export async function runTests(project, config) {
   await save(path.join(run, 'started.json'), { created_at: new Date().toISOString() });
   const detected = await detectEnvironment(project), plan = await json(config.plan_file);
   const before = await sourceHashes(project), reports = path.join(run, 'evidence/surefire');
+  const coveragePlan = config.coverage_plan ? await json(config.coverage_plan) : null;
+  if (coveragePlan) for (const [file, hash] of Object.entries(coveragePlan.generated_files ?? {})) {
+    if (before[file] !== hash) throw new Error('coverage-plan과 실제 생성 테스트가 다릅니다');
+  }
   await mkdir(reports, { recursive: true });
   const environment = { java_runtime: 'UNKNOWN', java_target: detected.java_target ?? 'UNKNOWN', build_tool: 'Maven',
     junit: 'UNKNOWN', mockito: 'UNKNOWN', spring_test: 'UNKNOWN', h2: 'UNKNOWN', ...detected.libraries };
@@ -97,14 +102,20 @@ export async function runTests(project, config) {
     environment, summary, tests, unverified: [...new Set(unverified)] };
   const errors = validateTestResults(result); if (errors.length) throw new Error(`결과 스키마 오류 ${errors.join(', ')}`);
   await save(path.join(run, 'test-results.json'), result);
+  const coverage = coveragePlan ? coverageSummary(coveragePlan, tests) : null;
+  if (coverage) {
+    await save(path.join(run, 'coverage-plan.json'), coveragePlan);
+    await save(path.join(run, 'coverage-results.json'), coverage);
+  }
   await save(path.join(run, 'evidence/execution.json'), { exit_code: exitCode, source_files: before, pom_unchanged: true, test_pattern: config.test_pattern, plan });
   const manifest = { schema_version: '1.0.0', run_id: config.run_id, skill: 'si-unit-test', created_at: result.created_at,
     source_revision: result.source_revision, status, inputs: { target: config.test_pattern },
-    evidence: [{ path: 'test-results.json', level: tests.length ? 4 : 2, description: '생성 테스트 실행 결과. 앱/운영 환경 검증 아님' }],
+    evidence: [{ path: 'test-results.json', level: tests.length ? 4 : 2, description: '생성 테스트 실행 결과. 앱/운영 환경 검증 아님' },
+      ...(coverage ? [{ path: 'coverage-results.json', level: tests.length ? 4 : 2, description: '정상 소스에서 도출한 계획 대비 실제 테스트 실행·통과 충족률' }] : [])],
     unverified: result.unverified, next_actions: status === 'PASS' ? [] : ['실패·미실행 사유 검토'],
     ...(config.parent_run_ids ? { parent_run_ids: config.parent_run_ids } : {}) };
   if (validateManifest(manifest).length) throw new Error('manifest 계약 오류');
   await save(path.join(run, 'manifest.json'), manifest);
-  await save(path.join(run, 'report.md'), `> AI의 PASS는 PL/PM 승인이나 고객 검수 완료가 아닙니다.\n\n# 단위 테스트 실행\n\n상태: ${status}\n\n실행 ${summary.total}건, 통과 ${summary.passed}, 실패 ${summary.failed}, 오류 ${summary.errors}, 건너뜀 ${summary.skipped}.\n\nM5 입력: [test-results.json](test-results.json)\n\n${result.unverified.join('\n')}\n`);
+  await save(path.join(run, 'report.md'), `> AI의 PASS는 PL/PM 승인이나 고객 검수 완료가 아닙니다.\n\n# 단위 테스트 실행\n\n상태: ${status}\n\n실행 ${summary.total}건, 통과 ${summary.passed}, 실패 ${summary.failed}, 오류 ${summary.errors}, 건너뜀 ${summary.skipped}.\n\nM5 입력: [test-results.json](test-results.json)\n\n${coverage ? `계획 ${coverage.planned}개 대비 생성 ${coverage.generated}, 실행 ${coverage.executed} (${coverage.planned ? (coverage.executed * 100 / coverage.planned).toFixed(1) : '0.0'}%), 통과 ${coverage.passed}, 미해결 ${coverage.unresolved}. 이는 계획 테스트 충족률이며 JVM 계측 코드 커버리지가 아닙니다.\n\n` : ''}${result.unverified.join('\n')}\n`);
   return { run, result };
 }

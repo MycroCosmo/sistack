@@ -1,0 +1,13 @@
+{
+  "beans": {
+    "kr.sistack.board.domain.Board": { "id": 101, "title": "정상제목", "content": "정상본문", "author": "정상작성자", "category": "FREE" },
+    "kr.sistack.board.domain.BoardSearch": { "searchType": "title", "keyword": "", "startDate": "", "endDate": "", "sort": "createdAt" }
+  },
+  "tables": {
+    "BOARD": {
+      "key_column": "ID", "key_property": "id",
+      "values": { "ID": 101, "TITLE": "일반제목", "CONTENT": "일반본문", "AUTHOR": "일반작성자", "CATEGORY": "FREE", "CREATED_AT": { "timestamp": "2026-01-02 12:00:00" } },
+      "changes": { "TITLE": "변경제목", "CONTENT": "변경본문", "AUTHOR": "변경작성자", "CATEGORY": "NOTICE" }
+    }
+  }
+}

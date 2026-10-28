@@ -72,14 +72,15 @@ export async function evaluateUnitCase(spec, config) {
   await installUnitTests(project, spec.generated);
   const baseline = await json(spec.baseline_results);
   const patchHash = spec.patch ? await applyUnitPatch(project, spec.patch) : null;
-  const buggy = await runTests(project, { ...config, run_id: `${spec.id}-buggy` });
+  const prefix = spec.run_prefix ?? spec.id;
+  const buggy = await runTests(project, { ...config, run_id: `${prefix}-buggy` });
   const detected = detection(baseline, buggy.result);
   let repaired = null;
   if (detected === 'DETECTED' && spec.proposal) {
     const diagnosis = await json(spec.proposal);
     const repairPatch = path.join(spec.output, 'proposal.patch'); await save(repairPatch, diagnosis.proposal.diff);
     await applyUnitPatch(project, repairPatch);
-    repaired = await runTests(project, { ...config, run_id: `${spec.id}-repaired`, parent_run_ids: spec.parent_run_ids ?? [] });
+    repaired = await runTests(project, { ...config, run_id: `${prefix}-repaired`, parent_run_ids: spec.parent_run_ids ?? [] });
   }
   await checkSources(spec.source, original);
   const result = { case_id: spec.id, eligible: spec.eligible, detection: detected, patch_sha256: patchHash,
@@ -91,7 +92,7 @@ export async function evaluateUnitCase(spec, config) {
   return result;
 }
 
-export async function freezeUnit(output) {
+export async function freezeUnit(output, { protocol } = {}) {
   const names = ['package.json', 'prompts/M4.md', ...await files(path.join(root, 'lib')).then(a => a.map(p => `lib/${p}`)),
     ...await files(path.join(root, 'skills/si-unit-test')).then(a => a.map(p => `skills/si-unit-test/${p}`)),
     ...await files(path.join(root, 'scripts')).then(a => a.map(p => `scripts/${p}`)),
@@ -103,7 +104,14 @@ export async function freezeUnit(output) {
   for (const name of names.map(p => p.replaceAll('\\', '/')).sort()) hashes[name] = digest(await readFile(await inside(root, name)));
   const rev = spawnSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8', windowsHide: true });
   if (rev.status !== 0) throw new Error('동결 revision 없음');
-  const record = { created_at: new Date().toISOString(), revision: rev.stdout.trim(), files: hashes,
+  if (protocol) {
+    for (const testbed of ['legacy-board', 'legacy-board-thymeleaf']) {
+      const dir = protocol.generations[testbed]; await inside(root, dir);
+      for (const name of ['coverage-plan.json', 'test-plan.json']) if (!Object.hasOwn(hashes, `${dir}/${name}`)) throw new Error('동결 목록에 생성 계획이 없습니다');
+    }
+    await inside(path.join(root, 'evals/private'), protocol.first_output.replace(/^evals\/private\//, ''));
+  }
+  const record = { created_at: new Date().toISOString(), revision: rev.stdout.trim(), files: hashes, ...(protocol ? { protocol } : {}),
     policy: '신규 패치 3건의 원문을 열람하지 않고 동결 테스트만 실행. 첫 결과 보존. 학습과 합산 금지' };
   await save(output, record); return { revision: record.revision, files: names.length };
 }
@@ -112,9 +120,10 @@ export async function runBlindUnit(spec, config) {
   const privateRoot = path.join(root, 'evals/private');
   const privatePath = file => inside(privateRoot, path.relative(privateRoot, path.resolve(file)).replaceAll('\\', '/'));
   await privatePath(spec.output);
-  if (path.resolve(spec.output) !== path.join(privateRoot, 'm4-heldout-first')) throw new Error('첫 held-out 출력은 evals/private/m4-heldout-first로 고정합니다');
-  if (config.test_pattern !== 'M4*Test' || path.resolve(config.plan_file) !== path.join(root, 'evals/unit/test-plan.json')) throw new Error('동결 테스트 전체와 동결된 계획만 실행합니다');
   const frozen = await json(spec.freeze);
+  const canonical = frozen.protocol?.first_output ?? 'evals/private/m4-heldout-first';
+  if (path.resolve(spec.output) !== path.join(root, canonical)) throw new Error('첫 held-out 출력은 해당 동결의 지정 경로로 고정합니다');
+  if (config.test_pattern !== 'M4*Test' || !frozen.protocol && path.resolve(config.plan_file) !== path.join(root, 'evals/unit/test-plan.json')) throw new Error('동결 테스트 전체와 동결된 계획만 실행합니다');
   await checkSources(root, frozen.files);
   if (spec.phase !== 'first' || !Array.isArray(spec.cases) || spec.cases.length !== 3 || new Set(spec.cases.map(c => c.id)).size !== 3) throw new Error('신규 held-out 첫 평가 3건만 허용');
   for (const c of spec.cases) {
@@ -125,10 +134,14 @@ export async function runBlindUnit(spec, config) {
   await mkdir(spec.output);
   await save(path.join(spec.output, 'started.json'), { frozen_revision: frozen.revision, created_at: new Date().toISOString() });
   const baselines = {};
+  const configs = {}, generations = {};
   for (const testbed of new Set(spec.cases.map(c => c.testbed))) {
     const project = path.join(spec.output, `baseline-${testbed}`);
-    await copyUnitProject(path.join(root, 'examples', testbed), project); await installUnitTests(project);
-    const b = await runTests(project, { ...config, run_id: 'blind-baseline' });
+    const generation = frozen.protocol?.generations[testbed];
+    generations[testbed] = generation ? path.join(root, generation, 'generated') : undefined;
+    configs[testbed] = generation ? { ...config, plan_file: path.join(root, generation, 'test-plan.json'), coverage_plan: path.join(root, generation, 'coverage-plan.json') } : config;
+    await copyUnitProject(path.join(root, 'examples', testbed), project); await installUnitTests(project, generations[testbed]);
+    const b = await runTests(project, { ...configs[testbed], run_id: 'blind-baseline' });
     if (b.result.status !== 'PASS') throw new Error('held-out 정상 기준선 BLOCKED');
     baselines[testbed] = path.join(b.run, 'test-results.json');
   }
@@ -136,7 +149,7 @@ export async function runBlindUnit(spec, config) {
   for (const c of spec.cases) {
     try {
       const r = await evaluateUnitCase({ id: c.id, source: path.join(root, 'examples', c.testbed), patch: c.patch,
-        output: path.join(spec.output, c.id), eligible: null, baseline_results: baselines[c.testbed] }, config);
+        output: path.join(spec.output, c.id), eligible: null, generated: generations[c.testbed], baseline_results: baselines[c.testbed] }, configs[c.testbed]);
       results.push({ case_id: c.id, detection: r.detection });
     } catch {
       results.push({ case_id: c.id, detection: 'BLOCKED' });
@@ -151,7 +164,7 @@ export async function runBlindUnit(spec, config) {
 
 if (isMain(import.meta.url)) await cli(async () => {
   const [mode, specFile, configFile] = process.argv.slice(2);
-  if (mode === 'freeze') console.log(JSON.stringify(await freezeUnit(specFile)));
+  if (mode === 'freeze') console.log(JSON.stringify(await freezeUnit(specFile, configFile ? await json(configFile) : {})));
   else if (mode === 'training') {
     const result = await evaluateUnitCase(await json(specFile), await json(configFile));
     console.log(JSON.stringify({ case_id: result.case_id, detection: result.detection, repair_status: result.repair_status }));
