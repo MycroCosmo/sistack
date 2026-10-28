@@ -1,0 +1,317 @@
+{
+  "version": "v3",
+  "implementation_revision": "5c156ab5cf81cc2f6eba0afd5a5861e6bff034fa",
+  "status": "PARTIAL",
+  "milestone": "M5b 완료; 실행 제한은 상태/보고서에 별도 명시",
+  "inventory_approval": {
+    "approved_by": "Ian",
+    "approved_at": "2026-10-28",
+    "sha256": "09b49f63417dc2e720d18fb088d39c458b632ed43c57408b17cd4f3755fe4b0b"
+  },
+  "projects": {
+    "legacy-board": {
+      "source_revision": "5c156ab5cf81cc2f6eba0afd5a5861e6bff034fa",
+      "inventory": 47,
+      "missing": 0,
+      "extra": 0,
+      "cases": 36,
+      "v2_cases": 56,
+      "case_delta": -20,
+      "counts": {
+        "PASS": 29,
+        "SKIP": 4,
+        "BLOCKED": 3
+      },
+      "v2_counts": {
+        "PASS": 34,
+        "BLOCKED": 16,
+        "SKIP": 6
+      },
+      "modes": {
+        "AUTO-API:PASS": 12,
+        "AUTO-UI:PASS": 17,
+        "SKIP:SKIP": 4,
+        "AUTO-UI:BLOCKED": 3
+      },
+      "blocked_reasons": {
+        "소스 근거가 있는 선택자가 없습니다": 2,
+        "화면 진입 요청이 미확정입니다": 1
+      },
+      "covered_structural": 20,
+      "covered_by_outcomes": {
+        "SKIP": 4,
+        "PASS": 15,
+        "BLOCKED": 1
+      },
+      "selector_kinds": {
+        "text": 10,
+        "href": 1,
+        "id": 6
+      },
+      "edge": {
+        "PASS": 2
+      },
+      "db_preserved": true,
+      "first_frozen": true
+    },
+    "legacy-board-thymeleaf": {
+      "source_revision": "5c156ab5cf81cc2f6eba0afd5a5861e6bff034fa",
+      "inventory": 71,
+      "missing": 0,
+      "extra": 0,
+      "cases": 52,
+      "v2_cases": 80,
+      "case_delta": -28,
+      "counts": {
+        "PASS": 40,
+        "SKIP": 6,
+        "BLOCKED": 6
+      },
+      "v2_counts": {
+        "PASS": 47,
+        "BLOCKED": 25,
+        "SKIP": 8
+      },
+      "modes": {
+        "AUTO-API:PASS": 13,
+        "AUTO-UI:PASS": 27,
+        "SKIP:SKIP": 6,
+        "AUTO-UI:BLOCKED": 6
+      },
+      "blocked_reasons": {
+        "소스 근거가 있는 선택자가 없습니다": 3,
+        "화면 진입 요청이 미확정입니다": 2,
+        "소스 선택자가 현재 화면 조건에서 나타나지 않습니다": 1
+      },
+      "covered_structural": 28,
+      "covered_by_outcomes": {
+        "SKIP": 4,
+        "PASS": 21,
+        "BLOCKED": 3
+      },
+      "selector_kinds": {
+        "text": 13,
+        "href": 1,
+        "id": 15
+      },
+      "edge": {
+        "PASS": 2
+      },
+      "db_preserved": true,
+      "first_frozen": true
+    }
+  },
+  "training": {
+    "generalization": false,
+    "counts": {
+      "DETECTED": 9,
+      "BLOCKED": 1
+    },
+    "cases": [
+      {
+        "case_id": "01-binding",
+        "status": "DETECTED",
+        "detected_by": [
+          "SUP-CREATE",
+          "SUP-UPDATE",
+          "TC-001",
+          "TC-002",
+          "TC-009",
+          "TC-012",
+          "TC-013",
+          "TC-016",
+          "TC-018",
+          "TC-020",
+          "TC-024",
+          "TC-026",
+          "TC-031",
+          "TC-033",
+          "TC-034",
+          "TC-035",
+          "TC-040",
+          "TC-042",
+          "TC-043",
+          "TC-044",
+          "TC-046",
+          "SUP-SORT",
+          "SUP-PAGING",
+          "SUP-BOUNDARY",
+          "SUP-SEARCH",
+          "SUP-CODES",
+          "SUP-ERROR"
+        ]
+      },
+      {
+        "case_id": "02-js-url",
+        "status": "DETECTED",
+        "detected_by": [
+          "TC-018",
+          "TC-034",
+          "TC-035",
+          "TC-042",
+          "TC-043",
+          "SUP-SEARCH"
+        ]
+      },
+      {
+        "case_id": "03-request-encoding",
+        "status": "DETECTED",
+        "detected_by": [
+          "SUP-CREATE",
+          "SUP-UPDATE",
+          "TC-009",
+          "TC-012",
+          "TC-026",
+          "TC-044",
+          "TC-046",
+          "SUP-PAGING",
+          "SUP-CODES"
+        ]
+      },
+      {
+        "case_id": "04-session-bypass",
+        "status": "DETECTED",
+        "detected_by": [
+          "SUP-CREATE",
+          "SUP-UPDATE",
+          "TC-001",
+          "TC-009",
+          "TC-012",
+          "TC-013",
+          "TC-016",
+          "TC-018",
+          "TC-020",
+          "TC-031",
+          "TC-034",
+          "TC-035",
+          "TC-040",
+          "TC-043",
+          "SUP-SORT",
+          "SUP-PAGING",
+          "SUP-BOUNDARY",
+          "SUP-ANONYMOUS",
+          "SUP-SEARCH"
+        ]
+      },
+      {
+        "case_id": "05-paging",
+        "status": "DETECTED",
+        "detected_by": [
+          "SUP-PAGING"
+        ]
+      },
+      {
+        "case_id": "06-sort-sql",
+        "status": "DETECTED",
+        "detected_by": [
+          "TC-001",
+          "TC-013",
+          "TC-016",
+          "TC-018",
+          "TC-020",
+          "TC-031",
+          "TC-034",
+          "TC-035",
+          "TC-040",
+          "TC-043",
+          "SUP-SORT",
+          "SUP-PAGING",
+          "SUP-BOUNDARY",
+          "SUP-SEARCH"
+        ]
+      },
+      {
+        "case_id": "07-oracle-log-only",
+        "status": "BLOCKED",
+        "detected_by": []
+      },
+      {
+        "case_id": "08-thymeleaf-utilities",
+        "status": "DETECTED",
+        "detected_by": [
+          "SUP-CREATE",
+          "SUP-UPDATE",
+          "TC-011",
+          "TC-014",
+          "TC-015",
+          "TC-018",
+          "TC-020",
+          "TC-023",
+          "TC-024",
+          "TC-025",
+          "TC-026",
+          "TC-027",
+          "TC-033",
+          "TC-035",
+          "TC-037",
+          "TC-038",
+          "TC-043",
+          "TC-045",
+          "TC-053",
+          "TC-061",
+          "TC-067",
+          "TC-068",
+          "TC-069",
+          "SUP-SORT",
+          "SUP-PAGING",
+          "SUP-BOUNDARY",
+          "SUP-SEARCH",
+          "SUP-CODES",
+          "SUP-ERROR"
+        ]
+      },
+      {
+        "case_id": "09-view-resolver",
+        "status": "DETECTED",
+        "detected_by": [
+          "SUP-CREATE",
+          "SUP-UPDATE",
+          "TC-003",
+          "TC-004",
+          "TC-011",
+          "TC-014",
+          "TC-015",
+          "TC-018",
+          "TC-020",
+          "TC-023",
+          "TC-024",
+          "TC-025",
+          "TC-026",
+          "TC-027",
+          "TC-033",
+          "TC-035",
+          "TC-037",
+          "TC-038",
+          "TC-045",
+          "TC-053",
+          "TC-061",
+          "TC-067",
+          "TC-068",
+          "TC-069",
+          "SUP-SORT",
+          "SUP-PAGING",
+          "SUP-BOUNDARY",
+          "SUP-SEARCH",
+          "SUP-CODES"
+        ]
+      },
+      {
+        "case_id": "10-fragment-encoding",
+        "status": "DETECTED",
+        "detected_by": [
+          "SUP-PAGING"
+        ]
+      }
+    ]
+  },
+  "preservation": {
+    "previous_result_files": 101,
+    "already_absent_old_files": 18,
+    "all_preexisting_hashes_unchanged": true,
+    "delivery_workbooks": 11
+  },
+  "popup": {
+    "actual_samples": 0,
+    "status": "UNVERIFIED"
+  }
+}
