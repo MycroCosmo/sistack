@@ -225,6 +225,7 @@ M0 기반 ──▶ M1 공통 인덱서 ──┬──▶ M2 si-trace ──▶
 - modern-board 테스트베드(Spring Boot + JPA) — si-migrate의 to-be 및 JPA 인덱서 수집기 검증용
 - JPA 수집기: Repository 메서드명, `@Query`, `@Entity`/`@Table`
 - Vue3+REST 수집기: `.vue`, axios, router, `application.yml`
+- Service↔Mapper map 파라미터 키 정적 대조(Java put 키 vs XML `#{}` / `parameterType=map`)
 
 - `si-impact` (← `blast-radius`): 안전 근거 1개 증명 + SI에서 grep이 멈추는 곳 점검
 - `si-migrate`: 기준선 고정 → 이관 → 비교 (si-trace + si-unit-test + si-impact 조합)
