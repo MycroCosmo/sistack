@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>신청 상세 · 온마을 시설관리</title>
+<link rel="stylesheet" th:href="@{/resources/app.css}">
+</head>
+<body>
+<header th:replace="~{fragments/common :: header}">
+</header>
+<main>
+<div class="eyebrow">ONMAEUL · COMMUNITY SPACE</div>
+<h1>신청 상세</h1>
+<div class="toolbar">
+<p class="lead" th:text="${'신청번호 #' + booking.id}">
+</p>
+<span class="badge" id="booking-status" th:classappend="${booking.status}" th:text="${states[booking.status]}">
+</span>
+</div>
+<div class="detail-grid">
+<section class="panel">
+<h2 th:text="${booking.facilityName}">
+</h2>
+<dl>
+<dt>신청자</dt>
+<dd th:text="${booking.applicant}">
+</dd>
+<dt>사용일</dt>
+<dd th:text="${booking.useDate}">
+</dd>
+<dt>시간</dt>
+<dd th:text="${booking.startTime + '–' + booking.endTime}">
+</dd>
+<dt>참여 인원</dt>
+<dd th:text="${booking.attendees + '명'}">
+</dd>
+<dt>사용 목적</dt>
+<dd class="preserve" th:text="${booking.purpose}">
+</dd>
+</dl>
+<div th:if="${(actor.staff and booking.status == 'REQUESTED') or (actor.id == booking.applicant and (booking.status == 'REQUESTED' or booking.status == 'APPROVED'))}">
+<h2>신청 처리</h2>
+<form id="decision-form" method="post" th:action="@{/bookings/{id}/decision(id=${booking.id})}">
+<input type="hidden" name="csrf" th:value="${session.csrf}">
+<label for="reason">처리 사유 (반려·취소 시 필수)</label>
+<textarea id="reason" name="reason" maxlength="300" rows="3">
+</textarea>
+<div class="actions">
+<button id="approve" th:if="${actor.staff}" name="action" value="approve">승인</button>
+<button id="reject" th:if="${actor.staff}" class="danger" name="action" value="reject">반려</button>
+<button id="cancel" th:if="${actor.id == booking.applicant}" class="danger" name="action" value="cancel">신청 취소</button>
+</div>
+</form>
+</div>
+</section>
+<aside class="panel">
+<h2>처리 이력</h2>
+<ol class="timeline">
+<li th:each="event : ${history}">
+<strong th:text="${states[event.toStatus]}">
+</strong>
+<p th:text="${event.reason}">
+</p>
+<small th:text="${event.actor + ' · ' + event.createdAt}">
+</small>
+</li>
+</ol>
+</aside>
+</div>
+<p>
+<a th:href="@{/bookings}">← 신청 목록</a>
+</p>
+</main>
+<footer>온마을 시설관리 · SIStack 실습용 가상 기관 · 합성 데이터</footer>
+</body>
+</html>

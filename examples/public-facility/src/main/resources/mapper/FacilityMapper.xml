@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.sistack.facility.mapper.FacilityMapper">
+ <resultMap id="booking" type="kr.sistack.facility.domain.Booking">
+  <id column="id" property="id"/><result column="facility_id" property="facilityId"/>
+  <result column="facility_name" property="facilityName"/><result column="use_date" property="useDate"/>
+  <result column="start_time" property="startTime"/><result column="end_time" property="endTime"/>
+ </resultMap>
+ <resultMap id="history" type="kr.sistack.facility.domain.History">
+  <id column="id" property="id"/><result column="booking_id" property="bookingId"/>
+  <result column="from_status" property="fromStatus"/><result column="to_status" property="toStatus"/>
+  <result column="created_at" property="createdAt"/>
+ </resultMap>
+ <select id="selectFacilities" resultType="kr.sistack.facility.domain.Facility">SELECT * FROM facility ORDER BY id</select>
+ <select id="lockFacility" resultType="kr.sistack.facility.domain.Facility">SELECT * FROM facility WHERE id=#{id} FOR UPDATE</select>
+ <update id="updateFacility">UPDATE facility SET active=#{active} WHERE id=#{id}</update>
+ <sql id="filters">
+  <where>
+   <if test="applicant != null">AND b.applicant=#{applicant}</if>
+   <if test="status != ''">AND b.status=#{status}</if>
+   <if test="keyword != ''">AND (LOWER(b.purpose) LIKE '%' || LOWER(#{keyword}) || '%' OR LOWER(f.name) LIKE '%' || LOWER(#{keyword}) || '%')</if>
+  </where>
+ </sql>
+ <select id="selectBookings" resultMap="booking">
+  SELECT b.*, f.name AS facility_name FROM booking b JOIN facility f ON b.facility_id=f.id
+  <include refid="filters"/> ORDER BY b.id DESC LIMIT 10 OFFSET #{offset}
+ </select>
+ <select id="countBookings" resultType="int">
+  SELECT COUNT(*) FROM booking b JOIN facility f ON b.facility_id=f.id <include refid="filters"/>
+ </select>
+ <select id="selectBooking" resultMap="booking">
+  SELECT b.*, f.name AS facility_name FROM booking b JOIN facility f ON b.facility_id=f.id WHERE b.id=#{id}
+ </select>
+ <select id="selectHistory" resultMap="history">SELECT * FROM booking_history WHERE booking_id=#{id} ORDER BY id</select>
+ <select id="countOverlap" resultType="int">
+  SELECT COUNT(*) FROM booking WHERE facility_id=#{facilityId} AND use_date=#{useDate}
+  AND status IN ('REQUESTED','APPROVED') AND start_time &lt; #{endTime} AND end_time &gt; #{startTime} AND id &lt;&gt; #{id}
+ </select>
+ <insert id="insertBooking" useGeneratedKeys="true" keyProperty="id">
+  INSERT INTO booking(facility_id,applicant,use_date,start_time,end_time,attendees,purpose,status,reason)
+  VALUES(#{facilityId},#{applicant},#{useDate},#{startTime},#{endTime},#{attendees},#{purpose},'REQUESTED','')
+ </insert>
+ <update id="updateStatus">UPDATE booking SET status=#{status},reason=#{reason} WHERE id=#{id} AND status=#{previous}</update>
+ <insert id="insertHistory">
+  INSERT INTO booking_history(booking_id,actor,from_status,to_status,reason) VALUES(#{id},#{actor},#{previous},#{status},#{reason})
+ </insert>
+</mapper>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>신청 관리 · 온마을 시설관리</title>
+<link rel="stylesheet" th:href="@{/resources/app.css}">
+</head>
+<body>
+<header th:replace="~{fragments/common :: header}">
+</header>
+<main>
+<div class="eyebrow">ONMAEUL · COMMUNITY SPACE</div>
+<h1>신청 관리</h1>
+<div class="toolbar">
+<p class="lead" th:text="${actor.staff ? '전체 신청을 조회하고 심사합니다.' : '내 신청 내역과 처리 상태를 확인합니다.'}">
+</p>
+<a class="button" th:if="${actor.role == 'APPLICANT'}" th:href="@{/bookings/new}">+ 사용 신청</a>
+</div>
+<section class="panel">
+<form id="search-form" class="search" method="get" th:action="@{/bookings}">
+<div>
+<label for="status">처리 상태</label>
+<select id="status" name="status">
+<option value="">전체</option>
+<option th:each="state : ${states}" th:value="${state.key}" th:text="${state.value}" th:selected="${state.key == status}">
+</option>
+</select>
+</div>
+<div class="grow">
+<label for="keyword">시설명 / 사용 목적</label>
+<input id="keyword" name="keyword" maxlength="80" th:value="${keyword}" placeholder="검색어를 입력하세요">
+</div>
+<button type="submit">검색</button>
+</form>
+<p class="muted" th:text="${'총 ' + total + '건'}">
+</p>
+<div class="table-wrap">
+<table th:replace="~{fragments/common :: bookingTable}">
+</table>
+</div>
+<nav class="pagination" aria-label="페이지">
+<a th:if="${page > 1}" th:href="@{/bookings(page=${page - 1},status=${status},keyword=${keyword})}">← 이전</a>
+<span th:text="${page + ' 페이지'}">
+</span>
+<a th:if="${page * 10 < total}" th:href="@{/bookings(page=${page + 1},status=${status},keyword=${keyword})}">다음 →</a>
+</nav>
+</section>
+</main>
+<footer>온마을 시설관리 · SIStack 실습용 가상 기관 · 합성 데이터</footer>
+</body>
+</html>

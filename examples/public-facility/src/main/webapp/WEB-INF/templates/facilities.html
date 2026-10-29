@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>시설 안내 · 온마을 시설관리</title>
+<link rel="stylesheet" th:href="@{/resources/app.css}">
+</head>
+<body>
+<header th:replace="~{fragments/common :: header}">
+</header>
+<main>
+<div class="eyebrow">ONMAEUL · COMMUNITY SPACE</div>
+<h1>시설 안내</h1>
+<p class="lead">운영시간 09:00–18:00 · 1회 최대 4시간 · 내일부터 90일 이내 신청</p>
+<div class="facility-grid">
+<article class="panel facility" th:each="facility : ${facilities}">
+<div class="room-art" aria-hidden="true">▥</div>
+<span class="badge" th:text="${facility.active ? '운영 중' : '운영 중지'}">
+</span>
+<h2 th:text="${facility.name}">
+</h2>
+<p th:text="${facility.location}">
+</p>
+<p>
+<strong th:text="${facility.capacity}">
+</strong> 명 정원</p>
+<a class="button" th:if="${facility.active and actor.role == 'APPLICANT'}" th:href="@{/bookings/new}">사용 신청</a>
+<form th:if="${actor.role == 'ADMIN'}" method="post" th:action="@{/facilities/{id}/availability(id=${facility.id})}">
+<input type="hidden" name="csrf" th:value="${session.csrf}">
+<input type="hidden" name="active" th:value="${!facility.active}">
+<button class="quiet" th:text="${facility.active ? '운영 중지하기' : '운영 재개하기'}">
+</button>
+</form>
+</article>
+</div>
+<p class="note">운영 중지는 신규 신청과 대기 신청의 승인을 차단합니다. 이미 승인된 일정은 보존됩니다.</p>
+</main>
+<footer>온마을 시설관리 · SIStack 실습용 가상 기관 · 합성 데이터</footer>
+</body>
+</html>
