@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>신청 관리 · 온마을 시설관리</title>
+<link rel="stylesheet" th:href="@{/resources/style.css}">
+</head>
+<body>
+<header th:replace="~{fragments/common :: header}">
+</header>
+<main>
+<p class="eyebrow">ONMAEUL / PUBLIC FACILITIES</p>
+<h1>신청 관리</h1>
+<div class="toolbar">
+<p class="lead">신청자는 본인 내역을, 담당자는 전체 신청을 조회합니다.</p>
+<a class="button" th:if="${account.role=='APPLICANT'}" th:href="@{/requests/new}">+ 사용 신청</a>
+</div>
+<section class="panel">
+<form id="search-form" class="search" method="get" th:action="@{/requests}">
+<div>
+<label for="status">상태</label>
+<select id="status" name="status">
+<option value="">전체</option>
+<option th:each="state : ${labels}" th:value="${state.key}" th:text="${state.value}" th:selected="${state.key==status}">
+</option>
+</select>
+</div>
+<div class="grow">
+<label for="keyword">시설명·사용 목적</label>
+<input id="keyword" name="keyword" maxlength="80" th:value="${keyword}">
+</div>
+<button>검색</button>
+</form>
+<p class="muted" th:text="${'총 '+total+'건'}">
+</p>
+<div class="table-wrap">
+<table th:replace="~{fragments/common :: list}">
+</table>
+</div>
+<nav class="pages" aria-label="페이지">
+<a th:if="${page>1}" th:href="@{/requests(page=${page-1},status=${status},keyword=${keyword})}">← 이전</a>
+<span th:text="${page+' 페이지'}">
+</span>
+<a th:if="${page*10<total}" th:href="@{/requests(page=${page+1},status=${status},keyword=${keyword})}">다음 →</a>
+</nav>
+</section>
+</main>
+<footer>온마을 시설관리 · 가상 기관의 로컬 실습 서비스</footer>
+</body>
+</html>

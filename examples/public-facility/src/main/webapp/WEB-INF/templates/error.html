@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>요청을 확인해 주세요 · 온마을 시설관리</title>
+<link rel="stylesheet" th:href="@{/resources/style.css}">
+</head>
+<body>
+<header th:replace="~{fragments/common :: header}">
+</header>
+<main>
+<p class="eyebrow">ONMAEUL / PUBLIC FACILITIES</p>
+<h1>요청을 확인해 주세요</h1>
+<section class="panel narrow" role="alert">
+<p id="error-message" th:text="${message}">
+</p>
+<div class="actions">
+<a th:href="@{/requests}">신청 목록</a>
+<a th:href="@{/requests/new}">다시 신청</a>
+<a th:href="@{/login}">로그인</a>
+</div>
+</section>
+</main>
+<footer>온마을 시설관리 · 가상 기관의 로컬 실습 서비스</footer>
+</body>
+</html>

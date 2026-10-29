@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>시설 사용 신청 · 온마을 시설관리</title>
+<link rel="stylesheet" th:href="@{/resources/style.css}">
+</head>
+<body>
+<header th:replace="~{fragments/common :: header}">
+</header>
+<main>
+<p class="eyebrow">ONMAEUL / PUBLIC FACILITIES</p>
+<h1>시설 사용 신청</h1>
+<p class="lead">접수·승인된 신청과 시간이 겹치면 신청할 수 없습니다.</p>
+<section class="panel narrow">
+<form id="apply-form" method="post" th:action="@{/requests}">
+<input type="hidden" name="csrf" th:value="${session.csrf}">
+<label for="facilityId">시설</label>
+<select id="facilityId" name="facilityId" required>
+<option value="">시설 선택</option>
+<option th:each="room : ${facilities}" th:if="${room.enabled}" th:value="${room.id}" th:text="${room.name+' · '+room.capacity+'명'}">
+</option>
+</select>
+<label for="useDate">사용일</label>
+<input type="date" id="useDate" name="useDate" th:min="${tomorrow}" th:max="${lastDate}" required>
+<div class="two">
+<div>
+<label for="startTime">시작 시간</label>
+<input type="time" id="startTime" name="startTime" min="09:00" max="17:59" value="09:00" required>
+</div>
+<div>
+<label for="endTime">종료 시간</label>
+<input type="time" id="endTime" name="endTime" min="09:01" max="18:00" value="11:00" required>
+</div>
+</div>
+<label for="people">참여 인원</label>
+<input type="number" id="people" name="people" min="1" max="120" required>
+<label for="purpose">사용 목적</label>
+<textarea id="purpose" name="purpose" maxlength="300" rows="4" required placeholder="개인정보 없이 행사나 모임의 목적을 입력하세요">
+</textarea>
+<p class="note">담당자가 승인하면 사용 일정이 확정됩니다. 반려·취소 사유와 이력은 보존됩니다.</p>
+<div class="actions">
+<button id="apply-submit">신청 접수</button>
+<a th:href="@{/requests}">목록으로</a>
+</div>
+</form>
+</section>
+</main>
+<footer>온마을 시설관리 · 가상 기관의 로컬 실습 서비스</footer>
+</body>
+</html>

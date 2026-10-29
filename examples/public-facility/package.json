@@ -1,0 +1,12 @@
+{
+  "name": "public-facility",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node scripts/app.mjs",
+    "test": "node --test test/*.test.mjs"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "kr.sistack.facility.ReservationServiceTest#신청번호와세션신청자및접수상태를저장한다": {
+    "display_name": "신청번호와세션신청자및접수상태를저장한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "apply"
+  },
+  "kr.sistack.facility.ReservationServiceTest#조회결과와페이지범위를전달한다": {
+    "display_name": "조회결과와페이지범위를전달한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "search"
+  },
+  "kr.sistack.facility.ReservationServiceTest#담당자는전체신청을조회한다": {
+    "display_name": "담당자는전체신청을조회한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "query"
+  },
+  "kr.sistack.facility.ReservationServiceTest#타인상세와신청자승인을차단한다": {
+    "display_name": "타인상세와신청자승인을차단한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "find"
+  },
+  "kr.sistack.facility.ReservationServiceTest#정원경계와목적길이를검증한다": {
+    "display_name": "정원경계와목적길이를검증한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "apply"
+  },
+  "kr.sistack.facility.ReservationServiceTest#신청기간의양끝과초과를검증한다": {
+    "display_name": "신청기간의양끝과초과를검증한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "apply"
+  },
+  "kr.sistack.facility.ReservationServiceTest#운영시간과최대네시간을검증한다": {
+    "display_name": "운영시간과최대네시간을검증한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "apply"
+  },
+  "kr.sistack.facility.ReservationServiceTest#중복또는운영중지시설의신청을차단한다": {
+    "display_name": "중복또는운영중지시설의신청을차단한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "apply"
+  },
+  "kr.sistack.facility.ReservationServiceTest#승인결과와처리이력을저장한다": {
+    "display_name": "승인결과와처리이력을저장한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "decide"
+  },
+  "kr.sistack.facility.ReservationServiceTest#반려취소사유와재처리를검증한다": {
+    "display_name": "반려취소사유와재처리를검증한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "decide"
+  },
+  "kr.sistack.facility.ReservationServiceTest#관리자만시설운영을변경한다": {
+    "display_name": "관리자만시설운영을변경한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "availability"
+  },
+  "kr.sistack.facility.ReservationMapperTest#신청전체필드와접수이력을재조회한다": {
+    "display_name": "신청전체필드와접수이력을재조회한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "apply"
+  },
+  "kr.sistack.facility.ReservationMapperTest#조건별조회와마지막페이지를검증한다": {
+    "display_name": "조건별조회와마지막페이지를검증한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "search"
+  },
+  "kr.sistack.facility.ReservationMapperTest#중복은차단하고맞닿은시간은허용한다": {
+    "display_name": "중복은차단하고맞닿은시간은허용한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "apply"
+  },
+  "kr.sistack.facility.ReservationMapperTest#반려후같은시간을재신청할수있다": {
+    "display_name": "반려후같은시간을재신청할수있다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "decide"
+  },
+  "kr.sistack.facility.ReservationMapperTest#승인취소와세단계이력을보존한다": {
+    "display_name": "승인취소와세단계이력을보존한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "decide"
+  },
+  "kr.sistack.facility.ReservationMapperTest#운영중지시설은승인을막고기존신청은보존한다": {
+    "display_name": "운영중지시설은승인을막고기존신청은보존한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "availability"
+  },
+  "kr.sistack.facility.ReservationMapperTest#이력저장실패는신청상태변경도롤백한다": {
+    "display_name": "이력저장실패는신청상태변경도롤백한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "decide"
+  },
+  "kr.sistack.facility.ReservationMapperTest#동시요청은같은시간을한번만접수한다": {
+    "display_name": "동시요청은같은시간을한번만접수한다",
+    "target_class": "kr.sistack.facility.service.ReservationService",
+    "target_method": "apply"
+  }
+}

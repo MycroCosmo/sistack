@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.sistack.facility.mapper.ReservationMapper">
+ <resultMap id="reservation" type="kr.sistack.facility.domain.Reservation">
+  <id column="id" property="id"/><result column="facility_id" property="facilityId"/>
+  <result column="use_date" property="useDate"/><result column="start_time" property="startTime"/><result column="end_time" property="endTime"/>
+ </resultMap>
+ <resultMap id="event" type="kr.sistack.facility.domain.AuditEvent">
+  <id column="id" property="id"/><result column="reservation_id" property="reservationId"/>
+  <result column="previous_status" property="previous"/><result column="occurred_at" property="occurredAt"/>
+ </resultMap>
+ <select id="facilities" resultType="kr.sistack.facility.domain.Facility">SELECT * FROM facility ORDER BY id</select>
+ <select id="lockFacility" resultType="kr.sistack.facility.domain.Facility">SELECT * FROM facility WHERE id=#{id} FOR UPDATE</select>
+ <update id="updateFacility" parameterType="kr.sistack.facility.domain.Facility">UPDATE facility SET enabled=#{enabled} WHERE id=#{id}</update>
+ <sql id="filters">
+  <where>
+   <if test="applicant != null">AND applicant=#{applicant}</if>
+   <if test="status != null and status != ''">AND status=#{status}</if>
+   <if test="keyword != null and keyword != ''">AND (purpose LIKE '%' || #{keyword} || '%' OR facility_id IN (SELECT id FROM facility WHERE name LIKE '%' || #{keyword} || '%'))</if>
+  </where>
+ </sql>
+ <select id="search" parameterType="kr.sistack.facility.domain.Search" resultMap="reservation">
+  SELECT * FROM reservation <include refid="filters"/> ORDER BY id DESC LIMIT 10 OFFSET #{offset}
+ </select>
+ <select id="count" parameterType="kr.sistack.facility.domain.Search" resultType="int">SELECT COUNT(*) FROM reservation <include refid="filters"/></select>
+ <select id="find" resultMap="reservation">SELECT * FROM reservation WHERE id=#{id}</select>
+ <select id="overlaps" parameterType="kr.sistack.facility.domain.Reservation" resultType="int">
+  SELECT COUNT(*) FROM reservation WHERE facility_id=#{facilityId} AND use_date=#{useDate}
+  AND start_time &lt; #{endTime} AND end_time &gt; #{startTime} AND status IN ('REQUESTED','APPROVED') AND id &lt;&gt; #{id}
+ </select>
+ <insert id="insert" parameterType="kr.sistack.facility.domain.Reservation" useGeneratedKeys="true" keyProperty="id">
+  INSERT INTO reservation(facility_id,applicant,use_date,start_time,end_time,people,purpose,status,reason)
+  VALUES(#{facilityId},#{applicant},#{useDate},#{startTime},#{endTime},#{people},#{purpose},#{status},#{reason})
+ </insert>
+ <update id="updateStatus" parameterType="kr.sistack.facility.domain.Reservation">
+  UPDATE reservation SET status=#{status},reason=#{reason} WHERE id=#{id} AND status=#{previousStatus}
+ </update>
+ <insert id="insertEvent" parameterType="kr.sistack.facility.domain.AuditEvent" useGeneratedKeys="true" keyProperty="id">
+  INSERT INTO reservation_event(reservation_id,actor,previous_status,status,reason) VALUES(#{reservationId},#{actor},#{previous},#{status},#{reason})
+ </insert>
+ <select id="history" resultMap="event">SELECT * FROM reservation_event WHERE reservation_id=#{id} ORDER BY id</select>
+</mapper>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>업무 현황 · 온마을 시설관리</title>
+<link rel="stylesheet" th:href="@{/resources/style.css}">
+</head>
+<body>
+<header th:replace="~{fragments/common :: header}">
+</header>
+<main>
+<p class="eyebrow">ONMAEUL / PUBLIC FACILITIES</p>
+<h1>업무 현황</h1>
+<div class="toolbar">
+<p class="lead">조회 권한에 해당하는 신청과 처리 상태입니다.</p>
+<a class="button" th:if="${account.role=='APPLICANT'}" th:href="@{/requests/new}">+ 시설 사용 신청</a>
+</div>
+<div class="stats">
+<article>
+<span>전체 신청</span>
+<strong th:text="${total}">
+</strong>
+</article>
+<article>
+<span>승인 대기</span>
+<strong th:text="${pending}">
+</strong>
+</article>
+<article>
+<span>승인 완료</span>
+<strong th:text="${approved}">
+</strong>
+</article>
+</div>
+<section class="panel">
+<div class="toolbar">
+<h2>최근 신청</h2>
+<a th:href="@{/requests}">전체 보기 →</a>
+</div>
+<div class="table-wrap">
+<table th:replace="~{fragments/common :: list}">
+</table>
+</div>
+</section>
+</main>
+<footer>온마을 시설관리 · 가상 기관의 로컬 실습 서비스</footer>
+</body>
+</html>

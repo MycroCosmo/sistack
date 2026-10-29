@@ -1,0 +1,4 @@
+INSERT INTO facility SELECT 1,'시민교육실','시민센터 2층',24,TRUE WHERE NOT EXISTS(SELECT 1 FROM facility WHERE id=1);
+INSERT INTO facility SELECT 2,'다목적 회의실','시민센터 3층',40,TRUE WHERE NOT EXISTS(SELECT 1 FROM facility WHERE id=2);
+INSERT INTO facility SELECT 3,'동아리 연습실','문화관 1층',12,TRUE WHERE NOT EXISTS(SELECT 1 FROM facility WHERE id=3);
+INSERT INTO facility SELECT 4,'대강당','문화관 2층',120,FALSE WHERE NOT EXISTS(SELECT 1 FROM facility WHERE id=4);

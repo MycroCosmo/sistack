@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>신청 상세 · 온마을 시설관리</title>
+<link rel="stylesheet" th:href="@{/resources/style.css}">
+</head>
+<body>
+<header th:replace="~{fragments/common :: header}">
+</header>
+<main>
+<p class="eyebrow">ONMAEUL / PUBLIC FACILITIES</p>
+<h1>신청 상세</h1>
+<div class="toolbar">
+<p class="lead" th:text="${'신청번호 #'+item.id}">
+</p>
+<span id="request-status" class="badge" th:classappend="${item.status}" th:text="${labels[item.status]}">
+</span>
+</div>
+<div class="detail-grid">
+<section class="panel">
+<h2 th:text="${rooms[item.facilityId]}">
+</h2>
+<dl>
+<dt>신청자</dt>
+<dd th:text="${item.applicant}">
+</dd>
+<dt>사용일</dt>
+<dd th:text="${item.useDate}">
+</dd>
+<dt>시간</dt>
+<dd th:text="${item.startTime+'–'+item.endTime}">
+</dd>
+<dt>인원</dt>
+<dd th:text="${item.people+'명'}">
+</dd>
+<dt>사용 목적</dt>
+<dd class="purpose" th:text="${item.purpose}">
+</dd>
+</dl>
+<form id="decision-form" th:if="${(account.staff and item.status=='REQUESTED') or (account.id==item.applicant and (item.status=='REQUESTED' or item.status=='APPROVED'))}" method="post" th:action="@{/requests/{id}(id=${item.id})}">
+<input type="hidden" name="csrf" th:value="${session.csrf}">
+<label for="reason">처리 사유 (반려·취소 시 필수)</label>
+<textarea id="reason" name="reason" rows="3" maxlength="300">
+</textarea>
+<div class="actions">
+<button id="approve" th:if="${account.staff}" name="action" value="approve">승인</button>
+<button id="reject" class="secondary" th:if="${account.staff}" name="action" value="reject">반려</button>
+<button id="cancel" class="secondary" th:if="${account.id==item.applicant}" name="action" value="cancel">신청 취소</button>
+</div>
+</form>
+</section>
+<aside class="panel">
+<h2>처리 이력</h2>
+<ol class="timeline">
+<li th:each="event : ${events}">
+<strong th:text="${labels[event.status]}">
+</strong>
+<p th:text="${event.reason}">
+</p>
+<small th:text="${event.actor+' · '+event.occurredAt}">
+</small>
+</li>
+</ol>
+</aside>
+</div>
+<p>
+<a th:href="@{/requests}">← 신청 목록</a>
+</p>
+</main>
+<footer>온마을 시설관리 · 가상 기관의 로컬 실습 서비스</footer>
+</body>
+</html>

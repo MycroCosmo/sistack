@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>시설 안내 · 온마을 시설관리</title>
+<link rel="stylesheet" th:href="@{/resources/style.css}">
+</head>
+<body>
+<header th:replace="~{fragments/common :: header}">
+</header>
+<main>
+<p class="eyebrow">ONMAEUL / PUBLIC FACILITIES</p>
+<h1>시설 안내</h1>
+<p class="lead">운영시간 09:00~18:00 · 1회 최대 4시간 · 내일부터 90일 이내 신청</p>
+<div class="room-grid">
+<article class="panel" th:each="room : ${facilities}">
+<span class="badge" th:text="${room.enabled?'운영 중':'운영 중지'}">
+</span>
+<h2 th:text="${room.name}">
+</h2>
+<p th:text="${room.location}">
+</p>
+<p th:text="${'정원 '+room.capacity+'명'}">
+</p>
+<a class="button" th:if="${room.enabled and account.role=='APPLICANT'}" th:href="@{/requests/new}">사용 신청</a>
+<form th:if="${account.role=='ADMIN'}" method="post" th:action="@{/facilities/{id}(id=${room.id})}">
+<input type="hidden" name="csrf" th:value="${session.csrf}">
+<input type="hidden" name="enabled" th:value="${!room.enabled}">
+<button class="secondary" th:text="${room.enabled?'운영 중지':'운영 재개'}">
+</button>
+</form>
+</article>
+</div>
+<p class="note">운영 중지 시 신규 신청과 대기 신청 승인을 차단합니다. 기존 승인 일정은 보존됩니다.</p>
+</main>
+<footer>온마을 시설관리 · 가상 기관의 로컬 실습 서비스</footer>
+</body>
+</html>

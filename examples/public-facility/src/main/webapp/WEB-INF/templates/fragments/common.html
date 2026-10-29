@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="header">
+<a class="brand" th:href="@{/dashboard}">온마을 <small>시설관리</small>
+</a>
+<nav th:if="${session.account != null}" aria-label="주 메뉴">
+<a th:href="@{/dashboard}">업무 현황</a>
+<a th:href="@{/facilities}">시설 안내</a>
+<a th:href="@{/requests}">신청 관리</a>
+</nav>
+<div class="identity" th:if="${session.account != null}">
+<span th:text="${session.account.id}">
+</span>
+<form method="post" th:action="@{/logout}">
+<input type="hidden" name="csrf" th:value="${session.csrf}">
+<button class="secondary">로그아웃</button>
+</form>
+</div>
+</header>
+<table th:fragment="list">
+<thead>
+<tr>
+<th>번호</th>
+<th>시설·사용 목적</th>
+<th>사용일</th>
+<th>시간</th>
+<th>신청자</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="row : ${rows}">
+<td th:text="${row.id}">
+</td>
+<td>
+<a th:href="@{/requests/{id}(id=${row.id})}" th:text="${rooms[row.facilityId]}">
+</a>
+<small class="sub" th:text="${row.purpose}">
+</small>
+</td>
+<td th:text="${row.useDate}">
+</td>
+<td th:text="${row.startTime+'–'+row.endTime}">
+</td>
+<td th:text="${row.applicant}">
+</td>
+<td>
+<span class="badge" th:classappend="${row.status}" th:text="${labels[row.status]}">
+</span>
+</td>
+</tr>
+<tr th:if="${#lists.isEmpty(rows)}">
+<td colspan="6" class="empty">신청 내역이 없습니다. 시설 사용을 신청해 보세요.</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
